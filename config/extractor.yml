@@ -1,0 +1,134 @@
+ARC:
+ id:
+  type: Headers
+  path: "ARC-Filename"
+ creationDate:
+  type: Headers
+  path: archiveDate
+ datatype:
+  type: XML
+  path: "/arcmetadata/format"
+ robotsPolicy:
+  type: XML
+  path: "/arcmetadata/robots"
+ user-agent:
+  type: XML
+  path: "/arcmetadata/http-header-user-agent"
+ hostname:
+  type: XML
+  path: "/arcmetadata/hostname"
+ ip:
+  type: XML
+  path: "/arcmetadata/ip"
+ software:
+  type: XML
+  path: "/arcmetadata/software"
+ isPartOf:
+  type: XML
+  path: "/arcmetadata/isPartOf"
+ description:
+  type: XML 
+  path: "/arcmetadata/description"
+ operator:
+  type: XML
+  path: operator
+WARC: &warc-header
+ software:
+  type: NameValue
+  recordSeparator: "\n"
+  fieldSeparator: ":" 
+  path: software
+ ip:
+  type: NameValue
+  recordSeparator: "\n"
+  fieldSeparator: ":" 
+  path: ip
+ hostname:
+  type: NameValue
+  recordSeparator: "\n"
+  fieldSeparator: ":" 
+  path: hostname
+ user-agent:
+  type: NameValue
+  recordSeparator: "\n"
+  fieldSeparator: ":" 
+  path: http-header-user-agent
+ robotsPolicy:  
+  type: NameValue
+  recordSeparator: "\n"
+  fieldSeparator: ":" 
+  path: robots
+ creationDate:
+  type: Headers
+  path: WARC-Date
+ datatype:
+  type: NameValue
+  recordSeparator: "\n"
+  fieldSeparator: ":" 
+  path: format
+ id:
+   type: Headers
+   path: WARC-Filename 
+ maxDuration:
+  type: NameValueList
+  recordSeparator: ["\n",","]
+  fieldSeparator: "="
+  path: maxDuration
+ recurrence:
+  type: NameValueList
+  recordSeparator: ["\n",","]
+  fieldSeparator: "="
+  path: recurrence
+ 
+ isTestCrawl:
+  type: NameValueList
+  recordSeparator: ["\n",","]
+  fieldSeparator: "="
+  path: isTestCrawl
+  
+ isPatchCrawl:
+  type: NameValueList
+  recordSeparator: ["\n",","]
+  fieldSeparator: "="
+  path: isPatchCrawl
+
+ seedCount:
+  type: NameValueList
+  recordSeparator: ["\n",","]
+  fieldSeparator: "="
+  path: seedCount
+
+ accountId:
+  type: NameValueList
+  recordSeparator: ["\n",","]
+  fieldSeparator: "="
+  path: accountId
+ 
+ accountType:
+  type: NameValueList
+  recordSeparator: ["\n",","]
+  fieldSeparator: "="
+  path: accountType
+
+ organizationName:
+  type: NameValueList
+  recordSeparator: ["\n",","]
+  fieldSeparator: "="
+  path: organizationName
+ 
+ collectionName:
+  type: NameValueList
+  recordSeparator: ["\n",","]
+  fieldSeparator: "="
+  path: collectionName1
+ 
+ collectionId:
+  type: NameValueList
+  recordSeparator: ["\n",","]
+  fieldSeparator: "="
+  path: collectionId
+  
+GENERAL: #This is a holder for any file types otherthan WARC and ARC.
+ empty: 
+  empty2: []
+ 

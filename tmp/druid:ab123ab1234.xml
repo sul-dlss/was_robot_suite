@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<crawlObject>
+<crawlId>test_crawl</crawlId>
+<collectionId>test_collection</collectionId>
+<files>
+<file>
+<fileName>.DS_Store</fileName>
+<fileType>GENERAL</fileType>
+<recordCount>0</recordCount>
+</file>
+<file>
+<fileName>WARC-Test.warc.gz</fileName>
+<fileType>WARC</fileType>
+<recordCount>4027</recordCount>
+<isPatchCrawl>false</isPatchCrawl>
+<accountId>159</accountId>
+<collectionId>924</collectionId>
+<organizationName>"Stanford University</organizationName>
+<robotsPolicy> obey</robotsPolicy>
+<hostname> wbgrp-crawl051.us.archive.org</hostname>
+<user-agent> Mozilla/5.0 (compatible; archive.org_bot; Archive-It; +http://archive-it.org/files/site-owners.html)</user-agent>
+<maxDuration>604800</maxDuration>
+<isTestCrawl>false</isTestCrawl>
+<ip> 207.241.226.90</ip>
+<id>ARCHIVEIT-924-QUARTERLY-31501-20140119223740943-00015-wbgrp-crawl051.us.archive.org-6441.warc.gz</id>
+<creationDate>2014-01-19T22:37:40Z</creationDate>
+<software> Heritrix/3.2.0-SNAPSHOT-20140108-2049 http://crawler.archive.org</software>
+<recurrence>QUARTERLY</recurrence>
+<seedCount>68</seedCount>
+<accountType>SUBSCRIBER</accountType>
+<datatype> WARC File Format 1.0</datatype>
+</file>
+</files>
+</crawlObject>

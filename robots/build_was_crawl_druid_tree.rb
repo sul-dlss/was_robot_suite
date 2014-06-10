@@ -1,0 +1,27 @@
+module Robots
+  module DorRepo
+    module WASCrawl
+
+      class BuildDRUIDTree
+        include LyberCore::Robot
+
+        def initialize
+          super('dor', 'wasCrawlPreassemblyWF', 'build-was-crawl-druid-tree')
+        end
+
+        def perform(druid)
+          #staging_path
+          crawl_id = Dor::WASCrawl::Utilities::get_crawl_id(druid_obj)
+          source_root_pathname = Dor::Config.was_crawl.source_root_pathname
+          obj = Dor::Item.find(druid)
+          collection_id = Dor::WASCrawl::Utilities::get_collection_id(druid_obj)
+          staging_path = Dor::Config.was_crawl.staging_path
+          
+          druid_tree_directory = DruidTools::Druid.new(druid.id,staging_path).path()
+          FileUtils.cp "#{source_root_pathname}/#{crawlid}", druid_tree_directory+"content"
+        end
+      end
+
+    end
+  end
+end
