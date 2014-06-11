@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'was-crawl-preassembly'
-set :repo_url, '.'
+set :repo_url, 'https://github.com/sul-dlss/was-crawl-preassembly.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
