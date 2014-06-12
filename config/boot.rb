@@ -22,6 +22,15 @@ end
 require 'dor-services'
 require 'lyber_core'
 
+# TODO Maybe move auto-require to just run_robot and spec_helper?
+Dir["#{ROBOT_ROOT}/lib/*.rb"].each { |f| require f }
+require 'build_was_crawl_druid_tree'
+require 'metadata_extractor'
+require 'content_metadata_generator'
+require 'desc_metadata_generator'
+require 'technical_metadata_generator'
+require 'end_was_crawl_preassembly'
+
 
 env_file = File.expand_path(File.dirname(__FILE__) + "/./environments/#{environment}")
 puts "Loading config from #{env_file}"
