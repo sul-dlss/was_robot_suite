@@ -2,9 +2,9 @@ require 'utilities'
 
 module Robots
   module DorRepo
-    module WASCrawl
+    module WasCrawlPreassembly
 
-      class ContentMetadataGeneratorRobot
+      class ContentMetadataGenerator
         include LyberCore::Robot
 
         def initialize

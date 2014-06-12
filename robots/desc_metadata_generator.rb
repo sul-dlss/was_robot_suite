@@ -1,8 +1,8 @@
 module Robots
   module DorRepo
-    module WASCrawl
+    module WasCrawlPreassembly
 
-      class DescMetadataGeneratorRobot
+      class DescMetadataGenerator
         include LyberCore::Robot
 
         def initialize

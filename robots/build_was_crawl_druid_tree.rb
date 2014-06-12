@@ -1,8 +1,8 @@
 module Robots
   module DorRepo
-    module WASCrawl
+    module WasCrawlPreassembly
 
-      class BuildDRUIDTree
+      class BuildWasCrawlDruidTree
         include LyberCore::Robot
 
         def initialize
