@@ -11,9 +11,9 @@ module Robots
 
         def perform(druid)
           #staging_path
+          druid_obj = Dor::Item.find(druid)
           crawl_id = Dor::WASCrawl::Utilities::get_crawl_id(druid_obj)
           source_root_pathname = Dor::Config.was_crawl.source_root_pathname
-          obj = Dor::Item.find(druid)
           collection_id = Dor::WASCrawl::Utilities::get_collection_id(druid_obj)
           staging_path = Dor::Config.was_crawl.staging_path
           
