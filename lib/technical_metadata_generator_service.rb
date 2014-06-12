@@ -1,3 +1,5 @@
+require 'metadata_generator_service'
+
 module Dor
   module WASCrawl
   
