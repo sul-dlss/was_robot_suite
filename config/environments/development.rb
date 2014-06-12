@@ -14,7 +14,13 @@ Dor::Config.configure do
     metadata_extractor_jar  'jar/WASMetadataExtractor.jar'
 
   end
-
+  suri do
+    mint_ids true
+    id_namespace 'druid'
+    url 'https://lyberservices-dev.stanford.edu'
+    user 'labware'
+    pass 'lyberteam'
+  end
   dor do
     service_root 'https://USERNAME:PASSWORD@lyberservices-dev.stanford.edu/dor'
   end
