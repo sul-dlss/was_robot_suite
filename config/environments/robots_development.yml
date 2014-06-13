@@ -46,7 +46,7 @@
 sul-robots1-dev:
   - dor_wasCrawlPreassemblyWF_build-was-crawl-druid-tree
   - dor_wasCrawlPreassemblyWF_metadata-extractor
-  - dor_wasCrawlPreassemblyWF_content-metadata-extractor
-  - dor_wasCrawlPreassemblyWF_technical-metadata-extractor
-  - dor_wasCrawlPreassemblyWF_desc-metadata-extarctor
+  - dor_wasCrawlPreassemblyWF_content-metadata-generator
+  - dor_wasCrawlPreassemblyWF_technical-metadata-generator
+  - dor_wasCrawlPreassemblyWF_desc-metadata-generator
   - dor_wasCrawlPreassemblyWF_end-was-crawl-preassembly
