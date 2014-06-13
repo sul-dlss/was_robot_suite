@@ -2,7 +2,6 @@
 module Robots
   module DorRepo
     module WasCrawlPreassembly
-
       class BuildWasCrawlDruidTree
         include LyberCore::Robot
 
@@ -18,8 +17,8 @@ module Robots
           collection_id = Dor::WASCrawl::Utilities::get_collection_id(druid_obj)
           staging_path = Dor::Config.was_crawl.staging_path
           
-          druid_tree_directory = DruidTools::Druid.new(druid,staging_path).path()
-          FileUtils.cp "#{source_root_pathname}/#{crawl_id}", druid_tree_directory+"content"
+          druid_tree_directory = DruidTools::Druid.new(druid,staging_path)
+          FileUtils.cp_r "#{source_root_pathname}#{crawl_id}/.", druid_tree_directory.content_dir
         end
       end
 
