@@ -11,7 +11,7 @@ module Dor
         @crawl_id = crawl_id
         @staging_path = staging_path
         @druid_id = druid_id
-        @java_log_file = Dor::Config.was_crawl.metadata_extractor_jar
+        @java_log_file = "log/java_log_file.txt"
         @extracted_metadata_xml_path="tmp"
 
       end
@@ -26,7 +26,7 @@ module Dor
         @input_directory = Pathname(DruidTools::Druid.new(@druid_id,@staging_path.to_s).path).to_s+"/content"
         raise "#{@input_directory} doesn't exist" unless File.exists?(@input_directory)
         
-        @jar_path="jar/WASMetadataExtractor.jar"
+        @jar_path=Dor::Config.was_crawl.metadata_extractor_jar
         @xml_output_location="#{@extracted_metadata_xml_path}/#{@druid_id}.xml"
       end
 
