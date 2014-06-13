@@ -1,6 +1,9 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
+set :rvm_type, :system
+set :rvm_ruby_string, 'ruby-1.9.3-p484@was-gemsets'
+
 set :application, 'was-crawl-preassembly'
 set :repo_url, 'https://github.com/sul-dlss/was-crawl-preassembly.git'
 
@@ -36,25 +39,22 @@ set :scm, :git
 
 set :stages, %W(dev staging production)
 set :default_stage, "dev"
+set :linked_dirs, %w(log run config/environments config/certs)
+
 namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
+    on roles(:app), in: :sequence, wait: 10 do
+      within release_path do
+        execute :bundle, :exec, :controller, :stop
+        execute :bundle, :exec, :controller, :quit
+        execute :bundle, :exec, :controller, :boot
+        
+      end
     end
   end
 
   after :publishing, :restart
 
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-
-end
+ end
