@@ -1,9 +1,0 @@
-<workflow id="wasCrawlPreassemblyWF">
-  <process name="start" status="completed" attempts="1"/>
-  <process name="build-was-crawl-druid-tree" status="waiting"/>
-  <process name="metadata-extractor" status="waiting"/>
-  <process name="content-metadata-generator" status="waiting"/>
-  <process name="technical-metadata-generator" status="waiting"/>
-  <process name="desc-metadata-generator" status="waiting"/>
-  <process name="end-was-crawl-preassembly" status="waiting"/>
-</workflow>
