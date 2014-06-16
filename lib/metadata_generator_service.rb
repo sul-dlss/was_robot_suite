@@ -8,12 +8,12 @@ module Dor
       attr_accessor  :collection_id
       attr_accessor  :staging_path
       attr_accessor  :druid_id
-      @extracted_metadata_xml_location="tmp/"
       
       def initialize(collection_id,  staging_path, druid_id)
         @collection_id = collection_id
         @staging_path = staging_path
         @druid_id = druid_id
+        @extracted_metadata_xml_location="tmp/"
       end
       
       def read_metadata_xml_input_file
