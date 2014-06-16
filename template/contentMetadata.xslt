@@ -5,10 +5,10 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <contentMetadata type="file" >
      <xsl:attribute name="stacks">
-        <xsl:value-of select="concat('/web-archiving-stack/','collectionId')"/>
+        <xsl:value-of select="concat('/web-archiving-stack/',collectionId)"/>
      </xsl:attribute>
      
-    <xsl:for-each select="files/file[type='WARC']">
+    <xsl:for-each select="files/file[fileType='WARC']">
 		<resource type="file" >
 			<file dataType="WARC" publish="no" shelve="yes" preserve="yes" >
 			     <xsl:attribute name="id">  <xsl:value-of select="name"/>   </xsl:attribute>
@@ -20,7 +20,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		</resource>
     </xsl:for-each>
 
-    <xsl:for-each select="files/file[type='ARC']">
+    <xsl:for-each select="files/file[fileType='ARC']">
 		<resource type="file" >
 			<file dataType="ARC" publish="no" shelve="yes" preserve="yes" >
 			     <xsl:attribute name="id">  <xsl:value-of select="name"/>   </xsl:attribute>
@@ -32,7 +32,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		</resource>
     </xsl:for-each>
 
-	<xsl:for-each select="files/file[type='GENERAL']">
+	<xsl:for-each select="files/file[fileType='GENERAL']">
 		<resource type="file" >
 			<file dataType="general" publish="no" shelve="no" preserve="yes" >
 			     <xsl:attribute name="id">  <xsl:value-of select="name"/>   </xsl:attribute>
