@@ -10,9 +10,8 @@ module Robots
         end
 
         def perform(druid)
-          obj = Dor::Item.find(druid)
-          obj.clear_diff_cache
-          Dor::WorkflowService.update_workflow_status('dor', druid, 'assemblyWF', 'cleanup', 'waiting')
+          druid_obj = Dor::Item.find(druid)
+          druid_obj.initialize_workflow('accessionWF')
         end
       end
 
