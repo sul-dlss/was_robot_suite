@@ -18,8 +18,8 @@ Dor::Config.configure do
     mint_ids true
     id_namespace 'druid'
     url 'https://lyberservices-dev.stanford.edu'
-    user 'labware'
-    pass 'lyberteam'
+    user ''
+    pass ''
   end
   dor do
     service_root 'https://USERNAME:PASSWORD@lyberservices-dev.stanford.edu/dor'
