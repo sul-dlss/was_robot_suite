@@ -12,6 +12,7 @@ Dor::Config.configure do
     staging_path  '/dor/assembly/'  #the root for the storage for DRUID tree that will be the input to AssemblyWF
     extracted_metadata_xml_location   'tmp'
     metadata_extractor_jar  'jar/WASMetadataExtractor.jar'
+    java_heap_size  '-Xmx1582m'
 
   end
   suri do

@@ -11,9 +11,9 @@ module Dor
         @crawl_id = crawl_id
         @staging_path = staging_path
         @druid_id = druid_id
-        @java_log_file = "log/java_log_file.txt"
+        @java_log_file = "log/jar_WASMetadataExtractor.log"
         @extracted_metadata_xml_path="tmp"
-
+        @java_heap_size = Dor::Config.was_crawl.java_heap_size
       end
       
       def run_metadata_extractor_jar
@@ -31,7 +31,7 @@ module Dor
       end
 
       def build_cmd_string
-        java_cmd="java -jar #{@jar_path} -f XML -d #{@input_directory} -o #{@xml_output_location} -c config/extractor.yml --collectionId #{@collection_id} --crawlId #{@crawl_id} 2>> #{@java_log_file}" 
+        java_cmd="java #{@java_heap_size} -jar #{@jar_path} -f XML -d #{@input_directory} -o #{@xml_output_location} -c config/extractor.yml --collectionId #{@collection_id} --crawlId #{@crawl_id} 2>> #{@java_log_file}" 
         return java_cmd
       end
       
