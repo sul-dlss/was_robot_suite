@@ -20,7 +20,7 @@ describe Dor::WASCrawl::MetadataExtractor do
       metadata_extractor_service.run_metadata_extractor_jar
       
       output_file = "tmp/"+druid_id+".xml"
-      File.exist?(output_file).should == true 
+      File.exist?(output_file).should 
       
       actual_output = File.read("tmp/"+druid_id+".xml")
       expected_output = <<-EOF 
