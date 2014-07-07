@@ -8,7 +8,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
         <xsl:value-of select="concat('/web-archiving-stacks/data_test/collections/',collectionId)"/>
      </xsl:attribute>
      
-    <xsl:for-each select="files/file[fileType='WARC']">
+    <xsl:for-each select="files/file[type='WARC']">
 		<resource type="file" >
 			<file dataType="WARC" publish="no" shelve="yes" preserve="yes" >
 			     <xsl:attribute name="id">  <xsl:value-of select="name"/>   </xsl:attribute>
@@ -20,7 +20,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		</resource>
     </xsl:for-each>
 
-    <xsl:for-each select="files/file[fileType='ARC']">
+    <xsl:for-each select="files/file[type='ARC']">
 		<resource type="file" >
 			<file dataType="ARC" publish="no" shelve="yes" preserve="yes" >
 			     <xsl:attribute name="id">  <xsl:value-of select="name"/>   </xsl:attribute>
@@ -32,7 +32,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 		</resource>
     </xsl:for-each>
 
-	<xsl:for-each select="files/file[fileType='GENERAL']">
+	<xsl:for-each select="files/file[type='GENERAL']">
 		<resource type="file" >
 			<file dataType="general" publish="no" shelve="no" preserve="yes" >
 			     <xsl:attribute name="id">  <xsl:value-of select="name"/>   </xsl:attribute>
