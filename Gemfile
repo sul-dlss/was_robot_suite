@@ -16,9 +16,7 @@ group :development do
   gem 'awesome_print'
 end
 
-group :test do
-  gem "rspec"
-end
+gem "rspec", "2.14.1"
 
 group :deployment do
   gem 'lyberteam-capistrano-devel'
