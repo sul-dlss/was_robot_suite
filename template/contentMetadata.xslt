@@ -5,7 +5,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 <contentMetadata type="file" >
      <xsl:attribute name="stacks">
-        <xsl:value-of select="concat('/web-archiving-stacks/data_test/collections/',collectionId)"/>
+        <xsl:value-of select="concat('/web-archiving-stacks/data/collections/',collectionId)"/>
      </xsl:attribute>
      
     <xsl:for-each select="files/file[type='WARC']">
