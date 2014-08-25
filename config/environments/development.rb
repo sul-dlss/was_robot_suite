@@ -27,3 +27,5 @@ Dor::Config.configure do
   end
    
 end
+
+REDIS_URL = 'sul-lyberservices-dev:6379/resque:development' # hostname:port[:db][/namespace]

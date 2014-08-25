@@ -47,8 +47,8 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 10 do
       within release_path do
-        execute :bundle, :exec, :controller, :stop
-        execute :bundle, :exec, :controller, :quit
+        test :bundle, :exec, :controller, :stop
+        test :bundle, :exec, :controller, :quit
         execute :bundle, :exec, :controller, :boot
         
       end
