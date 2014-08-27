@@ -14,7 +14,7 @@ slop = Slop.new do
   on :f, :file=, 'One file containing a druid per line'
 end
 
-unless ARGV.first =~ /^\w+:\w+:\w+$/
+unless ARGV.first =~ /^\w+:\w+:[-_\w]+$/
   puts slop.help
   exit 1
 end
@@ -27,14 +27,7 @@ ENV['ROBOT_ENVIRONMENT'] = opts[:environment] unless opts[:environment].nil?
 require File.expand_path(File.dirname(__FILE__) + '/../config/boot')
 
 # generate the robot job class name
-repo_suffix = 'Repo'
-r, w, s = robot.split(':')
-class_name = [
-  'Robots',
-  r.camelcase + repo_suffix, # 'Dor' conflicts with dor-services
-  w.sub('WF', '').camelcase,
-  s.sub('-', '_').camelcase
-]
+class_name = LyberCore::Robot.step_to_classname robot
 
 # instantiate a Robot object using the name
 klazz = class_name.inject(Object) {|o,c| o.const_get c}

@@ -19,6 +19,7 @@ begin
 rescue LoadError, NameError, NoMethodError
 end
 
+# Load core robot services
 require 'dor-services'
 require 'lyber_core'
 
@@ -31,14 +32,12 @@ require 'desc_metadata_generator'
 require 'technical_metadata_generator'
 require 'end_was_crawl_preassembly'
 
-
+# Load local environment configuration
 env_file = File.expand_path(File.dirname(__FILE__) + "/./environments/#{environment}")
 puts "Loading config from #{env_file}"
 require env_file
 
+# Load Resque configuration and controller
 require 'resque'
-REDIS_URL ||= "sul-lyberservices-test.stanford.edu:6379/resque:#{ENV['ROBOT_ENVIRONMENT']}"
-Resque.redis = REDIS_URL
-
-require 'active_support/core_ext' # camelcase
+Resque.redis = (defined? REDIS_URL) ? REDIS_URL : "localhost:6379/resque:#{ENV['ROBOT_ENVIRONMENT']}"
 require 'robot-controller'
