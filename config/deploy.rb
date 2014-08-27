@@ -12,7 +12,7 @@ set :repo_url, 'https://github.com/sul-dlss/was-crawl-dissemination.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/home/lyberadmin/was-crawl-dissemination'
+set :deploy_to, '/home/lyberadmin/was-crawl-diss'
 
 # Default value for :scm is :git
 # set :scm, :git
