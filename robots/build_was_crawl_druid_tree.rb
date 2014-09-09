@@ -1,3 +1,4 @@
+require 'find'
 
 module Robots
   module DorRepo
