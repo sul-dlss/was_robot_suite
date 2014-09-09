@@ -18,10 +18,13 @@ module Robots
           
           druid_tree_directory = DruidTools::Druid.new(druid,staging_path)
           LyberCore::Log.info "Moving files between #{source_root_pathname}#{crawl_id}/. to #{druid_tree_directory.content_dir}"
-          FileUtils.cp_r "#{source_root_pathname}#{crawl_id}/.", druid_tree_directory.content_dir
+          Find.find("#{source_root_pathname}#{crawl_id}").each do |single_file|
+            if File.file?(single_file) then
+              FileUtils.cp_r single_file, druid_tree_directory.content_dir
+            end
+          end
         end
       end
-
     end
   end
 end
