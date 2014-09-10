@@ -4,6 +4,7 @@ $:.unshift File.expand_path(File.join(File.dirname(__FILE__), "..", "robots"))
 require 'rubygems'
 require 'bundler/setup'
 require 'logger'
+require 'rspec/matchers'
 
 # Load the environment file based on Environment.  Default to development
 environment = ENV['ROBOT_ENVIRONMENT'] ||= 'development'
