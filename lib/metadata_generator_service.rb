@@ -15,7 +15,7 @@ module Dor
       end
       
       def read_metadata_xml_input_file
-        druid_tree_directory = DruidTools::Druid.new(@druid_id,@workspace)
+         druid_tree_directory = DruidTools::Druid.new(@druid_id,@workspace)
          metadata_xml_input   = Nokogiri::XML(File.read("#{druid_tree_directory.content_dir}/source.xml"))
          unless metadata_xml_input.errors.empty?
            raise "#{druid_tree_directory.content_dir}/source.xml is not a valid xml file.\nNokogiri errors: #{metadata_xml_input.errors}"

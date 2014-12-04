@@ -4,10 +4,10 @@ require 'phantomjs'
 module Dor
   module WASSeed
   
-    class ThumbnailGenerator
+    class ThumbnailGeneratorService
 
-      def self.capture_thumbnail(druid, workspace, uri)
-        thumbnail_file  = "#{DruidTools::Druid.new(druid,workspace).content_dir}/thumbnail.jpeg"
+      def self.capture_thumbnail(druid_tree_directory,  uri)
+        thumbnail_file  = "#{druid_tree_directory.content_dir}/thumbnail.jpeg"
         wayback_uri     = "#{Dor::Config.was_seed.wayback_uri}/19900101120000/#{uri}"
         temporary_file  = "tmp/#{druid[6,14]}.jpeg"
         
