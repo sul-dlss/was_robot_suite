@@ -20,7 +20,7 @@
 		<prereq>thumbnail-generator</prereq>
 		<label>Generate content metadata</label>
 	</process>
-	<process name="end-was-crawl-preassembly" sequence="6">
+	<process name="end-was-seed-preassembly" sequence="6">
 		<prereq>content-metadata-generator</prereq>
 		<label>End of the WAS Seed preassembly</label>
 	</process>

@@ -13,9 +13,9 @@ module Robots
         def perform(druid)
          
           staging_path = Dor::Config.was_seed.staging_path
-          workspace = Dor::Config.was_seed.workspace
+          workspace_path = Dor::Config.was_seed.workspace_path
           
-          druid_tree_directory = DruidTools::Druid.new(druid,workspace)
+          druid_tree_directory = DruidTools::Druid.new(druid,workspace_path)
           source_xml_file = staging_path + "#{druid}.xml"
           
           if File.file?(source_xml_file) then

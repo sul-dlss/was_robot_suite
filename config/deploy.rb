@@ -1,14 +1,16 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :rvm_ruby_string, 'ruby-1.9.3-p484'
+
+set :application, 'was-seed-preassembly'
+set :repo_url, 'https://github.com/sul-dlss/was-seed-preassembly.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-# set :deploy_to, '/var/www/my_app'
+set :deploy_to, '/home/lyberadmin/was-seed-preassembly'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -33,14 +35,21 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+set :stages, %W(dev staging production)
+set :default_stage, "dev"
+set :linked_dirs, %w(log run config/environments config/certs)
 
 namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      # execute :touch, release_path.join('tmp/restart.txt')
+    on roles(:app), in: :sequence, wait: 10 do
+      within release_path do
+        test :bundle, :exec, :controller, :stop
+        test :bundle, :exec, :controller, :quit
+        execute :bundle, :exec, :controller, :boot
+        
+      end
     end
   end
 
