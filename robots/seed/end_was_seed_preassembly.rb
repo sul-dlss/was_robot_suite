@@ -6,7 +6,7 @@ module Robots
         include LyberCore::Robot
 
         def initialize
-          super('dor', 'wasSeedPreassemblyWF', 'end-was-crawl-preassembly')          
+          super('dor', 'wasSeedPreassemblyWF', 'end-was-seed-preassembly')          
         end
 
         def perform(druid)
