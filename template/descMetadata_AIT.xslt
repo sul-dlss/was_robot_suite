@@ -12,14 +12,10 @@
 
 
     <xsl:template match="/item">
-        <descMetadata>
         <!--This part is for the seed records-->
 
         <xsl:for-each select="source_xml/seed">
-                <mods xmlns:xlink="http://www.w3.org/1999/xlink"
-                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                    xmlns="http://www.loc.gov/mods/v3"
-                    xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+                <mods xmlns="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-3.xsd" version="3.3">
                     <typeOfResource>text</typeOfResource>
                     <genre authority="local">archived website</genre>
                     <titleInfo>
@@ -106,6 +102,5 @@
                     </recordInfo>
                 </mods>
         </xsl:for-each>
-        </descMetadata>
     </xsl:template>
 </xsl:stylesheet>
