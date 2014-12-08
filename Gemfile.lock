@@ -103,7 +103,7 @@ GEM
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
-    fastimage (1.6.4)
+    fastimage (1.6.6)
       addressable (~> 2.3, >= 2.3.5)
     holepicker (0.3.3)
       json (~> 1.8)

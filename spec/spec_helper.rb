@@ -8,3 +8,4 @@ require 'pry'
 require 'rspec'
 require 'rspec/matchers' # req by equivalent-xml custom matcher `be_equivalent_to`
 require 'equivalent-xml'
+require 'nokogiri'

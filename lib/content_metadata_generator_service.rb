@@ -15,11 +15,10 @@ module Dor
     end
   
     def generate_metadata_output
-      metadata_content = 
       thumbnail_file  = "#{DruidTools::Druid.new(@druid_id,workspace).content_dir}/thumbnail.jpeg"
-
       image_xml_str = create_thumbnail_xml_element thumbnail_file
-      xml_input = generate_xml_doc image_xml_str #generating basic xml instead of reading from the input file
+
+      xml_input = generate_xml_doc image_xml_str 
       
       xslt_template = read_template(@content_metadata_name)
       metadata_content = transform_xml_using_xslt(xml_input,xslt_template)
@@ -34,21 +33,38 @@ module Dor
     end
       
     def create_thumbnail_xml_element thumbnail_file
-      unless File.exist?(thumbnail_file) then 
+      unless !thumbnail_file.nil? and File.exist?(thumbnail_file) then 
+        LyberCore::Log.warn "ThumbnailGenerator - #{thumbnail_file} doesn't exist"
         return ""
       end
       
-      thumbnail_file_object = File.new(thumbnail_file, "r")
-      thumbnail_file_data = thumbnail_file_object.read()
+      if FastImage.type(thumbnail_file).nil? then
+        LyberCore::Log.warn "ThumbnailGenerator - #{thumbnail_file} is not a valid image"
+        raise "#{thumbnail_file} is not a valid image"
+      end
       
+      begin
+        thumbnail_file_object = File.new(thumbnail_file, "r")
+        thumbnail_file_data = thumbnail_file_object.read()
+      rescue Exception => e
+        LyberCore::Log.warn "ThumbnailGenerator - problem in reading #{thumbnail_file}"
+        raise "Problem in reading #{thumbnail_file}. #{e.message}\n#{e.backtrace.inspect}"
+      end
+
+      size = thumbnail_file_object.size()
+      if size == 0 then
+        LyberCore::Log.warn "ThumbnailGenerator - #{thumbnail_file} size is 0"
+        return ""
+      end
+              
       md5 = Digest::MD5.hexdigest(thumbnail_file_data)
       sha1 = Digest::SHA1.hexdigest(thumbnail_file_data)
-      size = thumbnail_file_object.size()
       
+ 
       dimensions = FastImage.size(thumbnail_file)
       width = dimensions[0]
       height = dimensions[1]
-      
+ 
       xml_str = "<image>"+
                 "<md5>#{md5}</md5>"+
                 "<sha1>#{sha1}</sha1>"+
