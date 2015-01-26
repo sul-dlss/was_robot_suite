@@ -53,10 +53,9 @@ module Dor
         raise "invalid warc file name" if warc_file_path.nil? or warc_file_path.length <1
         raise "invalid cdx file name" if cdx_file_path.nil? or cdx_file_path.length <1
         
-        cmd_string = "java #{@java_heap_size} -cp #{@cdx_generator_jar_file_name}  org.archive.extract.ResourceExtractor -cdxURL  #{warc_file_path} > #{cdx_file_path} 2>> #{@java_log_file}"
+        cmd_string = "#{@cdx_generator_jar_file_name} #{warc_file_path} #{cdx_file_path} 2>> #{@java_log_file}"
         return cmd_string
       end
-
     end
   end
 end
