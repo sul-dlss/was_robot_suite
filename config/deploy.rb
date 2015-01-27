@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
-lock '3.2.1'
+#lock '3.2.1'
 
 set :rvm_type, :system
 set :rvm_ruby_string, 'ruby-1.9.3-p484'
@@ -40,11 +40,11 @@ set :scm, :git
 
 set :stages, %W(development staging production)
 set :default_stage, "development"
-set :linked_dirs, %w(log run config/environments config/certs)
+set :linked_dirs, %w(log run config/environments config/certs jar)
 
 namespace :deploy do
   #This is a try to configure a clean install
-  #desc 'Start application'
+  #desc 'Start application' 6677778876788888g
   #task :start do
   #   invoke 'deploy'
   #  on roles(:app), in: :sequence, wait: 10 do
@@ -54,7 +54,15 @@ namespace :deploy do
   #    end
   #  end
   #end
-
+  desc 'Download/unpack OpenWayback tar file to work with indexer script.'
+  task :download_openwayback_tar do
+    on roles(:app), in: :sequence, wait: 10 do
+        execute :curl, "-s https://jenkinsqa.stanford.edu/artifacts/dist/target/openwayback.tar.gz", "> /home/lyberadmin/was-crawl-diss/shared/jar/openwayback.tar.gz"
+        execute :tar, "-xvf /home/lyberadmin/was-crawl-diss/shared/jar/openwayback.tar.gz", "-C /home/lyberadmin/was-crawl-diss/shared/jar/"
+        execute :rm, "/home/lyberadmin/was-crawl-diss/shared/jar/openwayback/*.war"
+    end
+  end
+  
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 10 do
@@ -74,5 +82,5 @@ namespace :deploy do
   end
 
   after :publishing, :restart
-
- end
+  after :restart, :download_openwayback_tar
+end
