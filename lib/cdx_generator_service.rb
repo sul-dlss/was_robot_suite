@@ -1,4 +1,3 @@
-
 module Dor
   module WASCrawl
     class CDXGeneratorService
@@ -8,10 +7,10 @@ module Dor
         @druid_id = druid_id
         @collection_path = collection_path
        
-        @cdx_generator_jar_file_name = Dor::Config.was_crawl_dissemination.webarchives_commons_jar
+        @cdx_indexer_script_file_name = Dor::Config.was_crawl_dissemination.cdx_indexer_script
         @cdx_working_directory = Dor::Config.was_crawl_dissemination.cdx_working_directory
         @java_heap_size = Dor::Config.was_crawl_dissemination.java_heap_size
-        @java_log_file = "log/jar_webarchive_commons.log"
+        @cdx_indexer_log_file = "log/cdx_indexer.log"
       end
       
       def generate_cdx_for_crawl
@@ -26,11 +25,9 @@ module Dor
          
           generate_cdx_for_one_warc(warc_file_path, cdx_file_path) 
         end
-        
       end
 
-      def get_cdx_file_name( warc_file_name )
-        
+      def get_cdx_file_name(warc_file_name)
         cdx_file_name = File.basename(warc_file_name)
         if cdx_file_name.end_with?"gz"
           cdx_file_name = cdx_file_name[0...-3]
@@ -44,16 +41,16 @@ module Dor
         return cdx_file_name+".cdx"
       end
       
-      def generate_cdx_for_one_warc( warc_file_path,cdx_file_path )
+      def generate_cdx_for_one_warc(warc_file_path,cdx_file_path)
         cmd_string = prepare_cdx_generation_cmd_string(warc_file_path,cdx_file_path)
         Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(cmd_string,"extracting CDX")
       end
       
       def prepare_cdx_generation_cmd_string(warc_file_path,cdx_file_path)
-        raise "invalid warc file name" if warc_file_path.nil? or warc_file_path.length <1
-        raise "invalid cdx file name" if cdx_file_path.nil? or cdx_file_path.length <1
+        raise "invalid warc file name" if warc_file_path.nil? || warc_file_path.length <1
+        raise "invalid cdx file name" if cdx_file_path.nil? || cdx_file_path.length <1
         
-        cmd_string = "#{@cdx_generator_jar_file_name} #{warc_file_path} #{cdx_file_path} 2>> #{@java_log_file}"
+        cmd_string = "#{@cdx_indexer_script_file_name} #{warc_file_path} #{cdx_file_path} 2>> #{@cdx_indexer_log_file}"
         return cmd_string
       end
     end

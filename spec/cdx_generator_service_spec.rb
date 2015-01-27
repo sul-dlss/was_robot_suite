@@ -1,11 +1,6 @@
 require 'spec_helper'
 require 'cdx_generator_service'
 
-#  specify { expect(3).to eq(3) }
-#  specify { expect(3).not_to eq(4) }
-#  specify { expect { raise "boom" }.to raise_error("boom") }
-#  specify { expect { }.not_to raise_error }
-
 describe Dor::WASCrawl::CDXGeneratorService do
 
   before(:all) do
@@ -25,7 +20,6 @@ describe Dor::WASCrawl::CDXGeneratorService do
     end
 
     it "should generate cdx file for each warc or arc file in contentMetadata" do
-      
       contentMetadata = File.open(@content_metadata_xml_location+"contentMetadata_3files.xml").read
       collection_path = "#{@stacks_path}/data/collections/test_collection"
       cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path,@druid_id_1,contentMetadata)
@@ -46,11 +40,9 @@ describe Dor::WASCrawl::CDXGeneratorService do
       actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path_2))    
       expected_cdx_MD5 = Digest::MD5.hexdigest(File.read("fixtures/cdx_files/ARC-Test.cdx"))
       expect(actual_cdx_MD5).to eq(expected_cdx_MD5)    
-      
     end
 
     it "should generate cdx file for each warc or arc file in contentMetadata even if there are some file already created" do
-      
       #Make sure the test case is correctly setup
       cdx_file_path_1 = "#{@stacks_path}/data/indecies/cdx_working/#{@druid_id_2}/WARC-Test.cdx"
       expect(File.exist?(cdx_file_path_1)).to eq(true)
@@ -74,7 +66,6 @@ describe Dor::WASCrawl::CDXGeneratorService do
       actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path_2))    
       expected_cdx_MD5 = Digest::MD5.hexdigest(File.read("fixtures/cdx_files/ARC-Test.cdx"))
       expect(actual_cdx_MD5).to eq(expected_cdx_MD5)    
-      
     end
     
     it "should do nothing for the contentMetadata without any arcs or warcs" do
@@ -88,6 +79,7 @@ describe Dor::WASCrawl::CDXGeneratorService do
       expect(File.exist?(cdx_dir)).to eq(true)
       expect(Dir.glob('#{cdx_dir}{*,.*}').empty? ).to eq(true)
     end
+
     after(:all) do
       FileUtils.rm_rf("#{@stacks_path}/data/indecies/cdx_working/#{@druid_id_1}/")
       FileUtils.rm_rf("#{@stacks_path}/data/indecies/cdx_working/#{@druid_id_3}/")
@@ -110,11 +102,23 @@ describe Dor::WASCrawl::CDXGeneratorService do
       actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path))    
       expected_cdx_MD5 = Digest::MD5.hexdigest(File.read("fixtures/cdx_files/WARC-Test.cdx"))
       expect(actual_cdx_MD5).to eq(expected_cdx_MD5)    
-
+    end
+    
+    it "should generate CDX file for the input arc file" do
+      cdx_file_path = "tmp/ARC-Test.cdx"
+      warc_file_path = "#{@workspace}/cc111cc1111/ARC-Test.arc.gz"
+      @cdx_generator.generate_cdx_for_one_warc(warc_file_path,cdx_file_path )
+      
+      expect(File.exist?(cdx_file_path)).to eq(true)
+      
+      actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path))    
+      expected_cdx_MD5 = Digest::MD5.hexdigest(File.read("fixtures/cdx_files/ARC-Test.cdx"))
+      expect(actual_cdx_MD5).to eq(expected_cdx_MD5)    
     end
     
     after(:all) do
       FileUtils.rm "tmp/WARC-Test.cdx"
+      FileUtils.rm "tmp/ARC-Test.cdx"
     end
   end
 
@@ -161,10 +165,6 @@ describe Dor::WASCrawl::CDXGeneratorService do
       expect(@cdx_generator.get_cdx_file_name("c://tmp/file.txt")).to eq("file.txt.cdx") 
       expect(@cdx_generator.get_cdx_file_name("file://tmp/file.txt")).to eq("file.txt.cdx") 
    end
-
-    
-    after(:all) do
-    end
   end
 
   context ".prepare_cdx_generation_cmd_string" do
@@ -177,7 +177,7 @@ describe Dor::WASCrawl::CDXGeneratorService do
       cdx_file_name = "file.cdx"
       @cdx_generator.instance_variable_set(:@cdx_working_directory,"working_directory/")
       cmd_string = @cdx_generator.prepare_cdx_generation_cmd_string(warc_file_name, cdx_file_name)
-      expect(cmd_string).to eq("java -Xmx1024m -cp jar/webarchive-commons-jar-with-dependencies.jar  org.archive.extract.ResourceExtractor -cdxURL  file.warc > file.cdx 2>> log/jar_webarchive_commons.log")
+      expect(cmd_string).to eq("jar/openwayback/bin/cdx-indexer file.warc file.cdx 2>> log/cdx_indexer.log")
     end
 
     it "should raise an error with nil or missing file names" do
@@ -189,19 +189,13 @@ describe Dor::WASCrawl::CDXGeneratorService do
       expect{@cdx_generator.prepare_cdx_generation_cmd_string(warc_file_name, nil)}.to raise_error 
       expect{@cdx_generator.prepare_cdx_generation_cmd_string(warc_file_name,  "")}.to raise_error 
     end
-    
-    after(:all) do
-    end
   end
 
   context Dor::WASCrawl::Dissemination::Utilities, ".run_sys_cmd" do
-    before(:all) do
-    end
-
     it "should generate CDX file in the right location with valid WARC file" do
       warc_file_name = "#{@workspace}/aa111aa1111/WARC-Test.warc.gz"
       cdx_file_name = "tmp/WARC-Test.cdx"
-      cmd_string = "java -Xmx1024m -cp jar/webarchive-commons-jar-with-dependencies.jar  org.archive.extract.ResourceExtractor -cdxURL  #{warc_file_name} > #{cdx_file_name} 2>> log/jar_webarchive_commons.log"
+      cmd_string = "jar/openwayback/bin/cdx-indexer  #{warc_file_name} #{cdx_file_name} 2>> log/cdx_indexer.log"
       Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd( cmd_string, "extracting CDX")
 
       expect(File.exist?(cdx_file_name)).to eq(true)
@@ -214,13 +208,8 @@ describe Dor::WASCrawl::CDXGeneratorService do
     it "should raise an error with invalid input file" do
       warc_file_name = "{@workspace}/bb111bbb1111/WARC-Test.txt"
       cdx_file_name = "tmp/WARC-Test.cdx"
-      cmd_string = "java -Xmx1024m -cp jar/webarchive-commons-jar-with-dependencies.jar  org.archive.extract.ResourceExtractor -cdxURL  #{warc_file_name} > #{cdx_file_name} 2>> log/java_jar.txt"
+      cmd_string = "jar/openwayback/bin/cdx-indexer  #{warc_file_name} #{cdx_file_name} 2>> log/cdx_indexer.log"
       expect{Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(cmd_string,"extracting CDX")}.to raise_error
     end
-
-    
-    after(:all) do
-    end
   end
-
 end

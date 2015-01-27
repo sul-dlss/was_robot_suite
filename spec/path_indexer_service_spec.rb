@@ -104,15 +104,7 @@ describe Dor::WASCrawl::PathIndexerService do
   end
   
   context ".clean" do
-    
-    before(:all) do
-    end
-  
-    it "should" do
-    end
-    
-    after(:all) do
-    end
+    pending
   end
   
   after(:all) do
