@@ -46,7 +46,7 @@ describe Dor::WASCrawl::DescMetadataGenerator do
   def generate_data_items()
     @expected_desc_metadata = <<-EOF
 <?xml version="1.0"?>
-<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="3.3" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-3.xsd">
+<mods xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns=\"http://www.loc.gov/mods/v3\" version="3.3" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-3.xsd">
   <titleInfo>
     <title>test</title>
   </titleInfo>

@@ -59,7 +59,7 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
   def generate_data_items()
     @expected_content_metadata = <<-EOF
 <?xml version="1.0"?>
-<contentMetadata type="file" stacks="/web-archiving-stack/collectionId" id="druid:gh123gh1234">
+<contentMetadata type="file" stacks="/web-archiving-stacks/data/collections/" id="druid:gh123gh1234">
   <resource type="file">
     <file dataType="WARC" publish="no" shelve="yes" preserve="yes" id="WARC-Test.warc.gz" size="6608320" mimetype="application/octet-stream">
       <checksum type="MD5">c7edbde066e4697b3f2d823ac42c3692</checksum>

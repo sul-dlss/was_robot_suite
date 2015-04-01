@@ -12,12 +12,12 @@ gem 'robot-controller', '~> 1.0' # requires Resque
 gem 'pry', '~> 0.10.0'          # for bin/console
 gem 'slop', '~> 3.5.0'          # for bin/run_robot
 gem 'rake', '~> 10.3.2'
-
+  gem "rspec", "2.14.1"
+  gem 'equivalent-xml'
 group :development do
   gem 'awesome_print'
 end
 
-gem "rspec", "2.14.1"
 
 group :deployment do
   gem 'lyberteam-capistrano-devel'

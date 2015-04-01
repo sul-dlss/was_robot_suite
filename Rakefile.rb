@@ -5,18 +5,8 @@ require 'robot-controller/tasks'
 # Import external rake tasks
 Dir.glob('lib/tasks/*.rake').each { |r| import r }
 
-task :default  => [:rspec_run, :doc]
+task :default  => [:rspec_run]
 
-# require 'spec/rake/verify_rcov'
-# RCov::VerifyTask.new(:verify_rcov => ['rspec_with_rcov', 'doc']) do |t|
-#   t.threshold = 79.64
-#   t.index_html = 'coverage/index.html'
-# end
-
-# desc "Run integration tests"
-# Spec::Rake::SpecTask.new('integration') do |t|
-#   t.spec_files = FileList['integration_tests/*_spec.rb']
-# end
 
 task :clean do
   puts 'Cleaning old coverage.data'
@@ -24,7 +14,6 @@ task :clean do
 end
 
 require 'rspec/core/rake_task'
-
 RSpec::Core::RakeTask.new(:spec)
 
 desc "Run RSpec with RCov"

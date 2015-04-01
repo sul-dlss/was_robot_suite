@@ -261,6 +261,7 @@ DEPENDENCIES
   capistrano-one_time_key
   dor-services (~> 4.8)
   druid-tools
+  equivalent-xml
   lyber-core (~> 3.2, >= 3.2.4)
   lyberteam-capistrano-devel
   net-ssh-krb
