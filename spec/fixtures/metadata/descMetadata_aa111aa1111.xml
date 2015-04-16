@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mods xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.loc.gov/mods/v3" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
+  <typeOfResource>text</typeOfResource>
+  <genre authority="local">archived website</genre>
+  <titleInfo>
+    <title>US Environmental Protection Agency</title>
+  </titleInfo>
+  <name type="corporate" usage="primary">
+    <namePart>United States. Environmental Protection Agency</namePart>
+    <role>
+      <roleTerm type="code" authority="marcrelator">cre</roleTerm>
+      <roleTerm type="text" authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/cre">Creator</roleTerm>
+    </role>
+  </name>
+  <name type="corporate">
+    <namePart>Stanford University, Social Sciences Resource Group</namePart>
+    <role>
+      <roleTerm type="text" authority="marcrelator" valueURI="http://id.loc.gov/vocabulary/relators/col">Collector</roleTerm>
+    </role>
+  </name>
+  <note>Archived by Stanford University, Social Sciences Resource Group.</note>
+  <note displayLabel="Web archiving service">Archive-It</note>
+  <note type="system details" displayLabel="Original site">http://urbanstudies.stanford.edu/</note>
+  <language>
+    <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+  </language>
+  <physicalDescription>
+    <form authority="marcform">electronic</form>
+    <internetMediaType>text/html</internetMediaType>
+    <digitalOrigin>born digital</digitalOrigin>
+  </physicalDescription>
+  <abstract displayLabel="Description">Web site of the US Environmental Protection Agency (EPA). Site contains information on environmental laws and regulations, as well as scientific research on environmental protection.</abstract>
+  <originInfo>
+    <publisher>EPA</publisher>
+  </originInfo>
+  <subject authority="lcsh">
+    <topic>Environmental policy--United States.</topic>
+  </subject>
+  <subject authority="lcsh">
+    <topic>Environmental law--United States</topic>
+  </subject>
+  <location displayLabel="Archived site">
+    <url>https://swap.stanford.edu/*/http://urbanstudies.stanford.edu/</url>
+  </location>
+  <recordInfo>
+    <languageOfCataloging>
+      <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+    </languageOfCataloging>
+    <recordContentSource authority="marcorg">CSt</recordContentSource>
+    <recordOrigin>Transformed from record for http://urbanstudies.stanford.edu/ used in the web archiving service
+                            Archive-It and which is part of the Fugitive US Agencies collection (record ID ).</recordOrigin>
+  </recordInfo>
+</mods>

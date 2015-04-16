@@ -7,15 +7,16 @@
     <!--
         Author: Robert J. Rohrbacher
         Created: 10/15/2014
+        Updated: 12/3/2014
         -->
 
-
-
-    <xsl:template match="/item">
-        <!--This part is for the seed records-->
-
-        <xsl:for-each select="source_xml/seed">
-                <mods xmlns="http://www.loc.gov/mods/v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-3.xsd" version="3.3">
+    <xsl:output method="xml" encoding="UTF-8" indent="yes"/>
+	<xsl:template match="/item">
+ 		<xsl:for-each select="source_xml/seed">
+ 			<mods xmlns:xlink="http://www.w3.org/1999/xlink"
+                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                    xmlns="http://www.loc.gov/mods/v3"
+                    xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
                     <typeOfResource>text</typeOfResource>
                     <genre authority="local">archived website</genre>
                     <titleInfo>
@@ -93,12 +94,16 @@
                             </topic>
                         </subject>
                     </xsl:for-each>
+                    <location displayLabel="Archived site">
+                        <url>https://swap.stanford.edu/*/<xsl:value-of select="url"/></url>
+                    </location> 
                     <recordInfo>
                         <languageOfCataloging>
                             <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
                         </languageOfCataloging>
-                        <recordOrigin>Description based on record from the web archiving service
-                            Archive-It.</recordOrigin>
+                        <recordContentSource authority="marcorg">CSt</recordContentSource>
+                        <recordOrigin>Transformed from record for <xsl:value-of select="url"/> used in the web archiving service
+                            Archive-It and which is part of the Fugitive US Agencies collection (record ID <xsl:value-of select="//id"/>).</recordOrigin>
                     </recordInfo>
                 </mods>
         </xsl:for-each>

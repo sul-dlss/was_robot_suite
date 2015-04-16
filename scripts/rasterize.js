@@ -23,6 +23,7 @@ if (system.args.length < 3 || system.args.length > 5) {
     general_http_status = 200;
     general_http_message = "OK";
     required_id = 1;
+    general_status = true;
     page.onResourceReceived=function(response) {
     		if(response.id == required_id && response.status >= 400 && response.stage=='end'){
     			general_status = false;
@@ -33,8 +34,8 @@ if (system.args.length < 3 || system.args.length > 5) {
     		}
 	};
     page.open(address, function (status) {
-        if (status !== 'success' || general_result == false) {
-            console.log('Unable to load the address! with HTTP status: '+general_http_status+", HTTP message: "+general_http_message);
+        if (status !== 'success' || general_status == false) {
+            console.log('#FAIL# Unable to load the address! with HTTP status: '+general_http_status+", HTTP message: "+general_http_message);
             phantom.exit();
         } else {
             page.evaluate(function() {

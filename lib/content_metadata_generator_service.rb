@@ -1,13 +1,11 @@
 require 'metadata_generator_service'
 require 'digest/md5'
 require 'digest/sha1'
-require 'fastimage'
 
 module Dor
   module WASSeed
   
     class ContentMetadataGenerator < MetadataGenerator
-    
     
     def initialize(workspace, druid_id)
       super(workspace, druid_id)
@@ -38,8 +36,9 @@ module Dor
         return ""
       end
       
-      if FastImage.type(thumbnail_file).nil? then
-        LyberCore::Log.warn "ThumbnailGenerator - #{thumbnail_file} is not a valid image"
+      exif = MiniExiftool.new thumbnail_file
+      if exif.MIMEType.nil? || exif.MIMEType != "image/jp2" then
+        LyberCore::Log.warn "ThumbnailGenerator - #{thumbnail_file} is not a valid JP2 image"
         raise "#{thumbnail_file} is not a valid image"
       end
       
@@ -60,10 +59,8 @@ module Dor
       md5 = Digest::MD5.hexdigest(thumbnail_file_data)
       sha1 = Digest::SHA1.hexdigest(thumbnail_file_data)
       
- 
-      dimensions = FastImage.size(thumbnail_file)
-      width = dimensions[0]
-      height = dimensions[1]
+      width = exif.imagewidth
+      height = exif.imageheight
  
       xml_str = "<image>"+
                 "<md5>#{md5}</md5>"+

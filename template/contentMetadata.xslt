@@ -7,8 +7,8 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 	<contentMetadata type="webarchive-seed" >
 		<xsl:attribute name="id">  <xsl:value-of select="druid"/>   </xsl:attribute>
 		<xsl:for-each select="image">
-			<resource type="thumb" sequnce="1">
-				<file presrver="no" publish="yes" shelve="yes"  mimetype="image/jp2"  id="thumbnail.jpeg">
+			<resource type="image" sequence="1">
+				<file preserve="no" publish="yes" shelve="yes"  mimetype="image/jp2"  id="thumbnail.jp2">
 					<xsl:attribute name="size">  <xsl:value-of select="size"/>   </xsl:attribute>
 					<checksum type="md5"><xsl:value-of select="md5"/></checksum>
       				<checksum type="sha1"><xsl:value-of select="sha1"/></checksum>

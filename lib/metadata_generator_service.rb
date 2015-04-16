@@ -46,7 +46,6 @@ module Dor
       end
       
       def transform_xml_using_xslt(metadata_xml_input_object, metadata_xslt_template)
-       # metadata_xml_input_object =metadata_xml_input
         metadata_xslt_template_object = Nokogiri::XSLT(metadata_xslt_template)
         metadata_content =  metadata_xslt_template_object.transform(metadata_xml_input_object)
         return metadata_content.to_s
