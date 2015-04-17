@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'addressable'      
-gem 'dor-services', '~> 5.1.0'
+gem 'dor-services', '~> 4.19.1'
 gem 'lyber-core', '~> 3.2', '>=3.2.4'
 gem 'robot-controller' # requires Resque
 gem 'pry', '~> 0.10.0'          # for bin/console
