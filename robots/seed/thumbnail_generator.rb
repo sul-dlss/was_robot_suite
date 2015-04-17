@@ -17,7 +17,7 @@ module Robots
           metadata_xml_input   = Nokogiri::XML(File.read("#{druid_tree_directory.content_dir}/source.xml"))
           uri = metadata_xml_input.xpath("//item/uri").text
 
-          Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(workspace_path,druid, uri)
+          Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(druid, workspace_path,uri)
           
        end
       end
