@@ -17,9 +17,9 @@ gem 'yard'
 gem 'holepicker', '~> 0.3', '>= 0.3.3'
 
 gem 'equivalent-xml'
+gem 'rspec'
 
 group :development, :test do
-  gem 'rspec'
   gem 'webmock'
   gem 'vcr'
 end
