@@ -13,7 +13,7 @@ module Dor
     end
   
     def generate_metadata_output
-      thumbnail_file  = "#{DruidTools::Druid.new(@druid_id,workspace).content_dir}/thumbnail.jpeg"
+      thumbnail_file  = "#{DruidTools::Druid.new(@druid_id,workspace).content_dir}/thumbnail.jp2"
       image_xml_str = create_thumbnail_xml_element thumbnail_file
 
       xml_input = generate_xml_doc image_xml_str 
