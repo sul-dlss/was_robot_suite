@@ -14,7 +14,9 @@ module Robots
         # @param [String] druid -- the Druid identifier for the object to process
         def perform(druid)
           druid_obj = Dor::Item.find(druid)
-          original_uri = get_original_uri(druid_obj.druid_obj.datastreams['descMetadata'].ng_xml)
+          original_uri = get_original_uri(druid_obj.datastreams['descMetadata'].ng_xml)
+          druid_id = druid_obj.id.split(':').last
+          send_to_thumbnail_generator(druid_id, original_uri) 
         end
         
         def get_original_uri descMetadata_ng
@@ -22,17 +24,17 @@ module Robots
           s_mods = Mods::Record.new.from_nk_node(descMetadata_ng)
           s_mods.note.map.each do |x|
              if x.attributes.include?("displayLabel") && x.attributes["displayLabel"].to_s == "Original site" then
-               original_uri x.text
+               original_uri = x.text
              end
           end
           return original_uri
         end
         
-        def send_to_thumbnail_generator druid, original_uri
+        def send_to_thumbnail_generator druid_id, original_uri
           begin
-            response = RestClient.get "#{Dor::Configuration.thumbnail_generator_service_uri}api/seed/create?druid=#{druid}&uri=#{original_uri}"
+            response = RestClient.get "#{Dor::Config.thumbnail_generator_service_uri}api/seed/create?druid=#{druid_id}&uri=#{original_uri}"
           rescue RestClient::Conflict => e
-            LyberCore::Log.error("#{druid} already exists on #{Dor::Configuration.thumbnail_generator_service_uri}")
+            LyberCore::Log.error("#{druid_id} already exists on #{Dor::Configuration.thumbnail_generator_service_uri}")
           end
         end
       end
