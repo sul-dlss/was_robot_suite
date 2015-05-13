@@ -12,7 +12,7 @@ set :branch, 'master'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/home/lyberadmin/was-seed-dissemination'
+set :deploy_to, '/home/lyberadmin/was-seed-diss'
 
 # Default value for :scm is :git
 # set :scm, :git
