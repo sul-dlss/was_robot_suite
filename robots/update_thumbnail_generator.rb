@@ -34,7 +34,7 @@ module Robots
           begin
             response = RestClient.get "#{Dor::Config.thumbnail_generator_service_uri}api/seed/create?druid=#{druid_id}&uri=#{original_uri}"
           rescue RestClient::Conflict => e
-            LyberCore::Log.error("#{druid_id} already exists on #{Dor::Configuration.thumbnail_generator_service_uri}")
+            LyberCore::Log.error("#{druid_id} already exists on #{Dor::Config.thumbnail_generator_service_uri}")
           end
         end
       end
