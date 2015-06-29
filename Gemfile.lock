@@ -39,7 +39,7 @@ GEM
       docopt (~> 0.5.0)
       validatable (~> 1.6)
     blue-daemons (1.1.11)
-    bluepill (0.0.69)
+    bluepill (0.0.68)
       activesupport (>= 3, < 5)
       blue-daemons (~> 1.1.11)
       i18n (~> 0.5)
@@ -190,7 +190,7 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    rack (1.6.0)
+    rack (1.6.4)
     rack-protection (1.5.3)
       rack
     rainbow (2.0.0)
@@ -217,8 +217,8 @@ GEM
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
     retries (0.0.5)
-    robot-controller (1.0.2)
-      bluepill (~> 0.0.67)
+    robot-controller (2.0.0)
+      bluepill (= 0.0.68)
       rake (~> 10.3.2)
       resque (~> 1.25.2)
     rsolr (1.0.12)
@@ -313,7 +313,7 @@ DEPENDENCIES
   phantomjs
   pry (~> 0.10.0)
   rake (~> 10.3.2)
-  robot-controller
+  robot-controller (~> 2.0)
   rspec
   slop (~> 3.5.0)
   vcr
