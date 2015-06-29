@@ -173,8 +173,8 @@ GEM
     rest-client (1.6.8)
       mime-types (~> 1.16)
       rdoc (>= 2.4.2)
-    robot-controller (1.0.2)
-      bluepill (~> 0.0.67)
+    robot-controller (2.0.0)
+      bluepill (= 0.0.68)
       rake (~> 10.3.2)
       resque (~> 1.25.2)
     rsolr (1.0.10)
@@ -253,6 +253,6 @@ DEPENDENCIES
   pry (~> 0.10.0)
   rake (~> 10.3.2)
   rest-client
-  robot-controller (~> 1.0)
+  robot-controller (~> 2.0)
   rspec
   slop (~> 3.5.0)
