@@ -11,7 +11,14 @@ module Robots
 
         def perform(druid)
           druid_obj = Dor::Item.find(druid)
-          druid_obj.initialize_workflow('accessionWF')
+          
+          if Dor::WorkflowService.get_lifecycle('dor', druid, 'registered').nil? then 
+            druid_obj.open_new_version
+            druid_obj.close_version( {:description=>"Updating the seed object through wasSeedPreassemblyWF", :significance=>"Major"})
+          else
+            druid_obj.initialize_workflow('accessionWF')
+          end
+          
         end
       end
 
