@@ -146,6 +146,7 @@ GEM
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_exiftool (1.7.0)
+    mini_magick (4.2.7)
     mini_portile (0.6.2)
     moab-versioning (1.4.4)
       confstruct
@@ -310,6 +311,7 @@ DEPENDENCIES
   lyber-core (~> 3.2, >= 3.2.4)
   lyberteam-capistrano-devel (~> 3.0)
   mini_exiftool
+  mini_magick
   phantomjs
   pry (~> 0.10.0)
   rake (~> 10.3.2)

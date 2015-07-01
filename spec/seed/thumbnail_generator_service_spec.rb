@@ -58,8 +58,30 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
         temporary_file = "tmp/test_capture.jpeg"
         result = Dor::WASSeed::ThumbnailGeneratorService.capture(wayback_uri,temporary_file)
         expect(result).to eq("")
-        
       end     
+    end
+    after :each do 
+      FileUtils.rm_rf "tmp/test_capture.jpeg" if File.exists?("tmp/test_capture.jpeg")
+    end
+  end
+  
+  describe ".resize_temporary_image" do
+    it "resizes the image with extra width to maximum 400 pixel width" do
+      temporary_image = "tmp/thum_extra_width.jpeg"
+      FileUtils.cp "spec/fixtures/thumbnail_files/image_extra_width.jpeg",temporary_image
+      Dor::WASSeed::ThumbnailGeneratorService.resize_temporary_image temporary_image
+      expect(FileUtils.compare_file(temporary_image, "spec/fixtures/thumbnail_files/thum_extra_width.jpeg")).to be_truthy
+    end
+    it "resizes the image with extra height to maximum 400 pixel height" do
+      temporary_image = "tmp/thum_extra_height.jpeg"
+      FileUtils.cp "spec/fixtures/thumbnail_files/image_extra_height.jpeg", temporary_image
+      Dor::WASSeed::ThumbnailGeneratorService.resize_temporary_image temporary_image
+      expect(FileUtils.compare_file(temporary_image, "spec/fixtures/thumbnail_files/thum_extra_height.jpeg")).to be_truthy
+    end
+
+    after :each do 
+      FileUtils.rm_rf "tmp/thum_extra_width.jpeg" if File.exists?("tmp/thum_extra_width.jpeg")
+      FileUtils.rm "tmp/thum_extra_height.jpeg" if File.exists?("tmp/thum_extra_height.jpeg")
     end
   end
 end

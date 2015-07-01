@@ -10,7 +10,7 @@ gem 'rake', '~> 10.3.2'
 gem 'phantomjs'
 gem 'assembly-image'
 gem 'mini_exiftool'
-
+gem 'mini_magick'
 gem 'awesome_print'
 gem 'debugger', :platform => :ruby_19
 gem 'yard'
