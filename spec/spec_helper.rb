@@ -6,3 +6,6 @@ require bootfile
 
 require 'pry'
 require 'rspec'
+require 'nokogiri'
+
+require_relative '../robots/update_thumbnail_generator'

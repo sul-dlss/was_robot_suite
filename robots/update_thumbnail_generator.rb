@@ -1,3 +1,5 @@
+require 'mods'
+
 module Robots
   module DorRepo
     module WasSeedDissemination
