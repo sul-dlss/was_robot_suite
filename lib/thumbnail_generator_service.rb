@@ -1,6 +1,8 @@
 require 'nokogiri'
 require 'phantomjs'
 require 'assembly-image'
+require 'mini_magick'
+
 module Dor
   module WASSeed
   
@@ -23,6 +25,7 @@ module Dor
           File.delete(temporary_file+".jpeg") if File.exist?(temporary_file+".jpeg") 
           raise "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{result}"
         else  
+          self.resize_temporary_image(temporary_file+'.jpeg')
           Assembly::Image.new(temporary_file+'.jpeg').create_jp2(:output=>temporary_file+".jp2")
           FileUtils.rm temporary_file+'.jpeg'
           FileUtils.mv temporary_file+".jp2", thumbnail_file
@@ -37,6 +40,20 @@ module Dor
           result = result +"\nException in generating thumbnail. #{e.message}\n#{e.backtrace.inspect}"
         end
         return result
+      end
+      
+      def self.resize_temporary_image(temporary_image)
+        image = MiniMagick::Image.open(temporary_image)
+        width = image.width
+        height = image.height
+        
+        if width > height then
+          resize_dimension = " 400x "
+        else
+          resize_dimension = " x400 "
+        end
+        image.resize resize_dimension
+        image.write(temporary_image)
       end
     end
   end
