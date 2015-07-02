@@ -13,6 +13,7 @@ set :repo_url, 'https://github.com/sul-dlss/was-crawl-dissemination.git'
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/lyberadmin/was-crawl-diss'
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for :scm is :git
 # set :scm, :git
