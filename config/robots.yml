@@ -1,3 +1,6 @@
+#
+# robots.yml - Provides the complete list of all robots in this suite
+#
 - dor_wasCrawlPreassemblyWF_build-was-crawl-druid-tree
 - dor_wasCrawlPreassemblyWF_content-metadata-generator
 - dor_wasCrawlPreassemblyWF_desc-metadata-generator
