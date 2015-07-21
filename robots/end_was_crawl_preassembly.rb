@@ -1,7 +1,6 @@
 module Robots
   module DorRepo
     module WasCrawlPreassembly
-
       class EndWasCrawlPreassembly
         include LyberCore::Robot
 
@@ -10,11 +9,12 @@ module Robots
         end
 
         def perform(druid)
-          druid_obj = Dor::Item.find(druid)
-          druid_obj.initialize_workflow('accessionWF')
+          opts = { :create_ds => true }
+          opts[:lane_id] = Dor::Config.was_crawl.dedicated_lane.nil? ? 'default' : Dor::Config.was_crawl.dedicated_lane
+          Dor::WorkflowService.create_workflow('dor', druid, 'accessionWF', Dor::WorkflowObject.initial_workflow('accessionWF'), opts)
         end
-      end
 
+      end
     end
   end
 end
