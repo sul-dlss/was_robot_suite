@@ -18,7 +18,7 @@ describe Dor::WASCrawl::MetadataGenerator do
       metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location,@extracted_metadata_xml_location)
       
       actual_xml = metadata_generator_service.read_metadata_xml_input_file
-      actual_xml.to_s.should eq @druid_gh123gh1234_expected_xml
+      expect(actual_xml.to_s).to eq @druid_gh123gh1234_expected_xml
     end  
     
     it "should raise an error if the file doesn't exists" do
@@ -61,10 +61,10 @@ describe Dor::WASCrawl::MetadataGenerator do
       
       metadata_generator_service.write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)
 
-      File.exists?(expected_metadata_directory).should  
-      File.exist?(expected_output_file).should 
+      expect(File.exists?(expected_metadata_directory)).to be_truthy  
+      expect(File.exist?(expected_output_file)).to be_truthy
       
-      File.read(expected_output_file).should eq metadata_content
+      expect(File.read(expected_output_file)).to eq metadata_content
       File.delete(expected_output_file)
       Dir.delete(expected_metadata_directory)
     end
@@ -79,8 +79,8 @@ describe Dor::WASCrawl::MetadataGenerator do
       
       metadata_generator_service.write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)
       
-      File.exist?(expected_output_file).should  
-      File.read(expected_output_file).should eq metadata_content
+      expect(File.exist?(expected_output_file)).to  be_truthy
+     expect( File.read(expected_output_file)).to eq metadata_content
       File.delete(expected_output_file)
     end
   end 
@@ -92,7 +92,7 @@ describe Dor::WASCrawl::MetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
       
       actual_xsl = metadata_generator_service.read_template("contentMetadata")
-      actual_xsl.to_s.length.should > 1
+      expect(actual_xsl.to_s.length).to be > 1
     end  
     
     it "should read the technicalMetadata template successfully" do
@@ -100,7 +100,7 @@ describe Dor::WASCrawl::MetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
       
       actual_xsl = metadata_generator_service.read_template("technicalMetadata")
-      actual_xsl.to_s.length.should > 1
+       expect(actual_xsl.to_s.length).to be > 1
     end  
 
     it "should read the descMetadata template successfully" do
@@ -108,7 +108,7 @@ describe Dor::WASCrawl::MetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
       
       actual_xsl = metadata_generator_service.read_template("descMetadata")
-      actual_xsl.to_s.length.should > 1
+      expect(actual_xsl.to_s.length).to be > 1
     end  
 
     it "should raise an error if the file doesn't exists" do
@@ -150,7 +150,7 @@ describe Dor::WASCrawl::MetadataGenerator do
 </newuserlist>
 EOF
       actual_transformed =   metadata_generator_service.transform_xml_using_xslt(xml_doc,xslt_doc)
-      actual_transformed.to_s.should eq expected_transformed
+      expect(actual_transformed.to_s).to eq expected_transformed
     end    
   end 
 
@@ -162,7 +162,7 @@ EOF
       test_string = "test_string"
       actual_string = metadata_generator_service.do_post_transform(test_string)
       
-      actual_string.should eq test_string
+      expect(actual_string).to eq test_string
     end
   end 
   

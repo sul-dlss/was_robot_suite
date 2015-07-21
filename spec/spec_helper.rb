@@ -10,8 +10,8 @@ require bootfile
 require 'pry'
 require 'rspec'
 require 'awesome_print'
-
-require 'metadata_extractor_service'
-require 'content_metadata_generator_service'
+require 'rspec/matchers' # req by equivalent-xml custom matcher `be_equivalent_to`
+require 'nokogiri'
+require 'equivalent-xml'
 
 

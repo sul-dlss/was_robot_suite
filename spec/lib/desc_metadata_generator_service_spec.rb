@@ -17,13 +17,13 @@ describe Dor::WASCrawl::DescMetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
       metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location,@extracted_metadata_xml_location)
       #receiver = double(metadata_generator_service)
-      metadata_generator_service.stub(:generate_xml_doc).and_return("<?xml version=\"1.0\"?><title>test</title>")
+      allow(metadata_generator_service).to receive(:generate_xml_doc).and_return("<?xml version=\"1.0\"?><title>test</title>")
  
       metadata_generator_service.generate_metadata_output
       
       expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/descMetadata.xml"    
       actual_desc_metadata = File.read(expected_output_file)
-      actual_desc_metadata.should eq @expected_desc_metadata
+      expect(actual_desc_metadata).to eq @expected_desc_metadata
     end
 
     after(:each) do

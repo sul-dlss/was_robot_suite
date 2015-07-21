@@ -20,7 +20,7 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
 
       expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/contentMetadata.xml"    
       actual_content_metadata = File.read(expected_output_file)
-      actual_content_metadata.should eq @expected_content_metadata
+      expect(actual_content_metadata).to eq @expected_content_metadata
     end
     
     after(:each) do
@@ -38,7 +38,7 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
       expected_post_transform_str = Nokogiri::XML('<?xml version="1.0" ?><test_root id="druid:gh123gh1234"><test_element/>')
       actual_post_transform_str = metadata_generator_service.do_post_transform(pre_transform_str)
       
-      actual_post_transform_str.should eq expected_post_transform_str.to_s
+      expect(actual_post_transform_str).to eq expected_post_transform_str.to_s
     end
     
     it "should raise an error with an invalid xml input" do
