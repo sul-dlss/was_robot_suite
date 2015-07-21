@@ -22,7 +22,7 @@ describe Dor::WASCrawl::TechnicalMetadataGenerator do
       
       expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/technicalMetadata.xml"    
       actual_technical_metadata = File.read(expected_output_file)
-      actual_technical_metadata.should eq @expected_technical_metadata
+      expect(actual_technical_metadata).to eq @expected_technical_metadata
     end
 
     after(:each) do
