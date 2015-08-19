@@ -16,6 +16,8 @@ gem "whenever"
 gem 'rake', '~> 10.3.2'
 gem "rspec"
 gem 'equivalent-xml'
+gem 'coveralls', require: false
+gem 'yard'
 
 group :development do
   gem 'awesome_print'
