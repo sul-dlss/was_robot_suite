@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/sul-dlss/was-crawl-preassembly.svg?branch=master)](https://travis-ci.org/sul-dlss/was-crawl-preassembly) [![Coverage Status](https://coveralls.io/repos/sul-dlss/was-crawl-preassembly/badge.png)](https://coveralls.io/r/sul-dlss/was-crawl-preassembly) [![Dependency Status](https://gemnasium.com/sul-dlss/was-crawl-preassembly.svg)](https://gemnasium.com/sul-dlss/was-crawl-preassembly) [![Gem Version](https://badge.fury.io/rb/was-crawl-preassembly.svg)](http://badge.fury.io/rb/was-crawl-preassembly)
+[![Build Status](https://travis-ci.org/sul-dlss/was-crawl-preassembly.svg?branch=master)](https://travis-ci.org/sul-dlss/was-crawl-preassembly) [![Coverage Status](https://coveralls.io/repos/sul-dlss/was-crawl-preassembly/badge.png)](https://coveralls.io/r/sul-dlss/was-crawl-preassembly) [![Dependency Status](https://gemnasium.com/sul-dlss/was-crawl-preassembly.svg)](https://gemnasium.com/sul-dlss/was-crawl-preassembly) 
 
 was-crawl-preassembly
 ---------
