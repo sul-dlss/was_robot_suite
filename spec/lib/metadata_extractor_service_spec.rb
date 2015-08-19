@@ -58,8 +58,7 @@ describe Dor::WASCrawl::MetadataExtractor do
 </crawlObject>
 EOF
 
-#expect(Nokogiri::XML(expected_output).root).to be_equivalent_to(Nokogiri::XML(actual_output).root)
-expect(Nokogiri::XML(expected_output).root.to_xml).to eq(Nokogiri::XML(actual_output).root.to_xml)
+      expect(Nokogiri::XML(expected_output).root).to be_equivalent_to(Nokogiri::XML(actual_output).root)
       
     end
     
