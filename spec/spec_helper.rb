@@ -7,14 +7,12 @@ Coveralls.wear!
 bootfile = File.expand_path(File.dirname(__FILE__) + '/../config/boot')
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
-
 require bootfile
 
 require 'pry'
 require 'rspec'
 require 'awesome_print'
-require 'rspec/matchers' # req by equivalent-xml custom matcher `be_equivalent_to`
 require 'nokogiri'
 require 'equivalent-xml'
-
+require 'equivalent-xml/rspec_matchers'
 
