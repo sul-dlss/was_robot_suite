@@ -1,28 +1,29 @@
 source 'https://rubygems.org'
 
 gem 'addressable'      
-gem 'dor-services', '~> 4.20'
-gem 'lyber-core', '~> 3.2', '>=3.2.4'
+gem 'dor-services', '~> 4.21.4'
+gem 'lyber-core'
 gem 'robot-controller', '~> 2.0.1' # requires Resque
-gem 'pry', '~> 0.10.0'          # for bin/console
-gem 'slop', '~> 3.5.0'          # for bin/run_robot
-gem 'rake', '~> 10.3.2'
+gem 'pry'          # for bin/console
+gem 'slop'          # for bin/run_robot
+gem 'rake'
 gem 'phantomjs'
 gem 'assembly-image'
 gem 'mini_exiftool'
 gem 'mini_magick'
-gem 'awesome_print'
-gem 'debugger', :platform => :ruby_19
-gem 'yard'
-gem 'holepicker', '~> 0.3', '>= 0.3.3'
-
-gem 'equivalent-xml'
-gem 'rspec'
+gem 'holepicker'
 
 group :development, :test do
   gem 'webmock'
   gem 'vcr'
+  gem 'rspec'
+  gem 'equivalent-xml'
+  gem 'awesome_print'
+  gem 'debugger', :platform => :ruby_19
+  gem 'yard'
+  gem 'coveralls', require: false
 end
+
 group :deployment do
   gem 'capistrano', '~> 3.2.1'
   gem 'capistrano-bundler', '~> 1.1'

@@ -1,6 +1,9 @@
 require 'spec_helper'
 require 'content_metadata_generator_service'
 require 'equivalent-xml'
+RSpec.configure do |c|
+  c.filter_run_excluding :image_prerequisite
+end
 
 describe Dor::WASSeed::ContentMetadataGenerator do
 
@@ -44,7 +47,7 @@ describe Dor::WASSeed::ContentMetadataGenerator do
   end 
   
   describe ".create_thumbnail_xml_element" do
-    it "should return valid xml element for a regular image" do
+    it "should return valid xml element for a regular image", :image_prerequisite do
       thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail.jp2"
       actual_xml_element = cm_generator_instance.create_thumbnail_xml_element thumbnail_file_location
       
