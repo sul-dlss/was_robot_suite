@@ -8,11 +8,11 @@ gem 'robot-controller', '~> 2.0.2' # requires Resque
 gem 'pry', '~> 0.10.1'     # for bin/console
 gem 'slop'  # for bin/run_robot
 gem 'rake', '~> 10.3.2'
+gem 'yard'
+gem "rspec"
 
 group :development, :test do
   gem 'coveralls', require: false
-  gem 'yard'
-  gem "rspec"
   gem 'awesome_print'
 end
 group :deployment do
