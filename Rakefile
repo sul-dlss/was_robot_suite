@@ -1,37 +1,23 @@
 require 'rake'
 require 'rake/testtask'
 require 'robot-controller/tasks'
+require 'bundler'
+require 'rspec/core/rake_task'
+require 'yard'
+require 'yard/rake/yardoc_task'
 
 # Import external rake tasks
 Dir.glob('lib/tasks/*.rake').each { |r| import r }
 
-task :default  => [:rspec_run, :doc]
+task :default => :ci  
 
-# require 'spec/rake/verify_rcov'
-# RCov::VerifyTask.new(:verify_rcov => ['rspec_with_rcov', 'doc']) do |t|
-#   t.threshold = 79.64
-#   t.index_html = 'coverage/index.html'
-# end
-
-# desc "Run integration tests"
-# Spec::Rake::SpecTask.new('integration') do |t|
-#   t.spec_files = FileList['integration_tests/*_spec.rb']
-# end
-
-task :clean do
-  puts 'Cleaning old coverage.data'
-  FileUtils.rm('coverage.data') if(File.exists? 'coverage.data')
-end
-
-require 'rspec/core/rake_task'
-
-RSpec::Core::RakeTask.new(:spec)
+desc "run continuous integration suite (tests, coverage, docs)" 
+task :ci => [:rspec, :doc]
 
 desc "Run RSpec with RCov"
-RSpec::Core::RakeTask.new(:rspec_run) do |t|
+RSpec::Core::RakeTask.new(:rspec) do |t|
     t.pattern = 'spec/**/*_spec.rb'
-    t.rcov = true
-    t.rcov_opts = %w{--rails --exclude osx\/objc,gems\/,spec\/}
+    t.rspec_opts = ["-c", "-f progress", "--tty", "-r ./spec/spec_helper.rb"]
 end
 
 desc 'Get application version'
@@ -42,3 +28,20 @@ end
 task :environment do
   require_relative 'config/boot'
 end
+
+# Use yard to build docs
+begin
+  project_root = File.expand_path(File.dirname(__FILE__))
+  doc_dest_dir = File.join(project_root, 'doc')
+
+  YARD::Rake::YardocTask.new(:doc) do |yt|
+    yt.files = Dir.glob(File.join(project_root, 'lib', '**', '*.rb')) +
+                 [ File.join(project_root, 'README.rdoc') ]
+    yt.options = ['--output-dir', doc_dest_dir, '--readme', 'README.rdoc', '--title', 'WAS Registrar Documentation']
+  end
+rescue LoadError
+  desc "Generate YARD Documentation"
+  task :doc do
+    abort "Please install the YARD gem to generate rdoc."
+  end
+end  
