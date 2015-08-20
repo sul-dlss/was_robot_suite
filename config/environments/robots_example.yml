@@ -40,5 +40,9 @@
 #      - dor_accessionWF_technical-metadata: A: 5
 #
 
-sul-robots1-dev:
-  - dor_myDemoWF_a1-first:default:3 # 3 robots in default lane
+sul-robots-machine:
+  - dor_wasSeedPreassemblyWF_build-was-crawl-druid-tree
+  - dor_wasSeedPreassemblyWF_content-metadata-generator
+  - dor_wasSeedPreassemblyWF_desc-metadata-generator
+  - dor_wasSeedPreassemblyWF_thumbnail-generator
+  - dor_wasSeedPreassemblyWF_end-was-seed-preassembly

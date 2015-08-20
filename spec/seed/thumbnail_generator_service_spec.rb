@@ -1,5 +1,8 @@
 require 'spec_helper'
 require 'thumbnail_generator_service'
+RSpec.configure do |c|
+  c.filter_run_excluding :image_prerequisite
+end
 
 describe Dor::WASSeed::ThumbnailGeneratorService do
   VCR.configure do |config|
@@ -23,7 +26,7 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
       FileUtils.cp "spec/fixtures/thumbnail_files/ab123cd4567.jpeg", "tmp/ab123cd4567.jpeg"
     end
     
-    it "generates jp2 from jpeg thumbnail and pushes to druid_tree content directory" do
+    it "generates jp2 from jpeg thumbnail and pushes to druid_tree content directory", :image_prerequisite do
       allow(Dor::WASSeed::ThumbnailGeneratorService).to receive(:capture).and_return("")  
       Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail( @druid_id, @workspace, @uri)
       expect(File.exist?("spec/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2")).to be true
@@ -65,14 +68,14 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
     end
   end
   
-  describe ".resize_temporary_image" do
+  describe ".resize_temporary_image", :image_prerequisite do
     it "resizes the image with extra width to maximum 400 pixel width" do
       temporary_image = "tmp/thum_extra_width.jpeg"
       FileUtils.cp "spec/fixtures/thumbnail_files/image_extra_width.jpeg",temporary_image
       Dor::WASSeed::ThumbnailGeneratorService.resize_temporary_image temporary_image
       expect(FileUtils.compare_file(temporary_image, "spec/fixtures/thumbnail_files/thum_extra_width.jpeg")).to be_truthy
     end
-    it "resizes the image with extra height to maximum 400 pixel height" do
+    it "resizes the image with extra height to maximum 400 pixel height", :image_prerequisite do
       temporary_image = "tmp/thum_extra_height.jpeg"
       FileUtils.cp "spec/fixtures/thumbnail_files/image_extra_height.jpeg", temporary_image
       Dor::WASSeed::ThumbnailGeneratorService.resize_temporary_image temporary_image
