@@ -1,5 +1,5 @@
 # config valid only for Capistrano 3.1
-lock '3.2.1'
+lock '3.4'
 
 set :rvm_type, :system
 set :rvm_ruby_string, 'ruby-1.9.3-p484@was-gemsets'
