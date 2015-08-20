@@ -4,23 +4,23 @@ gem 'addressable'
 gem 'dor-services', '~> 4.21.4'
 gem 'lyber-core'
 gem 'robot-controller', '~> 2.0.1' # requires Resque
-gem 'pry'          # for bin/console
-gem 'slop'          # for bin/run_robot
+gem 'pry', '~> 0.10.0' # for bin/console
+gem 'slop'             # for bin/run_robot
 gem 'rake'
 gem 'phantomjs'
 gem 'assembly-image'
 gem 'mini_exiftool'
 gem 'mini_magick'
+gem 'rspec'
 gem 'holepicker'
+gem 'yard'
 
 group :development, :test do
   gem 'webmock'
   gem 'vcr'
-  gem 'rspec'
   gem 'equivalent-xml'
   gem 'awesome_print'
   gem 'debugger', :platform => :ruby_19
-  gem 'yard'
   gem 'coveralls', require: false
 end
 
