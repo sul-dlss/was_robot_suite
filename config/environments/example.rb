@@ -31,4 +31,4 @@ Dor::Config.configure do
   end
  
 end
-REDIS_URL ||= ''
+REDIS_URL ||= 'sul-lyberservices-test.stanford.edu:6379/resque:test'
