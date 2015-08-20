@@ -24,7 +24,7 @@ describe Dor::WASCrawl::Dissemination::Utilities do
   context ".prepare_new_file_list" do
     
     it "should return a list for the extrcted arc and warc files" do
-      content_metadata_xml_location = "fixtures/metadata/" 
+      content_metadata_xml_location = "spec/fixtures/metadata/" 
       contentMetadata = File.open(content_metadata_xml_location+"contentMetadata_3files.xml").read
 
       file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_contentMetadata(contentMetadata)
@@ -32,7 +32,7 @@ describe Dor::WASCrawl::Dissemination::Utilities do
     end
     
     it "should return an empty list for the contentMetadata with no arcs or warcs inside" do
-      content_metadata_xml_location = "fixtures/metadata/" 
+      content_metadata_xml_location = "spec/fixtures/metadata/" 
       contentMetadata = File.open(content_metadata_xml_location+"contentMetadata_0file.xml").read
 
       file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_contentMetadata(contentMetadata)

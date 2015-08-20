@@ -15,3 +15,6 @@ require 'rspec'
 require 'awesome_print'
 require 'utilities'
 
+require 'cdx_merge_sort_publish_service'
+require 'path_indexer_service'
+require 'cdx_generator_service'
