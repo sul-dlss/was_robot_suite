@@ -8,7 +8,7 @@ gem 'net-ssh-krb'
 gem 'addressable', '2.3.5'      # pin to avoid RDF bug
 gem 'dor-services', '~> 4.21.4'
 gem 'lyber-core', '~> 3.2', '>=3.2.4'
-gem 'robot-controller', '~> 2.0.2' # requires Resque
+gem 'robot-controller', '~> 2.0.3' # requires Resque
 gem 'pry', '~> 0.10.1'          # for bin/console
 gem 'slop'                      # for bin/run_robot
 gem "whenever"
