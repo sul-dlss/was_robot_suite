@@ -40,10 +40,17 @@ set :scm, :git
 
 set :stages, %W(dev staging production)
 set :default_stage, "dev"
-set :linked_dirs, %w(log run config/environments config/certs)
+set :linked_dirs, %w(log run config/environments config/certs jar)
 
 namespace :deploy do
-
+  
+  desc 'Download WAS Metadata Extractor.'
+  task :download_metadata_extractor_tar do
+    on roles(:app), in: :sequence, wait: 10 do
+      execute :curl, "-s https://jenkinsqa.stanford.edu/artifacts/WASMetadataExtractor-0.0.2-SNAPSHOT-jar-with-dependencies.jar", "> /home/lyberadmin/was-crawl-preassembly/shared/jar/WASMetadataExtractor.jar"
+    end
+  end
+ 
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 10 do
@@ -51,11 +58,10 @@ namespace :deploy do
         test :bundle, :exec, :controller, :stop
         test :bundle, :exec, :controller, :quit
         execute :bundle, :exec, :controller, :boot
-        
       end
     end
   end
 
   after :publishing, :restart
-
- end
+  after :restart, :download_metadata_extractor_tar
+end
