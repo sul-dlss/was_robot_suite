@@ -22,7 +22,7 @@ module Dor
       def sort
         #read file from working_directory/unsorted_cdx/index.cdx
         #to working/directory/sorted_cdx/index.cdx
-        sort_cmd_string = "LC_ALL=C sort #{@working_merged_cdx} > #{@working_sorted_duplicate_cdx}"
+        sort_cmd_string = "#{Dor::Config.was_crawl_dissemination.sort_env_vars} sort #{@working_merged_cdx} > #{@working_sorted_duplicate_cdx}"
         Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(sort_cmd_string, "sorting CDX files")
         uniq_cmd_string = "uniq #{@working_sorted_duplicate_cdx} > #{@working_sorted_cdx}"
         Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(uniq_cmd_string, "removing duplicates from CDX file")
