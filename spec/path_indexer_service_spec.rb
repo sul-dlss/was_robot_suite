@@ -15,7 +15,7 @@ describe Dor::WASCrawl::PathIndexerService do
     end
 
     it 'should merge results from contentMetadata to the main path index' do
-      content_metadata = File.open(@content_metadata_xml_location + 'contentMetadata_3files.xml').read
+      content_metadata = File.open(@content_metadata_xml_location + 'contentMetadata_4files.xml').read
       path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, content_metadata)
       path_index_service.instance_variable_set(:@main_path_index_file, "#{@stacks_path}/data/indecies/path/path-index.txt")
 
