@@ -18,6 +18,7 @@ Dor::Config.configure do
 
     cdx_indexer_script "jar/openwayback/bin/cdx-indexer"
     stacks_collections_path "./web-archiving-stacks/data/collections/"
+    sort_env_vars "TMPDIR=/web-archiving-stacks/data/tmp/ LC_ALL=C"
   end
 
   dor do
