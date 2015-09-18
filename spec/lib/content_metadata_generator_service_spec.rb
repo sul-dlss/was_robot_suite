@@ -15,7 +15,7 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
       metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location,@extracted_metadata_xml_location)
-
+      allow(metadata_generator_service).to receive(:template_suffix).and_return('public')
       metadata_generator_service.generate_metadata_output
 
       expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/contentMetadata.xml"    
@@ -49,6 +49,35 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
       expect{ metadata_generator_service.do_post_transform(pre_transform_invalid_str) }.to raise_error
     end
   end 
+
+  context Dor::WASCrawl::ContentMetadataGenerator,"template_suffix" do
+    it 'should return dark for read/none access' do
+      datastreams = { 'defaultObjectRights' => Dor::DefaultObjectRightsDS.new}
+      admin_policy_object = double('admin_policy_object',datastreams: datastreams )
+      druid_obj = double('net http response', admin_policy_object: admin_policy_object)
+      druid_obj.admin_policy_object.datastreams["defaultObjectRights"].content =  
+        '<rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access> ' +
+        '<access type= "read">  <machine>   <none/>  </machine> </access> <use> ' +
+        '<human type= "useAndReproduction"/> <human type= "creativeCommons"/> ' +
+        '<machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>'
+      allow(Dor::Item).to receive(:find).and_return(druid_obj)
+      metadata_generator_service = generate_object(nil)
+      expect(metadata_generator_service.template_suffix).to eq('dark')
+    end
+    it 'should return public for read/world access' do
+      datastreams = { 'defaultObjectRights' => Dor::DefaultObjectRightsDS.new}
+      admin_policy_object = double('admin_policy_object',datastreams: datastreams)
+      druid_obj = double('net http response', admin_policy_object: admin_policy_object)
+      druid_obj.admin_policy_object.datastreams["defaultObjectRights"].content = 
+        '<rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access> ' +
+        '<access type= "read">  <machine>   <world/>  </machine> </access> <use> ' +
+        '<human type= "useAndReproduction"/> <human type= "creativeCommons"/> ' +
+        '<machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>'
+      allow(Dor::Item).to receive(:find).and_return(druid_obj)
+      metadata_generator_service = generate_object(nil)
+      expect(metadata_generator_service.template_suffix).to eq('public')
+    end
+  end
 
   def generate_object(druid_id)
      metadata_generator_service = Dor::WASCrawl::ContentMetadataGenerator.new(@collection_id, 

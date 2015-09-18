@@ -13,7 +13,7 @@ module Dor
     
       def generate_metadata_output
         xml_input = read_metadata_xml_input_file
-        xslt_template = read_template(@content_metadata_name)
+        xslt_template = read_template("#{@content_metadata_name}_#{template_suffix}")
         metadata_content = transform_xml_using_xslt(xml_input,xslt_template)
         metadata_content = do_post_transform(metadata_content)
         write_file_to_druid_metadata_folder( @content_metadata_name, metadata_content)
@@ -28,7 +28,18 @@ module Dor
         metadata_content_xml.root().set_attribute('id', @druid_id)
         return metadata_content_xml.to_s
      end
-        
+     
+     def template_suffix()
+       druid_obj = Dor::Item.find @druid_id
+       admin_policy = druid_obj.admin_policy_object
+       default_rights_md = admin_policy.datastreams["defaultObjectRights"].content
+       puts default_rights_md
+       if Nokogiri::XML(default_rights_md).xpath('//access[@type="read"]/machine/world').first.nil? then
+         return 'dark' # The read access is anything otherthan world, it's dark.
+       else
+         return 'public'
+       end
+     end
     end 
   end
 end

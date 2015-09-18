@@ -91,7 +91,7 @@ describe Dor::WASCrawl::MetadataGenerator do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
       
-      actual_xsl = metadata_generator_service.read_template("contentMetadata")
+      actual_xsl = metadata_generator_service.read_template("contentMetadata_public")
       expect(actual_xsl.to_s.length).to be > 1
     end  
     
