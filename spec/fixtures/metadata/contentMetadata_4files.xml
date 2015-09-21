@@ -18,4 +18,10 @@
       <checksum type="SHA1">81fe8bfe87576c3ecb22426f8e57847382917acf</checksum>
     </file>
   </resource>
+  <resource type="file">
+    <file dataType="ARC" publish="no" shelve="no" preserve="yes" id="ARC-Test2.arc.gz" size="87846905" mimetype="application/octet-stream">
+      <checksum type="MD5">f05e6759eeebbed5e17266809872c9f3</checksum>
+      <checksum type="SHA1">e4fd69c988b5abb5d082e4ec897a582d74dc2bbf</checksum>
+    </file>
+  </resource>
 </contentMetadata>
