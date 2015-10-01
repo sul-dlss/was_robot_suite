@@ -1,4 +1,3 @@
-
 module Dor
   module WASCrawl
     class CDXMergeSortPublishService
@@ -11,21 +10,17 @@ module Dor
         @working_sorted_cdx = "#{cdx_working_directory}/#{druid_id}_sorted_index.cdx"
         @cdx_backup_directory = cdx_backup_directory
       end
-      
-      def merge
-        #merge files from working_directory/druid_id/*.cdx with cdx/index.cdx 
-        # to working_directory/unsorted_cdx/
-        merge_cmd_string = "cat #{@main_cdx_file} #{@source_cdx_dir}*.cdx > #{@working_merged_cdx}"
-        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(merge_cmd_string, "merging the CDX files")
+
+      def sort_druid_cdx
+        # merge and sort files from working_directory/druid_id/*.cdx to working_directory/[druid_id]_merged_index.cdx
+        merge_cmd_string = "#{Dor::Config.was_crawl_dissemination.sort_env_vars} sort #{@source_cdx_dir}*.cdx > #{@working_merged_cdx}"
+        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(merge_cmd_string, "merging and sorting the druid CDX files")
       end
-      
-      def sort
-        #read file from working_directory/unsorted_cdx/index.cdx
-        #to working/directory/sorted_cdx/index.cdx
-        sort_cmd_string = "#{Dor::Config.was_crawl_dissemination.sort_env_vars} sort #{@working_merged_cdx} > #{@working_sorted_duplicate_cdx}"
-        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(sort_cmd_string, "sorting CDX files")
-        uniq_cmd_string = "uniq #{@working_sorted_duplicate_cdx} > #{@working_sorted_cdx}"
-        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(uniq_cmd_string, "removing duplicates from CDX file")
+
+      def merge_with_main_index
+        # merge and sort file from working_directory/[druid_id]_merged_index.cdx with cdx/index.cdx
+        sort_cmd_string = "#{Dor::Config.was_crawl_dissemination.sort_env_vars} sort -u -m #{@working_merged_cdx} #{@main_cdx_file} > #{@working_sorted_cdx}"
+        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(sort_cmd_string, "mergign druid CDX files with the main index")
       end
       
       def publish

@@ -10,13 +10,12 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
     @cdx_backup_directory = "#{@stacks_path}/data/indecies/cdx_backup"
   end
 
-  describe '.merge' do
-    it 'should merge all cdx files within the druid directory with the main index file' do
+  describe '.sort_druid_cdx' do
+    it 'should merge and sort all cdx files within the druid directory' do
       druid_id = 'ff111ff1111'
 
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid_id, @cdx_working_directory, '')
-      mergeSortPublishService.instance_variable_set(:@main_cdx_file, "#{@stacks_path}/data/indecies/cdx/index.cdx")
-      mergeSortPublishService.merge
+      mergeSortPublishService.sort_druid_cdx
 
       expected_merged_file_path = "#{@cdx_files}/#{druid_id}_merged_index.cdx"
       actual_merged_file_path = "#{@cdx_working_directory}/#{druid_id}_merged_index.cdx"
@@ -32,25 +31,17 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
     end
   end
 
-  describe '.sort' do
+  describe '.merge_with_main_index' do
     it 'should sort and remove duplicate from the merged index' do
       druid_id = 'gg111gg1111'
 
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid_id, @cdx_working_directory, '')
-      mergeSortPublishService.sort
-
-      expected_sorted_duplicate = "#{@cdx_files}/#{druid_id}_sorted_duplicate_index.cdx"
-      actual_sorted_duplicate = "#{@cdx_working_directory}/#{druid_id}_sorted_duplicate_index.cdx"
-      expect(File.exist?(actual_sorted_duplicate)).to eq(true)
-
-      actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(actual_sorted_duplicate))
-      expected_cdx_MD5 = Digest::MD5.hexdigest(File.read(expected_sorted_duplicate))
-      expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
+      mergeSortPublishService.instance_variable_set(:@main_cdx_file, "#{@stacks_path}/data/indecies/cdx/index.cdx")
+      mergeSortPublishService.merge_with_main_index
 
       expected_sorted = "#{@cdx_files}/#{druid_id}_sorted_index.cdx"
       actual_sorted = "#{@cdx_working_directory}/#{druid_id}_sorted_index.cdx"
       expect(File.exist?(actual_sorted)).to eq(true)
-
       actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(actual_sorted))
       expected_cdx_MD5 = Digest::MD5.hexdigest(File.read(expected_sorted))
       expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
