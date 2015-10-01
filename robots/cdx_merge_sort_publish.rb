@@ -19,8 +19,8 @@ module Robots
           cdx_merge_sort_publish = Dor::WASCrawl::CDXMergeSortPublishService.new( druid, cdx_working_directory, cdx_backup_directory)
 
           unless Dir["#{cdx_working_directory}/#{druid}/*"].empty?
-            cdx_merge_sort_publish.merge
-            cdx_merge_sort_publish.sort
+            cdx_merge_sort_publish.sort_druid_cdx
+            cdx_merge_sort_publish.merge_with_main_index
             cdx_merge_sort_publish.publish
           end
           cdx_merge_sort_publish.clean
