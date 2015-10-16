@@ -83,12 +83,12 @@
                         <xsl:value-of select="metadata/description"/>
                     </abstract>
                     <originInfo>
-                        <publisher>
+                        <publisher displayLabel="Publisher">
                             <xsl:value-of select="metadata/publisher"/>
                         </publisher>
                     </originInfo>
                     <xsl:for-each select="metadata/subject">
-                        <subject authority="lcsh">
+                        <subject>
                             <topic>
                                 <xsl:value-of select="."/>
                             </topic>
