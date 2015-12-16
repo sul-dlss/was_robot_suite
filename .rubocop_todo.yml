@@ -13,12 +13,6 @@ Lint/BlockAlignment:
     - 'spec/cdx_generator_service_spec.rb'
     - 'spec/utilities_spec.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Lint/DeprecatedClassMethods:
-  Exclude:
-    - 'lib/cdx_generator_service.rb'
-
 # Offense count: 2
 Lint/HandleExceptions:
   Exclude:
@@ -30,12 +24,6 @@ Lint/HandleExceptions:
 Lint/SpaceBeforeFirstArg:
   Exclude:
     - 'lib/cdx_generator_service.rb'
-
-# Offense count: 2
-Lint/UselessAssignment:
-  Exclude:
-    - 'spec/cdx_generator_service_spec.rb'
-    - 'spec/spec_helper.rb'
 
 # Offense count: 1
 Metrics/AbcSize:
@@ -61,14 +49,6 @@ Style/Documentation:
     - 'robots/cdx_generator.rb'
     - 'robots/cdx_merge_sort_publish.rb'
     - 'robots/path_indexer.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/EmptyLines:
-  Exclude:
-    - 'Gemfile'
-    - 'spec/spec_helper.rb'
-    - 'spec/utilities_spec.rb'
 
 # Offense count: 3
 # Cop supports --auto-correct.
@@ -113,20 +93,12 @@ Style/ExtraSpacing:
 Style/HashSyntax:
   Enabled: false
 
-# Offense count: 2
+# Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: MaxLineLength.
 Style/IfUnlessModifier:
   Exclude:
-    - 'bin/console'
     - 'lib/cdx_generator_service.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/IndentationConsistency:
-  Exclude:
-    - 'spec/utilities_spec.rb'
 
 # Offense count: 4
 # Cop supports --auto-correct.
@@ -134,14 +106,6 @@ Style/IndentationConsistency:
 Style/IndentationWidth:
   Exclude:
     - 'Rakefile'
-    - 'config/deploy.rb'
-    - 'lib/path_indexer_service.rb'
-    - 'spec/cdx_generator_service_spec.rb'
-
-# Offense count: 8
-# Cop supports --auto-correct.
-Style/LeadingCommentSpace:
-  Exclude:
     - 'config/deploy.rb'
     - 'lib/path_indexer_service.rb'
     - 'spec/cdx_generator_service_spec.rb'
@@ -165,13 +129,6 @@ Style/MultilineOperationIndentation:
 
 # Offense count: 2
 # Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'lib/cdx_generator_service.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/SignalException:
   Exclude:
@@ -190,19 +147,6 @@ Style/SingleSpaceBeforeFirstArg:
     - 'config/environments/example.rb'
     - 'config/environments/test.rb'
 
-# Offense count: 34
-# Cop supports --auto-correct.
-Style/SpaceAfterComma:
-  Exclude:
-    - 'Rakefile'
-    - 'bin/run_robot'
-    - 'lib/cdx_generator_service.rb'
-    - 'lib/path_indexer_service.rb'
-    - 'robots/cdx_generator.rb'
-    - 'robots/path_indexer.rb'
-    - 'spec/cdx_generator_service_spec.rb'
-    - 'spec/utilities_spec.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/SpaceAfterControlKeyword:
@@ -215,15 +159,6 @@ Style/SpaceAfterMethodName:
   Exclude:
     - 'lib/cdx_generator_service.rb'
     - 'lib/path_indexer_service.rb'
-
-# Offense count: 11
-# Cop supports --auto-correct.
-# Configuration parameters: MultiSpaceAllowedForOperators.
-Style/SpaceAroundOperators:
-  Exclude:
-    - 'lib/cdx_generator_service.rb'
-    - 'spec/cdx_generator_service_spec.rb'
-    - 'spec/utilities_spec.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -259,52 +194,12 @@ Style/SpecialGlobalVars:
   Exclude:
     - 'config/boot.rb'
 
-# Offense count: 66
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/StringLiterals:
-  Enabled: false
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: IgnoredMethods.
 Style/SymbolProc:
   Exclude:
     - 'bin/run_robot'
-
-# Offense count: 10
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/TrailingBlankLines:
-  Exclude:
-    - 'Gemfile'
-    - 'Rakefile'
-    - 'config/environments/example.rb'
-    - 'config/environments/test.rb'
-    - 'config/schedule.rb'
-    - 'lib/cdx_generator_service.rb'
-    - 'robots/cdx_generator.rb'
-    - 'robots/cdx_merge_sort_publish.rb'
-    - 'robots/path_indexer.rb'
-    - 'spec/utilities_spec.rb'
-
-# Offense count: 105
-# Cop supports --auto-correct.
-Style/TrailingWhitespace:
-  Exclude:
-    - 'Rakefile'
-    - 'config/deploy.rb'
-    - 'config/environments/example.rb'
-    - 'config/environments/test.rb'
-    - 'lib/cdx_generator_service.rb'
-    - 'lib/cdx_merge_sort_publish_service.rb'
-    - 'lib/path_indexer_service.rb'
-    - 'robots/cdx_generator.rb'
-    - 'robots/cdx_merge_sort_publish.rb'
-    - 'robots/path_indexer.rb'
-    - 'spec/cdx_generator_service_spec.rb'
-    - 'spec/path_indexer_service_spec.rb'
-    - 'spec/utilities_spec.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

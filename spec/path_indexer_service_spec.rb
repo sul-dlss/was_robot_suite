@@ -42,7 +42,7 @@ describe Dor::WASCrawl::PathIndexerService do
 
       expected_duplicate_path_index = "#{@path_files}/duplicate_path_index.txt"
       actual_duplicate_path_index = "#{@path_working_directory}/duplicate_path_index.txt"
-      
+
       expect(File.exist?(actual_duplicate_path_index)).to eq(true)
       expect(File.read(actual_duplicate_path_index)).to eq(File.read(expected_duplicate_path_index))
 

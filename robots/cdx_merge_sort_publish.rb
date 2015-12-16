@@ -14,8 +14,8 @@ module Robots
         #
         # @param [String] druid -- the Druid identifier for the object to process
         def perform(druid)
-          cdx_working_directory = Dor::Config.was_crawl_dissemination.cdx_working_directory 
-          cdx_backup_directory = Dor::Config.was_crawl_dissemination.cdx_backup_directory 
+          cdx_working_directory = Dor::Config.was_crawl_dissemination.cdx_working_directory
+          cdx_backup_directory = Dor::Config.was_crawl_dissemination.cdx_backup_directory
           cdx_merge_sort_publish = Dor::WASCrawl::CDXMergeSortPublishService.new( druid, cdx_working_directory, cdx_backup_directory)
 
           unless Dir["#{cdx_working_directory}/#{druid}/*"].empty?
