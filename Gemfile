@@ -21,9 +21,6 @@ gem 'yard'
 
 group :development do
   gem 'awesome_print'
-end
-
-group :deployment do
   gem 'lyberteam-capistrano-devel'
   gem 'capistrano-bundler'
 end
