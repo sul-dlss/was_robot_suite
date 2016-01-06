@@ -13,13 +13,10 @@ describe Dor::WASCrawl::TechnicalMetadataGenerator do
 
   context Dor::WASCrawl::TechnicalMetadataGenerator, 'generate_metadata_output' do
     it 'should generate technicalMetadata with valid input' do
-        druid_id = 'druid:gh123gh1234'
+      druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
       metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location, @extracted_metadata_xml_location)
-
       metadata_generator_service.generate_metadata_output
-      @expected_technical_metadata
-
       expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/technicalMetadata.xml"
       actual_technical_metadata = File.read(expected_output_file)
       expect(actual_technical_metadata).to eq @expected_technical_metadata
@@ -32,9 +29,7 @@ describe Dor::WASCrawl::TechnicalMetadataGenerator do
   end
 
   def generate_object(druid_id)
-     metadata_generator_service = Dor::WASCrawl::TechnicalMetadataGenerator.new(@collection_id,
-      @staging_path.to_s, druid_id)
-     metadata_generator_service
+    Dor::WASCrawl::TechnicalMetadataGenerator.new(@collection_id, @staging_path.to_s, druid_id)
   end
 
   def generate_data_items()
@@ -105,6 +100,4 @@ describe Dor::WASCrawl::TechnicalMetadataGenerator do
 </technicalMetadata>
 EOF
   end
-
-
 end
