@@ -15,4 +15,3 @@ require 'awesome_print'
 require 'nokogiri'
 require 'equivalent-xml'
 require 'equivalent-xml/rspec_matchers'
-

@@ -2,60 +2,60 @@ require 'nokogiri'
 
 module Dor
   module WASCrawl
-  
+
     class MetadataGenerator
-    
+
       attr_accessor  :collection_id
       attr_accessor  :staging_path
       attr_accessor  :druid_id
-      
+
       def initialize(collection_id,  staging_path, druid_id)
         @collection_id = collection_id
         @staging_path = staging_path
         @druid_id = druid_id
-        @extracted_metadata_xml_location="tmp/"
+        @extracted_metadata_xml_location='tmp/'
       end
-      
+
       def read_metadata_xml_input_file
          metadata_xml_input   = Nokogiri::XML(File.read("#{@extracted_metadata_xml_location}/#{@druid_id}.xml"))
          unless metadata_xml_input.errors.empty?
            raise "#{@extracted_metadata_xml_location}/#{@druid_id}.xml is not a valid xml file.\nNokogiri errors: #{metadata_xml_input.errors}"
          end
-         return metadata_xml_input.to_s
+         metadata_xml_input.to_s
       end
-      
+
       def write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)
-        
-        druid_pathname = Pathname(DruidTools::Druid.new(@druid_id,@staging_path.to_s).path).to_s
-        unless File.exists?(druid_pathname) 
+
+        druid_pathname = Pathname(DruidTools::Druid.new(@druid_id, @staging_path.to_s).path).to_s
+        unless File.exist?(druid_pathname)
           raise "Directory for #{@druid_id} doesn't exist in workspace #{@staging_path}"
-        end 
-        
-        metadata_pathname = druid_pathname + "/metadata/"
-        unless File.exists?(metadata_pathname)
+        end
+
+        metadata_pathname = druid_pathname + '/metadata/'
+        unless File.exist?(metadata_pathname)
           Dir.mkdir(metadata_pathname)
         end
-          
-        f = File.open(metadata_pathname+metadata_file_name+".xml",'w'); 
-        f.write(metadata_content); 
+
+        f = File.open(metadata_pathname+metadata_file_name+'.xml', 'w');
+        f.write(metadata_content);
         f.close
       end
-      
+
       def read_template(metadata_name)
          metadata_xslt_template = File.read(Pathname(File.dirname(__FILE__)).join("../template/#{metadata_name}.xslt"))
-         return  metadata_xslt_template
+         metadata_xslt_template
       end
-      
+
       def transform_xml_using_xslt(metadata_xml_input, metadata_xslt_template)
         metadata_xml_input_object = Nokogiri::XML(metadata_xml_input)
         metadata_xslt_template_object = Nokogiri::XSLT(metadata_xslt_template)
         metadata_content =  metadata_xslt_template_object.transform(metadata_xml_input_object)
-        return metadata_content.to_s
+        metadata_content.to_s
       end
-      
+
       def do_post_transform(metadata_content)
-        return metadata_content
+        metadata_content
       end
-   end 
+   end
   end
 end

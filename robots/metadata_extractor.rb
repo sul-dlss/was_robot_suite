@@ -11,7 +11,7 @@ module Robots
 
         def perform(druid)
           druid_obj = Dor::Item.find(druid)
-          #Fill the input parameters
+          # Fill the input parameters
           collection_id = Dor::WASCrawl::Utilities::get_collection_id(druid_obj)
           crawl_id = Dor::WASCrawl::Utilities::get_crawl_id(druid_obj)
           staging_path = Dor::Config.was_crawl.staging_path

@@ -4,37 +4,37 @@ require 'technical_metadata_generator_service'
 describe Dor::WASCrawl::TechnicalMetadataGenerator do
 
   before(:all) do
-    @staging_path = Pathname(File.dirname(__FILE__)).join("../fixtures/workspace")
-    @extracted_metadata_xml_location = Pathname(File.dirname(__FILE__)).join("../fixtures/xml_extracted_metadata")
-    @collection_id = "test_collection"
-    @crawl_id = "test_crawl"
+    @staging_path = Pathname(File.dirname(__FILE__)).join('../fixtures/workspace')
+    @extracted_metadata_xml_location = Pathname(File.dirname(__FILE__)).join('../fixtures/xml_extracted_metadata')
+    @collection_id = 'test_collection'
+    @crawl_id = 'test_crawl'
     generate_data_items
   end
 
-  context Dor::WASCrawl::TechnicalMetadataGenerator,"generate_metadata_output" do
-    it "should generate technicalMetadata with valid input" do
+  context Dor::WASCrawl::TechnicalMetadataGenerator, 'generate_metadata_output' do
+    it 'should generate technicalMetadata with valid input' do
         druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
-      metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location,@extracted_metadata_xml_location)
+      metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location, @extracted_metadata_xml_location)
 
       metadata_generator_service.generate_metadata_output
       @expected_technical_metadata
-      
-      expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/technicalMetadata.xml"    
+
+      expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/technicalMetadata.xml"
       actual_technical_metadata = File.read(expected_output_file)
       expect(actual_technical_metadata).to eq @expected_technical_metadata
     end
 
     after(:each) do
-      expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/technicalMetadata.xml"    
+      expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/technicalMetadata.xml"
       File.delete(expected_output_file)
     end
-  end 
+  end
 
   def generate_object(druid_id)
-     metadata_generator_service = Dor::WASCrawl::TechnicalMetadataGenerator.new(@collection_id, 
+     metadata_generator_service = Dor::WASCrawl::TechnicalMetadataGenerator.new(@collection_id,
       @staging_path.to_s, druid_id)
-     return metadata_generator_service
+     metadata_generator_service
   end
 
   def generate_data_items()
@@ -106,5 +106,5 @@ describe Dor::WASCrawl::TechnicalMetadataGenerator do
 EOF
   end
 
- 
+
 end

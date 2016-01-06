@@ -38,19 +38,19 @@ set :scm, :git
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :stages, %W(dev staging production)
-set :default_stage, "dev"
+set :stages, %w(dev staging production)
+set :default_stage, 'dev'
 set :linked_dirs, %w(log run config/environments config/certs jar)
 
 namespace :deploy do
-  
+
   desc 'Download WAS Metadata Extractor.'
   task :download_metadata_extractor_tar do
     on roles(:app), in: :sequence, wait: 10 do
-      execute :curl, "-s https://jenkinsqa.stanford.edu/artifacts/WASMetadataExtractor-0.0.2-SNAPSHOT-jar-with-dependencies.jar", "> /home/lyberadmin/was-crawl-preassembly/shared/jar/WASMetadataExtractor.jar"
+      execute :curl, '-s https://jenkinsqa.stanford.edu/artifacts/WASMetadataExtractor-0.0.2-SNAPSHOT-jar-with-dependencies.jar', '> /home/lyberadmin/was-crawl-preassembly/shared/jar/WASMetadataExtractor.jar'
     end
   end
- 
+
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 10 do

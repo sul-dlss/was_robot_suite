@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem "rest-client"
-gem "druid-tools"
+gem 'rest-client'
+gem 'druid-tools'
 gem 'capistrano-one_time_key'
 gem 'net-ssh-krb'
 
@@ -11,10 +11,10 @@ gem 'lyber-core', '~> 3.2', '>=3.2.4'
 gem 'robot-controller', '~> 2.0.3' # requires Resque
 gem 'pry', '~> 0.10.1'          # for bin/console
 gem 'slop'                      # for bin/run_robot
-gem "whenever"
+gem 'whenever'
 
 gem 'rake', '>=10.3.2'
-gem "rspec"
+gem 'rspec'
 gem 'equivalent-xml'
 gem 'coveralls', require: false
 gem 'yard'

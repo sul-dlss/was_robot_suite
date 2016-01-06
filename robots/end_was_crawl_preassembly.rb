@@ -5,7 +5,7 @@ module Robots
         include LyberCore::Robot
 
         def initialize
-          super('dor', 'wasCrawlPreassemblyWF', 'end-was-crawl-preassembly')          
+          super('dor', 'wasCrawlPreassemblyWF', 'end-was-crawl-preassembly')
         end
 
         def perform(druid)

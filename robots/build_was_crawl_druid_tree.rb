@@ -16,8 +16,8 @@ module Robots
           source_root_pathname = Dor::Config.was_crawl.source_path
           collection_id = Dor::WASCrawl::Utilities::get_collection_id(druid_obj)
           staging_path = Dor::Config.was_crawl.staging_path
-          
-          druid_tree_directory = DruidTools::Druid.new(druid,staging_path)
+
+          druid_tree_directory = DruidTools::Druid.new(druid, staging_path)
           LyberCore::Log.info "Moving files between #{source_root_pathname}#{crawl_id}/. to #{druid_tree_directory.content_dir}"
           Find.find("#{source_root_pathname}#{crawl_id}").each do |single_file|
             if File.file?(single_file) then

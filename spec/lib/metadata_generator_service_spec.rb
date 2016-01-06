@@ -4,125 +4,125 @@ require 'fileutils'
 describe Dor::WASCrawl::MetadataGenerator do
 
   before(:all) do
-    @staging_path = Pathname(File.dirname(__FILE__)).join("../fixtures/workspace")
-    @extracted_metadata_xml_location = Pathname(File.dirname(__FILE__)).join("../fixtures/xml_extracted_metadata")
-    @collection_id = "test_collection"
+    @staging_path = Pathname(File.dirname(__FILE__)).join('../fixtures/workspace')
+    @extracted_metadata_xml_location = Pathname(File.dirname(__FILE__)).join('../fixtures/xml_extracted_metadata')
+    @collection_id = 'test_collection'
     generate_data_items
   end
 
-  context Dor::WASCrawl::MetadataGenerator,"read_metadata_xml_input_file" do
+  context Dor::WASCrawl::MetadataGenerator, 'read_metadata_xml_input_file' do
 
-    it "should read the file successfully if druid id is passed" do
+    it 'should read the file successfully if druid id is passed' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
-      metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location,@extracted_metadata_xml_location)
-      
+      metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location, @extracted_metadata_xml_location)
+
       actual_xml = metadata_generator_service.read_metadata_xml_input_file
       expect(actual_xml.to_s).to eq @druid_gh123gh1234_expected_xml
-    end  
-    
+    end
+
     it "should raise an error if the file doesn't exists" do
       druid_id = 'druid:xx'
       metadata_generator_service = generate_object(druid_id)
-      metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location,@extracted_metadata_xml_location)
-     
-      expect{ metadata_generator_service.read_metadata_xml_input_file }.to raise_error  
-    end
-    
-    it "should raise an error if the file is not a valid xml" do
-      #Here, we focus on a valid xml, there is no schema validation
-      druid_id = 'druid:xx_invalid'
-      metadata_generator_service = generate_object(druid_id)
-      metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location,@extracted_metadata_xml_location)
-     
-      expect{ metadata_generator_service.read_metadata_xml_input_file }.to raise_error  
+      metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location, @extracted_metadata_xml_location)
+
+      expect{ metadata_generator_service.read_metadata_xml_input_file }.to raise_error
     end
 
-  end 
- 
-  context Dor::WASCrawl::MetadataGenerator,"write_file_to_druid_metadata_folder" do
+    it 'should raise an error if the file is not a valid xml' do
+      # Here, we focus on a valid xml, there is no schema validation
+      druid_id = 'druid:xx_invalid'
+      metadata_generator_service = generate_object(druid_id)
+      metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location, @extracted_metadata_xml_location)
+
+      expect{ metadata_generator_service.read_metadata_xml_input_file }.to raise_error
+    end
+
+  end
+
+  context Dor::WASCrawl::MetadataGenerator, 'write_file_to_druid_metadata_folder' do
     it "should raise an error if the druid directory tree doesn't exist in the workspace" do
       druid_id = 'druid:xx111xx1111'
       metadata_generator_service = generate_object(druid_id)
-      
-      metadata_file_name = "test_name"
-      metadata_content = "test_content"
+
+      metadata_file_name = 'test_name'
+      metadata_content = 'test_content'
       expect{ metadata_generator_service.write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)}.to raise_error
     end
 
-    it "should create the metadata directory in the druid tree and create the metadata file in it" do
+    it 'should create the metadata directory in the druid tree and create the metadata file in it' do
       druid_id = 'druid:ij123ij1234'
       metadata_generator_service = generate_object(druid_id)
-      
-      metadata_file_name = "test_name"
-      metadata_content = "test_content"
+
+      metadata_file_name = 'test_name'
+      metadata_content = 'test_content'
       expected_metadata_directory = "#{@staging_path}/ij/123/ij/1234/ij123ij1234/metadata/"
       expected_output_file = "#{@staging_path}/ij/123/ij/1234/ij123ij1234/metadata/test_name.xml"
-      
+
       metadata_generator_service.write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)
 
-      expect(File.exists?(expected_metadata_directory)).to be_truthy  
+      expect(File.exist?(expected_metadata_directory)).to be_truthy
       expect(File.exist?(expected_output_file)).to be_truthy
-      
+
       expect(File.read(expected_output_file)).to eq metadata_content
       File.delete(expected_output_file)
       Dir.delete(expected_metadata_directory)
     end
 
-    it "should write the file in the druid metadata folder" do
+    it 'should write the file in the druid metadata folder' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
-      
-      metadata_file_name = "test_name"
-      metadata_content = "test_content"
+
+      metadata_file_name = 'test_name'
+      metadata_content = 'test_content'
       expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/test_name.xml"
-      
+
       metadata_generator_service.write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)
-      
+
       expect(File.exist?(expected_output_file)).to  be_truthy
      expect( File.read(expected_output_file)).to eq metadata_content
       File.delete(expected_output_file)
     end
-  end 
-  
-  context Dor::WASCrawl::MetadataGenerator,"read_template" do
-  
-    it "should read the contentMetadata template successfully" do
-      druid_id = 'druid:gh123gh1234'
-      metadata_generator_service = generate_object(druid_id)
-      
-      actual_xsl = metadata_generator_service.read_template("contentMetadata_public")
-      expect(actual_xsl.to_s.length).to be > 1
-    end  
-    
-    it "should read the technicalMetadata template successfully" do
-      druid_id = 'druid:gh123gh1234'
-      metadata_generator_service = generate_object(druid_id)
-      
-      actual_xsl = metadata_generator_service.read_template("technicalMetadata")
-       expect(actual_xsl.to_s.length).to be > 1
-    end  
+  end
 
-    it "should read the descMetadata template successfully" do
+  context Dor::WASCrawl::MetadataGenerator, 'read_template' do
+
+    it 'should read the contentMetadata template successfully' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
-      
-      actual_xsl = metadata_generator_service.read_template("descMetadata")
+
+      actual_xsl = metadata_generator_service.read_template('contentMetadata_public')
       expect(actual_xsl.to_s.length).to be > 1
-    end  
+    end
+
+    it 'should read the technicalMetadata template successfully' do
+      druid_id = 'druid:gh123gh1234'
+      metadata_generator_service = generate_object(druid_id)
+
+      actual_xsl = metadata_generator_service.read_template('technicalMetadata')
+       expect(actual_xsl.to_s.length).to be > 1
+    end
+
+    it 'should read the descMetadata template successfully' do
+      druid_id = 'druid:gh123gh1234'
+      metadata_generator_service = generate_object(druid_id)
+
+      actual_xsl = metadata_generator_service.read_template('descMetadata')
+      expect(actual_xsl.to_s.length).to be > 1
+    end
 
     it "should raise an error if the file doesn't exists" do
       druid_id = 'druid:xx'
       metadata_generator_service = generate_object(druid_id)
-      metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location,@extracted_metadata_xml_location)
-     
-     expect{ actual_xsl = metadata_generator_service.read_template("nothginMetadata") }.to raise_error  
+      metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location, @extracted_metadata_xml_location)
+
+     expect{ actual_xsl = metadata_generator_service.read_template('nothginMetadata') }.to raise_error
     end
-    
-  end 
-  
-  context Dor::WASCrawl::MetadataGenerator,"transform_xml_using_xslt" do
-    it "should transform the xml using xslt with valid inputs" do
+
+  end
+
+  context Dor::WASCrawl::MetadataGenerator, 'transform_xml_using_xslt' do
+    it 'should transform the xml using xslt with valid inputs' do
       druid_id = 'druid:xx'
       metadata_generator_service = generate_object(druid_id)
       xml_doc = <<-EOF
@@ -132,7 +132,7 @@ describe Dor::WASCrawl::MetadataGenerator do
         <Account>John</Account>
       </User></UserList>
       EOF
-      
+
       xslt_doc = <<-EOF
       <?xml version="1.0" ?>
       <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
@@ -149,29 +149,29 @@ describe Dor::WASCrawl::MetadataGenerator do
   <newuser>John Smith</newuser>
 </newuserlist>
 EOF
-      actual_transformed =   metadata_generator_service.transform_xml_using_xslt(xml_doc,xslt_doc)
+      actual_transformed =   metadata_generator_service.transform_xml_using_xslt(xml_doc, xslt_doc)
       expect(actual_transformed.to_s).to eq expected_transformed
-    end    
-  end 
+    end
+  end
 
-  context Dor::WASCrawl::MetadataGenerator,"do_post_transform" do
-    it "should return the string with no modification" do
+  context Dor::WASCrawl::MetadataGenerator, 'do_post_transform' do
+    it 'should return the string with no modification' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
 
-      test_string = "test_string"
+      test_string = 'test_string'
       actual_string = metadata_generator_service.do_post_transform(test_string)
-      
+
       expect(actual_string).to eq test_string
     end
-  end 
-  
-  def generate_object(druid_id)
-     metadata_generator_service = Dor::WASCrawl::MetadataGenerator.new(@collection_id, 
-      @staging_path.to_s, druid_id)
-     return metadata_generator_service
   end
-  
+
+  def generate_object(druid_id)
+     metadata_generator_service = Dor::WASCrawl::MetadataGenerator.new(@collection_id,
+      @staging_path.to_s, druid_id)
+     metadata_generator_service
+  end
+
   def generate_data_items()
     @druid_gh123gh1234_expected_xml=<<-EOF
 <?xml version="1.0" encoding="UTF-8"?>
@@ -238,5 +238,5 @@ EOF
 </crawlObject>
 EOF
   end
-  
+
 end

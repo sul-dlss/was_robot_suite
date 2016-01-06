@@ -4,31 +4,30 @@
 <collectionId>test_collection</collectionId>
 <files>
 <file>
-<fileName>.DS_Store</fileName>
-<fileType>GENERAL</fileType>
-<recordCount>0</recordCount>
-</file>
-<file>
-<fileName>WARC-Test.warc.gz</fileName>
-<fileType>WARC</fileType>
+<name>WARC-Test.warc.gz</name>
+<type>WARC</type>
+<size>6608320</size>
 <recordCount>4027</recordCount>
+<mimeType>application/octet-stream</mimeType>
+<checksumMD5>c7edbde066e4697b3f2d823ac42c3692</checksumMD5>
+<checksumSHA1>3a9f2ffac1497c70291d93a8bc86c1469547d8f8</checksumSHA1>
 <isPatchCrawl>false</isPatchCrawl>
-<accountId>159</accountId>
-<collectionId>924</collectionId>
-<organizationName>"Stanford University</organizationName>
-<robotsPolicy> obey</robotsPolicy>
-<hostname> wbgrp-crawl051.us.archive.org</hostname>
-<user-agent> Mozilla/5.0 (compatible; archive.org_bot; Archive-It; +http://archive-it.org/files/site-owners.html)</user-agent>
-<maxDuration>604800</maxDuration>
-<isTestCrawl>false</isTestCrawl>
-<ip> 207.241.226.90</ip>
-<id>ARCHIVEIT-924-QUARTERLY-31501-20140119223740943-00015-wbgrp-crawl051.us.archive.org-6441.warc.gz</id>
-<creationDate>2014-01-19T22:37:40Z</creationDate>
 <software> Heritrix/3.2.0-SNAPSHOT-20140108-2049 http://crawler.archive.org</software>
-<recurrence>QUARTERLY</recurrence>
-<seedCount>68</seedCount>
+<organizationName>"Stanford University</organizationName>
+<ip> 207.241.226.90</ip>
 <accountType>SUBSCRIBER</accountType>
+<creationDate>2014-01-19T22:37:40Z</creationDate>
+<seedCount>68</seedCount>
+<robotsPolicy> obey</robotsPolicy>
+<recurrence>QUARTERLY</recurrence>
+<isTestCrawl>false</isTestCrawl>
+<accountId>159</accountId>
+<hostname> wbgrp-crawl051.us.archive.org</hostname>
 <datatype> WARC File Format 1.0</datatype>
+<id>ARCHIVEIT-924-QUARTERLY-31501-20140119223740943-00015-wbgrp-crawl051.us.archive.org-6441.warc.gz</id>
+<collectionId>924</collectionId>
+<maxDuration>604800</maxDuration>
+<user-agent> Mozilla/5.0 (compatible; archive.org_bot; Archive-It; +http://archive-it.org/files/site-owners.html)</user-agent>
 </file>
 </files>
 </crawlObject>
