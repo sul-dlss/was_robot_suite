@@ -12,17 +12,16 @@ module Robots
 
         def perform(druid)
           druid_obj = Dor::Item.find(druid)
-          crawl_id = Dor::WASCrawl::Utilities::get_crawl_id(druid_obj)
+          crawl_id = Dor::WASCrawl::Utilities.get_crawl_id(druid_obj)
           source_root_pathname = Dor::Config.was_crawl.source_path
-          collection_id = Dor::WASCrawl::Utilities::get_collection_id(druid_obj)
+          # collection_id = Dor::WASCrawl::Utilities.get_collection_id(druid_obj)
           staging_path = Dor::Config.was_crawl.staging_path
 
           druid_tree_directory = DruidTools::Druid.new(druid, staging_path)
           LyberCore::Log.info "Moving files between #{source_root_pathname}#{crawl_id}/. to #{druid_tree_directory.content_dir}"
           Find.find("#{source_root_pathname}#{crawl_id}").each do |single_file|
-            if File.file?(single_file) then
-              FileUtils.cp_r single_file, druid_tree_directory.content_dir
-            end
+            next unless File.file?(single_file)
+            FileUtils.cp_r single_file, druid_tree_directory.content_dir
           end
         end
       end
