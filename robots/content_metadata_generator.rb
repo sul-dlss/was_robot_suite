@@ -3,7 +3,6 @@ require 'utilities'
 module Robots
   module DorRepo
     module WasCrawlPreassembly
-
       class ContentMetadataGenerator
         include LyberCore::Robot
 
@@ -14,7 +13,7 @@ module Robots
         def perform(druid)
           druid_obj = Dor::Item.find(druid)
           # Fill the input parameters
-          collection_id = Dor::WASCrawl::Utilities::get_collection_id(druid_obj)
+          collection_id = Dor::WASCrawl::Utilities.get_collection_id(druid_obj)
           staging_path = Dor::Config.was_crawl.staging_path
 
           LyberCore::Log.info "Creating ContentMetadataGenerator with parameters #{collection_id}, #{staging_path.to_s}, #{druid}"
@@ -22,9 +21,7 @@ module Robots
                 staging_path.to_s, druid)
           metadata_generator_service.generate_metadata_output
         end
-
       end
-
     end
   end
 end

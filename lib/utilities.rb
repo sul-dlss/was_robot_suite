@@ -1,6 +1,5 @@
 module Dor
   module WASCrawl
-
     class Utilities
       def self.get_collection_id(druid_obj)
         collections = druid_obj.collections

@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'technical_metadata_generator_service'
 
 describe Dor::WASCrawl::TechnicalMetadataGenerator do
-
   before(:all) do
     @staging_path = Pathname(File.dirname(__FILE__)).join('../fixtures/workspace')
     @extracted_metadata_xml_location = Pathname(File.dirname(__FILE__)).join('../fixtures/xml_extracted_metadata')
@@ -32,7 +31,7 @@ describe Dor::WASCrawl::TechnicalMetadataGenerator do
     Dor::WASCrawl::TechnicalMetadataGenerator.new(@collection_id, @staging_path.to_s, druid_id)
   end
 
-  def generate_data_items()
+  def generate_data_items
     @expected_technical_metadata = <<-EOF
 <?xml version="1.0"?>
 <technicalMetadata>

@@ -1,7 +1,6 @@
 cert_dir = File.join(File.dirname(__FILE__), '..', 'certs')
 
 Dor::Config.configure do
-
   workflow.url ''
   solrizer.url ''
 
@@ -39,7 +38,6 @@ Dor::Config.configure do
   fedora do
     url ''
   end
-
 end
 REDIS_URL = ''
 WORKFLOW_URI = ''

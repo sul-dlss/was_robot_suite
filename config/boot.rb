@@ -23,7 +23,7 @@ end
 require 'dor-services'
 require 'lyber_core'
 
-# TODO Maybe move auto-require to just run_robot and spec_helper?
+# TODO: Maybe move auto-require to just run_robot and spec_helper?
 Dir["#{ROBOT_ROOT}/lib/*.rb"].each { |f| require f }
 require 'build_was_crawl_druid_tree'
 require 'metadata_extractor'

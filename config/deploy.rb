@@ -43,7 +43,6 @@ set :default_stage, 'dev'
 set :linked_dirs, %w(log run config/environments config/certs jar)
 
 namespace :deploy do
-
   desc 'Download WAS Metadata Extractor.'
   task :download_metadata_extractor_tar do
     on roles(:app), in: :sequence, wait: 10 do

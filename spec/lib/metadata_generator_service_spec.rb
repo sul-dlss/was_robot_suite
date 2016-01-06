@@ -2,7 +2,6 @@ require 'spec_helper'
 require 'metadata_generator_service'
 require 'fileutils'
 describe Dor::WASCrawl::MetadataGenerator do
-
   before(:all) do
     @staging_path = Pathname(File.dirname(__FILE__)).join('../fixtures/workspace')
     @extracted_metadata_xml_location = Pathname(File.dirname(__FILE__)).join('../fixtures/xml_extracted_metadata')
@@ -11,7 +10,6 @@ describe Dor::WASCrawl::MetadataGenerator do
   end
 
   context Dor::WASCrawl::MetadataGenerator, 'read_metadata_xml_input_file' do
-
     it 'should read the file successfully if druid id is passed' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
@@ -37,7 +35,6 @@ describe Dor::WASCrawl::MetadataGenerator do
 
       expect{ metadata_generator_service.read_metadata_xml_input_file }.to raise_error
     end
-
   end
 
   context Dor::WASCrawl::MetadataGenerator, 'write_file_to_druid_metadata_folder' do
@@ -80,13 +77,12 @@ describe Dor::WASCrawl::MetadataGenerator do
       metadata_generator_service.write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)
 
       expect(File.exist?(expected_output_file)).to  be_truthy
-     expect( File.read(expected_output_file)).to eq metadata_content
+      expect( File.read(expected_output_file)).to eq metadata_content
       File.delete(expected_output_file)
     end
   end
 
   context Dor::WASCrawl::MetadataGenerator, 'read_template' do
-
     it 'should read the contentMetadata template successfully' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
@@ -100,7 +96,7 @@ describe Dor::WASCrawl::MetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
 
       actual_xsl = metadata_generator_service.read_template('technicalMetadata')
-       expect(actual_xsl.to_s.length).to be > 1
+      expect(actual_xsl.to_s.length).to be > 1
     end
 
     it 'should read the descMetadata template successfully' do
@@ -116,9 +112,8 @@ describe Dor::WASCrawl::MetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
       metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location, @extracted_metadata_xml_location)
 
-     expect{ actual_xsl = metadata_generator_service.read_template('nothginMetadata') }.to raise_error
+      expect{ metadata_generator_service.read_template('nothginMetadata') }.to raise_error
     end
-
   end
 
   context Dor::WASCrawl::MetadataGenerator, 'transform_xml_using_xslt' do
@@ -172,8 +167,8 @@ EOF
      metadata_generator_service
   end
 
-  def generate_data_items()
-    @druid_gh123gh1234_expected_xml=<<-EOF
+  def generate_data_items
+    @druid_gh123gh1234_expected_xml = <<-EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <crawlObject>
    <crawlId/>
@@ -238,5 +233,4 @@ EOF
 </crawlObject>
 EOF
   end
-
 end

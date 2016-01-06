@@ -2,9 +2,7 @@ require 'nokogiri'
 
 module Dor
   module WASCrawl
-
     class MetadataGenerator
-
       attr_accessor  :collection_id
       attr_accessor  :staging_path
       attr_accessor  :druid_id
@@ -13,7 +11,7 @@ module Dor
         @collection_id = collection_id
         @staging_path = staging_path
         @druid_id = druid_id
-        @extracted_metadata_xml_location='tmp/'
+        @extracted_metadata_xml_location = 'tmp/'
       end
 
       def read_metadata_xml_input_file
@@ -32,11 +30,9 @@ module Dor
         end
 
         metadata_pathname = druid_pathname + '/metadata/'
-        unless File.exist?(metadata_pathname)
-          Dir.mkdir(metadata_pathname)
-        end
+        Dir.mkdir(metadata_pathname) unless File.exist?(metadata_pathname)
 
-        f = File.open(metadata_pathname+metadata_file_name+'.xml', 'w');
+        f = File.open(metadata_pathname + metadata_file_name + '.xml', 'w');
         f.write(metadata_content);
         f.close
       end

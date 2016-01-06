@@ -1,13 +1,12 @@
 require 'spec_helper'
 
 describe Dor::WASCrawl::ContentMetadataGenerator do
-
   before(:all) do
     @staging_path = Pathname(File.dirname(__FILE__)).join('../fixtures/workspace')
     @extracted_metadata_xml_location = Pathname(File.dirname(__FILE__)).join('../fixtures/xml_extracted_metadata')
     @collection_id = 'test_collection'
     @crawl_id = 'test_crawl'
-    generate_data_items()
+    generate_data_items
   end
 
   context Dor::WASCrawl::ContentMetadataGenerator, 'generate_metadata_output' do
@@ -85,7 +84,7 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
      metadata_generator_service
   end
 
-  def generate_data_items()
+  def generate_data_items
     @expected_content_metadata = <<-EOF
 <?xml version="1.0"?>
 <contentMetadata type="file" stacks="/web-archiving-stacks/data/collections/" id="druid:gh123gh1234">
