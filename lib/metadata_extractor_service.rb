@@ -6,9 +6,9 @@ module Dor
     class MetadataExtractor
       def initialize(collection_id, crawl_id, staging_path, druid_id)
         @collection_id = collection_id
-        @crawl_id = crawl_id
-        @staging_path = staging_path
-        @druid_id = druid_id
+        @crawl_id      = crawl_id
+        @staging_path  = staging_path
+        @druid_id      = druid_id
         @java_log_file = 'log/jar_WASMetadataExtractor.log'
         @extracted_metadata_xml_path = 'tmp'
         @java_heap_size = Dor::Config.was_crawl.java_heap_size
@@ -23,14 +23,12 @@ module Dor
       def prepare_parameters
         @input_directory = Pathname(DruidTools::Druid.new(@druid_id, @staging_path.to_s).path).to_s + '/content'
         raise "#{@input_directory} doesn't exist" unless File.exist?(@input_directory)
-
         @jar_path = Dor::Config.was_crawl.metadata_extractor_jar
         @xml_output_location = "#{@extracted_metadata_xml_path}/#{@druid_id}.xml"
       end
 
       def build_cmd_string
-        java_cmd = "java #{@java_heap_size} -jar #{@jar_path} -f XML -d #{@input_directory} -o #{@xml_output_location} -c config/extractor.yml --collectionId #{@collection_id} --crawlId #{@crawl_id} 2>> #{@java_log_file}"
-        java_cmd
+        "java #{@java_heap_size} -jar #{@jar_path} -f XML -d #{@input_directory} -o #{@xml_output_location} -c config/extractor.yml --collectionId #{@collection_id} --crawlId #{@crawl_id} 2>> #{@java_log_file}"
       end
 
       def call_java_library(java_cmd)

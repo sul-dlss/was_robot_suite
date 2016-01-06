@@ -15,31 +15,27 @@ module Dor
       end
 
       def read_metadata_xml_input_file
-         metadata_xml_input   = Nokogiri::XML(File.read("#{@extracted_metadata_xml_location}/#{@druid_id}.xml"))
-         unless metadata_xml_input.errors.empty?
-           raise "#{@extracted_metadata_xml_location}/#{@druid_id}.xml is not a valid xml file.\nNokogiri errors: #{metadata_xml_input.errors}"
-         end
-         metadata_xml_input.to_s
+        metadata_xml_input   = Nokogiri::XML(File.read("#{@extracted_metadata_xml_location}/#{@druid_id}.xml"))
+        unless metadata_xml_input.errors.empty?
+          raise "#{@extracted_metadata_xml_location}/#{@druid_id}.xml is not a valid xml file.\nNokogiri errors: #{metadata_xml_input.errors}"
+        end
+        metadata_xml_input.to_s
       end
 
       def write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)
-
         druid_pathname = Pathname(DruidTools::Druid.new(@druid_id, @staging_path.to_s).path).to_s
-        unless File.exist?(druid_pathname)
-          raise "Directory for #{@druid_id} doesn't exist in workspace #{@staging_path}"
-        end
+        raise "Directory for #{@druid_id} doesn't exist in workspace #{@staging_path}" unless File.exist?(druid_pathname)
 
         metadata_pathname = druid_pathname + '/metadata/'
         Dir.mkdir(metadata_pathname) unless File.exist?(metadata_pathname)
-
         f = File.open(metadata_pathname + metadata_file_name + '.xml', 'w');
         f.write(metadata_content);
         f.close
       end
 
       def read_template(metadata_name)
-         metadata_xslt_template = File.read(Pathname(File.dirname(__FILE__)).join("../template/#{metadata_name}.xslt"))
-         metadata_xslt_template
+        metadata_xslt_template = File.read(Pathname(File.dirname(__FILE__)).join("../template/#{metadata_name}.xslt"))
+        metadata_xslt_template
       end
 
       def transform_xml_using_xslt(metadata_xml_input, metadata_xslt_template)
@@ -52,6 +48,6 @@ module Dor
       def do_post_transform(metadata_content)
         metadata_content
       end
-   end
+    end
   end
 end
