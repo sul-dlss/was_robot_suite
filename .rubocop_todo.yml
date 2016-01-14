@@ -23,11 +23,6 @@ Lint/UnderscorePrefixedVariableName:
   Exclude:
     - 'config/boot.rb'
 
-# Offense count: 1
-Lint/UselessAssignment:
-  Exclude:
-    - 'spec/spec_helper.rb'
-
 # Offense count: 4
 Metrics/AbcSize:
   Max: 33
