@@ -23,15 +23,15 @@ module Dor
       end
 
       def create_thumbnail_xml_element(thumbnail_file)
-        unless !thumbnail_file.nil? && File.exist?(thumbnail_file) then
+        unless !thumbnail_file.nil? && File.exist?(thumbnail_file)
           LyberCore::Log.warn "ThumbnailGenerator - #{thumbnail_file} doesn't exist"
           return ''
         end
 
         exif = MiniExiftool.new thumbnail_file
-        if exif.MIMEType.nil? || exif.MIMEType != 'image/jp2' then
+        if exif.MIMEType.nil? || exif.MIMEType != 'image/jp2'
           LyberCore::Log.warn "ThumbnailGenerator - #{thumbnail_file} is not a valid JP2 image"
-          raise "#{thumbnail_file} is not a valid image"
+          fail "#{thumbnail_file} is not a valid image"
         end
 
         begin
@@ -43,7 +43,7 @@ module Dor
         end
 
         size = thumbnail_file_object.size()
-        if size == 0 then
+        if size == 0
           LyberCore::Log.warn "ThumbnailGenerator - #{thumbnail_file} size is 0"
           return ''
         end

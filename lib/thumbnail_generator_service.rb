@@ -19,9 +19,9 @@ module Dor
           raise "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{e.message}"
         end
 
-        if result.length > 0 && result.starts_with?('#FAIL#') then
+        if result.length > 0 && result.starts_with?('#FAIL#')
           File.delete(temporary_file + '.jpeg') if File.exist?(temporary_file + '.jpeg')
-          raise "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{result}"
+          fail "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{result}"
         else
           resize_temporary_image(temporary_file + '.jpeg')
           Assembly::Image.new(temporary_file + '.jpeg').create_jp2(:output => temporary_file + '.jp2')
@@ -35,7 +35,7 @@ module Dor
         begin
           result = Phantomjs.run('scripts/rasterize.js', wayback_uri, temporary_file + '.jpeg')
         rescue Exception => e
-          result = result + "\nException in generating thumbnail. #{e.message}\n#{e.backtrace.inspect}"
+          result += "\nException in generating thumbnail. #{e.message}\n#{e.backtrace.inspect}"
         end
         result
       end
@@ -45,7 +45,7 @@ module Dor
         width = image.width
         height = image.height
 
-        if width > height then
+        if width > height
           resize_dimension = ' 400x '
         else
           resize_dimension = ' x400 '

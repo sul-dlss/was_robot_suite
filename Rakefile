@@ -17,7 +17,7 @@ task :ci => [:rspec, :doc]
 desc 'Run RSpec with RCov'
 RSpec::Core::RakeTask.new(:rspec) do |t|
   t.pattern = 'spec/**/*_spec.rb'
-    t.rspec_opts = ['-c', '-f progress', '--tty', '-r ./spec/spec_helper.rb']
+  t.rspec_opts = ['-c', '-f progress', '--tty', '-r ./spec/spec_helper.rb']
 end
 
 desc 'Get application version'
@@ -36,7 +36,7 @@ begin
 
   YARD::Rake::YardocTask.new(:doc) do |yt|
     yt.files = Dir.glob(File.join(project_root, 'lib', '**', '*.rb')) +
-                 [File.join(project_root, 'README.rdoc')]
+               [File.join(project_root, 'README.rdoc')]
     yt.options = ['--output-dir', doc_dest_dir, '--readme', 'README.rdoc', '--title', 'WAS Registrar Documentation']
   end
 rescue LoadError
