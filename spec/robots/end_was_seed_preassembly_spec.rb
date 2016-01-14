@@ -14,7 +14,7 @@ describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
     it 'should re-version the object already accessioned objects' do
       druid_obj = double('druid_obj')
       expect(druid_obj).to receive(:open_new_version)
-      expect(druid_obj).to receive(:close_version).with( {:description=>'Updating the seed object through wasSeedPreassemblyWF', :significance=>'Major'})
+      expect(druid_obj).to receive(:close_version).with( {:description => 'Updating the seed object through wasSeedPreassemblyWF', :significance => 'Major'})
 
       allow(Dor::Item).to receive(:find).and_return(druid_obj)
       allow(Dor::WorkflowService).to receive(:get_workflow_status).and_return('completed')

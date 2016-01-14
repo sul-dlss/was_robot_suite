@@ -57,7 +57,7 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
     pending
     it 'captures jpeg image for the first capture of url', :image_prerequisite do
       VCR.use_cassette('slac_capture') do
-        wayback_uri ='https://swap.stanford.edu/20110202032021/http://www.slac.stanford.edu'
+        wayback_uri = 'https://swap.stanford.edu/20110202032021/http://www.slac.stanford.edu'
         temporary_file = 'tmp/test_capture.jpeg'
         result = Dor::WASSeed::ThumbnailGeneratorService.capture(wayback_uri, temporary_file)
         expect(result).to eq('')

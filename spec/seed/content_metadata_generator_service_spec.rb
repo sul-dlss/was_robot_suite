@@ -31,7 +31,7 @@ describe Dor::WASSeed::ContentMetadataGenerator do
     it 'should return a complete xml element for valid druid and an image xml element' do
       actual_xml_element =  cm_generator_instance_with_druid().generate_xml_doc @expected_thumbnal_xml_element
       expect(actual_xml_element.to_xml).to eq(@expected_full_xml_element.to_xml)
-      #expect(actual_xml_element).to be_equivalent_to(@expected_full_xml_element)
+      # expect(actual_xml_element).to be_equivalent_to(@expected_full_xml_element)
     end
 
     it 'should return a basic xml element for a valid druid and empty xml element' do
@@ -51,8 +51,8 @@ describe Dor::WASSeed::ContentMetadataGenerator do
       actual_xml_element = cm_generator_instance.create_thumbnail_xml_element thumbnail_file_location
 
       expect(actual_xml_element).to eq(@expected_thumbnal_xml_element)
-      #expected_xml_objet = Nokogiri::XML(@expected_thumbnal_xml_element)
-      #actual_xml_object  = Nokogiri::XML(actual_xml_element)
+      # expected_xml_objet = Nokogiri::XML(@expected_thumbnal_xml_element)
+      # actual_xml_object  = Nokogiri::XML(actual_xml_element)
       # expect(actual_xml_object).to be_equivalent_to(expected_xml_objet)
     end
 
@@ -69,12 +69,12 @@ describe Dor::WASSeed::ContentMetadataGenerator do
 
     it 'should raise an excetion for reading an empty image' do
        # This test case should be fixed with adding an empty image
-       thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail_empty.jpeg"
+      thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail_empty.jpeg"
        expect{ create_thumbnail_xml_element thumbnail_file_location }.to raise_error
     end
 
     it 'should raise an error for reading an invalid image' do
-       thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail_text.jpeg"
+      thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail_text.jpeg"
        expect{ create_thumbnail_xml_element thumbnail_file_location }.to raise_error
     end
   end
@@ -89,10 +89,10 @@ describe Dor::WASSeed::ContentMetadataGenerator do
   end
 
   def cm_generator_instance
-    return Dor::WASSeed::ContentMetadataGenerator.new( '', '')
+    Dor::WASSeed::ContentMetadataGenerator.new( '', '')
   end
 
-  def cm_generator_instance_with_druid druid='druid:aa111aa1111'
-    return Dor::WASSeed::ContentMetadataGenerator.new( '', druid)
+  def cm_generator_instance_with_druid(druid='druid:aa111aa1111')
+    Dor::WASSeed::ContentMetadataGenerator.new( '', druid)
   end
 end

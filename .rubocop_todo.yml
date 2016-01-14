@@ -7,18 +7,6 @@
 # versions of RuboCop, may require this file to be generated again.
 
 # Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: AlignWith, SupportedStyles, AutoCorrect.
-Lint/DefEndAlignment:
-  Enabled: false
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: AlignWith, SupportedStyles, AutoCorrect.
-Lint/EndAlignment:
-  Enabled: false
-
-# Offense count: 2
 Lint/HandleExceptions:
   Exclude:
     - 'bin/console'
@@ -104,35 +92,6 @@ Style/ExtraSpacing:
 Style/HashSyntax:
   Enabled: false
 
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: MaxLineLength.
-Style/IfUnlessModifier:
-  Exclude:
-    - 'bin/console'
-    - 'lib/metadata_generator_service.rb'
-
-# Offense count: 8
-# Cop supports --auto-correct.
-# Configuration parameters: Width.
-Style/IndentationWidth:
-  Exclude:
-    - 'Rakefile'
-    - 'lib/content_metadata_generator_service.rb'
-    - 'lib/desc_metadata_generator_service.rb'
-    - 'lib/metadata_generator_service.rb'
-    - 'robots/seed/build_was_seed_druid_tree.rb'
-    - 'spec/seed/content_metadata_generator_service_spec.rb'
-
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/LeadingCommentSpace:
-  Exclude:
-    - 'config/environments/example.rb'
-    - 'config/environments/test.rb'
-    - 'lib/desc_metadata_generator_service.rb'
-    - 'spec/seed/content_metadata_generator_service_spec.rb'
-
 # Offense count: 6
 # Cop supports --auto-correct.
 Style/LineEndConcatenation:
@@ -145,12 +104,6 @@ Style/MethodCallParentheses:
   Exclude:
     - 'lib/content_metadata_generator_service.rb'
     - 'spec/seed/content_metadata_generator_service_spec.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/MethodDefParentheses:
-  Enabled: false
 
 # Offense count: 9
 # Cop supports --auto-correct.
@@ -182,22 +135,6 @@ Style/PercentLiteralDelimiters:
     - 'config/deploy/development.rb'
     - 'config/deploy/production.rb'
     - 'config/deploy/test.rb'
-
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: AllowMultipleReturnValues.
-Style/RedundantReturn:
-  Exclude:
-    - 'lib/content_metadata_generator_service.rb'
-    - 'lib/metadata_generator_service.rb'
-    - 'lib/thumbnail_generator_service.rb'
-    - 'spec/seed/content_metadata_generator_service_spec.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/RedundantSelf:
-  Exclude:
-    - 'lib/thumbnail_generator_service.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -242,19 +179,6 @@ Style/SingleSpaceBeforeFirstArg:
 # Configuration parameters: SupportedStyles.
 Style/SpaceAroundEqualsInParameterDefault:
   EnforcedStyle: no_space
-
-# Offense count: 28
-# Cop supports --auto-correct.
-# Configuration parameters: MultiSpaceAllowedForOperators.
-Style/SpaceAroundOperators:
-  Exclude:
-    - 'lib/content_metadata_generator_service.rb'
-    - 'lib/desc_metadata_generator_service.rb'
-    - 'lib/metadata_generator_service.rb'
-    - 'lib/thumbnail_generator_service.rb'
-    - 'robots/seed/end_was_seed_preassembly.rb'
-    - 'spec/robots/end_was_seed_preassembly_spec.rb'
-    - 'spec/seed/thumbnail_generator_service_spec.rb'
 
 # Offense count: 7
 # Cop supports --auto-correct.

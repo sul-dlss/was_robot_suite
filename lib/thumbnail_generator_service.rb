@@ -13,31 +13,31 @@ module Dor
 
         result = ''
         begin
-          result = self.capture( wayback_uri, temporary_file)
+          result = capture( wayback_uri, temporary_file)
         rescue => e
-          File.delete(temporary_file+'.jpeg') if File.exist?(temporary_file+'.jpeg')
+          File.delete(temporary_file + '.jpeg') if File.exist?(temporary_file + '.jpeg')
           raise "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{e.message}"
         end
 
         if (result.length > 0 && result.starts_with?('#FAIL#')) then
-          File.delete(temporary_file+'.jpeg') if File.exist?(temporary_file+'.jpeg')
+          File.delete(temporary_file + '.jpeg') if File.exist?(temporary_file + '.jpeg')
           raise "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{result}"
         else
-          self.resize_temporary_image(temporary_file+'.jpeg')
-          Assembly::Image.new(temporary_file+'.jpeg').create_jp2(:output=>temporary_file+'.jp2')
-          FileUtils.rm temporary_file+'.jpeg'
-          FileUtils.mv temporary_file+'.jp2', thumbnail_file
+          resize_temporary_image(temporary_file + '.jpeg')
+          Assembly::Image.new(temporary_file + '.jpeg').create_jp2(:output => temporary_file + '.jp2')
+          FileUtils.rm temporary_file + '.jpeg'
+          FileUtils.mv temporary_file + '.jp2', thumbnail_file
         end
       end
 
       def self.capture(wayback_uri, temporary_file)
         result = ''
         begin
-          result = Phantomjs.run('scripts/rasterize.js', wayback_uri, temporary_file+'.jpeg')
+          result = Phantomjs.run('scripts/rasterize.js', wayback_uri, temporary_file + '.jpeg')
         rescue Exception => e
-          result = result +"\nException in generating thumbnail. #{e.message}\n#{e.backtrace.inspect}"
+          result = result + "\nException in generating thumbnail. #{e.message}\n#{e.backtrace.inspect}"
         end
-        return result
+        result
       end
 
       def self.resize_temporary_image(temporary_image)

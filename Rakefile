@@ -16,7 +16,7 @@ task :ci => [:rspec, :doc]
 
 desc 'Run RSpec with RCov'
 RSpec::Core::RakeTask.new(:rspec) do |t|
-    t.pattern = 'spec/**/*_spec.rb'
+  t.pattern = 'spec/**/*_spec.rb'
     t.rspec_opts = ['-c', '-f progress', '--tty', '-r ./spec/spec_helper.rb']
 end
 
