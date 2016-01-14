@@ -31,12 +31,12 @@
   </physicalDescription>
   <abstract displayLabel="Description">Web site of the US Environmental Protection Agency (EPA). Site contains information on environmental laws and regulations, as well as scientific research on environmental protection.</abstract>
   <originInfo>
-    <publisher>EPA</publisher>
+    <publisher displayLabel="Publisher">EPA</publisher>
   </originInfo>
-  <subject authority="lcsh">
+  <subject>
     <topic>Environmental policy--United States.</topic>
   </subject>
-  <subject authority="lcsh">
+  <subject>
     <topic>Environmental law--United States</topic>
   </subject>
   <location displayLabel="Archived site">
