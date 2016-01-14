@@ -36,12 +36,11 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-set :stages, %W(dev staging production)
-set :default_stage, "dev"
+set :stages, %w(dev staging production)
+set :default_stage, 'dev'
 set :linked_dirs, %w(log run config/environments config/certs)
 
 namespace :deploy do
-
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 10 do
@@ -49,7 +48,6 @@ namespace :deploy do
         test :bundle, :exec, :controller, :stop
         test :bundle, :exec, :controller, :quit
         execute :bundle, :exec, :controller, :boot
-        
       end
     end
   end
@@ -64,5 +62,4 @@ namespace :deploy do
       # end
     end
   end
-
 end

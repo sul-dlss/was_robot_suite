@@ -1,9 +1,7 @@
 Dor::Config.configure do
-
   workflow.url ''
 
   was_seed do
-    
     workspace_path  '/dor/workspace/'  #the root for the storage for DRUID tree that will be the input to AssemblyWF
     staging_path  '/web-archiving-stage/seed/'
     wayback_uri 'https://swap.stanford.edu'
@@ -18,7 +16,6 @@ Dor::Config.configure do
   dor do
     service_root ''
   end
-   
 end
 
 REDIS_URL = 'localhost:6379/resque:example' # hostname:port[:db][/namespace]

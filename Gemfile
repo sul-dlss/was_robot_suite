@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'addressable'      
+gem 'addressable'
 gem 'dor-services', '~> 4.21.4'
 gem 'lyber-core'
 gem 'robot-controller', '~> 2.0.3' # requires Resque
@@ -27,6 +27,6 @@ end
 group :deployment do
   gem 'capistrano', '~> 3.2.1'
   gem 'capistrano-bundler', '~> 1.1'
-  gem 'lyberteam-capistrano-devel', "~> 3.0"
+  gem 'lyberteam-capistrano-devel', '~> 3.0'
   gem 'capistrano-one_time_key'
 end

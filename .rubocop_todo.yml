@@ -12,14 +12,6 @@
 Lint/DefEndAlignment:
   Enabled: false
 
-# Offense count: 8
-# Cop supports --auto-correct.
-Lint/DeprecatedClassMethods:
-  Exclude:
-    - 'lib/metadata_generator_service.rb'
-    - 'spec/seed/desc_metadata_generator_service_spec.rb'
-    - 'spec/seed/thumbnail_generator_service_spec.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: AlignWith, SupportedStyles, AutoCorrect.
@@ -70,13 +62,6 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 8
 
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/AndOr:
-  Exclude:
-    - 'lib/content_metadata_generator_service.rb'
-
 # Offense count: 3
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -85,19 +70,6 @@ Style/BracesAroundHashParameters:
     - 'config/deploy/development.rb'
     - 'robots/seed/end_was_seed_preassembly.rb'
     - 'spec/robots/end_was_seed_preassembly_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: Keywords.
-Style/CommentAnnotation:
-  Exclude:
-    - 'config/boot.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-Style/CommentIndentation:
-  Exclude:
-    - 'spec/seed/content_metadata_generator_service_spec.rb'
 
 # Offense count: 9
 # Configuration parameters: Exclude.
@@ -110,42 +82,6 @@ Style/Documentation:
     - 'lib/metadata_generator_service.rb'
     - 'lib/thumbnail_generator_service.rb'
     - 'robots/seed/build_was_seed_druid_tree.rb'
-    - 'robots/seed/content_metadata_generator.rb'
-    - 'robots/seed/desc_metadata_generator.rb'
-    - 'robots/seed/end_was_seed_preassembly.rb'
-    - 'robots/seed/thumbnail_generator.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/EmptyLines:
-  Exclude:
-    - 'config/deploy/production.rb'
-    - 'config/deploy/test.rb'
-
-# Offense count: 8
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundBlockBody:
-  Exclude:
-    - 'config/deploy.rb'
-    - 'config/environments/example.rb'
-    - 'config/environments/test.rb'
-    - 'spec/seed/content_metadata_generator_service_spec.rb'
-    - 'spec/seed/desc_metadata_generator_service_spec.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundClassBody:
-  Exclude:
-    - 'lib/desc_metadata_generator_service.rb'
-    - 'lib/thumbnail_generator_service.rb'
-
-# Offense count: 8
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/EmptyLinesAroundModuleBody:
-  Exclude:
     - 'robots/seed/content_metadata_generator.rb'
     - 'robots/seed/desc_metadata_generator.rb'
     - 'robots/seed/end_was_seed_preassembly.rb'
@@ -301,30 +237,6 @@ Style/SingleSpaceBeforeFirstArg:
     - 'config/environments/test.rb'
     - 'lib/metadata_generator_service.rb'
 
-# Offense count: 23
-# Cop supports --auto-correct.
-Style/SpaceAfterComma:
-  Exclude:
-    - 'Rakefile'
-    - 'bin/run_robot.rb'
-    - 'lib/content_metadata_generator_service.rb'
-    - 'lib/desc_metadata_generator_service.rb'
-    - 'lib/metadata_generator_service.rb'
-    - 'lib/thumbnail_generator_service.rb'
-    - 'robots/seed/build_was_seed_druid_tree.rb'
-    - 'robots/seed/end_was_seed_preassembly.rb'
-    - 'robots/seed/thumbnail_generator.rb'
-    - 'spec/robots/end_was_seed_preassembly_spec.rb'
-    - 'spec/seed/content_metadata_generator_service_spec.rb'
-    - 'spec/seed/desc_metadata_generator_service_spec.rb'
-    - 'spec/seed/thumbnail_generator_service_spec.rb'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/SpaceAfterControlKeyword:
-  Exclude:
-    - 'bin/console'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: SupportedStyles.
@@ -393,43 +305,9 @@ Style/SpecialGlobalVars:
   Exclude:
     - 'config/boot.rb'
 
-# Offense count: 113
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/StringLiterals:
-  Enabled: false
-
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: IgnoredMethods.
 Style/SymbolProc:
   Exclude:
     - 'bin/run_robot.rb'
-
-# Offense count: 11
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/TrailingBlankLines:
-  Exclude:
-    - 'Gemfile'
-    - 'config/schedule.rb'
-    - 'lib/content_metadata_generator_service.rb'
-    - 'lib/desc_metadata_generator_service.rb'
-    - 'lib/metadata_generator_service.rb'
-    - 'robots/seed/build_was_seed_druid_tree.rb'
-    - 'robots/seed/content_metadata_generator.rb'
-    - 'robots/seed/desc_metadata_generator.rb'
-    - 'robots/seed/end_was_seed_preassembly.rb'
-    - 'robots/seed/thumbnail_generator.rb'
-    - 'spec/robots/end_was_seed_preassembly_spec.rb'
-
-# Offense count: 117
-# Cop supports --auto-correct.
-Style/TrailingWhitespace:
-  Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/UnneededCapitalW:
-  Exclude:
-    - 'config/deploy.rb'

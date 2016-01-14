@@ -1,7 +1,6 @@
 module Robots
   module DorRepo
     module WasSeedPreassembly
-
       class ContentMetadataGenerator
         include LyberCore::Robot
 
@@ -16,9 +15,7 @@ module Robots
           metadata_generator_service = Dor::WASSeed::ContentMetadataGenerator.new(workspace_path, druid)
           metadata_generator_service.generate_metadata_output
         end
-        
       end
-
     end
   end
 end

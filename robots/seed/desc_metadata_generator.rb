@@ -1,7 +1,6 @@
 module Robots
   module DorRepo
     module WasSeedPreassembly
-
       class DescMetadataGenerator
         include LyberCore::Robot
 
@@ -17,7 +16,6 @@ module Robots
           metadata_generator_service.generate_metadata_output
        end
       end
-
     end
   end
 end

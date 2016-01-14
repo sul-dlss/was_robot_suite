@@ -1,19 +1,18 @@
 module Robots
   module DorRepo
     module WasSeedPreassembly
-
       class EndWasSeedPreassembly
         include LyberCore::Robot
 
         def initialize
-          super('dor', 'wasSeedPreassemblyWF', 'end-was-seed-preassembly')          
+          super('dor', 'wasSeedPreassemblyWF', 'end-was-seed-preassembly')
         end
 
         def perform(druid)
           druid_obj = Dor::Item.find(druid)
-          start_completed = Dor::WorkflowService.get_workflow_status('dor', druid,'accessionWF','start-accession')
-          end_completed = Dor::WorkflowService.get_workflow_status('dor', druid,'accessionWF','end-accession')
-          
+          start_completed = Dor::WorkflowService.get_workflow_status('dor', druid, 'accessionWF', 'start-accession')
+          end_completed = Dor::WorkflowService.get_workflow_status('dor', druid, 'accessionWF', 'end-accession')
+
           if start_completed.nil? && end_completed.nil? then
             # This object isn't accessioned yet.
             druid_obj.initialize_workflow('accessionWF')
@@ -29,7 +28,6 @@ module Robots
           end
         end
       end
-
     end
   end
 end
