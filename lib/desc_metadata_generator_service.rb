@@ -14,7 +14,7 @@ module Dor
         xslt_template = read_template(@desc_metadata_name + "_#{source}")
         metadata_content = transform_xml_using_xslt(xml_input, xslt_template)
         metadata_content = do_post_transform(metadata_content)
-        write_file_to_druid_metadata_folder( @desc_metadata_name, metadata_content)
+        write_file_to_druid_metadata_folder(@desc_metadata_name, metadata_content)
       end
     end
   end

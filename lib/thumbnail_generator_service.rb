@@ -13,13 +13,13 @@ module Dor
 
         result = ''
         begin
-          result = capture( wayback_uri, temporary_file)
+          result = capture(wayback_uri, temporary_file)
         rescue => e
           File.delete(temporary_file + '.jpeg') if File.exist?(temporary_file + '.jpeg')
           raise "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{e.message}"
         end
 
-        if (result.length > 0 && result.starts_with?('#FAIL#')) then
+        if result.length > 0 && result.starts_with?('#FAIL#') then
           File.delete(temporary_file + '.jpeg') if File.exist?(temporary_file + '.jpeg')
           raise "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{result}"
         else

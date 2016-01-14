@@ -19,7 +19,7 @@ module Robots
           elsif start_completed.eql?('completed') && end_completed.eql?('completed') then
             # We need to open a new version
             druid_obj.open_new_version
-            druid_obj.close_version( {:description => 'Updating the seed object through wasSeedPreassemblyWF', :significance => 'Major'})
+            druid_obj.close_version(:description => 'Updating the seed object through wasSeedPreassemblyWF', :significance => 'Major')
           elsif start_completed.eql?('completed') && !end_completed.eql?('completed') then
             # The object is still in accessioning, we have to wait until finish
             raise "Druid object #{druid} is still in accessioning, reset the end-was-seed-preassembly after accessioing completion"

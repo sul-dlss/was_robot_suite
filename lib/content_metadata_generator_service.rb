@@ -36,7 +36,7 @@ module Dor
 
         begin
           thumbnail_file_object = File.new(thumbnail_file, 'r')
-          thumbnail_file_data = thumbnail_file_object.read()
+          thumbnail_file_data = thumbnail_file_object.read
         rescue Exception => e
           LyberCore::Log.warn "ThumbnailGenerator - problem in reading #{thumbnail_file}"
           raise "Problem in reading #{thumbnail_file}. #{e.message}\n#{e.backtrace.inspect}"

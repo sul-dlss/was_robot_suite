@@ -28,23 +28,23 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
 
     it 'generates jp2 from jpeg thumbnail and pushes to druid_tree content directory', :image_prerequisite do
       allow(Dor::WASSeed::ThumbnailGeneratorService).to receive(:capture).and_return('')
-      Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail( @druid_id, @workspace, @uri)
+      Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(@druid_id, @workspace, @uri)
       expect(File.exist?('spec/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2')).to be true
-      expect(File.exist?('tmp/ab123cd4567.jpeg' )).to be false
+      expect(File.exist?('tmp/ab123cd4567.jpeg')).to be false
     end
 
     it 'raises an error if there is an error in the capture method' do
       allow(Dor::WASSeed::ThumbnailGeneratorService).to receive(:capture).and_return('#FAIL#')
-      expect{Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail( @druid_id, @workspace, @uri)}.to raise_error.with_message("Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n #FAIL#")
+      expect{ Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(@druid_id, @workspace, @uri) }.to raise_error.with_message("Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n #FAIL#")
       expect(File.exist?('spec/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2')).to be false
-      expect(File.exist?('tmp/ab123cd4567.jpeg' )).to be false
+      expect(File.exist?('tmp/ab123cd4567.jpeg')).to be false
     end
 
     it 'raises an error if there capture method raise an exception' do
       allow(Dor::WASSeed::ThumbnailGeneratorService).to receive(:capture).and_raise('Error')
-      expect{Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail( @druid_id, @workspace, @uri)}.to raise_error.with_message("Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n Error")
+      expect{ Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(@druid_id, @workspace, @uri) }.to raise_error.with_message("Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n Error")
       expect(File.exist?('spec/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2')).to be false
-      expect(File.exist?('tmp/ab123cd4567.jpeg' )).to be false
+      expect(File.exist?('tmp/ab123cd4567.jpeg')).to be false
     end
 
     after :each do

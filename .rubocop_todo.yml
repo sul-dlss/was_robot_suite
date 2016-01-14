@@ -50,15 +50,6 @@ Metrics/MethodLength:
 Metrics/PerceivedComplexity:
   Max: 8
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/BracesAroundHashParameters:
-  Exclude:
-    - 'config/deploy/development.rb'
-    - 'robots/seed/end_was_seed_preassembly.rb'
-    - 'spec/robots/end_was_seed_preassembly_spec.rb'
-
 # Offense count: 9
 # Configuration parameters: Exclude.
 Style/Documentation:
@@ -75,35 +66,11 @@ Style/Documentation:
     - 'robots/seed/end_was_seed_preassembly.rb'
     - 'robots/seed/thumbnail_generator.rb'
 
-# Offense count: 11
-# Cop supports --auto-correct.
-# Configuration parameters: AllowForAlignment.
-Style/ExtraSpacing:
-  Exclude:
-    - 'bin/run_robot.rb'
-    - 'config/environments/example.rb'
-    - 'config/environments/test.rb'
-    - 'lib/metadata_generator_service.rb'
-    - 'spec/seed/content_metadata_generator_service_spec.rb'
-
 # Offense count: 15
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues.
 Style/HashSyntax:
   Enabled: false
-
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/LineEndConcatenation:
-  Exclude:
-    - 'lib/content_metadata_generator_service.rb'
-
-# Offense count: 7
-# Cop supports --auto-correct.
-Style/MethodCallParentheses:
-  Exclude:
-    - 'lib/content_metadata_generator_service.rb'
-    - 'spec/seed/content_metadata_generator_service_spec.rb'
 
 # Offense count: 9
 # Cop supports --auto-correct.
@@ -119,22 +86,6 @@ Style/MultilineIfThen:
 # Configuration parameters: EnforcedStyle, SupportedStyles.
 Style/MultilineOperationIndentation:
   Enabled: false
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: AllowSafeAssignment.
-Style/ParenthesesAroundCondition:
-  Exclude:
-    - 'lib/thumbnail_generator_service.rb'
-
-# Offense count: 9
-# Cop supports --auto-correct.
-# Configuration parameters: PreferredDelimiters.
-Style/PercentLiteralDelimiters:
-  Exclude:
-    - 'config/deploy/development.rb'
-    - 'config/deploy/production.rb'
-    - 'config/deploy/test.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -159,75 +110,6 @@ Style/SignalException:
     - 'lib/thumbnail_generator_service.rb'
     - 'robots/seed/build_was_seed_druid_tree.rb'
     - 'robots/seed/end_was_seed_preassembly.rb'
-
-# Offense count: 1
-# Configuration parameters: Methods.
-Style/SingleLineBlockParams:
-  Exclude:
-    - 'bin/run_robot.rb'
-
-# Offense count: 6
-# Cop supports --auto-correct.
-Style/SingleSpaceBeforeFirstArg:
-  Exclude:
-    - 'config/environments/example.rb'
-    - 'config/environments/test.rb'
-    - 'lib/metadata_generator_service.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: SupportedStyles.
-Style/SpaceAroundEqualsInParameterDefault:
-  EnforcedStyle: no_space
-
-# Offense count: 7
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-Style/SpaceBeforeBlockBraces:
-  Enabled: false
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/SpaceBeforeComma:
-  Exclude:
-    - 'spec/robots/end_was_seed_preassembly_spec.rb'
-
-# Offense count: 12
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
-Style/SpaceInsideBlockBraces:
-  Enabled: false
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/SpaceInsideBrackets:
-  Exclude:
-    - 'Rakefile'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, EnforcedStyleForEmptyBraces, SupportedStyles.
-Style/SpaceInsideHashLiteralBraces:
-  Enabled: false
-
-# Offense count: 15
-# Cop supports --auto-correct.
-Style/SpaceInsideParens:
-  Exclude:
-    - 'lib/content_metadata_generator_service.rb'
-    - 'lib/desc_metadata_generator_service.rb'
-    - 'lib/metadata_generator_service.rb'
-    - 'lib/thumbnail_generator_service.rb'
-    - 'robots/seed/end_was_seed_preassembly.rb'
-    - 'spec/robots/end_was_seed_preassembly_spec.rb'
-    - 'spec/seed/content_metadata_generator_service_spec.rb'
-    - 'spec/seed/thumbnail_generator_service_spec.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/SpecialGlobalVars:
-  Exclude:
-    - 'config/boot.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

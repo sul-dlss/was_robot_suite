@@ -30,16 +30,14 @@ require File.expand_path(File.dirname(__FILE__) + '/../config/boot')
 class_name = LyberCore::Robot.step_to_classname robot
 
 # instantiate a Robot object using the name
-klazz = class_name.inject(Object) {|o, c| o.const_get c}
+klazz = class_name.inject(Object) { |o, c| o.const_get c } # rubocop:disable Style/SingleLineBlockParams
 bot = klazz.new
-bot.check_queued_status = false  # skipping the queued workflow status check
+bot.check_queued_status = false # skipping the queued workflow status check
 
 if opts[:file]
-  druids = IO.readlines(opts[:file]).map {|l| l.strip}
+  druids = IO.readlines(opts[:file]).map { |l| l.strip }
 else
   druids = [opts[:druid]]
 end
 
-druids.each do |druid|
-  bot.work druid
-end
+druids.each { |druid| bot.work druid }

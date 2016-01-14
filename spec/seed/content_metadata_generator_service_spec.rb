@@ -29,18 +29,18 @@ describe Dor::WASSeed::ContentMetadataGenerator do
 
   describe '.generate_xml_doc' do
     it 'should return a complete xml element for valid druid and an image xml element' do
-      actual_xml_element =  cm_generator_instance_with_druid().generate_xml_doc @expected_thumbnal_xml_element
+      actual_xml_element = cm_generator_instance_with_druid.generate_xml_doc @expected_thumbnal_xml_element
       expect(actual_xml_element.to_xml).to eq(@expected_full_xml_element.to_xml)
       # expect(actual_xml_element).to be_equivalent_to(@expected_full_xml_element)
     end
 
     it 'should return a basic xml element for a valid druid and empty xml element' do
-      actual_xml_element =  cm_generator_instance_with_druid().generate_xml_doc ''
+      actual_xml_element =  cm_generator_instance_with_druid.generate_xml_doc ''
       expect(actual_xml_element.to_xml).to eq(@expected_empty_xml_element.to_xml)
     end
 
     it 'should return a basic xml element for a valid druid and empty xml element' do
-      actual_xml_element =  cm_generator_instance_with_druid().generate_xml_doc
+      actual_xml_element =  cm_generator_instance_with_druid.generate_xml_doc
       expect(actual_xml_element.to_xml).to eq(@expected_empty_xml_element.to_xml)
     end
   end
@@ -58,12 +58,12 @@ describe Dor::WASSeed::ContentMetadataGenerator do
 
     it 'should return empty string for non-existing images' do
       thumbnail_file_location = "#{@staging_path}/thumbnail_files/nonthing.jpeg"
-      actual_xml_element = cm_generator_instance().create_thumbnail_xml_element thumbnail_file_location
+      actual_xml_element = cm_generator_instance.create_thumbnail_xml_element thumbnail_file_location
       expect(actual_xml_element).to eq('')
     end
 
     it 'should return empty string for null location string' do
-      actual_xml_element = cm_generator_instance().create_thumbnail_xml_element nil
+      actual_xml_element = cm_generator_instance.create_thumbnail_xml_element nil
       expect(actual_xml_element).to eq('')
     end
 
@@ -82,17 +82,17 @@ describe Dor::WASSeed::ContentMetadataGenerator do
   describe '.transform_xml_using_xslt' do
     it 'transforms the xml to content metadata data format using XSLT' do
       xslt_template = File.read(Pathname(File.dirname(__FILE__)).join('../../template/contentMetadata.xslt'))
-      actual_contnet_metadata = cm_generator_instance().transform_xml_using_xslt @expected_full_xml_element, xslt_template
+      actual_contnet_metadata = cm_generator_instance.transform_xml_using_xslt @expected_full_xml_element, xslt_template
 
       expect(Nokogiri::XML(actual_contnet_metadata).to_xml).to eq(Nokogiri::XML(@contnet_metadata_full).to_xml)
     end
   end
 
   def cm_generator_instance
-    Dor::WASSeed::ContentMetadataGenerator.new( '', '')
+    Dor::WASSeed::ContentMetadataGenerator.new('', '')
   end
 
-  def cm_generator_instance_with_druid(druid='druid:aa111aa1111')
-    Dor::WASSeed::ContentMetadataGenerator.new( '', druid)
+  def cm_generator_instance_with_druid(druid = 'druid:aa111aa1111')
+    Dor::WASSeed::ContentMetadataGenerator.new('', druid)
   end
 end
