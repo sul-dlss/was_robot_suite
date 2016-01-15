@@ -1,17 +1,10 @@
 require 'spec_helper'
 require 'thumbnail_generator_service'
-RSpec.configure do |c|
-  c.filter_run_excluding :image_prerequisite
-end
 
 describe Dor::WASSeed::ThumbnailGeneratorService do
   VCR.configure do |config|
     config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
     config.hook_into :webmock # or :fakeweb
-  end
-
-  RSpec.configure do |c|
-    c.filter_run_excluding :image_prerequisite
   end
 
   before :all do
@@ -23,6 +16,7 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
       @druid_id = 'druid:ab123cd4567'
       @workspace = 'spec/fixtures/workspace/'
       @uri = 'http://www.slac.stanford.edu'
+      FileUtils.rm 'tmp/ab123cd4567.jp2', :force => true
       FileUtils.cp 'spec/fixtures/thumbnail_files/ab123cd4567.jpeg', 'tmp/ab123cd4567.jpeg'
     end
 
@@ -49,22 +43,26 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
 
     after :each do
       FileUtils.rm_rf 'spec/fixtures/workspace/ab' if File.exist?('spec/fixtures/workspace/ab')
-      FileUtils.rm 'tmp/ab123cd4567.jpeg' if File.exist?('tmp/ab123cd4567.jpeg')
+      FileUtils.rm 'tmp/ab123cd4567.jpeg', :force => true
+      FileUtils.rm 'tmp/ab123cd4567.jp2', :force => true
     end
   end
 
   describe '.capture' do
-    pending
+    before :each do
+      FileUtils.rm 'tmp/test_capture.jpeg', :force => true
+    end
     it 'captures jpeg image for the first capture of url', :image_prerequisite do
+      pending 'fails from jquery error'
       VCR.use_cassette('slac_capture') do
         wayback_uri = 'https://swap.stanford.edu/20110202032021/http://www.slac.stanford.edu'
-        temporary_file = 'tmp/test_capture.jpeg'
+        temporary_file = 'tmp/test_capture'
         result = Dor::WASSeed::ThumbnailGeneratorService.capture(wayback_uri, temporary_file)
         expect(result).to eq('')
       end
     end
     after :each do
-      FileUtils.rm_rf 'tmp/test_capture.jpeg' if File.exist?('tmp/test_capture.jpeg')
+      FileUtils.rm 'tmp/test_capture.jpeg', :force => true
     end
   end
 
@@ -83,8 +81,8 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
     end
 
     after :each do
-      FileUtils.rm_rf 'tmp/thum_extra_width.jpeg' if File.exist?('tmp/thum_extra_width.jpeg')
-      FileUtils.rm 'tmp/thum_extra_height.jpeg' if File.exist?('tmp/thum_extra_height.jpeg')
+      FileUtils.rm 'tmp/thum_extra_width.jpeg', :force => true
+      FileUtils.rm 'tmp/thum_extra_height.jpeg', :force => true
     end
   end
 end

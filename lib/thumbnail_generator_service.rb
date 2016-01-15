@@ -7,10 +7,9 @@ module Dor
   module WASSeed
     class ThumbnailGeneratorService
       def self.capture_thumbnail(druid, workspace, uri)
-        thumbnail_file  = "#{DruidTools::Druid.new(druid, workspace).content_dir}/thumbnail.jp2"
-        wayback_uri     = "#{Dor::Config.was_seed.wayback_uri}/19900101120000/#{uri}"
-        temporary_file  = "tmp/#{druid[6, 14]}"
-
+        thumbnail_file = "#{DruidTools::Druid.new(druid, workspace).content_dir}/thumbnail.jp2"
+        wayback_uri    = "#{Dor::Config.was_seed.wayback_uri}/19900101120000/#{uri}"
+        temporary_file = "tmp/#{druid[6, 14]}"
         result = ''
         begin
           result = capture(wayback_uri, temporary_file)

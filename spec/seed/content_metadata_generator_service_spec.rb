@@ -1,9 +1,6 @@
 require 'spec_helper'
 require 'content_metadata_generator_service'
 require 'equivalent-xml'
-RSpec.configure do |c|
-  c.filter_run_excluding :image_prerequisite
-end
 
 describe Dor::WASSeed::ContentMetadataGenerator do
   before(:all) do
@@ -81,7 +78,6 @@ describe Dor::WASSeed::ContentMetadataGenerator do
     it 'transforms the xml to content metadata data format using XSLT' do
       xslt_template = File.read(Pathname(File.dirname(__FILE__)).join('../../template/contentMetadata.xslt'))
       actual_contnet_metadata = cm_generator_instance.transform_xml_using_xslt @expected_full_xml_element, xslt_template
-
       expect(Nokogiri::XML(actual_contnet_metadata).to_xml).to eq(Nokogiri::XML(@contnet_metadata_full).to_xml)
     end
   end
