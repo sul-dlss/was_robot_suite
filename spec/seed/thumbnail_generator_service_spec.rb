@@ -1,17 +1,10 @@
 require 'spec_helper'
 require 'thumbnail_generator_service'
-RSpec.configure do |c|
-  c.filter_run_excluding :image_prerequisite
-end
 
 describe Dor::WASSeed::ThumbnailGeneratorService do
   VCR.configure do |config|
     config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
     config.hook_into :webmock # or :fakeweb
-  end
-
-  RSpec.configure do |c|
-    c.filter_run_excluding :image_prerequisite
   end
 
   before :all do
