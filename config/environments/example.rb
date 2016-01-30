@@ -1,6 +1,8 @@
 Dor::Config.configure do
 
   workflow.url ''
+  workflow.logfile 'log/workflow_service.log'
+  workflow.shift_age 'weekly'
 
   robots do
     workspace '/tmp'
