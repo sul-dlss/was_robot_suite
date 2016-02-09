@@ -1,8 +1,8 @@
 sudo: false
-
 language: ruby
+cache: bundler
 rvm:
   - "2.1.4"
-
+  - "2.2.0"
 before_script:
   - cp config/environments/example.rb config/environments/test.rb
