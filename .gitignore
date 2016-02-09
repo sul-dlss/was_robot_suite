@@ -1,3 +1,4 @@
+workflow_service.log*
 log/*.log
 config/environments/test.rb
 config/environments/development.rb
