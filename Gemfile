@@ -1,28 +1,19 @@
 source 'https://rubygems.org'
 
-gem 'addressable'     # pin to avoid RDF bug
-gem 'dor-services', '~> 4.21.4'
+gem 'dor-services', '~> 5.3.3'
 gem 'lyber-core'
 gem 'robot-controller', '~> 2.0.3' # requires Resque
-gem 'pry', '~> 0.10.0'          # for bin/console
-gem 'slop'         # for bin/run_robot
+gem 'pry', '~> 0.10.0' # for bin/console
+gem 'slop'             # for bin/run_robot
 gem 'rake'
 gem 'rest-client'
-gem 'rspec'
+gem 'rspec', '~> 3.3'
 
 group :development, :test do
-  if File.exist?(mygems = File.join(ENV['HOME'], '.gemfile'))
-    instance_eval(File.read(mygems))
-  end
-  gem 'awesome_print'
-  gem 'debugger', :platform => :ruby_19
   gem 'yard'
-  gem 'holepicker', '~> 0.3', '>= 0.3.3'
   gem 'coveralls', require: false
 end
 
 group :deployment do
-  gem 'capistrano'
-  gem 'capistrano-bundler'
-  gem 'lyberteam-capistrano-devel'
+  gem 'dlss-capistrano'
 end
