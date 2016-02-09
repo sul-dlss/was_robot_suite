@@ -40,14 +40,14 @@ set :log_level, :info
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :stages, %W(development staging production)
-set :default_stage, "development"
+set :stages, %w(development staging production)
+set :default_stage, 'development'
 set :linked_dirs, %w(log run config/environments config/certs)
 
 namespace :deploy do
-  #This is a try to configure a clean install
-  #desc 'Start application'
-  #task :start do
+  # This is a try to configure a clean install
+  # desc 'Start application'
+  # task :start do
   #   invoke 'deploy'
   #  on roles(:app), in: :sequence, wait: 10 do
   #    within release_path do
@@ -55,26 +55,24 @@ namespace :deploy do
   #      execute :bundle, :exec, :controller, :boot
   #    end
   #  end
-  #end
+  # end
 
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 10 do
       within release_path do
-        # Uncomment  with the first deploy 
-         execute :bundle, :install
-         
+        # Uncomment with the first deploy
+        execute :bundle, :install
+
         # Comment with the first deploy
         test :bundle, :exec, :controller, :stop
         test :bundle, :exec, :controller, :quit
-        
+
         # Always call the boot
         execute :bundle, :exec, :controller, :boot
-        
       end
     end
   end
 
   after :publishing, :restart
-
  end

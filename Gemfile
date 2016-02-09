@@ -11,7 +11,7 @@ gem 'rest-client'
 gem 'rspec'
 
 group :development, :test do
-  if File.exists?(mygems = File.join(ENV['HOME'],'.gemfile'))
+  if File.exist?(mygems = File.join(ENV['HOME'], '.gemfile'))
     instance_eval(File.read(mygems))
   end
   gem 'awesome_print'

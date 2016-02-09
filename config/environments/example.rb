@@ -1,19 +1,17 @@
-cert_dir = File.join(File.dirname(__FILE__), "..", "certs")
-
+cert_dir = File.join(File.dirname(__FILE__), '..', 'certs')
 
 Dor::Config.configure do
-
   workflow.url ''
   solrizer.url ''
 
   thumbnail_generator_service_uri ''
 
-  robots do 
+  robots do
     workspace '/tmp'
   end
   ssl do
-    cert_file File.join(cert_dir,".crt")
-    key_file File.join(cert_dir,".key")
+    cert_file File.join(cert_dir, '.crt')
+    key_file File.join(cert_dir, '.key')
     key_pass ''
   end
   suri do
@@ -29,6 +27,5 @@ Dor::Config.configure do
   fedora do
     url ''
   end
- 
 end
 REDIS_URL ||= 'sul-lyberservices-test.stanford.edu:6379/resque:test'
