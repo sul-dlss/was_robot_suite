@@ -1,6 +1,6 @@
 require 'rake'
 require 'rspec/core/rake_task'
-require 'yard/rake/yardoc_task'
+require 'yard'
 require 'robot-controller/tasks'
 
 task :default => :ci
