@@ -1,28 +1,20 @@
 require 'rake'
-require 'rake/testtask'
-require 'robot-controller/tasks'
-require 'bundler'
 require 'rspec/core/rake_task'
-require 'yard'
 require 'yard/rake/yardoc_task'
+require 'robot-controller/tasks'
 
-# Import external rake tasks
-Dir.glob('lib/tasks/*.rake').each { |r| import r }
+task :default => :ci
+task :spec => :rspec
 
-task :default => :ci  
-
-desc "run continuous integration suite (tests, coverage, docs)" 
+desc 'run continuous integration suite (tests, coverage, docs)'
 task :ci => [:rspec, :doc]
 
-desc "Run RSpec with RCov"
-RSpec::Core::RakeTask.new(:rspec) do |t|
-    t.pattern = 'spec/**/*_spec.rb'
-    t.rspec_opts = ["-c", "-f progress", "--tty", "-r ./spec/spec_helper.rb"]
-end
+desc 'Run RSpec with RCov'
+RSpec::Core::RakeTask.new :rspec
 
 desc 'Get application version'
 task :app_version do
-  puts File.read(File.expand_path('../VERSION',__FILE__)).chomp
+  puts File.read(File.expand_path('../VERSION', __FILE__)).chomp
 end
 
 task :environment do
@@ -40,8 +32,8 @@ begin
     yt.options = ['--output-dir', doc_dest_dir, '--readme', 'README.rdoc', '--title', 'WAS Registrar Documentation']
   end
 rescue LoadError
-  desc "Generate YARD Documentation"
+  desc 'Generate YARD Documentation'
   task :doc do
-    abort "Please install the YARD gem to generate rdoc."
+    abort 'Please install the YARD gem to generate rdoc.'
   end
 end
