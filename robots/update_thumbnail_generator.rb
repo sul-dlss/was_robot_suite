@@ -25,17 +25,17 @@ module Robots
           original_uri = ''
           s_mods = Mods::Record.new.from_nk_node(descMetadata_ng)
           s_mods.note.map.each do |x|
-             if x.attributes.include?('displayLabel') && x.attributes['displayLabel'].to_s == 'Original site' then
-               original_uri = x.text
-             end
+            if x.attributes.include?('displayLabel') && x.attributes['displayLabel'].to_s == 'Original site' then
+              original_uri = x.text
+            end
           end
           original_uri
         end
 
         def send_to_thumbnail_generator(druid_id, original_uri)
-            response = RestClient.get "#{Dor::Config.thumbnail_generator_service_uri}api/seed/create?druid=#{druid_id}&uri=#{original_uri}"
+          response = RestClient.get "#{Dor::Config.thumbnail_generator_service_uri}api/seed/create?druid=#{druid_id}&uri=#{original_uri}"
         rescue RestClient::Conflict => e
-            LyberCore::Log.error("#{druid_id} already exists on #{Dor::Config.thumbnail_generator_service_uri}")
+          LyberCore::Log.error("#{druid_id} already exists on #{Dor::Config.thumbnail_generator_service_uri}")
         end
       end
     end

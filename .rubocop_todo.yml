@@ -64,22 +64,6 @@ Style/ExtraSpacing:
 Style/HashSyntax:
   Enabled: false
 
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: normal, rails
-Style/IndentationConsistency:
-  Exclude:
-    - 'config/deploy.rb'
-
-# Offense count: 3
-# Cop supports --auto-correct.
-# Configuration parameters: Width.
-Style/IndentationWidth:
-  Exclude:
-    - 'config/deploy.rb'
-    - 'robots/update_thumbnail_generator.rb'
-
 # Offense count: 1
 # Cop supports --auto-correct.
 Style/MultilineIfThen:
@@ -99,33 +83,6 @@ Style/MultilineOperationIndentation:
 Style/SingleLineBlockParams:
   Exclude:
     - 'bin/run_robot'
-
-# Offense count: 1
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: space, no_space
-Style/SpaceBeforeBlockBraces:
-  Enabled: false
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles, EnforcedStyleForEmptyBraces, SpaceBeforeBlockParameters.
-# SupportedStyles: space, no_space
-Style/SpaceInsideBlockBraces:
-  Enabled: false
-
-# Offense count: 2
-# Cop supports --auto-correct.
-Style/SpaceInsideBrackets:
-  Exclude:
-    - 'Rakefile'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: SupportedStyles.
-# SupportedStyles: use_perl_names, use_english_names
-Style/SpecialGlobalVars:
-  EnforcedStyle: use_perl_names
 
 # Offense count: 1
 # Cop supports --auto-correct.

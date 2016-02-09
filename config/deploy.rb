@@ -13,7 +13,7 @@ set :branch, 'master'
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/lyberadmin/was-seed-diss'
-set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -75,4 +75,4 @@ namespace :deploy do
   end
 
   after :publishing, :restart
- end
+end

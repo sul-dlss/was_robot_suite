@@ -28,4 +28,4 @@ Dor::Config.configure do
     url ''
   end
 end
-REDIS_URL ||= 'sul-lyberservices-test.stanford.edu:6379/resque:test'
+REDIS_URL ||= 'sul-lyberservices-test.stanford.edu:6379/resque:test'.freeze
