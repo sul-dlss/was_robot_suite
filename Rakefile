@@ -3,8 +3,6 @@ require 'rake/testtask'
 require 'robot-controller/tasks'
 require 'bundler'
 require 'rspec/core/rake_task'
-require 'yard'
-require 'yard/rake/yardoc_task'
 
 # Import external rake tasks
 Dir.glob('lib/tasks/*.rake').each { |r| import r }
@@ -31,6 +29,9 @@ end
 
 # Use yard to build docs
 begin
+  require 'yard'
+  require 'yard/rake/yardoc_task'
+
   project_root = File.expand_path(File.dirname(__FILE__))
   doc_dest_dir = File.join(project_root, 'doc')
 
