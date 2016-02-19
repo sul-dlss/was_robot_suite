@@ -1,7 +1,5 @@
 require 'rake'
 require 'rspec/core/rake_task'
-require 'yard'
-require 'robot-controller/tasks'
 
 task :default => :ci
 task :spec => :rspec
@@ -23,6 +21,9 @@ end
 
 # Use yard to build docs
 begin
+  require 'yard'
+  require 'yard/rake/yardoc_task'
+
   project_root = File.expand_path(File.dirname(__FILE__))
   doc_dest_dir = File.join(project_root, 'doc')
 
