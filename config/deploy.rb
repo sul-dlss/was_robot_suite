@@ -6,7 +6,7 @@ set :rvm_ruby_string, 'ruby-1.9.3-p484' # dor-services requires 1.9.3
 
 set :application, 'was-seed-dissemination'
 set :repo_url, 'https://github.com/sul-dlss/was-seed-dissemination.git'
-set :branch, 'master'
+ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
