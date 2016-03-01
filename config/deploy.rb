@@ -1,8 +1,6 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :rvm_ruby_string, 'ruby-1.9.3-p484'
-
 set :application, 'was-seed-preassembly'
 set :repo_url, 'https://github.com/sul-dlss/was-seed-preassembly.git'
 
@@ -36,7 +34,7 @@ set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-set :stages, %w(dev staging production)
+set :stages, %w(development staging production)
 set :default_stage, 'dev'
 set :linked_dirs, %w(log run config/environments config/certs)
 
