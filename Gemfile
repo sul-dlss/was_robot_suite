@@ -5,9 +5,9 @@ gem 'druid-tools'
 gem 'capistrano-one_time_key'
 gem 'net-ssh-krb'
 
-gem 'dor-services', '~> 5.3'
-gem 'lyber-core', '~> 3.2', '>=3.2.4'
-gem 'robot-controller', '~> 2.0.3' # requires Resque
+gem 'dor-services', '~> 5.4', '>= 5.4.2'
+gem 'lyber-core', '~> 4.0'
+gem 'robot-controller', '~> 2.0.4' # requires Resque
 gem 'pry', '~> 0.10.1'          # for bin/console
 gem 'slop'                      # for bin/run_robot
 gem 'whenever'
