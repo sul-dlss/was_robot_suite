@@ -310,7 +310,6 @@ DEPENDENCIES
   net-ssh-krb
   pry (~> 0.10.1)
   rake (>= 10.3.2)
-  rest-client
   robot-controller (~> 2.0.4)
   rspec
   slop

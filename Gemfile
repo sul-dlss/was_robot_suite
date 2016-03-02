@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'rest-client'
 gem 'druid-tools'
 gem 'capistrano-one_time_key'
 gem 'net-ssh-krb'
