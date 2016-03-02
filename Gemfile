@@ -7,9 +7,6 @@ gem 'rake'
 gem 'phantomjs'
 gem 'mini_exiftool'
 gem 'mini_magick'
-gem 'rspec'
-gem 'holepicker'
-gem 'yard'
 
 # DLSS dependencies
 gem 'dor-services', '~> 5.5', '>= 5.5.0'
@@ -22,6 +19,8 @@ group :development, :test do
   gem 'vcr' # only used by one pending test!
   gem 'equivalent-xml'
   gem 'coveralls', require: false
+  gem 'rspec'
+  gem 'yard'
 end
 
 group :deployment do
