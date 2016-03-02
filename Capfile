@@ -3,8 +3,6 @@ require 'capistrano/setup'
 
 # Includes default deployment tasks
 require 'capistrano/deploy'
-require 'capistrano/one_time_key'
-require 'capistrano/bundler'
 
 # Includes tasks from other gems included in your Gemfile
 #
@@ -19,11 +17,11 @@ require 'capistrano/bundler'
 # require 'capistrano/rvm'
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
-# require 'capistrano/bundler'
+require 'capistrano/bundler'
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
 
-# require 'dlss/capistrano'
+require 'dlss/capistrano'
 require 'whenever/capistrano'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
