@@ -15,5 +15,7 @@ group :development, :test do
 end
 
 group :deployment do
-  gem 'dlss-capistrano'
+  gem 'capistrano', '~> 3.0'
+  gem 'capistrano-bundler', '~> 1.1'
+  gem 'dlss-capistrano', '~> 3.2'
 end
