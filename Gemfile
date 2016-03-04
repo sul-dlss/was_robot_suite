@@ -1,9 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rest-client'
 gem 'druid-tools'
-gem 'capistrano-one_time_key'
-gem 'net-ssh-krb'
 
 gem 'dor-services', '~> 5.4', '>= 5.4.2'
 gem 'lyber-core', '~> 4.0'
@@ -13,13 +10,17 @@ gem 'slop'                      # for bin/run_robot
 gem 'whenever'
 
 gem 'rake', '>=10.3.2'
-gem 'rspec'
-gem 'equivalent-xml'
-gem 'coveralls', require: false
-gem 'yard'
 
-group :development do
+group :development, :test do
+  gem 'rspec'
   gem 'awesome_print'
-  gem 'lyberteam-capistrano-devel'
+  gem 'coveralls', require: false
+  gem 'yard'
+  gem 'equivalent-xml'
+end
+
+group :deployment do
+  gem 'capistrano'
   gem 'capistrano-bundler'
+  gem 'dlss-capistrano'
 end
