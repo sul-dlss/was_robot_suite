@@ -5,6 +5,13 @@ was-crawl-preassembly
 
 This is the preassembly workflow for web archiving crawl objects. It is used the new  `robot-master`/`robot-controller`/`lyber-core` framework, which builds upon `resque` for job-management.
 
+
+# Documentation
+
+Check the [Wiki](https://github.com/sul-dlss/robot-master/wiki) in the robot-master repo.
+
+# Workflow
+
 The workflow depends on 6 robots:
 
 1. `build-was-crawl-druid-tree`: this robot reads the crawl object content (ARCs or WARCs and logs) from directory defined by crawl object label, then it builds druid tree, and copy the content to the druid tree content directory.
