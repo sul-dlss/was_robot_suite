@@ -1,6 +1,3 @@
-# config valid only for Capistrano 3.1
-lock '3.4'
-
 set :application, 'was-crawl-preassembly'
 set :repo_url, 'https://github.com/sul-dlss/was-crawl-preassembly.git'
 
