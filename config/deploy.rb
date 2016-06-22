@@ -1,6 +1,3 @@
-# config valid only for Capistrano 3.1
-lock '3.4.0'
-
 set :application, 'was-seed-preassembly'
 set :repo_url, 'https://github.com/sul-dlss/was-seed-preassembly.git'
 
