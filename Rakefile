@@ -17,7 +17,7 @@ begin
   RSpec::Core::RakeTask.new(:spec)
 rescue LoadError
   desc 'Run RSpec'
-  task :doc do
+  task :spec do
     abort 'Please install the rspec gem to run tests.'
   end
 end
