@@ -5,6 +5,7 @@ module Robots
     module WasSeedDissemination
       class UpdateThumbnailGenerator
         include LyberCore::Robot
+        include Was::Robots::Base
 
         def initialize
           super('dor', 'wasSeedDisseminationWF', 'update-thumbnail-generator')

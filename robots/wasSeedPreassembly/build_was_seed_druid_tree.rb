@@ -5,6 +5,7 @@ module Robots
     module WasSeedPreassembly
       class BuildWasSeedDruidTree
         include LyberCore::Robot
+        include Was::Robots::Base
 
         def initialize
           super('dor', 'wasSeedPreassemblyWF', 'build-was-seed-druid-tree')

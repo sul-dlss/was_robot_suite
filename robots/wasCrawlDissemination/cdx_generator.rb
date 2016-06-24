@@ -4,6 +4,7 @@ module Robots
     module WasCrawlDissemination
       class CdxGenerator
         include LyberCore::Robot
+        include Was::Robots::Base
 
         def initialize
           super('dor', 'wasCrawlDisseminationWF', 'cdx-generator')

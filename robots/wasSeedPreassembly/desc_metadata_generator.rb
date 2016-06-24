@@ -3,6 +3,7 @@ module Robots
     module WasSeedPreassembly
       class DescMetadataGenerator
         include LyberCore::Robot
+        include Was::Robots::Base
 
         def initialize
           super('dor', 'wasSeedPreassemblyWF', 'desc-metadata-generator')

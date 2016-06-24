@@ -1,4 +1,5 @@
 # Put each of your robots here and they will be included via config/boot'
+require 'was/robots/base'
 
 require 'wasCrawlDissemination/cdx_generator'
 require 'wasCrawlDissemination/cdx_merge_sort_publish'
