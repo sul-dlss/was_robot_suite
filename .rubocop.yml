@@ -11,7 +11,3 @@ Style/EmptyLineBetweenDefs:
 # allow for alignment
 Style/SpaceAroundOperators:
   MultiSpaceAllowedForOperators: true
-
-# Configuration parameters: AllowURI, URISchemes.
-Metrics/LineLength:
-  Max: 200
