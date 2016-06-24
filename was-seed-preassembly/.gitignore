@@ -1,7 +1,0 @@
-config/environments/development.rb
-config/environments/test.rb
-coverage
-tmp/*.*
-workflow_service.log*
-.yardoc/
-doc/
