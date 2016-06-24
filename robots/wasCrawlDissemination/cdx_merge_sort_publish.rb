@@ -4,6 +4,7 @@ module Robots
     module WasCrawlDissemination
       class CdxMergeSortPublish
         include LyberCore::Robot
+        include Was::Robots::Base
 
         def initialize
           super('dor', 'wasCrawlDisseminationWF', 'cdx-merge-sort-publish')

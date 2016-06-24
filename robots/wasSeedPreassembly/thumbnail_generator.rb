@@ -3,6 +3,7 @@ module Robots
     module WasSeedPreassembly
       class ThumbnailGenerator
         include LyberCore::Robot
+        include Was::Robots::Base
 
         def initialize
           super('dor', 'wasSeedPreassemblyWF', 'thumbnail-generator')
