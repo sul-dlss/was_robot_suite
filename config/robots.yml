@@ -7,3 +7,13 @@
 - dor_wasCrawlPreassemblyWF_end-was-crawl-preassembly
 - dor_wasCrawlPreassemblyWF_metadata-extractor
 - dor_wasCrawlPreassemblyWF_technical-metadata-generator
+- dor_wasCrawlDisseminationWF_cdx-generator
+- dor_wasCrawlDisseminationWF_cdx-merge-sort-publish
+- dor_wasCrawlDisseminationWF_path-indexer
+- dor_wasDissemination_start-special-dissemination
+- dor_wasSeedDisseminationWF_update-thumbnail-generator
+- dor_wasSeedPreassemblyWF_build-was-seed-druid-tree
+- dor_wasSeedPreassemblyWF_content-metadata-generator
+- dor_wasSeedPreassemblyWF_desc-metadata-generator
+- dor_wasSeedPreassemblyWF_thumbnail-generator
+- dor_wasSeedPreassemblyWF_end-was-seed-preassembly

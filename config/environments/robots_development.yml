@@ -9,13 +9,13 @@
 #  where
 #    1. robot is a single robot identifier (fully-qualified with
 #       REPO_SUITE_ROBOT, e.g., "dor_accessionWF_technical-metadata").
-#    2. lane is 
-#          - a single identifier ('A'), or 
-#          - a list of identiers ('A,B,C'), or 
+#    2. lane is
+#          - a single identifier ('A'), or
+#          - a list of identiers ('A,B,C'), or
 #          - an asterix (*).
 #    3. instances is a single integer.
 #
-#  Both lane and instances are optional. Lane defaults to 'default', and 
+#  Both lane and instances are optional. Lane defaults to 'default', and
 #  instances defaults to 1.
 #
 #  When a robot is allocated to multiple lanes, it reads them in
@@ -30,7 +30,7 @@
 #
 #  Note that the syntax is YAML, so the lists must not contain spaces or
 #  needs to be quoted.
-#  
+#
 #    RIGHT
 #      - dor_accessionWF_technical-metadata:A:5
 #      - 'dor_accessionWF_technical-metadata : A : 5'
@@ -39,7 +39,6 @@
 #      - dor_accessionWF_technical-metadata : A : 5
 #      - dor_accessionWF_technical-metadata: A: 5
 #
-
 sul-robots1-dev:
   - dor_wasCrawlPreassemblyWF_build-was-crawl-druid-tree
   - dor_wasCrawlPreassemblyWF_metadata-extractor
@@ -47,3 +46,13 @@ sul-robots1-dev:
   - dor_wasCrawlPreassemblyWF_technical-metadata-generator
   - dor_wasCrawlPreassemblyWF_desc-metadata-generator
   - dor_wasCrawlPreassemblyWF_end-was-crawl-preassembly
+  - dor_wasCrawlDisseminationWF_cdx-generator
+  - dor_wasCrawlDisseminationWF_cdx-merge-sort-publish
+  - dor_wasCrawlDisseminationWF_path-indexer
+  - dor_wasDissemination_start-special-dissemination
+  - dor_wasSeedDisseminationWF_update-thumbnail-generator
+  - dor_wasSeedPreassemblyWF_build-was-crawl-druid-tree
+  - dor_wasSeedPreassemblyWF_content-metadata-generator
+  - dor_wasSeedPreassemblyWF_desc-metadata-generator
+  - dor_wasSeedPreassemblyWF_thumbnail-generator
+  - dor_wasSeedPreassemblyWF_end-was-seed-preassembly
