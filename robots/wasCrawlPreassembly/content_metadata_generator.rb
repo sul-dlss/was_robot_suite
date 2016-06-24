@@ -5,6 +5,7 @@ module Robots
     module WasCrawlPreassembly
       class ContentMetadataGenerator
         include LyberCore::Robot
+        include Was::Robots::Base
 
         def initialize
           super('dor', 'wasCrawlPreassemblyWF', 'content-metadata-generator')

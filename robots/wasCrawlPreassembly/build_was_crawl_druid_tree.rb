@@ -5,6 +5,7 @@ module Robots
     module WasCrawlPreassembly
       class BuildWasCrawlDruidTree
         include LyberCore::Robot
+        include Was::Robots::Base
 
         def initialize
           super('dor', 'wasCrawlPreassemblyWF', 'build-was-crawl-druid-tree')

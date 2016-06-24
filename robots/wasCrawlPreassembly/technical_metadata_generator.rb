@@ -3,6 +3,7 @@ module Robots
     module WasCrawlPreassembly
       class TechnicalMetadataGenerator
         include LyberCore::Robot
+        include Was::Robots::Base
 
         def initialize
           super('dor', 'wasCrawlPreassemblyWF', 'technical-metadata-generator')

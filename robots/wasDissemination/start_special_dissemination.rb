@@ -3,6 +3,7 @@ module Robots
     module WasDissemination
       class StartSpecialDissemination
         include LyberCore::Robot
+        include Was::Robots::Base
 
         def initialize
           super('dor', 'wasDisseminationWF', 'start-special-dissemination')
