@@ -4,3 +4,4 @@ AllCops:
   TargetRubyVersion: 2.2
   Exclude:
     - 'config/environments/test.rb'
+    - 'vendor/**/*'
