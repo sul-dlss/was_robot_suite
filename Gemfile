@@ -22,6 +22,7 @@ group :development, :test do
   gem 'equivalent-xml'
   gem 'awesome_print'
   gem 'rubocop'
+  gem 'pry-byebug'
 end
 
 group :deployment do
