@@ -5,13 +5,13 @@ describe Dor::WASCrawl::PathIndexerService do
     @stacks_path = Pathname(File.dirname(__FILE__)).join('fixtures/stacks')
     @path_files = Pathname(File.dirname(__FILE__)).join('fixtures/path_files')
     @path_working_directory = "#{@stacks_path}/data/indecies/path_working"
-    @collection_path = '/collections/test_collection'
+    @collection_path = '/wasCrawlDissemination/collections/test_collection'
   end
 
   describe '.merge' do
     before(:all) do
       @druid = 'druid:dd111dd1111'
-      @content_metadata_xml_location = 'spec/fixtures/metadata/'
+      @content_metadata_xml_location = 'spec/wasCrawlDissemination/fixtures/metadata/'
     end
 
     it 'should merge results from contentMetadata to the main path index' do
