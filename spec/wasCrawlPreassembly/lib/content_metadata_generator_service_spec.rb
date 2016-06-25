@@ -51,7 +51,7 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
 
   context Dor::WASCrawl::ContentMetadataGenerator, 'template_suffix' do
     it 'should return dark for read/none access' do
-      datastreams = { 'defaultObjectRights': Dor::DefaultObjectRightsDS.new}
+      datastreams = { 'defaultObjectRights' => Dor::DefaultObjectRightsDS.new }
       admin_policy_object = double('admin_policy_object', datastreams: datastreams )
       druid_obj = double('net http response', admin_policy_object: admin_policy_object)
       druid_obj.admin_policy_object.datastreams['defaultObjectRights'].content =
@@ -64,7 +64,7 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
       expect(metadata_generator_service.template_suffix).to eq('dark')
     end
     it 'should return public for read/world access' do
-      datastreams = { 'defaultObjectRights': Dor::DefaultObjectRightsDS.new}
+      datastreams = { 'defaultObjectRights' => Dor::DefaultObjectRightsDS.new}
       admin_policy_object = double('admin_policy_object', datastreams: datastreams)
       druid_obj = double('net http response', admin_policy_object: admin_policy_object)
       druid_obj.admin_policy_object.datastreams['defaultObjectRights'].content =
