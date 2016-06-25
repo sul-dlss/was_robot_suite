@@ -32,9 +32,7 @@ module Dor
       end
 
       def call_java_library(java_cmd)
-        unless system(java_cmd)
-          raise 'Error in executing the WASMetadataExtractor.jar' + "\n" + $?.to_s
-        end
+        raise 'Error in executing the WASMetadataExtractor.jar' + "\n" + $?.to_s unless system(java_cmd)
       end
     end
   end

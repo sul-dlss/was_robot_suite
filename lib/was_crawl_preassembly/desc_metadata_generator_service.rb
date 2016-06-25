@@ -20,12 +20,8 @@ module Dor
         item = Dor::Item.find(@druid_id)
         identityMetadata = item.datastreams['identityMetadata']
         title_list = identityMetadata.objectLabel
-        unless title_list.nil? && title_list.empty? then
-          xml_input = "<?xml version=\"1.0\"?><title>#{title_list[0]}</title>"
-          return xml_input
-        else
-          raise "#{@druid_id} identityMetadata doesn't have a valid objectLabel"
-        end
+        raise "#{@druid_id} identityMetadata doesn't have a valid objectLabel" if title_list.nil? && title_list.empty?
+        "<?xml version=\"1.0\"?><title>#{title_list[0]}</title>"
       end
     end
   end
