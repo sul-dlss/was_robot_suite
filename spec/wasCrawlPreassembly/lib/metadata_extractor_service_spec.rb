@@ -93,7 +93,7 @@ EOF
   context Dor::WASCrawl::MetadataExtractor, '.build_cmd_string' do
     it 'should build the command string as expected' do
       druid_id = 'druid:ab123ab1234'
-      expected_cmd_string = 'java -Xmx1582m -jar jar_path -f XML -d input_directory -o tmp/druid:ab123ab1234.xml -c config/extractor.yml --collectionId test_collection --crawlId test_crawl 2>> log_file'
+      expected_cmd_string = 'java -Xmx2048m -jar jar_path -f XML -d input_directory -o tmp/druid:ab123ab1234.xml -c config/extractor.yml --collectionId test_collection --crawlId test_crawl 2>> log_file'
 
       metadata_extractor_service = Dor::WASCrawl::MetadataExtractor.new(@collection_id, @crawl_id, @staging_path.to_s, druid_id)
       metadata_extractor_service.instance_variable_set(:@jar_path, 'jar_path')
