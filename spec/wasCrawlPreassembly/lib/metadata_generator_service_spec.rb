@@ -25,7 +25,7 @@ describe Dor::WASCrawl::MetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
       metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location, @extracted_metadata_xml_location)
 
-      expect{ metadata_generator_service.read_metadata_xml_input_file }.to raise_error
+      expect{ metadata_generator_service.read_metadata_xml_input_file }.to raise_error(StandardError, /No such file or directory/)
     end
 
     it 'should raise an error if the file is not a valid xml' do
@@ -34,7 +34,7 @@ describe Dor::WASCrawl::MetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
       metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location, @extracted_metadata_xml_location)
 
-      expect{ metadata_generator_service.read_metadata_xml_input_file }.to raise_error
+      expect{ metadata_generator_service.read_metadata_xml_input_file }.to raise_error(RuntimeError, /not a valid xml file/)
     end
   end
 
@@ -45,7 +45,7 @@ describe Dor::WASCrawl::MetadataGenerator do
 
       metadata_file_name = 'test_name'
       metadata_content = 'test_content'
-      expect{ metadata_generator_service.write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)}.to raise_error
+      expect{ metadata_generator_service.write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)}.to raise_error(RuntimeError, /Directory for druid:xx111xx1111 doesn't exist in workspace/)
     end
 
     it 'should create the metadata directory in the druid tree and create the metadata file in it' do
@@ -113,7 +113,7 @@ describe Dor::WASCrawl::MetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
       metadata_generator_service.instance_variable_set(:@extracted_metadata_xml_location, @extracted_metadata_xml_location)
 
-      expect{ metadata_generator_service.read_template('nothginMetadata') }.to raise_error
+      expect{ metadata_generator_service.read_template('nothginMetadata') }.to raise_error(StandardError, /No such file or directory/)
     end
   end
 

@@ -45,7 +45,7 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
 
       pre_transform_invalid_str = '<?xml version="1.0" ?><test_root><test_element/>'
-      expect{ metadata_generator_service.do_post_transform(pre_transform_invalid_str) }.to raise_error
+      expect{ metadata_generator_service.do_post_transform(pre_transform_invalid_str) }.to raise_error(RuntimeError, /input string is not a valid xml file/)
     end
   end
 

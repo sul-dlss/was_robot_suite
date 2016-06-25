@@ -74,19 +74,19 @@ EOF
     it 'should raise an error wrong druid' do
       druid_id = 'druid:xx999xxx9999'
       metadata_extractor_service = Dor::WASCrawl::MetadataExtractor.new(@collection_id, @crawl_id, @staging_path.to_s, druid_id)
-      expect { metadata_extractor_service.prepare_parameters }.to raise_error
+      expect { metadata_extractor_service.prepare_parameters }.to raise_error(ArgumentError, /Invalid DRUID/)
     end
 
     it 'should raise an error with nil druid' do
       druid_id = nil
       metadata_extractor_service = Dor::WASCrawl::MetadataExtractor.new(@collection_id, @crawl_id, @staging_path.to_s, druid_id)
-      expect { metadata_extractor_service.prepare_parameters }.to raise_error
+      expect { metadata_extractor_service.prepare_parameters }.to raise_error(ArgumentError, /Invalid DRUID/)
     end
 
     it 'should raise an error with existent druid tree without content folder' do
       druid_id = 'druid:ef123ef1234'
       metadata_extractor_service = Dor::WASCrawl::MetadataExtractor.new(@collection_id, @crawl_id, @staging_path.to_s, druid_id)
-      expect { metadata_extractor_service.prepare_parameters }.to raise_error
+      expect { metadata_extractor_service.prepare_parameters }.to raise_error(RuntimeError, /content doesn't exist/)
     end
   end
 
