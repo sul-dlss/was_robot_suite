@@ -1,22 +1,4 @@
 inherit_from: .rubocop_todo.yml
 
-Metrics/LineLength:
-  Max: 120
-
-Style/EmptyLineBetweenDefs:
-  AllowAdjacentOneLineDefs: true
-
-# Not something we care about at present.
-# Configuration parameters: EnforcedStyle, SupportedStyles, UseHashRocketsWithSymbolValues.
-# SupportedStyles: ruby19, ruby19_no_mixed_keys, hash_rockets
-Style/HashSyntax:
-  Enabled: false
-
-# allow for alignment
-Style/SpaceAroundOperators:
-  MultiSpaceAllowedForOperators: true
-
-# rspec expect{...} is conventional
-Style/SpaceBeforeBlockBraces:
-  Exclude:
-    - 'spec/**/*_spec.rb'
+AllCops:
+  TargetRubyVersion: 2.2

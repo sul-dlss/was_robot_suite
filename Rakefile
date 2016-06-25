@@ -5,10 +5,10 @@ require 'robot-controller/tasks'
 # Import external rake tasks
 Dir.glob('lib/tasks/*.rake').each { |r| import r }
 
-task :default => :ci
+task default: :ci
 
 desc 'run continuous integration suite (tests, coverage, docs)'
-task :ci => [:spec, :doc]
+task ci: [:spec, :rubocop]
 
 begin
   require 'rspec/core/rake_task'
@@ -23,6 +23,16 @@ end
 
 task :environment do
   require_relative 'config/boot'
+end
+
+begin
+  require 'rubocop/rake_task'
+  RuboCop::RakeTask.new
+rescue LoadError
+  desc 'Run rubocop'
+  task :rubocop do
+    abort 'Please install the rubocop gem to run rubocop.'
+  end
 end
 
 # Use yard to build docs

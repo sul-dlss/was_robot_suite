@@ -21,6 +21,7 @@ group :development, :test do
   gem 'yard'
   gem 'equivalent-xml'
   gem 'awesome_print'
+  gem 'rubocop'
 end
 
 group :deployment do
