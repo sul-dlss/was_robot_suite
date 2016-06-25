@@ -3,7 +3,7 @@ require 'was_seed_preassembly/desc_metadata_generator_service'
 
 describe Dor::WASSeed::DescMetadataGenerator do
   before :all do
-    @fixtures = 'spec/fixtures/'
+    @fixtures = 'spec/wasSeedPreassembly/fixtures/'
   end
 
   describe '.generate_metadata_output' do
