@@ -1,4 +1,4 @@
-require 'metadata_generator_service'
+require 'was_seed_preassembly/metadata_generator_service'
 require 'digest/md5'
 require 'digest/sha1'
 

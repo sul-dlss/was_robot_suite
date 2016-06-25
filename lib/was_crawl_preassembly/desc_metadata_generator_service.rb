@@ -1,4 +1,4 @@
-require 'metadata_generator_service'
+require 'was_crawl_preassembly/metadata_generator_service'
 
 module Dor
   module WASCrawl

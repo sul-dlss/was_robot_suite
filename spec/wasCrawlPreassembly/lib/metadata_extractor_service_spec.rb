@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'metadata_extractor_service'
+require 'was_crawl_preassembly/metadata_extractor_service'
 
 describe Dor::WASCrawl::MetadataExtractor do
   before(:all) do

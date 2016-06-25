@@ -1,6 +1,6 @@
 
 require 'spec_helper'
-require 'utilities'
+require 'was_crawl_dissemination/utilities'
 
 describe Dor::WASCrawl::Dissemination::Utilities do
   context '.run_sys_cmd' do

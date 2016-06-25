@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'content_metadata_generator_service'
+require 'was_seed_preassembly/content_metadata_generator_service'
 require 'equivalent-xml'
 
 describe Dor::WASSeed::ContentMetadataGenerator do

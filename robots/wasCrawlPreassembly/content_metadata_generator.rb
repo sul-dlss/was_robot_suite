@@ -1,4 +1,4 @@
-require 'utilities'
+require 'was_crawl_preassembly/utilities'
 
 module Robots
   module DorRepo

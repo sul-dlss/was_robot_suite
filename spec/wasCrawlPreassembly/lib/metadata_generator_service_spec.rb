@@ -1,6 +1,7 @@
 require 'spec_helper'
-require 'metadata_generator_service'
+require 'was_crawl_preassembly/metadata_generator_service'
 require 'fileutils'
+
 describe Dor::WASCrawl::MetadataGenerator do
   before(:all) do
     @staging_path = Pathname(File.dirname(__FILE__)).join('../fixtures/workspace')

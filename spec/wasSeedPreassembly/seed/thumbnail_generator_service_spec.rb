@@ -1,11 +1,11 @@
 require 'spec_helper'
-require 'thumbnail_generator_service'
+require 'was_seed_preassembly/thumbnail_generator_service'
 
 describe Dor::WASSeed::ThumbnailGeneratorService do
-  VCR.configure do |config|
-    config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-    config.hook_into :webmock # or :fakeweb
-  end
+#  VCR.configure do |config|
+#    config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
+#    config.hook_into :webmock # or :fakeweb
+#  end
 
   before :all do
     Dor::Config.was_seed.wayback_uri = 'https//swap.stanford.edu'

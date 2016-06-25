@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'technical_metadata_generator_service'
+require 'was_crawl_preassembly/technical_metadata_generator_service'
 
 describe Dor::WASCrawl::TechnicalMetadataGenerator do
   before(:all) do
