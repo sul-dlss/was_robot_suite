@@ -32,7 +32,7 @@ module Dor
       end
 
       def read_template(metadata_name)
-        metadata_xslt_template = File.read(Pathname(File.dirname(__FILE__)).join("../template/#{metadata_name}.xslt"))
+        metadata_xslt_template = File.read(Pathname(File.dirname(__FILE__)).join("../../template/wasSeedPreassembly/#{metadata_name}.xslt"))
         metadata_xslt_template
       end
 
