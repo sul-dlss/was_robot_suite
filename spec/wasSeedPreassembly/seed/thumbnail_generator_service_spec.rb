@@ -16,7 +16,7 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
       @druid_id = 'druid:ab123cd4567'
       @workspace = 'spec/fixtures/workspace/'
       @uri = 'http://www.slac.stanford.edu'
-      FileUtils.rm 'tmp/ab123cd4567.jp2', :force => true
+      FileUtils.rm 'tmp/ab123cd4567.jp2', force: true
       FileUtils.cp 'spec/fixtures/thumbnail_files/ab123cd4567.jpeg', 'tmp/ab123cd4567.jpeg'
     end
 
@@ -43,14 +43,14 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
 
     after :each do
       FileUtils.rm_rf 'spec/fixtures/workspace/ab' if File.exist?('spec/fixtures/workspace/ab')
-      FileUtils.rm 'tmp/ab123cd4567.jpeg', :force => true
-      FileUtils.rm 'tmp/ab123cd4567.jp2', :force => true
+      FileUtils.rm 'tmp/ab123cd4567.jpeg', force: true
+      FileUtils.rm 'tmp/ab123cd4567.jp2', force: true
     end
   end
 
   describe '.capture' do
     before :each do
-      FileUtils.rm 'tmp/test_capture.jpeg', :force => true
+      FileUtils.rm 'tmp/test_capture.jpeg', force: true
     end
     it 'captures jpeg image for the first capture of url', :image_prerequisite do
       pending 'fails from jquery error'
@@ -62,7 +62,7 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
       end
     end
     after :each do
-      FileUtils.rm 'tmp/test_capture.jpeg', :force => true
+      FileUtils.rm 'tmp/test_capture.jpeg', force: true
     end
   end
 
@@ -81,8 +81,8 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
     end
 
     after :each do
-      FileUtils.rm 'tmp/thum_extra_width.jpeg', :force => true
-      FileUtils.rm 'tmp/thum_extra_height.jpeg', :force => true
+      FileUtils.rm 'tmp/thum_extra_width.jpeg', force: true
+      FileUtils.rm 'tmp/thum_extra_height.jpeg', force: true
     end
   end
 end

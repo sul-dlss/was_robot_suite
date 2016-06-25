@@ -13,14 +13,14 @@ describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
   describe '.perform' do
     it 'start the accessionWF on default lane' do
       allow(Dor::WorkflowObject).to receive(:initial_workflow).with('accessionWF').and_return('')
-      expect(Dor::WorkflowService).to receive(:create_workflow).with('dor', 'druid:ab123cd4567', 'accessionWF', '', {:create_ds => true, :lane_id => 'default'})
+      expect(Dor::WorkflowService).to receive(:create_workflow).with('dor', 'druid:ab123cd4567', 'accessionWF', '', {create_ds: true, lane_id: 'default'})
       robot = Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly.new
       robot.perform('druid:ab123cd4567')
     end
     it 'start the accessionWF on W lane' do
       Dor::Config.was_crawl.dedicated_lane = 'W'
       allow(Dor::WorkflowObject).to receive(:initial_workflow).with('accessionWF').and_return('')
-      expect(Dor::WorkflowService).to receive(:create_workflow).with('dor', 'druid:ab123cd4567', 'accessionWF', '', {:create_ds => true, :lane_id => 'W'})
+      expect(Dor::WorkflowService).to receive(:create_workflow).with('dor', 'druid:ab123cd4567', 'accessionWF', '', {create_ds: true, lane_id: 'W'})
       robot = Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly.new
       robot.perform('druid:ab123cd4567')
     end  end

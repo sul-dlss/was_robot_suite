@@ -23,7 +23,7 @@ module Dor
           fail "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{result}"
         else
           resize_temporary_image(temporary_file + '.jpeg')
-          Assembly::Image.new(temporary_file + '.jpeg').create_jp2(:output => temporary_file + '.jp2')
+          Assembly::Image.new(temporary_file + '.jpeg').create_jp2(output: temporary_file + '.jp2')
           FileUtils.rm temporary_file + '.jpeg'
           FileUtils.mv temporary_file + '.jp2', thumbnail_file
         end
