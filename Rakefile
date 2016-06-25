@@ -1,6 +1,5 @@
 require 'bundler'
 require 'rake'
-require 'rake/testtask'
 require 'robot-controller/tasks'
 
 # Import external rake tasks
@@ -22,11 +21,6 @@ rescue LoadError
   end
 end
 
-desc 'Get application version'
-task :app_version do
-  puts File.read(File.expand_path('../VERSION', __FILE__)).chomp
-end
-
 task :environment do
   require_relative 'config/boot'
 end
@@ -40,8 +34,8 @@ begin
   doc_dest_dir = File.join(project_root, 'doc')
 
   YARD::Rake::YardocTask.new(:doc) do |yt|
-    yt.files   = Dir.glob(File.join(project_root, 'lib', '**', '*.rb')) + [ File.join(project_root, 'README.rdoc') ]
-    yt.options = ['--output-dir', doc_dest_dir, '--readme', 'README.rdoc', '--title', 'WAS Registrar Documentation']
+    yt.files = Dir.glob(File.join(project_root, 'lib', '**', '*.rb')) + Dir.glob(File.join(project_root, 'robots', '**', '*.rb'))
+    yt.options = ['--output-dir', doc_dest_dir, '--readme', 'README.rdoc', '--title', 'WAS Robots Documentation']
   end
 rescue LoadError
   desc 'Generate YARD Documentation'
