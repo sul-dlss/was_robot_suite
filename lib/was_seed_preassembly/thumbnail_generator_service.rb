@@ -33,7 +33,7 @@ module Dor
         result = ''
         begin
           result = Phantomjs.run('scripts/rasterize.js', wayback_uri, temporary_file + '.jpeg')
-        rescue Exception => e
+        rescue StandardError => e
           result += "\nException in generating thumbnail. #{e.message}\n#{e.backtrace.inspect}"
         end
         result
