@@ -10,7 +10,7 @@
 - dor_wasCrawlDisseminationWF_cdx-generator
 - dor_wasCrawlDisseminationWF_cdx-merge-sort-publish
 - dor_wasCrawlDisseminationWF_path-indexer
-- dor_wasDissemination_start-special-dissemination
+- dor_wasDisseminationWF_start-special-dissemination
 - dor_wasSeedDisseminationWF_update-thumbnail-generator
 - dor_wasSeedPreassemblyWF_build-was-seed-druid-tree
 - dor_wasSeedPreassemblyWF_content-metadata-generator
