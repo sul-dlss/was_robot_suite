@@ -1,7 +1,0 @@
-sudo: false
-language: ruby
-cache: bundler
-rvm:
-  - 2.2.4
-before_script:
-  - cp config/environments/example.rb config/environments/test.rb

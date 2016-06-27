@@ -1,6 +1,0 @@
-#
-# robots.yml - Provides the complete list of all robots in this suite
-#
-- dor_wasCrawlDisseminationWF_cdx-generator
-- dor_wasCrawlDisseminationWF_cdx-merge-sort-publish
-- dor_wasCrawlDisseminationWF_path-indexer

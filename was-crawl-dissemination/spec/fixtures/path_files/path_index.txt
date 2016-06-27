@@ -1,3 +1,0 @@
-ARC-Test.arc.gz	/collections/test_collection/dd/111/dd/1111/ARC-Test.arc.gz
-WARC-Test.warc.gz	/collections/test_collection/dd/111/dd/1111/WARC-Test.warc.gz
-a	data/a

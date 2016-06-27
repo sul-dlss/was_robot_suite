@@ -10,7 +10,7 @@ module Robots
         end
 
         def perform(druid)
-          opts = { :create_ds => true }
+          opts = { create_ds: true }
           opts[:lane_id] = Dor::Config.was_crawl.dedicated_lane.nil? ? 'default' : Dor::Config.was_crawl.dedicated_lane
           workflow_service.create_workflow('dor', druid, 'accessionWF', Dor::WorkflowObject.initial_workflow('accessionWF'), opts)
         end

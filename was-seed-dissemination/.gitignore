@@ -1,8 +1,0 @@
-workflow_service.log*
-log/*.log
-config/environments/test.rb
-config/environments/development.rb
-config/environments/production.rb
-coverage
-doc/
-.yardoc/

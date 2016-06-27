@@ -1,13 +1,7 @@
 inherit_from: .rubocop_todo.yml
 
-# rspec expect{...} is conventional
-Style/SpaceBeforeBlockBraces:
+AllCops:
+  TargetRubyVersion: 2.2
   Exclude:
-    - 'spec/**/*_spec.rb'
-
-Style/EmptyLineBetweenDefs:
-  AllowAdjacentOneLineDefs: true
-
-# allow for alignment
-Style/SpaceAroundOperators:
-  MultiSpaceAllowedForOperators: true
+    - 'config/environments/test.rb'
+    - 'vendor/**/*'

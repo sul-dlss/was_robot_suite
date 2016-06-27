@@ -1,15 +1,14 @@
 require 'bundler'
 require 'rake'
-require 'rake/testtask'
 require 'robot-controller/tasks'
 
 # Import external rake tasks
 Dir.glob('lib/tasks/*.rake').each { |r| import r }
 
-task :default => :ci
+task default: :ci
 
 desc 'run continuous integration suite (tests, coverage, docs)'
-task :ci => [:spec, :doc]
+task ci: [:spec, :rubocop]
 
 begin
   require 'rspec/core/rake_task'
@@ -22,13 +21,18 @@ rescue LoadError
   end
 end
 
-desc 'Get application version'
-task :app_version do
-  puts File.read(File.expand_path('../VERSION', __FILE__)).chomp
-end
-
 task :environment do
   require_relative 'config/boot'
+end
+
+begin
+  require 'rubocop/rake_task'
+  RuboCop::RakeTask.new
+rescue LoadError
+  desc 'Run rubocop'
+  task :rubocop do
+    abort 'Please install the rubocop gem to run rubocop.'
+  end
 end
 
 # Use yard to build docs
@@ -40,8 +44,8 @@ begin
   doc_dest_dir = File.join(project_root, 'doc')
 
   YARD::Rake::YardocTask.new(:doc) do |yt|
-    yt.files   = Dir.glob(File.join(project_root, 'lib', '**', '*.rb')) + [ File.join(project_root, 'README.rdoc') ]
-    yt.options = ['--output-dir', doc_dest_dir, '--readme', 'README.rdoc', '--title', 'WAS Registrar Documentation']
+    yt.files = Dir.glob(File.join(project_root, 'lib', '**', '*.rb')) + Dir.glob(File.join(project_root, 'robots', '**', '*.rb'))
+    yt.options = ['--output-dir', doc_dest_dir, '--readme', 'README.rdoc', '--title', 'WAS Robots Documentation']
   end
 rescue LoadError
   desc 'Generate YARD Documentation'

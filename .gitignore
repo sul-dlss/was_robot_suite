@@ -1,4 +1,9 @@
-#config/environments
 coverage
 log
 workflow_service.log*
+doc/
+.yardoc/
+#tmp/*.*
+
+config/environments/test.rb
+config/environments/dev.rb

@@ -1,8 +1,0 @@
-sudo: false
-
-language: ruby
-rvm:
-  - "2.1.4"
-
-before_script:
-  - cp config/environments/example.rb config/environments/test.rb
