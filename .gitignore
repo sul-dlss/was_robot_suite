@@ -8,3 +8,5 @@ doc/
 
 config/environments/test.rb
 config/environments/dev.rb
+spec/wasSeedPreassembly/fixtures/workspace/aa/111/aa/1111/aa111aa1111/metadata
+spec/wasSeedPreassembly/fixtures/workspace/aa/111/aa/2222/aa111aa2222/metadata
