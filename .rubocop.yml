@@ -5,3 +5,7 @@ AllCops:
   Exclude:
     - 'config/environments/test.rb'
     - 'vendor/**/*'
+
+# because it's silly to care
+Style/StringLiterals:
+  Enabled: false
