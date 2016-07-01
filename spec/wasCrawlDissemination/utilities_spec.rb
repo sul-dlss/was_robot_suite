@@ -29,12 +29,12 @@ describe Dor::WASCrawl::Dissemination::Utilities do
       expect(file_list.length).to eq(0)
     end
     it 'should return an empty list for the contentMetadata with dark archive shelve=no' do
-     content_metadata_xml_location = 'spec/wasCrawlDissemination/fixtures/metadata/'
-     contentMetadata = File.open(content_metadata_xml_location + 'contentMetadata_dark.xml').read
+      content_metadata_xml_location = 'spec/wasCrawlDissemination/fixtures/metadata/'
+      contentMetadata = File.open(content_metadata_xml_location + 'contentMetadata_dark.xml').read
 
-     file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_contentMetadata(contentMetadata)
-     expect(file_list).not_to be_nil
-     expect(file_list.length).to eq(0)
-   end
+      file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_contentMetadata(contentMetadata)
+      expect(file_list).not_to be_nil
+      expect(file_list.length).to eq(0)
+    end
   end
 end

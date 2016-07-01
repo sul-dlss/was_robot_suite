@@ -166,7 +166,7 @@ describe Dor::WASCrawl::CDXGeneratorService do
       expect(@cdx_generator.get_cdx_file_name('/tmp/file.txt')      ).to eq('file.txt.cdx')
       expect(@cdx_generator.get_cdx_file_name('c://tmp/file.txt')   ).to eq('file.txt.cdx')
       expect(@cdx_generator.get_cdx_file_name('file://tmp/file.txt')).to eq('file.txt.cdx')
-   end
+    end
   end
 
   context '.prepare_cdx_generation_cmd_string' do
