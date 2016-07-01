@@ -23,7 +23,6 @@ describe Dor::WASCrawl::CDXGeneratorService do
 
     it 'should generate cdx file for each warc or arc file in contentMetadata', :openwayback_prerequisite do
       contentMetadata = File.open(@content_metadata_xml_location + 'contentMetadata_3files.xml').read
-      collection_path = "#{@stacks_path}/data/collections/test_collection"
       cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_1, contentMetadata)
 
       cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indecies/cdx_working")

@@ -33,8 +33,8 @@ module Robots
         end
 
         def send_to_thumbnail_generator(druid_id, original_uri)
-          response = RestClient.get "#{Dor::Config.thumbnail_generator_service_uri}api/seed/create?druid=#{druid_id}&uri=#{original_uri}"
-        rescue RestClient::Conflict => e
+          RestClient.get "#{Dor::Config.thumbnail_generator_service_uri}api/seed/create?druid=#{druid_id}&uri=#{original_uri}"
+        rescue RestClient::Conflict
           LyberCore::Log.error("#{druid_id} already exists on #{Dor::Config.thumbnail_generator_service_uri}")
         end
       end
