@@ -16,7 +16,7 @@ module Robots
           crawl_id = Dor::WASCrawl::Utilities.get_crawl_id(druid_obj)
           staging_path = Dor::Config.was_crawl.staging_path
 
-          LyberCore::Log.info "Creating MetadataExtractor with parameters #{collection_id}, #{crawl_id}, #{staging_path.to_s}, #{druid}"
+          LyberCore::Log.info "Creating MetadataExtractor with parameters #{collection_id}, #{crawl_id}, #{staging_path}, #{druid}"
           metadata_extractor_service = Dor::WASCrawl::MetadataExtractor.new(collection_id, crawl_id, staging_path.to_s, druid)
           metadata_extractor_service.run_metadata_extractor_jar
         end
