@@ -4,6 +4,7 @@ workflow_service.log*
 doc/
 .yardoc/
 #tmp/*.*
+.pry_history
 
 config/environments/test.rb
 config/environments/dev.rb
