@@ -10,7 +10,7 @@ describe Dor::WASCrawl::MetadataGenerator do
     generate_data_items
   end
 
-  context Dor::WASCrawl::MetadataGenerator, 'read_metadata_xml_input_file' do
+  context '#read_metadata_xml_input_file' do
     it 'should read the file successfully if druid id is passed' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
@@ -38,7 +38,7 @@ describe Dor::WASCrawl::MetadataGenerator do
     end
   end
 
-  context Dor::WASCrawl::MetadataGenerator, 'write_file_to_druid_metadata_folder' do
+  context '#write_file_to_druid_metadata_folder' do
     it "should raise an error if the druid directory tree doesn't exist in the workspace" do
       druid_id = 'druid:xx111xx1111'
       metadata_generator_service = generate_object(druid_id)
@@ -83,7 +83,7 @@ describe Dor::WASCrawl::MetadataGenerator do
     end
   end
 
-  context Dor::WASCrawl::MetadataGenerator, 'read_template' do
+  context '#read_template' do
     it 'should read the contentMetadata template successfully' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
@@ -117,7 +117,7 @@ describe Dor::WASCrawl::MetadataGenerator do
     end
   end
 
-  context Dor::WASCrawl::MetadataGenerator, 'transform_xml_using_xslt' do
+  context '#transform_xml_using_xslt' do
     it 'should transform the xml using xslt with valid inputs' do
       druid_id = 'druid:xx'
       metadata_generator_service = generate_object(druid_id)
@@ -145,12 +145,12 @@ describe Dor::WASCrawl::MetadataGenerator do
   <newuser>John Smith</newuser>
 </newuserlist>
 EOF
-      actual_transformed =   metadata_generator_service.transform_xml_using_xslt(xml_doc, xslt_doc)
+      actual_transformed = metadata_generator_service.transform_xml_using_xslt(xml_doc, xslt_doc)
       expect(actual_transformed.to_s).to eq expected_transformed
     end
   end
 
-  context Dor::WASCrawl::MetadataGenerator, 'do_post_transform' do
+  context '#do_post_transform' do
     it 'should return the string with no modification' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
