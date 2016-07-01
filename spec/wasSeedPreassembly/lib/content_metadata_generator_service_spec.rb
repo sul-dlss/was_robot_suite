@@ -63,14 +63,14 @@ describe Dor::WASSeed::ContentMetadataGenerator do
     end
 
     it 'should raise an excetion for reading an empty image' do
-       # This test case should be fixed with adding an empty image
+      # TODO: ? This test case should be fixed with adding an empty image
       thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail_empty.jpeg"
-       expect{ create_thumbnail_xml_element thumbnail_file_location }.to raise_error StandardError
+      expect{ create_thumbnail_xml_element thumbnail_file_location }.to raise_error StandardError
     end
 
     it 'should raise an error for reading an invalid image' do
       thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail_text.jpeg"
-       expect{ create_thumbnail_xml_element thumbnail_file_location }.to raise_error StandardError
+      expect{ create_thumbnail_xml_element thumbnail_file_location }.to raise_error StandardError
     end
   end
 
