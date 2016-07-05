@@ -26,7 +26,6 @@ require 'was_crawl_dissemination/utilities'
 # for wasSeedDissemination
 require 'wasSeedDissemination/update_thumbnail_generator'
 
-#require 'pry'
 require 'rspec'
 require 'awesome_print'
 require 'nokogiri'

@@ -96,13 +96,13 @@
                     </xsl:for-each>
                     <location displayLabel="Archived site">
                         <url>https://swap.stanford.edu/*/<xsl:value-of select="url"/></url>
-                    </location> 
+                    </location>
                     <recordInfo>
                         <languageOfCataloging>
                             <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
                         </languageOfCataloging>
                         <recordContentSource authority="marcorg">CSt</recordContentSource>
-                        <recordOrigin>Transformed from record for <xsl:value-of select="url"/> used in the web archiving service Archive-It and which is part of the Fugitive US Agencies collection (record ID <xsl:value-of select="//id"/>).</recordOrigin>
+                        <recordOrigin>Transformed from record for <xsl:value-of select="url"/> used in the web archiving service Archive-It and which is part of the collection (record ID <xsl:value-of select="//id"/>).</recordOrigin>
                     </recordInfo>
                 </mods>
         </xsl:for-each>
