@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'druid-tools'
 
-gem 'dor-services', '~> 5.8', '>= 5.8.1'
+gem 'dor-services', '~> 5.8', '>= 5.8.2'
 gem 'lyber-core', '~> 4.0', '>= 4.0.3'
 gem 'robot-controller', '~> 2.0.4' # requires Resque
 gem 'phantomjs'      # was-seed-preassembly thumbnail creation
