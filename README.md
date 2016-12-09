@@ -3,7 +3,7 @@
 [![Code Climate](https://codeclimate.com/github/sul-dlss/was_robot_suite/badges/gpa.svg)](https://codeclimate.com/github/sul-dlss/was_robot_suite)
 [![Test Coverage](https://codeclimate.com/github/sul-dlss/was_robot_suite/badges/coverage.svg)](https://codeclimate.com/github/sul-dlss/was_robot_suite/coverage)
 [![Dependency Status](https://gemnasium.com/badges/github.com/sul-dlss/was_robot_suite.svg)](https://gemnasium.com/github.com/sul-dlss/was_robot_suite)
-
+[![GitHub tagged version](https://badge.fury.io/gh/sul-dlss%2Fwas_robot_suite.svg)](https://badge.fury.io/gh/sul-dlss%2Fwas_robot_suite)
 
 WAS_Robot_Suite
 ---------------
