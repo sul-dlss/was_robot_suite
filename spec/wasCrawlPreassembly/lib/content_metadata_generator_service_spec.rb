@@ -59,7 +59,7 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
         '<access type= "read">  <machine>   <none/>  </machine> </access> <use> ' +
         '<human type= "useAndReproduction"/> <human type= "creativeCommons"/> ' +
         '<machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>'
-      allow(Dor::Item).to receive(:find).and_return(druid_obj)
+      allow(Dor).to receive(:find).and_return(druid_obj)
       metadata_generator_service = generate_object(nil)
       expect(metadata_generator_service.template_suffix).to eq('dark')
     end
@@ -72,7 +72,7 @@ describe Dor::WASCrawl::ContentMetadataGenerator do
         '<access type= "read">  <machine>   <world/>  </machine> </access> <use> ' +
         '<human type= "useAndReproduction"/> <human type= "creativeCommons"/> ' +
         '<machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>'
-      allow(Dor::Item).to receive(:find).and_return(druid_obj)
+      allow(Dor).to receive(:find).and_return(druid_obj)
       metadata_generator_service = generate_object(nil)
       expect(metadata_generator_service.template_suffix).to eq('public')
     end

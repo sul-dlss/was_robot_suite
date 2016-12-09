@@ -27,7 +27,7 @@ module Dor
       end
 
       def template_suffix
-        druid_obj = Dor::Item.find @druid_id
+        druid_obj = Dor.find @druid_id
         admin_policy = druid_obj.admin_policy_object
         default_rights_md = admin_policy.datastreams['defaultObjectRights'].content
         # If the read access is anything otherthan world, it's dark.

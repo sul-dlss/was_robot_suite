@@ -12,7 +12,7 @@ module Robots
         end
 
         def perform(druid)
-          druid_obj = Dor::Item.find(druid)
+          druid_obj = Dor.find(druid)
           crawl_id = Dor::WASCrawl::Utilities.get_crawl_id(druid_obj)
           source_root_pathname = Dor::Config.was_crawl.source_path
           # collection_id = Dor::WASCrawl::Utilities.get_collection_id(druid_obj)

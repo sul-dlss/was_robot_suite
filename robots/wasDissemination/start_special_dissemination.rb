@@ -14,7 +14,7 @@ module Robots
         #
         # @param [String] druid -- the Druid identifier for the object to process
         def perform(druid)
-          druid_obj = Dor::Item.find(druid)
+          druid_obj = Dor.find(druid)
           return unless druid_obj.identityMetadata.objectType == ['item'] && !druid_obj.contentMetadata.nil?
           if druid_obj.contentMetadata.contentType == ['webarchive-seed']
             druid_obj.initialize_workflow('wasSeedDisseminationWF')
