@@ -6,7 +6,7 @@ set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/home/lyberadmin/was_robot_suite'
+set :deploy_to, "/opt/app/was/#{fetch(:application)}"
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -33,23 +33,23 @@ set :linked_dirs, %w(log run config/environments config/certs jar tmp)
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :stages, %w(dev stage production)
+set :stages, %w(dev stage prod)
 set :default_stage, 'dev'
 
 namespace :deploy do
   desc 'Download WAS Metadata Extractor for was-crawl-preassembly'
   task :download_metadata_extractor_tar do
     on roles(:app), in: :sequence, wait: 10 do
-      execute :curl, '-s https://jenkinsqa.stanford.edu/artifacts/WASMetadataExtractor-0.0.2-SNAPSHOT-jar-with-dependencies.jar', '> /home/lyberadmin/was_robot_suite/shared/jar/WASMetadataExtractor.jar'
+      execute :curl, '-s https://jenkinsqa.stanford.edu/artifacts/WASMetadataExtractor-0.0.2-SNAPSHOT-jar-with-dependencies.jar', "> #{fetch(:deploy_to)}/shared/jar/WASMetadataExtractor.jar"
     end
   end
 
   desc 'Download/unpack OpenWayback tar file to work with was-crawl-diss indexer script.'
   task :download_openwayback_tar do
     on roles(:app), in: :sequence, wait: 10 do
-        execute :curl, '-s https://jenkinsqa.stanford.edu/artifacts/dist/target/openwayback.tar.gz', '> /home/lyberadmin/was_robot_suite/shared/jar/openwayback.tar.gz'
-        execute :tar, '-xvf /home/lyberadmin/was_robot_suite/shared/jar/openwayback.tar.gz', '-C /home/lyberadmin/was_robot_suite/shared/jar/'
-        execute :rm, '/home/lyberadmin/was_robot_suite/shared/jar/openwayback/*.war'
+        execute :curl, '-s https://jenkinsqa.stanford.edu/artifacts/dist/target/openwayback.tar.gz', "> #{fetch(:deploy_to)}/shared/jar/openwayback.tar.gz"
+        execute :tar, "-xvf #{fetch(:deploy_to)}/shared/jar/openwayback.tar.gz", "-C #{fetch(:deploy_to)}/shared/jar/"
+        execute :rm, "#{fetch(:deploy_to)}/shared/jar/openwayback/*.war"
     end
   end
 
@@ -57,11 +57,8 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 10 do
       within release_path do
-        # Uncomment  with the first deploy
-        # execute :bundle, :install
-
-        # Comment with the first deploy
         test :bundle, :exec, :controller, :stop
+        sleep 15
         test :bundle, :exec, :controller, :quit
         execute :bundle, :exec, :controller, :boot
       end

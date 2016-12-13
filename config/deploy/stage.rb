@@ -1,4 +1,4 @@
-server 'sul-robots5-test.stanford.edu', user: 'lyberadmin', roles: %w{web app db}
+server 'was-robots1-stage.stanford.edu', user: 'was', roles: %w{web app db}
 
 Capistrano::OneTimeKey.generate_one_time_key!
 

@@ -55,7 +55,7 @@ Style/AlignParameters:
 Style/BracesAroundHashParameters:
   Exclude:
     - 'config/deploy/dev.rb'
-    - 'config/deploy/production.rb'
+    - 'config/deploy/prod.rb'
     - 'config/deploy/stage.rb'
     - 'spec/wasCrawlPreassembly/robots/end_was_crawl_preassembly_spec.rb'
 
@@ -200,7 +200,7 @@ Style/NestedParenthesizedCalls:
 Style/PercentLiteralDelimiters:
   Exclude:
     - 'config/deploy/dev.rb'
-    - 'config/deploy/production.rb'
+    - 'config/deploy/prod.rb'
     - 'config/deploy/stage.rb'
 
 # Offense count: 2
