@@ -10,7 +10,7 @@
 	</process>
 	<process name="cdx-merge-sort-publish" sequence="3">
 		<prereq>cdx-generator</prereq>
-		<label>M</label>
+		<label>Sort individual new CDX files, merge into existing openwayback cdx file</label>
 	</process>
 	<process name="path-indexer" sequence="4">
 		<prereq>cdx-merge-sort-publish</prereq>
