@@ -31,7 +31,7 @@ module Robots
           fail "There is no source xml file at #{source_xml_file} for druid #{druid}." unless File.file?(source_xml_file)
 
           FileUtils.cp source_xml_file, "#{druid_tree_directory.content_dir}/source.xml"
-            LyberCore::Log.info "Moving source xml file between #{source_xml_file} to #{druid_tree_directory.content_dir}/source.xml"
+            LyberCore::Log.info "Copying source xml file from #{source_xml_file} to #{druid_tree_directory.content_dir}/source.xml"
         end
       end
     end
