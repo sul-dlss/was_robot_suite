@@ -6,8 +6,8 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
     @stacks_path = Pathname(File.dirname(__FILE__)).join('fixtures/stacks')
 
     @content_metadata_xml_location = Pathname(File.dirname(__FILE__)).join('fixtures/metadata/')
-    @cdx_working_directory = "#{@stacks_path}/data/indecies/cdx_working"
-    @cdx_backup_directory = "#{@stacks_path}/data/indecies/cdx_backup"
+    @cdx_working_directory = "#{@stacks_path}/data/indices/cdx_working"
+    @cdx_backup_directory = "#{@stacks_path}/data/indices/cdx_backup"
   end
 
   describe '.sort_druid_cdx' do
@@ -27,7 +27,7 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
     end
 
     after(:all) do
-      FileUtils.rm_rf("#{@stacks_path}/data/indecies/cdx_working/ff111ff1111_merged_index.cdx")
+      FileUtils.rm_rf("#{@stacks_path}/data/indices/cdx_working/ff111ff1111_merged_index.cdx")
     end
   end
 
@@ -36,7 +36,7 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
       druid_id = 'gg111gg1111'
 
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid_id, @cdx_working_directory, '')
-      mergeSortPublishService.instance_variable_set(:@main_cdx_file, "#{@stacks_path}/data/indecies/cdx/index.cdx")
+      mergeSortPublishService.instance_variable_set(:@main_cdx_file, "#{@stacks_path}/data/indices/cdx/index.cdx")
       mergeSortPublishService.merge_with_main_index
 
       expected_sorted = "#{@cdx_files}/#{druid_id}_sorted_index.cdx"
@@ -48,25 +48,25 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
     end
 
     after(:all) do
-      FileUtils.rm_rf("#{@stacks_path}/data/indecies/cdx_working/gg111gg1111_sorted_index.cdx")
-      FileUtils.rm_rf("#{@stacks_path}/data/indecies/cdx_working/gg111gg1111_sorted_duplicate_index.cdx")
+      FileUtils.rm_rf("#{@stacks_path}/data/indices/cdx_working/gg111gg1111_sorted_index.cdx")
+      FileUtils.rm_rf("#{@stacks_path}/data/indices/cdx_working/gg111gg1111_sorted_duplicate_index.cdx")
     end
   end
 
   context 'publish' do
-    it 'should publish the cdx main index to indecies/cdx location' do
+    it 'should publish the cdx main index to indices/cdx location' do
       druid_id = 'hh111hh1111'
 
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid_id, @cdx_working_directory, '')
-      mergeSortPublishService.instance_variable_set(:@main_cdx_file, "#{@stacks_path}/data/indecies/cdx/g_index.cdx")
-      expect(File.exist?("#{@stacks_path}/data/indecies/cdx/g_index.cdx")).to eq(false)
+      mergeSortPublishService.instance_variable_set(:@main_cdx_file, "#{@stacks_path}/data/indices/cdx/g_index.cdx")
+      expect(File.exist?("#{@stacks_path}/data/indices/cdx/g_index.cdx")).to eq(false)
 
       mergeSortPublishService.publish
-      expect(File.exist?("#{@stacks_path}/data/indecies/cdx/g_index.cdx")).to eq(true)
+      expect(File.exist?("#{@stacks_path}/data/indices/cdx/g_index.cdx")).to eq(true)
     end
 
     after(:all) do
-      FileUtils.mv("#{@stacks_path}/data/indecies/cdx/g_index.cdx", "#{@stacks_path}/data/indecies/cdx_working/hh111hh1111_sorted_index.cdx")
+      FileUtils.mv("#{@stacks_path}/data/indices/cdx/g_index.cdx", "#{@stacks_path}/data/indices/cdx_working/hh111hh1111_sorted_index.cdx")
     end
   end
 

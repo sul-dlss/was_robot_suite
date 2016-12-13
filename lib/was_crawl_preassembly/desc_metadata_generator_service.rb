@@ -17,7 +17,7 @@ module Dor
       end
 
       def generate_xml_doc
-        item = Dor::Item.find(@druid_id)
+        item = Dor.find(@druid_id)
         identityMetadata = item.datastreams['identityMetadata']
         title_list = identityMetadata.objectLabel
         raise "#{@druid_id} identityMetadata doesn't have a valid objectLabel" if title_list.nil? && title_list.empty?

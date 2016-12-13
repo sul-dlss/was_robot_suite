@@ -10,7 +10,7 @@ module Robots
         end
 
         def perform(druid)
-          druid_obj = Dor::Item.find(druid)
+          druid_obj = Dor.find(druid)
           start_completed = workflow_service.get_workflow_status('dor', druid, 'accessionWF', 'start-accession')
           end_completed = workflow_service.get_workflow_status('dor', druid, 'accessionWF', 'end-accession')
 

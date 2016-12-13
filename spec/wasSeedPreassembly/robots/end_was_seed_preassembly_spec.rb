@@ -4,7 +4,7 @@ describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
   describe 'perform' do
     before :each do
       @druid_obj = double('@druid_obj')
-      allow(Dor::Item).to receive(:find).and_return(@druid_obj)
+      allow(Dor).to receive(:find).and_return(@druid_obj)
     end
     it 'should initialize accessionWF for the new objects' do
       expect(@druid_obj).to receive(:initialize_workflow).with('accessionWF')
