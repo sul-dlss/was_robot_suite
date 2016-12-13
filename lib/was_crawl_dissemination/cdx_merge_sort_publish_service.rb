@@ -14,13 +14,13 @@ module Dor
       def sort_druid_cdx
         # merge and sort files from working_directory/druid_id/*.cdx to working_directory/[druid_id]_merged_index.cdx
         merge_cmd_string = "#{Dor::Config.was_crawl_dissemination.sort_env_vars} sort #{@source_cdx_dir}*.cdx > #{@working_merged_cdx}"
-        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(merge_cmd_string, 'merging and sorting the druid CDX files')
+        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(merge_cmd_string, "sorting #{@druid_id} CDX files and merging into single file")
       end
 
       def merge_with_main_index
         # merge and sort file from working_directory/[druid_id]_merged_index.cdx with cdx/index.cdx
         sort_cmd_string = "#{Dor::Config.was_crawl_dissemination.sort_env_vars} sort -u -m #{@working_merged_cdx} #{@main_cdx_file} > #{@working_sorted_cdx}"
-        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(sort_cmd_string, 'mergign druid CDX files with the main index')
+        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(sort_cmd_string, "merging #{@druid_id} CDX files with the main index")
       end
 
       def publish
