@@ -3,7 +3,8 @@ inherit_from: .rubocop_todo.yml
 AllCops:
   TargetRubyVersion: 2.2
   Exclude:
-    - 'config/environments/test.rb'
+    - 'config/deploy/*.rb'
+    - 'config/environments/*.rb'
     - 'vendor/**/*'
 
 # because it's silly to care
