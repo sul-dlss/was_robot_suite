@@ -58,14 +58,19 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 10 do
       within release_path do
         test :bundle, :exec, :controller, :stop
-        sleep 15
+        sleep 15 # wait for clean stop
         test :bundle, :exec, :controller, :quit
         execute :bundle, :exec, :controller, :boot
       end
     end
   end
 
+  # update shared_configs before restarting app
+  before :restart, 'shared_configs:update'
+
+  # Download and extract JARs before restarting
+  before :restart, :download_metadata_extractor_tar
+  before :restart, :download_openwayback_tar
+
   after :publishing, :restart
-  after :restart, :download_metadata_extractor_tar
-  after :restart, :download_openwayback_tar
 end
