@@ -8,6 +8,7 @@ gem 'robot-controller', '~> 2.1', '>= 2.1.1' # requires Resque
 # need master rather than released version (as of 1/18/17)
 gem 'bluepill', git: 'https://github.com/bluepill-rb/bluepill.git'
 
+gem 'lockfile'       # file locks needed for mutual exclusion during rollup and index addition processes
 gem 'phantomjs'      # was-seed-preassembly thumbnail creation
 gem 'mini_exiftool'  # was-seed-preassembly thumbnail creation
 gem 'mini_magick'    # was-seed-preassembly thumbnail creation
