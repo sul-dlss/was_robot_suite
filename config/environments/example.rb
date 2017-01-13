@@ -45,7 +45,7 @@ Dor::Config.configure do
     java_heap_size  '-Xmx1024m'
     cdx_working_directory "/web-archiving-stacks/data/indices/cdx_working/"
     cdx_backup_directory  "/web-archiving-stacks/data/indices/cdx_backup/"
-    main_cdx_file "/web-archiving-stacks/data/indices/cdx/index.cdx"
+    main_cdx_file "/web-archiving-stacks/data/indices/cdx/level0.cdx"
 
     path_working_directory "/web-archiving-stacks/data/indices/path_working/"
     main_path_index_file "/web-archiving-stacks/data/indices/path/path-index.txt"
