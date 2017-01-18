@@ -12,6 +12,7 @@ gem 'assembly-image' # was-seed-preassembly thumbnail creation
 gem 'rest-client'    # was-seed-dissemination does direct call to Dor rest service???
 gem 'pry', '~> 0.10.1'          # for bin/console
 gem 'slop'                      # for bin/run_robot
+gem 'honeybadger', '~> 2.0'
 
 gem 'rake'
 
