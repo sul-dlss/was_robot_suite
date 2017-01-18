@@ -1,5 +1,4 @@
-# TODO: add 'rollup' to roles when ready for multi-level CDX indexing jobs
-server 'was-robots1-prod.stanford.edu', user: 'was', roles: %w{web app db monitor}
+server 'was-robots1-prod.stanford.edu', user: 'was', roles: %w{web app db monitor rollup}
 
 Capistrano::OneTimeKey.generate_one_time_key!
 
