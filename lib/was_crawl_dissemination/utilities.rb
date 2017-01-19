@@ -8,7 +8,7 @@ module Dor
           end
         end
 
-        def self.get_warc_file_list_from_contentMetadata(contentMetadata)
+        def self.get_warc_file_list_from_content_metadata(contentMetadata)
           contentMetadata_xml = Nokogiri::XML(contentMetadata)
           warc_file_list = contentMetadata_xml.xpath("//contentMetadata/resource/file[(@dataType='WARC' or @dataType='ARC') and @shelve='yes']/@id")
           warc_file_list
