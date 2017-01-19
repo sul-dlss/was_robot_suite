@@ -19,7 +19,7 @@ module Dor
         FileUtils.cp_r( @main_path_index_file, @working_merged_path_index)
 
         working_path_index_file = File.open(@working_merged_path_index, 'a')
-        warc_file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_contentMetadata(@contentMetadata)
+        warc_file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(@contentMetadata)
         druid_base_directory = DruidTools::AccessDruid.new(@druid_id, @collection_path).path
 
         warc_file_list.each do |warc_file_name|

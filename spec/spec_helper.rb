@@ -1,14 +1,11 @@
 # Make sure specs run with the definitions from test.rb
 ENV['ROBOT_ENVIRONMENT'] = 'test'
 
-require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+require 'simplecov'
+SimpleCov.start
+
 require 'coveralls'
 Coveralls.wear!
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  CodeClimate::TestReporter::Formatter,
-  Coveralls::SimpleCov::Formatter
-]
 
 bootfile = File.expand_path(File.dirname(__FILE__) + '/../config/boot')
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
