@@ -170,7 +170,7 @@ Style/LineEndConcatenation:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Style/MethodCallParentheses:
+Style/MethodCallWithoutArgsParentheses:
   Exclude:
     - 'lib/was_crawl_dissemination/path_indexer_service.rb'
 
