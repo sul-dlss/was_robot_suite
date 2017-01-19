@@ -38,7 +38,7 @@ Dor::Config.configure do
     extracted_metadata_xml_location   'tmp'
     metadata_extractor_jar  'jar/WASMetadataExtractor.jar'
     java_heap_size  '-Xmx2048m'
-#    dedicated_lane  'W'
+    # dedicated_lane  'default'
   end
 
   was_crawl_dissemination do
