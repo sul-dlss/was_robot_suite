@@ -32,6 +32,19 @@ namespace :cdx do
         srcfn.rename(dstfn)
         Rake::Task['cdx:index:admin:setup'].execute
       end
+
+      namespace :lockfile do
+        desc "Show lockfile"
+        task :show do
+          system("ls -l #{INDEX_DIR.join('working.lock')}")
+        end
+
+        desc "Remove a stale lockfile"
+        task :remove do
+          lockfile = INDEX_DIR.join('working.lock')
+          lockfile.delete if lockfile.exist?
+        end
+      end
     end
 
     namespace :rollup do
