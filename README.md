@@ -17,6 +17,21 @@ Check the [Wiki](https://github.com/sul-dlss/robot-master/wiki) in the robot-mas
 To run, use the `lyber-core` infrastructure, which uses `bundle exec controller boot`
 to start all robots defined in `config/environments/robots_ENV.yml`.
 
+## Deployment
+
+The WAS robots depend on some java projects:
+
+- [WasMetadataExtractor](https://github.com/sul-dlss/WASMetadataExtractor)
+  - to extract metadata from web archiving ARC and WARC files, used by wasCrawlPreassemblyWF.
+- [openwayback](https://github.com/sul-dlss/openwayback)
+  - to index WARC materials for the Stanford Web Archiving Portal, used by cdx-generator step in wasCrawlDisseminationWF
+
+These java projects use [jenkinsqa](https://jenkinsqa.stanford.edu/) to create deployment artifacts, which are then deployed with capistrano via `config/deploy.rb` (see lines 40-54).
+
+The deployed `was_robot_suite` houses these java artifacts in the `jar` directory.
+
+Various other dependencies can be teased out of `config/environments/example.rb` and [shared_configs](https://github.com/sul-dlss/shared_configs) (was-robotsxxx branches)
+
 # Documentation
 
 See consul pages in Web Archival portal, esp Web Archiving Development Documentation
