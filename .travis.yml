@@ -4,5 +4,8 @@ cache: bundler
 rvm:
   - 2.2.4
 
+env:
+  - ROBOT_ENVIRONMENT=test
+
 before_script:
   - cp config/environments/example.rb config/environments/test.rb

@@ -1,3 +1,4 @@
+require 'lockfile'
 
 module Robots
   module DorRepo
@@ -18,13 +19,16 @@ module Robots
           cdx_working_directory = Dor::Config.was_crawl_dissemination.cdx_working_directory
           cdx_backup_directory = Dor::Config.was_crawl_dissemination.cdx_backup_directory
           cdx_merge_sort_publish = Dor::WASCrawl::CDXMergeSortPublishService.new( druid, cdx_working_directory, cdx_backup_directory)
+          main_cdx_dir = File.dirname(Dor::Config.was_crawl_dissemination.main_cdx_file)
 
-          unless Dir["#{cdx_working_directory}/#{druid}/*"].empty?
-            cdx_merge_sort_publish.sort_druid_cdx
-            cdx_merge_sort_publish.merge_with_main_index
-            cdx_merge_sort_publish.publish
+          Lockfile.new("#{main_cdx_dir}/working.lock") do # synchornize writes with other processes
+            unless Dir["#{cdx_working_directory}/#{druid}/*"].empty?
+              cdx_merge_sort_publish.sort_druid_cdx
+              cdx_merge_sort_publish.merge_with_main_index
+              cdx_merge_sort_publish.publish
+            end
+            cdx_merge_sort_publish.clean
           end
-          cdx_merge_sort_publish.clean
         end
       end
 

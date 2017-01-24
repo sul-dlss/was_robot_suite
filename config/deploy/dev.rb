@@ -1,4 +1,4 @@
-server 'was-robots1-dev.stanford.edu', user: 'was', roles: %w{web app db}
+server 'was-robots1-dev.stanford.edu', user: 'was', roles: %w{web app db rollup}
 
 Capistrano::OneTimeKey.generate_one_time_key!
 
