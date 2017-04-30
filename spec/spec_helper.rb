@@ -5,10 +5,9 @@ require "codeclimate-test-reporter"
 CodeClimate::TestReporter.start
 require 'coveralls'
 Coveralls.wear!
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  CodeClimate::TestReporter::Formatter,
-  Coveralls::SimpleCov::Formatter
-]
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new(
+  [CodeClimate::TestReporter::Formatter, Coveralls::SimpleCov::Formatter]
+)
 
 bootfile = File.expand_path(File.dirname(__FILE__) + '/../config/boot')
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
