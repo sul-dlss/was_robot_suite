@@ -33,7 +33,7 @@ Dor::Config.configure do
   end
 
   was_crawl do
-    source_path   '/web-archiving-stage/jobs/' # the root for the storage for the input directory
+    source_path   '/was_unaccessioned_data/jobs/' # the root for the storage for the input directory
     staging_path  '/dor/workspace/'  # the root for the storage for DRUID tree that will be the input to AssemblyWF
     extracted_metadata_xml_location   'tmp'
     metadata_extractor_jar  'jar/WASMetadataExtractor.jar'
@@ -57,7 +57,7 @@ Dor::Config.configure do
 
   was_seed do
     workspace_path  '/dor/workspace/'  #the root for the storage for DRUID tree that will be the input to AssemblyWF
-    staging_path  '/web-archiving-stage/seed/'
+    staging_path  '/was_unaccessioned_data/seed/'
     wayback_uri 'https://swap.stanford.edu'
   end
 
