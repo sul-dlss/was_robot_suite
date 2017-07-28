@@ -74,18 +74,26 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
       # needs to be @ so after(:all) can access it
       @cdx_backup_dir = "#{@stacks_path}/data/indices/cdx_backup"
     end
+    let(:druid) { 'ii111ii1111'}
     it 'should clean all the working directory and move the files to backup' do
-      druid = 'ii111ii1111'
       FileUtils.cp_r("#{cdx_file_path}/ii/.", "#{@cdx_working_dir}")
-
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid, @cdx_working_dir, @cdx_backup_dir)
       mergeSortPublishService.clean
 
-      expect(File.exist?("#{@cdx_backup_dir}/ii111ii1111")).to eq(true)
-      expect(File.exist?("#{@cdx_backup_dir}/ii111ii1111/file1.cdx")).to eq(true)
-      expect(File.exist?("#{@cdx_backup_dir}/ii111ii1111/file2.cdx")).to eq(true)
-      expect(File.exist?("#{@cdx_backup_dir}/ii111ii1111_merged_index.cdx")).to eq(false)
-      expect(File.exist?("#{@cdx_backup_dir}/ii111ii1111_sorted_duplicate_index.cdx")).to eq(false)
+      expect(File.exist?("#{@cdx_backup_dir}/#{druid}")).to eq true
+      expect(File.exist?("#{@cdx_backup_dir}/#{druid}/file1.cdx")).to eq true
+      expect(File.exist?("#{@cdx_backup_dir}/#{druid}/file2.cdx")).to eq true
+      expect(File.exist?("#{@cdx_backup_dir}/#{druid}_merged_index.cdx")).to eq false
+      expect(File.exist?("#{@cdx_backup_dir}/#{druid}_sorted_duplicate_index.cdx")).to eq false
+    end
+
+    it 'should move files to backup when the druid directory already exists' do
+      FileUtils.cp_r("#{cdx_file_path}/ii/.", "#{@cdx_backup_dir}")
+      expect(File.exist?("#{@cdx_backup_dir}/#{druid}")).to eq true
+      mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid, @cdx_working_dir, @cdx_backup_dir)
+      mergeSortPublishService.clean
+      # it's okay if it complains about the files;  we are specifically concerned about the directory
+      expect {mergeSortPublishService.clean}.not_to raise_error(StandardError, "File exists - #{@cdx_backup_dir}/#{druid}")
     end
 
     after(:all) do

@@ -28,7 +28,7 @@ module Dor
       end
 
       def clean
-        FileUtils.mv(@source_cdx_dir, @cdx_backup_directory)
+        FileUtils.mv(@source_cdx_dir, @cdx_backup_directory, force: true)
         FileUtils.rm(@working_sorted_duplicate_cdx) if File.exist?(@working_sorted_duplicate_cdx)
         FileUtils.rm(@working_merged_cdx) if File.exist?(@working_merged_cdx)
       end
