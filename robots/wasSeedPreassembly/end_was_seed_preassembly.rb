@@ -23,7 +23,7 @@ module Robots
             druid_obj.close_version(description: 'Updating the seed object through wasSeedPreassemblyWF', significance: 'Major')
           elsif start_completed.eql?('completed') && !end_completed.eql?('completed')
             # The object is still in accessioning, we have to wait until finish
-            fail "Druid object #{druid} is still in accessioning, reset the end-was-seed-preassembly after accessioing completion"
+            fail "Druid object #{druid} is still in accessioning, reset the end-was-seed-preassembly after accessioning completion"
           else
             fail "Druid object #{druid} is unknown status"
           end
