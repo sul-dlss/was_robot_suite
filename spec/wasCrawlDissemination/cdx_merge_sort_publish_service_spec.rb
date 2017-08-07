@@ -3,13 +3,13 @@ require 'spec_helper'
 describe Dor::WASCrawl::CDXMergeSortPublishService do
   let(:cdx_file_path) { Pathname(File.dirname(__FILE__)).join('fixtures/cdx_files') }
   before(:all) do
-    # @stacks_path needs to be @ so after(:all) can access it
+    # need to be @ so after(:all) can access
     @stacks_path = Pathname(File.dirname(__FILE__)).join('fixtures/stacks')
     @cdx_working_dir = "#{@stacks_path}/data/indices/cdx_working"
   end
 
   describe '.sort_druid_cdx' do
-    it 'should merge and sort all cdx files within the druid directory' do
+    it 'sorts and merges all cdx files within the druid directory' do
       druid = 'ff111ff1111'
 
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid, @cdx_working_dir, '')
@@ -30,7 +30,7 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
   end
 
   describe '.merge_with_main_index' do
-    it 'should sort and remove duplicate from the merged index' do
+    it 'sorts and removes duplicates from merged index' do
       druid = 'gg111gg1111'
 
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid, @cdx_working_dir, '')
@@ -52,20 +52,26 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
   end
 
   context 'publish' do
-    it 'should publish the cdx main index to indices/cdx location' do
+    before(:all) do
+      # needs to be @ so after(:all) can access it
+      @main_cdx_file = "#{@stacks_path}/data/indices/cdx/g_index.cdx"
+    end
+    it 'moves sorted_index cdx to main_cdx_file location' do
       druid = 'hh111hh1111'
 
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid, @cdx_working_dir, '')
-      mergeSortPublishService.instance_variable_set(:@main_cdx_file, "#{@stacks_path}/data/indices/cdx/g_index.cdx")
-      expect(File.exist?("#{@stacks_path}/data/indices/cdx/g_index.cdx")).to eq false
+      mergeSortPublishService.instance_variable_set(:@main_cdx_file, @main_cdx_file)
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@working_sorted_cdx))).to eq true
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@main_cdx_file))).to eq false
 
       mergeSortPublishService.publish
-      expect(File.exist?("#{@stacks_path}/data/indices/cdx/g_index.cdx")).to eq true
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@working_sorted_cdx))).to eq false
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@main_cdx_file))).to eq true
     end
 
     after(:all) do
-      # FIXME: why do we want this?  Wouldn't we want to delete the file, instead of moving it?
-      FileUtils.mv("#{@stacks_path}/data/indices/cdx/g_index.cdx", "#{@cdx_working_dir}/hh111hh1111_sorted_index.cdx")
+      # ?? File kept so git will tell us if it changes (and therefore test not working right?) ??
+      FileUtils.mv(@main_cdx_file, "#{@cdx_working_dir}/hh111hh1111_sorted_index.cdx")
     end
   end
 
@@ -75,23 +81,35 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
       @cdx_backup_dir = "#{@stacks_path}/data/indices/cdx_backup"
     end
     let(:druid) { 'ii111ii1111'}
-    it 'should clean all the working directory and move the files to backup' do
+    it 'moves cdx files to cdx backup directory (from  source_dir)' do
       FileUtils.cp_r("#{cdx_file_path}/ii/.", "#{@cdx_working_dir}")
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid, @cdx_working_dir, @cdx_backup_dir)
-      mergeSortPublishService.clean
 
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@source_cdx_dir))).to eq true
+      expect(File.exist?("#{@cdx_working_dir}/#{druid}_merged_index.cdx")).to eq true
+      expect(File.exist?("#{@cdx_working_dir}/#{druid}_sorted_duplicate_index.cdx")).to eq true
+      expect(File.exist?("#{@cdx_backup_dir}/#{druid}")).to eq false
+      expect(File.exist?("#{@cdx_backup_dir}/#{druid}/file1.cdx")).to eq false
+      expect(File.exist?("#{@cdx_backup_dir}/#{druid}/file2.cdx")).to eq false
+
+      mergeSortPublishService.clean
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@source_cdx_dir))).to eq false
+      expect(File.exist?("#{@cdx_working_dir}/#{druid}_merged_index.cdx")).to eq false
+      expect(File.exist?("#{@cdx_working_dir}/#{druid}_sorted_duplicate_index.cdx")).to eq false
       expect(File.exist?("#{@cdx_backup_dir}/#{druid}")).to eq true
       expect(File.exist?("#{@cdx_backup_dir}/#{druid}/file1.cdx")).to eq true
       expect(File.exist?("#{@cdx_backup_dir}/#{druid}/file2.cdx")).to eq true
+      # merged_index.cdx and sorted_duplicate_index.cdx are not kept
       expect(File.exist?("#{@cdx_backup_dir}/#{druid}_merged_index.cdx")).to eq false
       expect(File.exist?("#{@cdx_backup_dir}/#{druid}_sorted_duplicate_index.cdx")).to eq false
     end
 
-    it 'should move files to backup when the druid directory already exists' do
+    it 'moves cdx files to cdx backup directory when the druid directory already exists' do
       FileUtils.cp_r("#{cdx_file_path}/ii/.", "#{@cdx_backup_dir}")
-      expect(File.exist?("#{@cdx_backup_dir}/#{druid}")).to eq true
+
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid, @cdx_working_dir, @cdx_backup_dir)
-      mergeSortPublishService.clean
+      expect(File.exist?("#{@cdx_backup_dir}/#{druid}")).to eq true
+
       # it's okay if it complains about the files;  we are specifically concerned about the directory
       expect {mergeSortPublishService.clean}.not_to raise_error(StandardError, "File exists - #{@cdx_backup_dir}/#{druid}")
     end
