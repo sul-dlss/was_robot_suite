@@ -30,7 +30,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../config/boot')
 class_name = LyberCore::Robot.step_to_classname robot
 
 # instantiate a Robot object using the name
-klazz = class_name.inject(Object) {|o, c| o.const_get c}
+klazz = class_name.split('::').inject(Object) { |o, c| o.const_get c }
 bot = klazz.new
 bot.check_queued_status = false  # skipping the queued workflow status check
 
@@ -40,6 +40,10 @@ else
   druids = [opts[:druid]]
 end
 
+Dor::WorkflowService.configure(Dor::Config.workflow.url)
+robot_split = robot.split(":")
 druids.each do |druid|
+  # the step must be queued, otherwise the run robot step will fail
+  Dor::WorkflowService.update_workflow_status(robot_split[0], druid, robot_split[1], robot_split[2], 'queued')
   bot.work druid
 end
