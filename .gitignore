@@ -2,7 +2,6 @@ coverage
 log
 workflow_service.log*
 doc/
-.yardoc/
 #tmp/*.*
 .pry_history
 
