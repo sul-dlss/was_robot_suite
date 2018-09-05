@@ -23,11 +23,10 @@ gem 'rake'
 
 group :development, :test do
   gem 'rspec'
-  gem 'coveralls', require: false
-  gem 'codeclimate-test-reporter', require: false
   gem 'equivalent-xml'
   gem 'awesome_print'
   gem 'rubocop'
+  gem 'simplecov', require: false
   gem 'pry-byebug'
 end
 
