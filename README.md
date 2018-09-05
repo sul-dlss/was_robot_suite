@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/sul-dlss/was_robot_suite.svg?branch=was-robots-base)](https://travis-ci.org/sul-dlss/was_robot_suite)
-[![Coverage Status](https://coveralls.io/repos/sul-dlss/was_robot_suite/badge.png)](https://coveralls.io/r/sul-dlsswas_robot_suite)
 [![Code Climate](https://codeclimate.com/github/sul-dlss/was_robot_suite/badges/gpa.svg)](https://codeclimate.com/github/sul-dlss/was_robot_suite)
 [![Test Coverage](https://codeclimate.com/github/sul-dlss/was_robot_suite/badges/coverage.svg)](https://codeclimate.com/github/sul-dlss/was_robot_suite/coverage)
 

@@ -5,7 +5,14 @@ rvm:
   - 2.3.4
 
 env:
-  - ROBOT_ENVIRONMENT=test
+  global:
+    - CC_TEST_REPORTER_ID=83c16289b10e9312a748431ec6adbb1c24767afbf317bb05691f2f54acc13cf1
+    - ROBOT_ENVIRONMENT=test
 
 before_script:
   - cp config/environments/example.rb config/environments/test.rb
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
