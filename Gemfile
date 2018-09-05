@@ -5,9 +5,7 @@ gem 'dor-services', '~> 5.24'
 gem 'faraday', '~> 0.11.0' # get "URI::BadURIError: relative URI" errors with 0.12
 gem 'lyber-core', '~> 4.1', '>= 4.1.1'
 gem 'robot-controller', '~> 2.1', '>= 2.1.1' # requires Resque
-
-# need master rather than released version (as of 1/18/17)
-gem 'bluepill', git: 'https://github.com/bluepill-rb/bluepill.git'
+gem 'bluepill', '~> 0.1.3'
 
 gem 'lockfile'       # file locks needed for mutual exclusion during rollup and index addition processes
 gem 'phantomjs'      # was-seed-preassembly thumbnail creation

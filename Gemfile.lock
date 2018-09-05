@@ -1,12 +1,3 @@
-GIT
-  remote: https://github.com/bluepill-rb/bluepill.git
-  revision: d82cc97956cacae8dea05f8b8f550aacbd8ddf27
-  specs:
-    bluepill (0.1.2)
-      activesupport (>= 3.2, < 6)
-      blue-daemons (~> 1.1)
-      state_machine (~> 1.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -48,6 +39,10 @@ GEM
       docopt (~> 0.5.0)
       validatable (~> 1.6)
     blue-daemons (1.1.11)
+    bluepill (0.1.3)
+      activesupport (>= 3.2, < 6)
+      blue-daemons (~> 1.1)
+      state_machine (~> 1.1)
     builder (3.2.3)
     bundler-audit (0.5.0)
       bundler (~> 1.2)
@@ -332,7 +327,7 @@ PLATFORMS
 DEPENDENCIES
   assembly-image
   awesome_print
-  bluepill!
+  bluepill (~> 0.1.3)
   capistrano-bundler
   dlss-capistrano
   dor-services (~> 5.24)
