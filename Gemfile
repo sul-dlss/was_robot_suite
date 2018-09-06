@@ -25,7 +25,7 @@ group :development, :test do
   gem 'rspec'
   gem 'equivalent-xml'
   gem 'awesome_print'
-  gem 'rubocop'
+  gem 'rubocop', '~> 0.40.0'
   gem 'simplecov', require: false
   gem 'pry-byebug'
 end

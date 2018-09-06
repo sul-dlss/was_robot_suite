@@ -351,7 +351,7 @@ DEPENDENCIES
   rest-client
   robot-controller (~> 2.1, >= 2.1.1)
   rspec
-  rubocop
+  rubocop (~> 0.40.0)
   simplecov
   slop
 
