@@ -65,6 +65,9 @@ namespace :deploy do
     end
   end
 
+  # honeybadger_env otherwise defaults to rails_env
+  set :honeybadger_env, fetch(:stage)
+
   # update shared_configs before restarting app
   before :restart, 'shared_configs:update'
 
