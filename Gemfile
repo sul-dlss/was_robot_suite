@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'druid-tools'
 gem 'dor-services', '~> 5.24'
-gem 'faraday', '~> 0.11.0' # get "URI::BadURIError: relative URI" errors with 0.12
+gem 'faraday', '~> 0.15.0'
 gem 'lyber-core', '~> 4.1', '>= 4.1.1'
 gem 'robot-controller', '~> 2.1', '>= 2.1.1' # requires Resque
 gem 'bluepill', '~> 0.1.3'

@@ -20,7 +20,7 @@ Dor::Config.configure do
   end
 
   workflow do
-    url ''
+    url 'http://example.com/'
     logfile 'log/wfs/workflow_service.log'
     shift_age 'weekly'
   end
