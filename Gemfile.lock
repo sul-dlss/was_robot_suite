@@ -115,7 +115,7 @@ GEM
       activesupport (>= 3.0, < 6.0)
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
-    faraday (0.11.0)
+    faraday (0.15.4)
       multipart-post (>= 1.2, < 3)
     haml (5.0.4)
       temple (>= 0.8.0)
@@ -328,7 +328,7 @@ DEPENDENCIES
   dor-services (~> 5.24)
   druid-tools
   equivalent-xml
-  faraday (~> 0.11.0)
+  faraday (~> 0.15.0)
   honeybadger (~> 2.0)
   lockfile
   lyber-core (~> 4.1, >= 4.1.1)
@@ -346,4 +346,4 @@ DEPENDENCIES
   slop
 
 BUNDLED WITH
-   1.16.4
+   1.17.1
