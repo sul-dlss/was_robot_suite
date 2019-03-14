@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'druid-tools'
 gem 'dor-services', '~> 5.24'
+gem 'dor-services-client', '~> 1.2'
 gem 'faraday', '~> 0.15.0'
 gem 'lyber-core', '~> 4.1', '>= 4.1.1'
 gem 'robot-controller', '~> 2.1', '>= 2.1.1' # requires Resque

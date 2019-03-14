@@ -26,7 +26,12 @@ Dor::Config.configure do
   end
 
   solr.url ''
-  dor_services.url ''
+
+  dor_services do
+    url ''
+    username ''
+    password ''
+  end
 
   robots do
     workspace '/tmp'

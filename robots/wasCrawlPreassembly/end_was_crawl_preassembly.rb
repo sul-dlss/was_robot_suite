@@ -1,3 +1,5 @@
+require 'dor/services/client'
+
 module Robots
   module DorRepo
     module WasCrawlPreassembly
@@ -12,7 +14,19 @@ module Robots
         def perform(druid)
           opts = { create_ds: true }
           opts[:lane_id] = Dor::Config.was_crawl.dedicated_lane.nil? ? 'default' : Dor::Config.was_crawl.dedicated_lane
-          workflow_service.create_workflow('dor', druid, 'accessionWF', Dor::WorkflowObject.initial_workflow('accessionWF'), opts)
+          workflow_service.create_workflow('dor', druid, 'accessionWF', initial_workflow, opts)
+        end
+
+        private
+
+        def initial_workflow
+          client.workflows.initial(name: 'accessionWF')
+        end
+
+        def client
+          @client ||= Dor::Services::Client.configure(url: Dor::Config.dor_services.url,
+                                                      username: Dor::Config.dor_services.username,
+                                                      password: Dor::Config.dor_services.password)
         end
       end
     end
