@@ -11,8 +11,8 @@ module Robots
 
         def perform(druid)
           druid_obj = Dor.find(druid)
-          start_completed = workflow_service.get_workflow_status('dor', druid, 'accessionWF', 'start-accession')
-          end_completed = workflow_service.get_workflow_status('dor', druid, 'accessionWF', 'end-accession')
+          start_completed = workflow_service.workflow_status('dor', druid, 'accessionWF', 'start-accession')
+          end_completed = workflow_service.workflow_status('dor', druid, 'accessionWF', 'end-accession')
 
           if start_completed.nil? && end_completed.nil?
             # This object isn't accessioned yet.
