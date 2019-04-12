@@ -5,20 +5,20 @@ gem 'dor-services', '~> 5.24'
 gem 'dor-services-client', '~> 1.2'
 gem 'faraday', '~> 0.15.0'
 gem 'lyber-core', '~> 4.1', '>= 4.1.1'
-gem 'robot-controller', '~> 2.1', '>= 2.1.1' # requires Resque
-gem 'bluepill', '~> 0.1.3'
 
 gem 'lockfile'       # file locks needed for mutual exclusion during rollup and index addition processes
 gem 'phantomjs'      # was-seed-preassembly thumbnail creation
 gem 'mini_exiftool'  # was-seed-preassembly thumbnail creation
 gem 'mini_magick'    # was-seed-preassembly thumbnail creation
 gem 'assembly-image' # was-seed-preassembly thumbnail creation
-gem 'rest-client'    # was-seed-dissemination does direct call to Dor rest service???
+gem 'rest-client'    # was-seed-dissemination to call was-thumbnail-service
 gem 'pry'            # for bin/console
 gem 'slop'           # for bin/run_robot
 gem 'honeybadger', '~> 2.0'
-
 gem 'rake'
+gem 'resque'
+gem 'resque-pool'
+gem 'whenever'
 
 group :development, :test do
   gem 'rspec'
@@ -31,5 +31,6 @@ end
 
 group :deployment do
   gem 'capistrano-bundler'
+  gem 'capistrano-resque-pool'
   gem 'dlss-capistrano'
 end

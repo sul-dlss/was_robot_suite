@@ -25,7 +25,7 @@ set :linked_files, %w(config/honeybadger.yml)
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
-set :linked_dirs, %w(log run config/environments config/certs jar tmp)
+set :linked_dirs, %w(log config/environments config/certs jar tmp)
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -53,27 +53,14 @@ namespace :deploy do
     end
   end
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 10 do
-      within release_path do
-        test :bundle, :exec, :controller, :stop
-        sleep 15 # wait for clean stop
-        test :bundle, :exec, :controller, :quit
-        execute :bundle, :exec, :controller, :boot
-      end
-    end
-  end
-
-  # honeybadger_env otherwise defaults to rails_env
-  set :honeybadger_env, fetch(:stage)
-
-  # update shared_configs before restarting app
-  before :restart, 'shared_configs:update'
-
   # Download and extract JARs before restarting
-  before :restart, :download_metadata_extractor_tar
-  before :restart, :download_openwayback_tar
-
-  after :publishing, :restart
+  after :publishing, :download_metadata_extractor_tar
+  after :publishing, :download_openwayback_tar
 end
+
+# honeybadger_env otherwise defaults to rails_env
+set :honeybadger_env, fetch(:stage)
+
+# update shared_configs before restarting app
+before 'deploy:publishing', 'shared_configs:update'
+after 'deploy:publishing', 'resque:pool:full_restart'
