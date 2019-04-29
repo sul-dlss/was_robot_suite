@@ -185,7 +185,7 @@ GEM
       nokogiri (>= 1.4.2)
       solrizer (~> 3.3)
     parallel (1.17.0)
-    parser (2.6.2.1)
+    parser (2.6.3.0)
       ast (~> 2.4.0)
     phantomjs (2.1.1.0)
     powerpack (0.1.2)
@@ -313,7 +313,7 @@ GEM
     uuidtools (2.1.5)
     vegas (0.1.11)
       rack (>= 1.0.0)
-    whenever (0.10.0)
+    whenever (0.11.0)
       chronic (>= 0.6.3)
     xml-simple (1.1.5)
 
