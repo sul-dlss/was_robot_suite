@@ -19,8 +19,9 @@ module Robots
             druid_obj.initialize_workflow('accessionWF')
           elsif start_completed.eql?('completed') && end_completed.eql?('completed')
             # We need to open a new version
-            druid_obj.open_new_version
-            druid_obj.close_version(description: 'Updating the seed object through wasSeedPreassemblyWF', significance: 'Major')
+            dor_service = Dor::Services::Client.object(druid)
+            dor_service.open_new_version
+            dor_service.close_version(description: 'Updating the seed object through wasSeedPreassemblyWF', significance: 'Major')
           elsif start_completed.eql?('completed') && !end_completed.eql?('completed')
             # The object is still in accessioning, we have to wait until finish
             fail "Druid object #{druid} is still in accessioning, reset the end-was-seed-preassembly after accessioning completion"
