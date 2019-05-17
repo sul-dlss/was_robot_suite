@@ -12,23 +12,27 @@ describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
 
   describe '.perform' do
     let(:xml) { '<xml/>' }
+    let(:wf_client) { instance_double(Dor::Workflow::Client, create_workflow: nil) }
 
     before do
       allow(Dor::Services::Client).to receive_message_chain(:workflows, :initial).and_return(xml)
+      allow(Dor::Config.workflow).to receive(:client).and_return(wf_client)
     end
 
-    it 'start the accessionWF on default lane' do
+    it 'starts the accessionWF on default lane' do
       Dor::Config.was_crawl.dedicated_lane = nil
       expect(Dor::Services::Client).to receive_message_chain(:workflows, :initial).with(name: 'accessionWF')
-      expect(Dor::WorkflowService).to receive(:create_workflow).with('dor', 'druid:ab123cd4567', 'accessionWF', xml, {create_ds: true, lane_id: 'default'})
       robot = Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly.new
       robot.perform('druid:ab123cd4567')
+      expect(wf_client).to have_received(:create_workflow).with('dor', 'druid:ab123cd4567', 'accessionWF', xml, {create_ds: true, lane_id: 'default'})
     end
-    it 'start the accessionWF on a non-default lane' do
+
+    it 'starts the accessionWF on a non-default lane' do
       Dor::Config.was_crawl.dedicated_lane = 'NotDefault'
       expect(Dor::Services::Client).to receive_message_chain(:workflows, :initial).with(name: 'accessionWF')
-      expect(Dor::WorkflowService).to receive(:create_workflow).with('dor', 'druid:ab123cd4567', 'accessionWF', xml, {create_ds: true, lane_id: 'NotDefault'})
       robot = Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly.new
       robot.perform('druid:ab123cd4567')
-    end  end
+      expect(wf_client).to have_received(:create_workflow).with('dor', 'druid:ab123cd4567', 'accessionWF', xml, {create_ds: true, lane_id: 'NotDefault'})
+    end
+  end
 end

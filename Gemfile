@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 gem 'druid-tools'
-gem 'dor-services', '~> 6.8'
+gem 'dor-services', '~> 7.1'
 gem 'dor-services-client', '~> 1.2'
 gem 'faraday', '~> 0.15.0'
-gem 'lyber-core', '~> 4.1', '>= 4.1.1'
+gem 'lyber-core', '~> 5.0'
 
 gem 'lockfile'       # file locks needed for mutual exclusion during rollup and index addition processes
 gem 'phantomjs'      # was-seed-preassembly thumbnail creation
