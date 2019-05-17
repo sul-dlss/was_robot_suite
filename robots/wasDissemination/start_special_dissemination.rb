@@ -17,9 +17,9 @@ module Robots
           druid_obj = Dor.find(druid)
           return unless druid_obj.identityMetadata.objectType == ['item'] && !druid_obj.contentMetadata.nil?
           if druid_obj.contentMetadata.contentType == ['webarchive-seed']
-            druid_obj.initialize_workflow('wasSeedDisseminationWF')
+            workflow_service.create_workflow_by_name(druid, 'wasSeedDisseminationWF')
           elsif druid_obj.contentMetadata.contentType == ['file']
-            druid_obj.initialize_workflow('wasCrawlDisseminationWF')
+            workflow_service.create_workflow_by_name(druid, 'wasCrawlDisseminationWF')
           end
         end
       end

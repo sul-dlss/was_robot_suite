@@ -10,13 +10,12 @@ module Robots
         end
 
         def perform(druid)
-          druid_obj = Dor.find(druid)
           start_completed = workflow_service.workflow_status('dor', druid, 'accessionWF', 'start-accession')
           end_completed = workflow_service.workflow_status('dor', druid, 'accessionWF', 'end-accession')
 
           if start_completed.nil? && end_completed.nil?
             # This object isn't accessioned yet.
-            druid_obj.initialize_workflow('accessionWF')
+            workflow_service.create_workflow_by_name(druid, 'accessionWF')
           elsif start_completed.eql?('completed') && end_completed.eql?('completed')
             # We need to open a new version
             dor_service = Dor::Services::Client.object(druid)
