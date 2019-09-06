@@ -10,12 +10,18 @@ module Robots
         end
 
         def perform(druid)
-          workspace_path = Dor::Config.was_seed.workspace_path
           LyberCore::Log.info "Creating ThumbnailGenerator with parameters #{druid}"
-          druid_tree_directory = DruidTools::Druid.new(druid, workspace_path)
-          metadata_xml_input   = Nokogiri::XML(File.read("#{druid_tree_directory.content_dir}/source.xml"))
-          uri = metadata_xml_input.xpath('//item/uri').text
-          Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(druid, workspace_path, uri)
+          Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(druid, workspace_path, seed_uri(druid))
+        end
+
+        private
+
+        def seed_uri(druid)
+          client.object(druid).find.label
+        end
+
+        def workspace_path
+          Dor::Config.was_seed.workspace_path
         end
       end
     end
