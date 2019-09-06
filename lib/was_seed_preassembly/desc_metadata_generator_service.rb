@@ -10,8 +10,7 @@ module Dor
 
       def generate_metadata_output
         xml_input = read_metadata_xml_input_file # generating basic xml instead of reading from the input file
-        source = xml_input.xpath('//item/source').text
-        xslt_template = read_template(@desc_metadata_name + "_#{source}")
+        xslt_template = read_template(@desc_metadata_name)
         metadata_content = transform_xml_using_xslt(xml_input, xslt_template)
         metadata_content = do_post_transform(metadata_content)
         write_file_to_druid_metadata_folder(@desc_metadata_name, metadata_content)
