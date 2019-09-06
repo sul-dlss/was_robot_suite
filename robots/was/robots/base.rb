@@ -10,6 +10,14 @@ module Was
                                                     token: Dor::Config.dor_services.token,
                                                     token_header: Dor::Config.dor_services.token_header)
       end
+
+      def seed_uri(druid)
+        client.object(druid).find.label
+      end
+
+      def workspace_path
+        Dor::Config.was_seed.workspace_path
+      end
     end
   end
 end
