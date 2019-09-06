@@ -10,10 +10,20 @@ module Robots
         end
 
         def perform(druid)
-          workspace_path = Dor::Config.was_seed.workspace_path
           LyberCore::Log.info "Creating DescMetadataGenerator with parameters #{druid}"
-          metadata_generator_service = Dor::WASSeed::DescMetadataGenerator.new(workspace_path, druid)
+          metadata_generator_service = Dor::WASSeed::DescMetadataGenerator.new(workspace_path,
+                                                                               druid,
+                                                                               seed_uri(druid),
+                                                                               collection_id(druid))
           metadata_generator_service.generate_metadata_output
+        end
+
+        private
+
+        def collection_id(druid)
+          collections = client.object(druid).collections
+          raise "Except only one collection for #{druid} but found #{collections.size}" unless collections.size == 1
+          collections[0].externalIdentifier
         end
       end
     end
