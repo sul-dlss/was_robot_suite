@@ -22,11 +22,8 @@ module Dor
       end
 
       def write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)
-        druid_pathname = Pathname(DruidTools::Druid.new(@druid_id, @workspace.to_s).path).to_s
-        fail "Directory for #{@druid_id} doesn't exist in workspace #{@workspace}" unless File.exist?(druid_pathname)
-        metadata_pathname = druid_pathname + '/metadata/'
-        Dir.mkdir(metadata_pathname) unless File.exist?(metadata_pathname)
-        f = File.open(metadata_pathname + metadata_file_name + '.xml', 'w')
+        metadata_pathname = DruidTools::Druid.new(@druid_id, @workspace.to_s).metadata_dir
+        f = File.open(File.join(metadata_pathname, "#{metadata_file_name}.xml"), 'w')
         f.write(metadata_content)
         f.close
       end
