@@ -30,7 +30,6 @@ Dor::Config.configure do
   dor_services do
     url ''
     token ''
-    token_header ''
   end
 
   robots do
