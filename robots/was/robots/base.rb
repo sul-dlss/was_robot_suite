@@ -7,8 +7,7 @@ module Was
 
       def client
         @client ||= Dor::Services::Client.configure(url: Dor::Config.dor_services.url,
-                                                    token: Dor::Config.dor_services.token,
-                                                    token_header: Dor::Config.dor_services.token_header)
+                                                    token: Dor::Config.dor_services.token)
       end
 
       def seed_uri(druid)
