@@ -10,7 +10,7 @@ module Robots
         end
 
         def perform(druid)
-          workspace_path = Dor::Config.was_seed.workspace_path
+          workspace_path = Settings.was_seed.workspace_path
           LyberCore::Log.info "Creating ContentMetadataGenerator with parameters  #{workspace_path}, #{druid}"
 
           metadata_generator_service = Dor::WASSeed::ContentMetadataGenerator.new(workspace_path, druid)

@@ -3,7 +3,7 @@ require 'lockfile'
 require File.dirname(__FILE__) + '../../../config/boot' # for Dor::Config settings
 
 # Location of the CDX index files
-INDEX_DIR = Pathname.new(File.dirname(Dor::Config.was_crawl_dissemination.main_cdx_file)).freeze
+INDEX_DIR = Pathname.new(File.dirname(Settings.was_crawl_dissemination.main_cdx_file)).freeze
 
 namespace :cdx do
   namespace :index do
@@ -50,8 +50,8 @@ namespace :cdx do
     namespace :rollup do
       def merge(n, src, dst)
         # load required environment variables from configuration file
-        unless Dor::Config.was_crawl_dissemination.sort_env_vars.nil?
-          Dor::Config.was_crawl_dissemination.sort_env_vars.split.each do |statement|
+        unless Settings.was_crawl_dissemination.sort_env_vars.nil?
+          Settings.was_crawl_dissemination.sort_env_vars.split.each do |statement|
             ENV[statement.split(/=/).first] = statement.split(/=/).last
           end
         end

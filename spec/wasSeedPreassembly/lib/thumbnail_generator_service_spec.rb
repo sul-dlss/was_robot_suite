@@ -8,7 +8,7 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
   # end
 
   before :all do
-    Dor::Config.was_seed.wayback_uri = 'https//swap.stanford.edu'
+    Settings.was_seed.wayback_uri = 'https//swap.stanford.edu'
   end
 
   describe '.capture_thumbnail' do

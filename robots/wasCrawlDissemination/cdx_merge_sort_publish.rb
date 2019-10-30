@@ -16,10 +16,10 @@ module Robots
         #
         # @param [String] druid -- the Druid identifier for the object to process
         def perform(druid)
-          cdx_working_directory = Dor::Config.was_crawl_dissemination.cdx_working_directory
-          cdx_backup_directory = Dor::Config.was_crawl_dissemination.cdx_backup_directory
+          cdx_working_directory = Settings.was_crawl_dissemination.cdx_working_directory
+          cdx_backup_directory = Settings.was_crawl_dissemination.cdx_backup_directory
           cdx_merge_sort_publish = Dor::WASCrawl::CDXMergeSortPublishService.new( druid, cdx_working_directory, cdx_backup_directory)
-          main_cdx_dir = File.dirname(Dor::Config.was_crawl_dissemination.main_cdx_file)
+          main_cdx_dir = File.dirname(Settings.was_crawl_dissemination.main_cdx_file)
 
           Lockfile.new("#{main_cdx_dir}/working.lock") do # synchornize writes with other processes
             unless Dir["#{cdx_working_directory}/#{druid}/*"].empty?

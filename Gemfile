@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'config', '~> 1.7'
 gem 'druid-tools'
-gem 'dor-services', '~> 7.2'
+gem 'dor-services', '~> 8.0'
 gem 'dor-services-client', '~> 2.5.1'
 gem 'faraday', '~> 0.15.0'
 gem 'lyber-core', '~> 5.0'

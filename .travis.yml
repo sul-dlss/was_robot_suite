@@ -9,6 +9,8 @@ env:
     - CC_TEST_REPORTER_ID=83c16289b10e9312a748431ec6adbb1c24767afbf317bb05691f2f54acc13cf1
     - ROBOT_ENVIRONMENT=test
 
+before_install:
+  - gem install bundler
 before_script:
   - cp config/environments/example.rb config/environments/test.rb
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter

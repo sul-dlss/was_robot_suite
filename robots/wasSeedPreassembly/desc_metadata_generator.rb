@@ -21,7 +21,7 @@ module Robots
         private
 
         def collection_id(druid)
-          collections = client.object(druid).collections
+          collections = Dor::Services::Client.object(druid).collections
           raise "Except only one collection for #{druid} but found #{collections.size}" unless collections.size == 1
           collections[0].externalIdentifier
         end
