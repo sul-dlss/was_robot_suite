@@ -18,7 +18,7 @@ module Robots
             workflow_service.create_workflow_by_name(druid, 'accessionWF')
           elsif start_completed.eql?('completed') && end_completed.eql?('completed')
             # We need to open a new version
-            version_client = client.object(druid).version
+            version_client = Dor::Services::Client.object(druid).version
             version_client.open
             version_client.close(description: 'Updating the seed object through wasSeedPreassemblyWF', significance: 'Major')
           elsif start_completed.eql?('completed') && !end_completed.eql?('completed')

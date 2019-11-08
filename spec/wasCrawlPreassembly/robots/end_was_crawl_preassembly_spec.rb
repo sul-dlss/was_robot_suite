@@ -20,7 +20,6 @@ describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
     end
 
     it 'starts the accessionWF on default lane' do
-      Dor::Config.was_crawl.dedicated_lane = nil
       allow(workflow_client).to receive(:create_workflow_by_name).with(druid, workflow_name, lane_id: 'default')
       robot = Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly.new
       robot.perform(druid)
@@ -28,7 +27,7 @@ describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
     end
 
     it 'starts the accessionWF on a non-default lane' do
-      Dor::Config.was_crawl.dedicated_lane = 'NotDefault'
+      Settings.was_crawl.dedicated_lane = 'NotDefault'
       allow(workflow_client).to receive(:create_workflow_by_name).with(druid, workflow_name, lane_id: 'NotDefault')
       robot = Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly.new
       robot.perform(druid)

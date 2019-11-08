@@ -6,9 +6,9 @@ module Dor
         @contentMetadata = contentMetadata
         @druid_id = druid_id
         @collection_path = collection_path
-        @cdx_indexer_script_file_name = Dor::Config.was_crawl_dissemination.cdx_indexer_script
-        @cdx_working_directory        = Dor::Config.was_crawl_dissemination.cdx_working_directory
-        @java_heap_size               = Dor::Config.was_crawl_dissemination.java_heap_size
+        @cdx_indexer_script_file_name = Settings.was_crawl_dissemination.cdx_indexer_script
+        @cdx_working_directory        = Settings.was_crawl_dissemination.cdx_working_directory
+        @java_heap_size               = Settings.was_crawl_dissemination.java_heap_size
         @cdx_indexer_log_file = 'log/cdx_indexer.log'
       end
 

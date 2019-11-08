@@ -11,7 +11,7 @@ module Dor
       DATE_TO_TRIGGER_EARLIEST_CAPTURE_DATE = '19900101120000'.freeze
       def self.capture_thumbnail(druid, workspace, uri)
         thumbnail_file = "#{DruidTools::Druid.new(druid, workspace).content_dir}/thumbnail.jp2"
-        wayback_uri    = "#{Dor::Config.was_seed.wayback_uri}/#{DATE_TO_TRIGGER_EARLIEST_CAPTURE_DATE}/#{uri}"
+        wayback_uri    = "#{Settings.was_seed.wayback_uri}/#{DATE_TO_TRIGGER_EARLIEST_CAPTURE_DATE}/#{uri}"
         temporary_file = "tmp/#{druid[6, 14]}"
         result = ''
         begin

@@ -11,7 +11,7 @@ module Dor
         @druid_id      = druid_id
         @java_log_file = 'log/jar_WASMetadataExtractor.log'
         @extracted_metadata_xml_path = 'tmp'
-        @java_heap_size = Dor::Config.was_crawl.java_heap_size
+        @java_heap_size = Settings.was_crawl.java_heap_size
       end
 
       def run_metadata_extractor_jar
@@ -23,7 +23,7 @@ module Dor
       def prepare_parameters
         @input_directory = Pathname(DruidTools::Druid.new(@druid_id, @staging_path.to_s).path).to_s + '/content'
         raise "#{@input_directory} doesn't exist" unless File.exist?(@input_directory)
-        @jar_path = Dor::Config.was_crawl.metadata_extractor_jar
+        @jar_path = Settings.was_crawl.metadata_extractor_jar
         @xml_output_location = "#{@extracted_metadata_xml_path}/#{@druid_id}.xml"
       end
 

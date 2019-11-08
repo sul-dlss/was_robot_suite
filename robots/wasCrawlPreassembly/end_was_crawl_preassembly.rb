@@ -16,7 +16,7 @@ module Robots
         private
 
         def lane_id
-          Dor::Config.was_crawl.dedicated_lane || 'default'
+          Settings.was_crawl.dedicated_lane
         end
       end
     end
