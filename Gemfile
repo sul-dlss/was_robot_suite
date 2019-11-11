@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'config', '~> 1.7'
+gem 'config', '~> 2.0'
 gem 'druid-tools'
 gem 'dor-services', '~> 8.0'
 gem 'dor-services-client', '~> 2.5.1'
