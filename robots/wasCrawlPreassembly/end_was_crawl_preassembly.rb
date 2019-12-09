@@ -10,7 +10,10 @@ module Robots
         end
 
         def perform(druid)
-          workflow_service.create_workflow_by_name(druid, 'accessionWF', lane_id: lane_id)
+          object_client = Dor::Services::Client.object(druid)
+          current_version = object_client.version.current
+          workflow_service.create_workflow_by_name(druid, 'accessionWF', lane_id: lane_id,
+                                                                         version: current_version)
         end
 
         private

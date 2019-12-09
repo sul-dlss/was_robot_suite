@@ -16,8 +16,12 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
 
   describe '.perform' do
     subject(:perform) { robot.perform(druid) }
+    let(:version_client) { instance_double(Dor::Services::Client::ObjectVersion, current: '1') }
+    let(:object_client) { instance_double(Dor::Services::Client::Object, version: version_client) }
+
     before do
       allow(Dor).to receive(:find).and_return(druid_obj)
+      allow(Dor::Services::Client).to receive(:object).with(druid).and_return(object_client)
     end
 
     it 'does nothing for collection object' do
@@ -31,15 +35,17 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
     it 'initializes wasSeedDisseminationWF for webarchive-seed item' do
       allow(druid_obj).to receive_message_chain('identityMetadata.objectType').and_return(['item'])
       allow(contentMetadata).to receive(:contentType).and_return(['webarchive-seed'])
-      expect(robot.workflow_service).to receive(:create_workflow_by_name).with(druid, 'wasSeedDisseminationWF')
+      allow(robot.workflow_service).to receive(:create_workflow_by_name)
       perform
+      expect(robot.workflow_service).to have_received(:create_workflow_by_name).with(druid, 'wasSeedDisseminationWF', version: '1')
     end
 
     it 'initializes wasCrawlDisseminationWF for crawl item' do
       allow(druid_obj).to receive_message_chain('identityMetadata.objectType').and_return(['item'])
       allow(contentMetadata).to receive(:contentType).and_return(['file'])
-      expect(robot.workflow_service).to receive(:create_workflow_by_name).with(druid, 'wasCrawlDisseminationWF')
+      allow(robot.workflow_service).to receive(:create_workflow_by_name)
       perform
+      expect(robot.workflow_service).to have_received(:create_workflow_by_name).with(druid, 'wasCrawlDisseminationWF', version: '1')
     end
   end
 end
