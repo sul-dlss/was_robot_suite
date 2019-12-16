@@ -10,7 +10,7 @@ env:
     - ROBOT_ENVIRONMENT=test
 
 before_install:
-  - gem install bundler
+  - yes | gem update --system
 before_script:
   - cp config/environments/example.rb config/environments/test.rb
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
