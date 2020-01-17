@@ -15,10 +15,10 @@ module Robots
 
           if start_completed.nil? && end_completed.nil?
             # This object isn't accessioned yet.
-            workflow_service.create_workflow_by_name(druid, 'accessionWF')
+            workflow_service.create_workflow_by_name(druid, 'accessionWF', version: current_version(druid))
           elsif start_completed.eql?('completed') && end_completed.eql?('completed')
             # We need to open a new version
-            version_client = Dor::Services::Client.object(druid).version
+            version_client = version_client(druid)
             version_client.open
             version_client.close(description: 'Updating the seed object through wasSeedPreassemblyWF', significance: 'Major')
           elsif start_completed.eql?('completed') && !end_completed.eql?('completed')

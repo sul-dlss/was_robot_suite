@@ -10,7 +10,9 @@ module Robots
         end
 
         def perform(druid)
-          workflow_service.create_workflow_by_name(druid, 'accessionWF', lane_id: lane_id)
+          workflow_service.create_workflow_by_name(druid, 'accessionWF',
+                                                   lane_id: lane_id,
+                                                   version: current_version(druid))
         end
 
         private

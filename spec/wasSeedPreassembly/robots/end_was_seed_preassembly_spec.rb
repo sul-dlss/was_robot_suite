@@ -4,7 +4,7 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
   describe 'perform' do
     let(:druid) { 'druid:ab123cd4567' }
     let(:instance) { described_class.new }
-    let(:version_client) { instance_double(Dor::Services::Client::ObjectVersion) }
+    let(:version_client) { instance_double(Dor::Services::Client::ObjectVersion, current: '5') }
     let(:object_client) { instance_double(Dor::Services::Client::Object, version: version_client) }
 
     subject(:perform) { instance.perform(druid) }
@@ -18,7 +18,7 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
       let(:wf_client) { instance_double(Dor::Workflow::Client, workflow_status: nil) }
 
       it 'initializes accessionWF' do
-        expect(instance.workflow_service).to receive(:create_workflow_by_name).with(druid, 'accessionWF')
+        expect(instance.workflow_service).to receive(:create_workflow_by_name).with(druid, 'accessionWF', version: 5)
         perform
       end
     end
