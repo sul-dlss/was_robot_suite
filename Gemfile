@@ -26,7 +26,8 @@ group :development, :test do
   gem 'equivalent-xml'
   gem 'awesome_print'
   gem 'rubocop', '~> 0.58.0'
-  gem 'simplecov', require: false
+   # Codeclimate is not compatible with 0.18+. See https://github.com/codeclimate/test-reporter/issues/413
+  gem 'simplecov',  '~> 0.17.1', require: false
   gem 'pry-byebug'
 end
 
