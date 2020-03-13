@@ -50,10 +50,8 @@ namespace :cdx do
     namespace :rollup do
       def merge(n, src, dst)
         # load required environment variables from configuration file
-        unless Settings.was_crawl_dissemination.sort_env_vars.nil?
-          Settings.was_crawl_dissemination.sort_env_vars.split.each do |statement|
-            ENV[statement.split(/=/).first] = statement.split(/=/).last
-          end
+        Settings.was_crawl_dissemination.sort_env_vars&.split&.each do |statement|
+          ENV[statement.split(/=/).first] = statement.split(/=/).last
         end
 
         # we need to merge the 2 *already sorted* files into the new file, and
