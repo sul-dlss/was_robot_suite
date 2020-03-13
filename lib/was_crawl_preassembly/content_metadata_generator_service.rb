@@ -16,6 +16,7 @@ module Dor
         write_file_to_druid_metadata_folder(@content_metadata_name, metadata_content)
       end
 
+      # Add some attributes to make the contentMetadata compliant with all SDR contentMetadata
       def do_post_transform(metadata_content)
         # include druid_id in the xml before saving
         metadata_content_xml = Nokogiri::XML(metadata_content)
@@ -23,6 +24,11 @@ module Dor
           raise "The input string is not a valid xml file.\nNokogiri errors: #{metadata_content_xml.errors}\n#{metadata_content_xml}"
         end
         metadata_content_xml.root.set_attribute('id', @druid_id)
+        resources = metadata_content_xml.root.xpath('resource')
+        druid_without_namespace = @druid_id.sub(/^druid:/, '')
+        resources.each.with_index(1) do |resource, i|
+          resource.set_attribute('id', "#{druid_without_namespace}_#{i}")
+        end
         metadata_content_xml.to_s
       end
 

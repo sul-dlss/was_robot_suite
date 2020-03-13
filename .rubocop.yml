@@ -1,7 +1,7 @@
 inherit_from: .rubocop_todo.yml
 
 AllCops:
-  TargetRubyVersion: 2.2
+  TargetRubyVersion: 2.3
   Exclude:
     - 'config/deploy/*.rb'
     - 'config/environments/*.rb'
@@ -9,4 +9,7 @@ AllCops:
 
 # because it's silly to care
 Style/StringLiterals:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false

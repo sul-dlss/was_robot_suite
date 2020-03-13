@@ -21,7 +21,7 @@ module Dor
           raise "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{e.message}"
         end
 
-        if result.length > 0 && result.starts_with?('#FAIL#')
+        if result.starts_with?('#FAIL#')
           File.delete(temporary_file + '.jpeg') if File.exist?(temporary_file + '.jpeg')
           fail "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{result}"
         else

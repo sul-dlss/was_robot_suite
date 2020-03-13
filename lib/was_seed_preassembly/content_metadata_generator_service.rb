@@ -5,16 +5,13 @@ require 'digest/sha1'
 module Dor
   module WASSeed
     class ContentMetadataGenerator < MetadataGenerator
-      def initialize(workspace, druid_id)
-        super(workspace, druid_id)
-        @content_metadata_name = 'contentMetadata'
-      end
+      CONTENT_METADATA = 'contentMetadata'.freeze
 
       def generate_metadata_output
         xml_input = generate_xml_doc(create_thumbnail_xml_element "#{DruidTools::Druid.new(@druid_id, workspace).content_dir}/thumbnail.jp2")
-        metadata_content = transform_xml_using_xslt(xml_input, read_template(@content_metadata_name))
+        metadata_content = transform_xml_using_xslt(xml_input, read_template(CONTENT_METADATA))
         metadata_content = do_post_transform(metadata_content)
-        write_file_to_druid_metadata_folder(@content_metadata_name, metadata_content)
+        write_file_to_druid_metadata_folder(CONTENT_METADATA, metadata_content)
       end
 
       def generate_xml_doc(image_xml_str = '')

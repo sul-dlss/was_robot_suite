@@ -6,10 +6,9 @@ module Dor
       attr_accessor :workspace
       attr_accessor :druid_id
 
-      def initialize(workspace, druid_id)
+      def initialize(workspace, druid_id, _extracted_location = 'tmp/')
         @workspace = workspace
         @druid_id = druid_id
-        @extracted_metadata_xml_location = 'tmp/'
       end
 
       def read_metadata_xml_input_file
@@ -39,6 +38,7 @@ module Dor
         metadata_content.to_s
       end
 
+      # NOP - returns what you pass in
       def do_post_transform(metadata_content)
         metadata_content
       end
