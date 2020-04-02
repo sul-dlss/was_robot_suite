@@ -18,10 +18,7 @@ module Dor
 
       def generate_xml_doc
         item = Dor.find(@druid_id)
-        identityMetadata = item.datastreams['identityMetadata']
-        title_list = identityMetadata.objectLabel
-        raise "#{@druid_id} identityMetadata doesn't have a valid objectLabel" if title_list.nil? && title_list.empty?
-        "<?xml version=\"1.0\"?><title>#{title_list[0]}</title>"
+        "<?xml version=\"1.0\"?><title>#{item.label}</title>"
       end
     end
   end
