@@ -60,11 +60,17 @@ GEM
       resque-pool
     capistrano-shared_configs (0.2.2)
     chronic (0.10.2)
-    cocina-models (0.1.2)
+    cocina-models (0.31.1)
+      activesupport
       dry-struct (~> 1.0)
       dry-types (~> 1.1)
+      openapi3_parser
+      openapi_parser
+      thor
       zeitwerk (~> 2.1)
     coderay (1.1.2)
+    commonmarker (0.21.0)
+      ruby-enum (~> 0.5)
     concurrent-ruby (1.1.6)
     config (2.2.1)
       deep_merge (~> 1.2, >= 1.2.1)
@@ -102,12 +108,12 @@ GEM
       solrizer (~> 3.0)
       stanford-mods (>= 2.3.1)
       stanford-mods-normalizer (~> 0.1)
-    dor-services-client (2.5.1)
+    dor-services-client (5.1.0)
       activesupport (>= 4.2, < 7)
-      cocina-models (~> 0.1.0)
-      faraday (~> 0.15)
+      cocina-models (~> 0.31.0)
+      deprecation
+      faraday (>= 0.15, < 2)
       moab-versioning (~> 4.0)
-      nokogiri (~> 1.8)
       zeitwerk (~> 2.1)
     dor-workflow-client (3.21.0)
       activesupport (>= 3.2.1, < 7)
@@ -231,6 +237,10 @@ GEM
       activesupport
       nokogiri (>= 1.4.2)
       solrizer (~> 3.3)
+    openapi3_parser (0.8.0)
+      commonmarker (~> 0.17)
+      psych (~> 3.1)
+    openapi_parser (0.10.0)
     parallel (1.19.1)
     parser (2.7.1.0)
       ast (~> 2.4.0)
@@ -242,6 +252,7 @@ GEM
     pry-byebug (3.9.0)
       byebug (~> 11.0)
       pry (~> 0.13.0)
+    psych (3.1.0)
     rack (2.2.2)
     rack-protection (2.0.8.1)
       rack
@@ -308,6 +319,8 @@ GEM
       rainbow (>= 2.2.2, < 4.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
+    ruby-enum (0.8.0)
+      i18n
     ruby-progressbar (1.10.1)
     ruby2_keywords (0.0.2)
     rubydora (2.1.0)
@@ -374,7 +387,7 @@ DEPENDENCIES
   config (~> 2.0)
   dlss-capistrano
   dor-services (~> 8.0)
-  dor-services-client (~> 2.5.1)
+  dor-services-client (~> 5.1)
   druid-tools
   equivalent-xml
   faraday (~> 0.15.0)
