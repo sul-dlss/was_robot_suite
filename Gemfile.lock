@@ -60,7 +60,7 @@ GEM
       resque-pool
     capistrano-shared_configs (0.2.2)
     chronic (0.10.2)
-    cocina-models (0.31.1)
+    cocina-models (0.32.0)
       activesupport
       dry-struct (~> 1.0)
       dry-types (~> 1.1)
@@ -108,9 +108,9 @@ GEM
       solrizer (~> 3.0)
       stanford-mods (>= 2.3.1)
       stanford-mods-normalizer (~> 0.1)
-    dor-services-client (5.1.0)
+    dor-services-client (6.0.0)
       activesupport (>= 4.2, < 7)
-      cocina-models (~> 0.31.0)
+      cocina-models (~> 0.32.0)
       deprecation
       faraday (>= 0.15, < 2)
       moab-versioning (~> 4.0)
@@ -205,7 +205,7 @@ GEM
     mini_magick (4.10.1)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
-    moab-versioning (4.4.0)
+    moab-versioning (4.4.1)
       druid-tools (>= 1.0.0)
       json
       nokogiri
@@ -387,7 +387,7 @@ DEPENDENCIES
   config (~> 2.0)
   dlss-capistrano
   dor-services (~> 8.0)
-  dor-services-client (~> 5.1)
+  dor-services-client (~> 6.0)
   druid-tools
   equivalent-xml
   faraday (~> 0.15.0)
@@ -411,4 +411,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   2.0.2
+   2.1.4
