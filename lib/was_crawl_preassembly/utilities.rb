@@ -10,8 +10,8 @@ module Dor
       end
 
       # @param [Cocina::Models::DRO] cocina_model
-      def self.get_crawl_id(_cocina_model)
-        druid_obj.label
+      def self.get_crawl_id(cocina_model)
+        cocina_model.label
       end
     end
   end
