@@ -17,7 +17,7 @@ module Dor
       end
 
       def generate_xml_doc
-        item = Dor.find(@druid_id)
+        item = Dor::Services::Client.object(@druid_id).find
         "<?xml version=\"1.0\"?><title>#{item.label}</title>"
       end
     end

@@ -50,31 +50,46 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
   end
 
   context Dor::WASCrawl::ContentMetadataGenerator, 'template_suffix' do
-    it 'should return dark for read/none access' do
-      datastreams = { 'defaultObjectRights' => Dor::DefaultObjectRightsDS.new }
-      admin_policy_object = double('admin_policy_object', datastreams: datastreams )
-      druid_obj = double('net http response', admin_policy_object: admin_policy_object)
-      druid_obj.admin_policy_object.datastreams['defaultObjectRights'].content =
-        '<rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access> ' +
-        '<access type= "read">  <machine>   <none/>  </machine> </access> <use> ' +
-        '<human type= "useAndReproduction"/> <human type= "creativeCommons"/> ' +
-        '<machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>'
-      allow(Dor).to receive(:find).and_return(druid_obj)
-      metadata_generator_service = generate_object(nil)
-      expect(metadata_generator_service.template_suffix).to eq('dark')
+    let(:metadata_generator_service) { generate_object(druid_id) }
+    let(:druid_id) { 'druid:gh123gh1234' }
+    let(:apo_pid) { 'druid:dz123fg1234' }
+    let(:object_client) { instance_double(Dor::Services::Client::Object, find: cocina_object) }
+    let(:cocina_object) { instance_double(Cocina::Models::DRO, administrative: dro_administrative) }
+    let(:dro_administrative) { instance_double(Cocina::Models::Administrative, hasAdminPolicy: apo_pid) }
+
+    let(:apo_client) { instance_double(Dor::Services::Client::Object, find: cocina_apo) }
+    let(:cocina_apo) { instance_double(Cocina::Models::AdminPolicy, administrative: apo_administrative) }
+    let(:apo_administrative) { instance_double(Cocina::Models::AdminPolicyAdministrative, defaultObjectRights: xml) }
+
+    before do
+      allow(Dor::Services::Client).to receive(:object).with(druid_id).and_return(object_client)
+      allow(Dor::Services::Client).to receive(:object).with(apo_pid).and_return(apo_client)
     end
-    it 'should return public for read/world access' do
-      datastreams = { 'defaultObjectRights' => Dor::DefaultObjectRightsDS.new}
-      admin_policy_object = double('admin_policy_object', datastreams: datastreams)
-      druid_obj = double('net http response', admin_policy_object: admin_policy_object)
-      druid_obj.admin_policy_object.datastreams['defaultObjectRights'].content =
+
+    context 'when the access is dark' do
+      let(:xml) do
         '<rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access> ' +
-        '<access type= "read">  <machine>   <world/>  </machine> </access> <use> ' +
-        '<human type= "useAndReproduction"/> <human type= "creativeCommons"/> ' +
-        '<machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>'
-      allow(Dor).to receive(:find).and_return(druid_obj)
-      metadata_generator_service = generate_object(nil)
-      expect(metadata_generator_service.template_suffix).to eq('public')
+          '<access type= "read">  <machine>   <none/>  </machine> </access> <use> ' +
+          '<human type= "useAndReproduction"/> <human type= "creativeCommons"/> ' +
+          '<machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>'
+      end
+
+      it 'returns dark for read/none access' do
+        expect(metadata_generator_service.template_suffix).to eq('dark')
+      end
+    end
+
+    context 'when the access is world' do
+      let(:xml) do
+        '<rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access> ' +
+          '<access type= "read">  <machine>   <world/>  </machine> </access> <use> ' +
+          '<human type= "useAndReproduction"/> <human type= "creativeCommons"/> ' +
+          '<machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>'
+      end
+
+      it 'returns public for read/world access' do
+        expect(metadata_generator_service.template_suffix).to eq('public')
+      end
     end
   end
 
