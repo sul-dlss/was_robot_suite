@@ -15,7 +15,6 @@ module Robots
           druid_obj = Dor.find(druid)
           crawl_id = Dor::WASCrawl::Utilities.get_crawl_id(druid_obj)
           source_root_pathname = Settings.was_crawl.source_path
-          # collection_id = Dor::WASCrawl::Utilities.get_collection_id(druid_obj)
           staging_path = Settings.was_crawl.staging_path
 
           druid_tree_directory = DruidTools::Druid.new(druid, staging_path)

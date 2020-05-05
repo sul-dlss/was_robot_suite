@@ -11,9 +11,11 @@ module Robots
         end
 
         def perform(druid)
+          cocina_model = Dor::Services::Client.object(druid).find
+
           druid_obj = Dor.find(druid)
           # Fill the input parameters
-          collection_id = Dor::WASCrawl::Utilities.get_collection_id(druid_obj)
+          collection_id = Dor::WASCrawl::Utilities.get_collection_id(cocina_model)
           crawl_id = Dor::WASCrawl::Utilities.get_crawl_id(druid_obj)
           staging_path = Settings.was_crawl.staging_path
 

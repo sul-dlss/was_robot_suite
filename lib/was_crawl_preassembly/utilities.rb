@@ -1,11 +1,12 @@
 module Dor
   module WASCrawl
     class Utilities
-      def self.get_collection_id(druid_obj)
-        collection = druid_obj.collections.first
-        collection.id.sub('druid:', '')
-      rescue => e
-        raise "#{druid_obj.id} doesn't belong to a collection (#{e.message})"
+      # @param [Cocina::Models::DRO] cocina_model
+      def self.get_collection_id(cocina_model)
+        collection = cocina_model.structural.isMemberOf
+        raise "#{cocina_model.externalIdentifier} doesn't belong to a collection" unless collection
+
+        collection.delete_prefix('druid:')
       end
 
       def self.get_crawl_id(druid_obj)
