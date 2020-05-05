@@ -9,7 +9,8 @@ module Dor
         collection.delete_prefix('druid:')
       end
 
-      def self.get_crawl_id(druid_obj)
+      # @param [Cocina::Models::DRO] cocina_model
+      def self.get_crawl_id(_cocina_model)
         druid_obj.label
       end
     end

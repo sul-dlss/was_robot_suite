@@ -13,10 +13,9 @@ module Robots
         def perform(druid)
           cocina_model = Dor::Services::Client.object(druid).find
 
-          druid_obj = Dor.find(druid)
           # Fill the input parameters
           collection_id = Dor::WASCrawl::Utilities.get_collection_id(cocina_model)
-          crawl_id = Dor::WASCrawl::Utilities.get_crawl_id(druid_obj)
+          crawl_id = Dor::WASCrawl::Utilities.get_crawl_id(cocina_model)
           staging_path = Settings.was_crawl.staging_path
 
           LyberCore::Log.info "Creating MetadataExtractor with parameters #{collection_id}, #{crawl_id}, #{staging_path}, #{druid}"
