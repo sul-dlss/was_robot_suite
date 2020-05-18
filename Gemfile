@@ -15,7 +15,7 @@ gem 'assembly-image' # was-seed-preassembly thumbnail creation
 gem 'rest-client'    # was-seed-dissemination to call was-thumbnail-service
 gem 'pry'            # for bin/console
 gem 'slop'           # for bin/run_robot
-gem 'honeybadger', '~> 2.0'
+gem 'honeybadger'
 # iso-639 0.3.0 isn't compatible with ruby 2.5.  This declaration can be dropped when we upgrade to 2.6
 gem 'iso-639', '~> 0.2.8'
 gem 'rake'
