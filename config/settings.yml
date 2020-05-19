@@ -29,3 +29,9 @@ was_seed:
   wayback_uri: 'https://swap.stanford.edu'
 
 thumbnail_generator_service_uri: ''  # for was-seed-dissemination
+
+workflow:
+  url: https://example.com/workflow/
+  logfile: 'log/workflow_service.log'
+  shift_age: 'weekly'
+  timeout: 60

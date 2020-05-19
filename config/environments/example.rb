@@ -20,9 +20,9 @@ Dor::Config.configure do
   end
 
   workflow do
-    url 'http://example.com/'
-    logfile 'log/wfs/workflow_service.log'
-    shift_age 'weekly'
+    url Settings.workflow.url
+    logfile Settings.workflow.logfile
+    shift_age Settings.workflow.shift_age
   end
 
   solr.url ''

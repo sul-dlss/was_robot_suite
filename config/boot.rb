@@ -13,27 +13,6 @@ ROBOT_ROOT = File.expand_path(File.dirname(__FILE__) + '/..')
 ROBOT_LOG = Logger.new(File.join(ROBOT_ROOT, "log/#{environment}.log"))
 ROBOT_LOG.level = Logger::SEV_LABEL.index(ENV['ROBOT_LOG_LEVEL']) || Logger::INFO
 
-# Override Solrizer's logger before it gets a chance to load and pollute STDERR.
-begin
-  require 'solrizer'
-  Solrizer.logger = ROBOT_LOG
-rescue LoadError, NameError, NoMethodError
-end
-
-# Load core robot services
-require 'dor-services'
-require 'lyber_core'
-
-# Load any library files and all the robots
-# TODO: Maybe move auto-require to just run_robot and spec_helper?
-Dir["#{ROBOT_ROOT}/lib/*/*.rb"].each { |f| require f }
-require 'robots'
-
-# Load local environment configuration
-env_file = File.expand_path(File.dirname(__FILE__) + "/environments/#{environment}")
-puts "Loading config from #{env_file}"
-require env_file
-
 require 'config'
 Config.setup do |config|
   # Name of the constant exposing loaded settings
@@ -56,6 +35,27 @@ end
 Config.load_and_set_settings(
   Config.setting_files(File.expand_path(__dir__), environment)
 )
+
+# Override Solrizer's logger before it gets a chance to load and pollute STDERR.
+begin
+  require 'solrizer'
+  Solrizer.logger = ROBOT_LOG
+rescue LoadError, NameError, NoMethodError
+end
+
+# Load core robot services
+require 'dor-services'
+require 'lyber_core'
+
+# Load any library files and all the robots
+# TODO: Maybe move auto-require to just run_robot and spec_helper?
+Dir["#{ROBOT_ROOT}/lib/*/*.rb"].each { |f| require f }
+require 'robots'
+
+# Load local environment configuration
+env_file = File.expand_path(File.dirname(__FILE__) + "/environments/#{environment}")
+puts "Loading config from #{env_file}"
+require env_file
 
 module Was
   def self.connect_dor_services_app
