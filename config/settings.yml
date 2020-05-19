@@ -1,3 +1,21 @@
+fedora:
+  url: ~
+
+ssl:
+  cert_file: ~
+  key_file: ~
+  key_pass: ~
+
+suri:
+  mint_ids: true
+  id_namespace: 'druid'
+  url: ~
+  user: ~
+  pass: ~
+
+solr:
+  url: ~
+
 dor_services:
   url:  'https://dor-services-test.stanford.test'
   token: secret-token
@@ -35,3 +53,6 @@ workflow:
   logfile: 'log/workflow_service.log'
   shift_age: 'weekly'
   timeout: 60
+
+redis:
+  url: ~

@@ -52,10 +52,35 @@ require 'lyber_core'
 Dir["#{ROBOT_ROOT}/lib/*/*.rb"].each { |f| require f }
 require 'robots'
 
-# Load local environment configuration
-env_file = File.expand_path(File.dirname(__FILE__) + "/environments/#{environment}")
-puts "Loading config from #{env_file}"
-require env_file
+Dor::Config.configure do
+  fedora do
+    url Settings.fedora.url
+  end
+
+  ssl do
+    cert_file Settings.ssl.cert_file
+    key_file Settings.ssl.key_file
+    key_pass Settings.ssl.key_pass
+  end
+
+  suri do
+    mint_ids Settings.suri.mint_ids
+    id_namespace Settings.suri.id_namespace
+    url Settings.suri.url
+    user Settings.suri.user
+    pass Settings.suri.pass
+  end
+
+  workflow do
+    url Settings.workflow.url
+    logfile Settings.workflow.logfile
+    shift_age Settings.workflow.shift_age
+  end
+
+  solr.url Settings.solr.url
+end
+
+REDIS_URL ||= Settings.redis.url
 
 module Was
   def self.connect_dor_services_app

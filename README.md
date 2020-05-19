@@ -29,7 +29,7 @@ These java projects use [jenkinsqa](https://jenkinsqa.stanford.edu/) to create d
 
 The deployed `was_robot_suite` houses these java artifacts in the `jar` directory.
 
-Various other dependencies can be teased out of `config/environments/example.rb` and [shared_configs](https://github.com/sul-dlss/shared_configs) (was-robotsxxx branches)
+Various other dependencies can be found in `config/settings.yml` and [shared_configs](https://github.com/sul-dlss/shared_configs) (was-robotsxxx branches)
 
 # Documentation
 
