@@ -2,7 +2,7 @@ module Was
   module Robots
     module Base
       def workflow_service
-        Dor::Config.workflow.client
+        WorkflowClientFactory.build
       end
 
       def seed_uri(druid)

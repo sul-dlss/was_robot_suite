@@ -6,7 +6,7 @@ module Robots
         include Was::Robots::Base
 
         def initialize
-          super('dor', 'wasDisseminationWF', 'start-special-dissemination')
+          super('wasDisseminationWF', 'start-special-dissemination')
         end
 
         # `perform` is the main entry point for the robot. This is where

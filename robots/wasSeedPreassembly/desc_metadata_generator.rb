@@ -6,7 +6,7 @@ module Robots
         include Was::Robots::Base
 
         def initialize
-          super('dor', 'wasSeedPreassemblyWF', 'desc-metadata-generator')
+          super('wasSeedPreassemblyWF', 'desc-metadata-generator')
         end
 
         def perform(druid)

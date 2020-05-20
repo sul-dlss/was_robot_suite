@@ -6,7 +6,7 @@ module Robots
         include Was::Robots::Base
 
         def initialize
-          super('dor', 'wasSeedPreassemblyWF', 'end-was-seed-preassembly')
+          super('wasSeedPreassemblyWF', 'end-was-seed-preassembly')
         end
 
         def perform(druid)

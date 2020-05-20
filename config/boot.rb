@@ -6,6 +6,7 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)
 require 'logger'
+require 'workflow_client_factory'
 
 # Load the environment file based on Environment.  Default to development
 environment = ENV['ROBOT_ENVIRONMENT'] ||= 'development'
@@ -69,12 +70,6 @@ Dor::Config.configure do
     url Settings.suri.url
     user Settings.suri.user
     pass Settings.suri.pass
-  end
-
-  workflow do
-    url Settings.workflow.url
-    logfile Settings.workflow.logfile
-    shift_age Settings.workflow.shift_age
   end
 
   solr.url Settings.solr.url

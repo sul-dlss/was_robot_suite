@@ -4,9 +4,8 @@ describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
   describe '.initialize' do
     it 'initializes the robot with valid parameters' do
       robot = Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly.new
-      expect(robot.instance_variable_get(:@repo)).to eq('dor')
       expect(robot.instance_variable_get(:@workflow_name)).to eq('wasCrawlPreassemblyWF')
-      expect(robot.instance_variable_get(:@step_name)).to eq('end-was-crawl-preassembly')
+      expect(robot.instance_variable_get(:@process)).to eq('end-was-crawl-preassembly')
     end
   end
 
@@ -18,7 +17,7 @@ describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
     let(:version_client) { instance_double(Dor::Services::Client::ObjectVersion, current: '1') }
 
     before do
-      allow(Dor::Config.workflow).to receive(:client).and_return(workflow_client)
+      allow(WorkflowClientFactory).to receive(:build).and_return(workflow_client)
       allow(Dor::Services::Client).to receive(:object).and_return(object_client)
     end
 

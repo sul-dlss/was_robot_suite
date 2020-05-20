@@ -8,7 +8,7 @@ module Robots
         include Was::Robots::Base
 
         def initialize
-          super('dor', 'wasSeedDisseminationWF', 'update-thumbnail-generator')
+          super('wasSeedDisseminationWF', 'update-thumbnail-generator')
         end
 
         # `perform` is the main entry point for the robot. This is where
