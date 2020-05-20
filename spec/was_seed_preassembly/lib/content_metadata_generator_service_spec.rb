@@ -10,7 +10,7 @@ RSpec.describe Dor::WASSeed::ContentMetadataGenerator do
 
   describe '#generate_metadata_output' do
     let(:druid_id) { 'druid:gh123gh1234' }
-    let(:workspace) { 'spec/wasSeedPreassembly/fixtures/workspace' }
+    let(:workspace) { 'spec/was_seed_preassembly/fixtures/workspace' }
     let(:extracted_location) { 'bar' }
     let(:metadata_generator_service) { described_class.new(workspace, druid_id, extracted_location) }
     let(:expected_xml) do
@@ -31,7 +31,7 @@ RSpec.describe Dor::WASSeed::ContentMetadataGenerator do
     before do
       path = "#{workspace}/gh/123/gh/1234/gh123gh1234/content"
       FileUtils.mkdir_p(path)
-      FileUtils.cp('spec/wasSeedPreassembly/fixtures/thumbnail_files/thumbnail.jp2', path)
+      FileUtils.cp('spec/was_seed_preassembly/fixtures/thumbnail_files/thumbnail.jp2', path)
       allow(MiniExiftool).to receive(:new).and_return(stub_exif)
     end
 

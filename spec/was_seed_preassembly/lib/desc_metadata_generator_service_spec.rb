@@ -1,10 +1,8 @@
 require 'spec_helper'
 require 'was_seed_preassembly/desc_metadata_generator_service'
 
-describe Dor::WASSeed::DescMetadataGenerator do
-  before :all do
-    @fixtures = 'spec/wasSeedPreassembly/fixtures/'
-  end
+RSpec.describe Dor::WASSeed::DescMetadataGenerator do
+  let(:fixtures) { 'spec/was_seed_preassembly/fixtures/' }
 
   describe '.generate_metadata_output xsl transform' do
     let(:collection_id) { 'druid:mc744qd2082' }
@@ -62,13 +60,13 @@ describe Dor::WASSeed::DescMetadataGenerator do
     end
 
     describe '.generate_metadata_output' do
-      let(:subject) { described_class.new("#{@fixtures}workspace", druid, seed_uri, 'druid:gz033bg3146') }
+      let(:subject) { described_class.new("#{fixtures}workspace", druid, seed_uri, 'druid:gz033bg3146') }
       let(:druid) { 'druid:aa111aa2222' }
       let(:seed_uri) { 'http://www.epa.gov/' }
 
       it 'descMetadata output file created' do
         subject.generate_metadata_output
-        actual_output_file = "#{@fixtures}workspace/aa/111/aa/2222/aa111aa2222/metadata/descMetadata.xml"
+        actual_output_file = "#{fixtures}workspace/aa/111/aa/2222/aa111aa2222/metadata/descMetadata.xml"
         expect(File.exist?(actual_output_file)).to be true
 
         smods_rec = Stanford::Mods::Record.new
