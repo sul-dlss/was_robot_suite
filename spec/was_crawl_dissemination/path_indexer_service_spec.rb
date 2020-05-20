@@ -11,7 +11,7 @@ describe Dor::WASCrawl::PathIndexerService do
   describe '.merge' do
     before(:all) do
       @druid = 'druid:dd111dd1111'
-      @content_metadata_xml_location = 'spec/wasCrawlDissemination/fixtures/metadata/'
+      @content_metadata_xml_location = 'spec/was_crawl_dissemination/fixtures/metadata/'
     end
 
     it 'should merge results from contentMetadata to the main path index' do

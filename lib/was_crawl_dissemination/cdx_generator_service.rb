@@ -13,7 +13,7 @@ module Dor
       end
 
       def generate_cdx_for_crawl
-        warc_file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_contentMetadata(@contentMetadata)
+        warc_file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(@contentMetadata)
         cdx_druid_dir = "#{@cdx_working_directory}/#{@druid_id}"
         FileUtils.makedirs cdx_druid_dir unless File.exist?(cdx_druid_dir)
         druid_base_directory = DruidTools::AccessDruid.new(@druid_id, @collection_path).path
