@@ -18,8 +18,7 @@ module Robots
         def perform(druid)
           druid_obj = Dor.find(druid)
           original_uri = get_original_uri(druid_obj.datastreams['descMetadata'].ng_xml)
-          druid_id = druid_obj.id.split(':').last
-          send_to_thumbnail_generator(druid_id, original_uri)
+          send_to_thumbnail_generator(druid.delete_prefix('druid:'), original_uri)
         end
 
         def get_original_uri(descMetadata_ng)

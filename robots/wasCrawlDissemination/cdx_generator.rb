@@ -16,7 +16,9 @@ module Robots
         # @param [String] druid -- the Druid identifier for the object to process
         def perform(druid)
           druid_obj = Dor.find(druid)
-          collection_id = Dor::WASCrawl::Dissemination::Utilities.get_collection_id(druid_obj)
+          cocina_object = Dor::Services::Client.object(druid).find
+
+          collection_id = Dor::WASCrawl::Dissemination::Utilities.get_collection_id(cocina_object)
           collection_path = Settings.was_crawl_dissemination.stacks_collections_path + collection_id
           contentMetadata = druid_obj.datastreams['contentMetadata']
 
