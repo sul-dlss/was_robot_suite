@@ -8,7 +8,7 @@ module Robots
         include Was::Robots::Base
 
         def initialize
-          super('dor', 'wasCrawlPreassemblyWF', 'content-metadata-generator')
+          super('wasCrawlPreassemblyWF', 'content-metadata-generator')
         end
 
         def perform(druid)

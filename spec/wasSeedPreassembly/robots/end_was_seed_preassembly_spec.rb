@@ -11,7 +11,7 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
 
     before do
       allow(Dor::Services::Client).to receive(:object).with(druid).and_return(object_client)
-      allow(Dor::Config.workflow).to receive(:client).and_return(wf_client)
+      allow(WorkflowClientFactory).to receive(:build).and_return(wf_client)
     end
 
     context 'for new objects' do

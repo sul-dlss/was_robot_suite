@@ -6,7 +6,7 @@ module Robots
         include Was::Robots::Base
 
         def initialize
-          super('dor', 'wasCrawlPreassemblyWF', 'end-was-crawl-preassembly')
+          super('wasCrawlPreassemblyWF', 'end-was-crawl-preassembly')
         end
 
         def perform(druid)

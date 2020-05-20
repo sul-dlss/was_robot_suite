@@ -7,7 +7,7 @@ module Robots
         include Was::Robots::Base
 
         def initialize
-          super('dor', 'wasCrawlPreassemblyWF', 'metadata-extractor')
+          super('wasCrawlPreassemblyWF', 'metadata-extractor')
         end
 
         def perform(druid)

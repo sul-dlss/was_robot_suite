@@ -8,7 +8,7 @@ module Robots
         include Was::Robots::Base
 
         def initialize
-          super('dor', 'wasCrawlPreassemblyWF', 'build-was-crawl-druid-tree')
+          super('wasCrawlPreassemblyWF', 'build-was-crawl-druid-tree')
         end
 
         def perform(druid)
