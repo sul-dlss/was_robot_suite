@@ -3,10 +3,7 @@ require 'mods'
 module Robots
   module DorRepo
     module WasSeedDissemination
-      class UpdateThumbnailGenerator
-        include LyberCore::Robot
-        include Was::Robots::Base
-
+      class UpdateThumbnailGenerator < Was::Robots::Base
         def initialize
           super('wasSeedDisseminationWF', 'update-thumbnail-generator')
         end

@@ -1,10 +1,7 @@
 module Robots
   module DorRepo
     module WasSeedPreassembly
-      class EndWasSeedPreassembly
-        include LyberCore::Robot
-        include Was::Robots::Base
-
+      class EndWasSeedPreassembly < Was::Robots::Base
         def initialize
           super('wasSeedPreassemblyWF', 'end-was-seed-preassembly')
         end

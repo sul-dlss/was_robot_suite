@@ -2,10 +2,7 @@ module Robots
   module DorRepo
     module WasCrawlPreassembly
       # This job can run a long time, occasionally > 2 hours.
-      class MetadataExtractor
-        include LyberCore::Robot
-        include Was::Robots::Base
-
+      class MetadataExtractor < Was::Robots::Base
         def initialize
           super('wasCrawlPreassemblyWF', 'metadata-extractor')
         end

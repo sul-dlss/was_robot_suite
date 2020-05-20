@@ -3,10 +3,7 @@ require 'lockfile'
 module Robots
   module DorRepo
     module WasCrawlDissemination
-      class CdxMergeSortPublish
-        include LyberCore::Robot
-        include Was::Robots::Base
-
+      class CdxMergeSortPublish < Was::Robots::Base
         def initialize
           super('dor', 'wasCrawlDisseminationWF', 'cdx-merge-sort-publish')
         end

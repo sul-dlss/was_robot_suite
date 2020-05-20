@@ -1,10 +1,7 @@
 module Robots
   module DorRepo
     module WasCrawlPreassembly
-      class DescMetadataGenerator
-        include LyberCore::Robot
-        include Was::Robots::Base
-
+      class DescMetadataGenerator < Was::Robots::Base
         def initialize
           super('wasCrawlPreassemblyWF', 'desc-metadata-generator')
         end
