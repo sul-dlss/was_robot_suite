@@ -24,7 +24,7 @@ describe Dor::WASCrawl::MetadataExtractor do
       metadata_extractor_service = Dor::WASCrawl::MetadataExtractor.new(@collection_id, @crawl_id, @staging_path.to_s, druid_id)
       metadata_extractor_service.prepare_parameters
       expect(metadata_extractor_service.instance_variable_get(:@input_directory)).to eq @staging_path.to_s + '/ab/123/ab/1234/ab123ab1234/content'
-      expect(metadata_extractor_service.instance_variable_get(:@xml_output_location)).to eq  'tmp/druid:ab123ab1234.xml'
+      expect(metadata_extractor_service.instance_variable_get(:@xml_output_location)).to eq 'tmp/druid:ab123ab1234.xml'
     end
 
     it 'should raise an error wrong druid' do
@@ -53,9 +53,9 @@ describe Dor::WASCrawl::MetadataExtractor do
 
       metadata_extractor_service = Dor::WASCrawl::MetadataExtractor.new(@collection_id, @crawl_id, @staging_path.to_s, druid_id)
       metadata_extractor_service.instance_variable_set(:@jar_path, 'jar_path')
-      metadata_extractor_service.instance_variable_set(:@input_directory , 'input_directory')
-      metadata_extractor_service.instance_variable_set(:@java_log_file , 'log_file')
-      metadata_extractor_service.instance_variable_set(:@xml_output_location , 'tmp/druid:ab123ab1234.xml')
+      metadata_extractor_service.instance_variable_set(:@input_directory, 'input_directory')
+      metadata_extractor_service.instance_variable_set(:@java_log_file, 'log_file')
+      metadata_extractor_service.instance_variable_set(:@xml_output_location, 'tmp/druid:ab123ab1234.xml')
 
       actual_cmd_string = metadata_extractor_service.build_cmd_string
       expect(actual_cmd_string).to eq expected_cmd_string

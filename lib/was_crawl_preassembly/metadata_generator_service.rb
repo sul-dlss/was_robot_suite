@@ -7,7 +7,7 @@ module Dor
       attr_accessor  :staging_path
       attr_accessor  :druid_id
 
-      def initialize(collection_id,  staging_path, druid_id)
+      def initialize(collection_id, staging_path, druid_id)
         @collection_id = collection_id
         @staging_path = staging_path
         @druid_id = druid_id
@@ -15,10 +15,11 @@ module Dor
       end
 
       def read_metadata_xml_input_file
-        metadata_xml_input   = Nokogiri::XML(File.read("#{@extracted_metadata_xml_location}/#{@druid_id}.xml"))
+        metadata_xml_input = Nokogiri::XML(File.read("#{@extracted_metadata_xml_location}/#{@druid_id}.xml"))
         unless metadata_xml_input.errors.empty?
           raise "#{@extracted_metadata_xml_location}/#{@druid_id}.xml is not a valid xml file.\nNokogiri errors: #{metadata_xml_input.errors}"
         end
+
         metadata_xml_input.to_s
       end
 
@@ -41,7 +42,7 @@ module Dor
       def transform_xml_using_xslt(metadata_xml_input, metadata_xslt_template)
         metadata_xml_input_object = Nokogiri::XML(metadata_xml_input)
         metadata_xslt_template_object = Nokogiri::XSLT(metadata_xslt_template)
-        metadata_content =  metadata_xslt_template_object.transform(metadata_xml_input_object)
+        metadata_content = metadata_xslt_template_object.transform(metadata_xml_input_object)
         metadata_content.to_s
       end
 

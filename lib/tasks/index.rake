@@ -27,8 +27,10 @@ namespace :cdx do
         srcfn = INDEX_DIR.join('index.cdx')
         dstfn = INDEX_DIR.join('level3.cdx')
         raise "Old index is not present: #{srcfn}" unless srcfn.exist?
+
         dstfn.delete if dstfn.zero?
         raise "Level3 index already exists: #{dstfn}" if dstfn.exist?
+
         srcfn.rename(dstfn)
         Rake::Task['cdx:index:admin:setup'].execute
       end

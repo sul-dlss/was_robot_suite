@@ -4,7 +4,6 @@ RSpec.configure do |c|
 end
 
 describe Dor::WASCrawl::CDXGeneratorService do
-
   before(:all) do
     @stacks_path = Pathname(File.dirname(__FILE__)).join('fixtures/stacks')
     @workspace   = Pathname(File.dirname(__FILE__)).join('fixtures/workspace')
@@ -78,7 +77,7 @@ describe Dor::WASCrawl::CDXGeneratorService do
       cdx_dir = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_3}/"
 
       expect(File.exist?(cdx_dir)).to eq(true)
-      expect(Dir.glob('#{cdx_dir}{*,.*}').empty? ).to eq(true)
+      expect(Dir.glob('#{cdx_dir}{*,.*}').empty?).to eq(true)
     end
 
     after(:all) do
@@ -96,7 +95,7 @@ describe Dor::WASCrawl::CDXGeneratorService do
     it 'should generate CDX file for the input warc file', :openwayback_prerequisite do
       cdx_file_path = 'tmp/WARC-Test.cdx'
       warc_file_path = "#{@workspace}/aa111aa1111/WARC-Test.warc.gz"
-      @cdx_generator.generate_cdx_for_one_warc(warc_file_path, cdx_file_path )
+      @cdx_generator.generate_cdx_for_one_warc(warc_file_path, cdx_file_path)
 
       expect(File.exist?(cdx_file_path)).to eq(true)
 
@@ -108,7 +107,7 @@ describe Dor::WASCrawl::CDXGeneratorService do
     it 'should generate CDX file for the input arc file', :openwayback_prerequisite do
       cdx_file_path = 'tmp/ARC-Test.cdx'
       warc_file_path = "#{@workspace}/cc111cc1111/ARC-Test.arc.gz"
-      @cdx_generator.generate_cdx_for_one_warc(warc_file_path, cdx_file_path )
+      @cdx_generator.generate_cdx_for_one_warc(warc_file_path, cdx_file_path)
 
       expect(File.exist?(cdx_file_path)).to eq(true)
 
@@ -129,41 +128,41 @@ describe Dor::WASCrawl::CDXGeneratorService do
     end
 
     it 'should return the cdx file for .warc.gz' do
-      warc_file_name  = 'file.warc.gz'
+      warc_file_name = 'file.warc.gz'
       cdx_file_name = @cdx_generator.get_cdx_file_name(warc_file_name)
       expect(cdx_file_name).to eq('file.cdx')
     end
 
     it 'should return the cdx file for .arc.gz' do
-      warc_file_name  = 'file.arc.gz'
+      warc_file_name = 'file.arc.gz'
       cdx_file_name = @cdx_generator.get_cdx_file_name(warc_file_name)
       expect(cdx_file_name).to eq('file.cdx')
     end
 
     it 'should return the cdx file for .warc' do
-      warc_file_name  = 'file.warc'
+      warc_file_name = 'file.warc'
       cdx_file_name = @cdx_generator.get_cdx_file_name(warc_file_name)
       expect(cdx_file_name).to eq('file.cdx')
     end
 
     it 'should return the cdx file for .arc' do
-      warc_file_name  = 'file.arc'
+      warc_file_name = 'file.arc'
       cdx_file_name = @cdx_generator.get_cdx_file_name(warc_file_name)
       expect(cdx_file_name).to eq('file.cdx')
     end
 
     it 'should return the cdx file for irregular file extension' do
-      warc_file_name  = 'file.txt'
+      warc_file_name = 'file.txt'
       cdx_file_name = @cdx_generator.get_cdx_file_name(warc_file_name)
       expect(cdx_file_name).to eq('file.txt.cdx')
     end
 
     it 'should return the cdx file without the directory path' do
-      expect(@cdx_generator.get_cdx_file_name('tmp/file.txt')       ).to eq('file.txt.cdx')
-      expect(@cdx_generator.get_cdx_file_name('./file.txt')         ).to eq('file.txt.cdx')
-      expect(@cdx_generator.get_cdx_file_name('../file.txt')        ).to eq('file.txt.cdx')
-      expect(@cdx_generator.get_cdx_file_name('/tmp/file.txt')      ).to eq('file.txt.cdx')
-      expect(@cdx_generator.get_cdx_file_name('c://tmp/file.txt')   ).to eq('file.txt.cdx')
+      expect(@cdx_generator.get_cdx_file_name('tmp/file.txt')).to eq('file.txt.cdx')
+      expect(@cdx_generator.get_cdx_file_name('./file.txt')).to eq('file.txt.cdx')
+      expect(@cdx_generator.get_cdx_file_name('../file.txt')).to eq('file.txt.cdx')
+      expect(@cdx_generator.get_cdx_file_name('/tmp/file.txt')).to eq('file.txt.cdx')
+      expect(@cdx_generator.get_cdx_file_name('c://tmp/file.txt')).to eq('file.txt.cdx')
       expect(@cdx_generator.get_cdx_file_name('file://tmp/file.txt')).to eq('file.txt.cdx')
     end
   end
@@ -185,19 +184,19 @@ describe Dor::WASCrawl::CDXGeneratorService do
       warc_file_name = nil
       cdx_file_name = 'file.cdx'
 
-      expect{@cdx_generator.prepare_cdx_generation_cmd_string(nil,  cdx_file_name)}.to raise_error StandardError
-      expect{@cdx_generator.prepare_cdx_generation_cmd_string('',   cdx_file_name)}.to raise_error StandardError
-      expect{@cdx_generator.prepare_cdx_generation_cmd_string(warc_file_name, nil)}.to raise_error StandardError
-      expect{@cdx_generator.prepare_cdx_generation_cmd_string(warc_file_name,  '')}.to raise_error StandardError
+      expect { @cdx_generator.prepare_cdx_generation_cmd_string(nil,  cdx_file_name) }.to raise_error StandardError
+      expect { @cdx_generator.prepare_cdx_generation_cmd_string('',   cdx_file_name) }.to raise_error StandardError
+      expect { @cdx_generator.prepare_cdx_generation_cmd_string(warc_file_name, nil) }.to raise_error StandardError
+      expect { @cdx_generator.prepare_cdx_generation_cmd_string(warc_file_name, '') }.to raise_error StandardError
     end
   end
 
-  context Dor::WASCrawl::Dissemination::Utilities, '.run_sys_cmd', :openwayback_prerequisite  do
+  context Dor::WASCrawl::Dissemination::Utilities, '.run_sys_cmd', :openwayback_prerequisite do
     it 'should generate CDX file in the right location with valid WARC file' do
       warc_file_name = "#{@workspace}/aa111aa1111/WARC-Test.warc.gz"
       cdx_file_name = 'tmp/WARC-Test.cdx'
       cmd_string = "jar/openwayback/bin/cdx-indexer  #{warc_file_name} #{cdx_file_name} 2>> log/cdx_indexer.log"
-      Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd( cmd_string, 'extracting CDX')
+      Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(cmd_string, 'extracting CDX')
 
       expect(File.exist?(cdx_file_name)).to eq(true)
 
@@ -210,7 +209,7 @@ describe Dor::WASCrawl::CDXGeneratorService do
       warc_file_name = '{@workspace}/bb111bbb1111/WARC-Test.txt'
       cdx_file_name = 'tmp/WARC-Test.cdx'
       cmd_string = "jar/openwayback/bin/cdx-indexer  #{warc_file_name} #{cdx_file_name} 2>> log/cdx_indexer.log"
-      expect{Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(cmd_string, 'extracting CDX')}.to raise_error StandardError
+      expect { Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(cmd_string, 'extracting CDX') }.to raise_error StandardError
     end
   end
 end

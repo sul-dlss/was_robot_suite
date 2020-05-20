@@ -20,7 +20,7 @@ module Robots
 
           LyberCore::Log.info "Creating ContentMetadataGenerator with parameters #{collection_id}, #{staging_path}, #{druid}"
           metadata_generator_service = Dor::WASCrawl::ContentMetadataGenerator.new(collection_id,
-                staging_path.to_s, druid)
+                                                                                   staging_path.to_s, druid)
           metadata_generator_service.generate_metadata_output
         end
       end

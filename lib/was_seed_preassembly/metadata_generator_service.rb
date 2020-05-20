@@ -17,6 +17,7 @@ module Dor
         unless metadata_xml_input.errors.empty?
           fail "#{druid_tree_directory.content_dir}/source.xml is not a valid xml file.\nNokogiri errors: #{metadata_xml_input.errors}"
         end
+
         metadata_xml_input
       end
 

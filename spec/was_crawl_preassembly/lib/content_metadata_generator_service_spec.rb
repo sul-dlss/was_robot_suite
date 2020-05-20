@@ -45,7 +45,7 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
       metadata_generator_service = generate_object(druid_id)
 
       pre_transform_invalid_str = '<?xml version="1.0" ?><test_root><test_element/>'
-      expect{ metadata_generator_service.do_post_transform(pre_transform_invalid_str) }.to raise_error(RuntimeError, /input string is not a valid xml file/)
+      expect { metadata_generator_service.do_post_transform(pre_transform_invalid_str) }.to raise_error(RuntimeError, /input string is not a valid xml file/)
     end
   end
 
@@ -94,34 +94,34 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
   end
 
   def generate_object(druid_id)
-     metadata_generator_service = Dor::WASCrawl::ContentMetadataGenerator.new(@collection_id,
-      @staging_path.to_s, druid_id)
-     metadata_generator_service
+    metadata_generator_service = Dor::WASCrawl::ContentMetadataGenerator.new(@collection_id,
+                                                                             @staging_path.to_s, druid_id)
+    metadata_generator_service
   end
 
   def generate_data_items
-    @expected_content_metadata = <<-EOF
-<?xml version="1.0"?>
-<contentMetadata type="file" stacks="/web-archiving-stacks/data/collections/" id="druid:gh123gh1234">
-  <resource type="file" id="gh123gh1234_1">
-    <file dataType="WARC" publish="no" shelve="yes" preserve="yes" id="WARC-Test.warc.gz" size="6608320" mimetype="application/octet-stream">
-      <checksum type="MD5">c7edbde066e4697b3f2d823ac42c3692</checksum>
-      <checksum type="SHA1">3a9f2ffac1497c70291d93a8bc86c1469547d8f8</checksum>
-    </file>
-  </resource>
-  <resource type="file" id="gh123gh1234_2">
-    <file dataType="ARC" publish="no" shelve="yes" preserve="yes" id="ARC-Test.arc.gz" size="87846905" mimetype="application/octet-stream">
-      <checksum type="MD5">f05e6759eeebbed5e17266809872c9f3</checksum>
-      <checksum type="SHA1">e4fd69c988b5abb5d082e4ec897a582d74dc2bbf</checksum>
-    </file>
-  </resource>
-  <resource type="file" id="gh123gh1234_3">
-    <file dataType="general" publish="no" shelve="no" preserve="yes" id="test.txt" size="4" mimetype="text/plain">
-      <checksum type="MD5">e2fc714c4727ee9395f324cd2e7f331f</checksum>
-      <checksum type="SHA1">81fe8bfe87576c3ecb22426f8e57847382917acf</checksum>
-    </file>
-  </resource>
-</contentMetadata>
-EOF
+    @expected_content_metadata = <<~EOF
+      <?xml version="1.0"?>
+      <contentMetadata type="file" stacks="/web-archiving-stacks/data/collections/" id="druid:gh123gh1234">
+        <resource type="file" id="gh123gh1234_1">
+          <file dataType="WARC" publish="no" shelve="yes" preserve="yes" id="WARC-Test.warc.gz" size="6608320" mimetype="application/octet-stream">
+            <checksum type="MD5">c7edbde066e4697b3f2d823ac42c3692</checksum>
+            <checksum type="SHA1">3a9f2ffac1497c70291d93a8bc86c1469547d8f8</checksum>
+          </file>
+        </resource>
+        <resource type="file" id="gh123gh1234_2">
+          <file dataType="ARC" publish="no" shelve="yes" preserve="yes" id="ARC-Test.arc.gz" size="87846905" mimetype="application/octet-stream">
+            <checksum type="MD5">f05e6759eeebbed5e17266809872c9f3</checksum>
+            <checksum type="SHA1">e4fd69c988b5abb5d082e4ec897a582d74dc2bbf</checksum>
+          </file>
+        </resource>
+        <resource type="file" id="gh123gh1234_3">
+          <file dataType="general" publish="no" shelve="no" preserve="yes" id="test.txt" size="4" mimetype="text/plain">
+            <checksum type="MD5">e2fc714c4727ee9395f324cd2e7f331f</checksum>
+            <checksum type="SHA1">81fe8bfe87576c3ecb22426f8e57847382917acf</checksum>
+          </file>
+        </resource>
+      </contentMetadata>
+    EOF
   end
 end
