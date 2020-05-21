@@ -3,10 +3,7 @@ require 'find'
 module Robots
   module DorRepo
     module WasCrawlPreassembly
-      class BuildWasCrawlDruidTree
-        include LyberCore::Robot
-        include Was::Robots::Base
-
+      class BuildWasCrawlDruidTree < Was::Robots::Base
         def initialize
           super('wasCrawlPreassemblyWF', 'build-was-crawl-druid-tree')
         end

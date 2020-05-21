@@ -1,6 +1,8 @@
 module Was
   module Robots
-    module Base
+    class Base
+      include LyberCore::Robot
+
       def workflow_service
         WorkflowClientFactory.build
       end

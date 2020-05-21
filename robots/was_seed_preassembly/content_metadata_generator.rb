@@ -1,10 +1,7 @@
 module Robots
   module DorRepo
     module WasSeedPreassembly
-      class ContentMetadataGenerator
-        include LyberCore::Robot
-        include Was::Robots::Base
-
+      class ContentMetadataGenerator < Was::Robots::Base
         def initialize
           super('wasSeedPreassemblyWF', 'content-metadata-generator')
         end

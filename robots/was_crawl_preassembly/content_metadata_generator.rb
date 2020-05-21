@@ -3,10 +3,7 @@ require 'was_crawl_preassembly/utilities'
 module Robots
   module DorRepo
     module WasCrawlPreassembly
-      class ContentMetadataGenerator
-        include LyberCore::Robot
-        include Was::Robots::Base
-
+      class ContentMetadataGenerator < Was::Robots::Base
         def initialize
           super('wasCrawlPreassemblyWF', 'content-metadata-generator')
         end
