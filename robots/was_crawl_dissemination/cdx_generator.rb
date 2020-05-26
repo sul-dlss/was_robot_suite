@@ -1,4 +1,3 @@
-
 module Robots
   module DorRepo
     module WasCrawlDissemination
@@ -23,7 +22,6 @@ module Robots
           cdx_generator.generate_cdx_for_crawl
         end
       end
-
     end
   end
 end

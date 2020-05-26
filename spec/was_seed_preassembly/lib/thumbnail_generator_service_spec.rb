@@ -30,7 +30,7 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
     it 'raises an error if there is an error in the capture method' do
       allow(Dor::WASSeed::ThumbnailGeneratorService).to receive(:capture).and_return('#FAIL#')
       exp_msg = "Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n #FAIL#"
-      expect{ Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(@druid_id, @workspace, @uri) }.to raise_error.with_message(exp_msg)
+      expect { Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(@druid_id, @workspace, @uri) }.to raise_error.with_message(exp_msg)
       expect(File.exist?('spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2')).to be false
       expect(File.exist?('tmp/ab123cd4567.jpeg')).to be false
     end
@@ -38,7 +38,7 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
     it 'raises an error if there capture method raise an exception' do
       allow(Dor::WASSeed::ThumbnailGeneratorService).to receive(:capture).and_raise('Error')
       exp_msg = "Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n Error"
-      expect{ Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(@druid_id, @workspace, @uri) }.to raise_error.with_message(exp_msg)
+      expect { Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(@druid_id, @workspace, @uri) }.to raise_error.with_message(exp_msg)
       expect(File.exist?('spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2')).to be false
       expect(File.exist?('tmp/ab123cd4567.jpeg')).to be false
     end

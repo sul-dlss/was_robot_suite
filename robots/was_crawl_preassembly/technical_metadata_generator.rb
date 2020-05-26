@@ -15,7 +15,7 @@ module Robots
 
           LyberCore::Log.info "Creating TechnicalMetadataGenerator with parameters #{collection_id}, #{staging_path}, #{druid}"
           metadata_generator_service = Dor::WASCrawl::TechnicalMetadataGenerator.new(collection_id,
-            staging_path.to_s, druid)
+                                                                                     staging_path.to_s, druid)
           metadata_generator_service.generate_metadata_output
         end
       end

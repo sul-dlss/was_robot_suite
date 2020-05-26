@@ -23,6 +23,7 @@ module Dor
         unless metadata_content_xml.errors.empty?
           raise "The input string is not a valid xml file.\nNokogiri errors: #{metadata_content_xml.errors}\n#{metadata_content_xml}"
         end
+
         metadata_content_xml.root.set_attribute('id', @druid_id)
         resources = metadata_content_xml.root.xpath('resource')
         druid_without_namespace = @druid_id.sub(/^druid:/, '')

@@ -4,7 +4,7 @@ RSpec.describe Dor::WASSeed::ContentMetadataGenerator do
   before(:all) do
     @staging_path = Pathname(File.dirname(__FILE__)).join('../fixtures/')
     @expected_thumbnal_xml_element = '<image><md5>cecab42610cefd7f8ba80c8505a0f95f</md5><sha1>c78e5e8e8ca02c6fffa9169b0e9e4df908675fdc</sha1><size>228709</size><width>1000</width><height>1215</height></image>'
-    @expected_full_xml_element  = Nokogiri::XML("<item><druid>druid:aa111aa1111</druid>#{@expected_thumbnal_xml_element}</item>")
+    @expected_full_xml_element = Nokogiri::XML("<item><druid>druid:aa111aa1111</druid>#{@expected_thumbnal_xml_element}</item>")
     @expected_empty_xml_element = Nokogiri::XML('<item><druid>druid:aa111aa1111</druid></item>')
   end
 
@@ -86,12 +86,12 @@ RSpec.describe Dor::WASSeed::ContentMetadataGenerator do
     it 'should raise an excetion for reading an empty image' do
       # TODO: ? This test case should be fixed with adding an empty image
       thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail_empty.jpeg"
-      expect{ create_thumbnail_xml_element thumbnail_file_location }.to raise_error StandardError
+      expect { create_thumbnail_xml_element thumbnail_file_location }.to raise_error StandardError
     end
 
     it 'should raise an error for reading an invalid image' do
       thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail_text.jpeg"
-      expect{ create_thumbnail_xml_element thumbnail_file_location }.to raise_error StandardError
+      expect { create_thumbnail_xml_element thumbnail_file_location }.to raise_error StandardError
     end
   end
 

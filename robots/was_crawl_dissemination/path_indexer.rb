@@ -1,4 +1,3 @@
-
 module Robots
   module DorRepo
     module WasCrawlDissemination
@@ -27,7 +26,6 @@ module Robots
           path_indexer_service.clean
         end
       end
-
     end
   end
 end

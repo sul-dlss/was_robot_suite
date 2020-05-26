@@ -80,7 +80,7 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
       # needs to be @ so after(:all) can access it
       @cdx_backup_dir = "#{@stacks_path}/data/indices/cdx_backup"
     end
-    let(:druid) { 'ii111ii1111'}
+    let(:druid) { 'ii111ii1111' }
     it 'moves cdx files to cdx backup directory (from  source_dir)' do
       FileUtils.cp_r("#{cdx_file_path}/ii/.", "#{@cdx_working_dir}")
       mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid, @cdx_working_dir, @cdx_backup_dir)
@@ -111,7 +111,7 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
       expect(File.exist?("#{@cdx_backup_dir}/#{druid}")).to eq true
 
       # it's okay if it complains about the files;  we are specifically concerned about the directory
-      expect {mergeSortPublishService.clean}.not_to raise_error(StandardError, "File exists - #{@cdx_backup_dir}/#{druid}")
+      expect { mergeSortPublishService.clean }.not_to raise_error(StandardError, "File exists - #{@cdx_backup_dir}/#{druid}")
     end
 
     after(:all) do

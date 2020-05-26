@@ -1,6 +1,6 @@
 set :application, 'was_robot_suite'
 set :repo_url, 'https://github.com/sul-dlss/was_robot_suite.git'
-set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
+set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
 # Default branch is :master
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -47,9 +47,9 @@ namespace :deploy do
   desc 'Download/unpack OpenWayback tar file to work with was-crawl-diss indexer script.'
   task :download_openwayback_tar do
     on roles(:app), in: :sequence, wait: 10 do
-        execute :curl, '-s https://jenkinsqa.stanford.edu/artifacts/dist/target/openwayback.tar.gz', "> #{fetch(:deploy_to)}/shared/jar/openwayback.tar.gz"
-        execute :tar, "-xvf #{fetch(:deploy_to)}/shared/jar/openwayback.tar.gz", "-C #{fetch(:deploy_to)}/shared/jar/"
-        execute :rm, "#{fetch(:deploy_to)}/shared/jar/openwayback/*.war"
+      execute :curl, '-s https://jenkinsqa.stanford.edu/artifacts/dist/target/openwayback.tar.gz', "> #{fetch(:deploy_to)}/shared/jar/openwayback.tar.gz"
+      execute :tar, "-xvf #{fetch(:deploy_to)}/shared/jar/openwayback.tar.gz", "-C #{fetch(:deploy_to)}/shared/jar/"
+      execute :rm, "#{fetch(:deploy_to)}/shared/jar/openwayback/*.war"
     end
   end
 

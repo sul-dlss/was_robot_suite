@@ -23,6 +23,7 @@ module Robots
           s_mods = Mods::Record.new.from_nk_node(descMetadata_ng)
           s_mods.note.map.each do |x|
             next unless x.attributes.include?('displayLabel')
+
             original_uri = x.text if x.attributes['displayLabel'].to_s == 'Original site'
           end
           original_uri

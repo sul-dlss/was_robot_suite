@@ -1,4 +1,3 @@
-
 require 'spec_helper'
 require 'was_crawl_dissemination/utilities'
 
@@ -8,7 +7,7 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
       Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd('ls', '')
     end
     it 'should raise an error with wrong command' do
-      expect{ Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd('lss', '') }.to raise_error StandardError
+      expect { Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd('lss', '') }.to raise_error StandardError
     end
   end
 

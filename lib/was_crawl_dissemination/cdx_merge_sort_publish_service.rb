@@ -1,8 +1,7 @@
 module Dor
   module WASCrawl
     class CDXMergeSortPublishService
-
-      def initialize( druid_id, cdx_working_directory, cdx_backup_directory)
+      def initialize(druid_id, cdx_working_directory, cdx_backup_directory)
         @main_cdx_file = Settings.was_crawl_dissemination.main_cdx_file
         @source_cdx_dir = "#{cdx_working_directory}/#{druid_id}/"
         @working_merged_cdx = "#{cdx_working_directory}/#{druid_id}_merged_index.cdx"
@@ -24,7 +23,7 @@ module Dor
       end
 
       def publish
-        FileUtils.mv( @working_sorted_cdx, @main_cdx_file)
+        FileUtils.mv(@working_sorted_cdx, @main_cdx_file)
       end
 
       def clean
