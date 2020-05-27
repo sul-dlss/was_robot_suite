@@ -16,10 +16,11 @@ module Robots
 
           collection_id = Dor::WASCrawl::Dissemination::Utilities.get_collection_id(cocina_object)
           collection_path = Settings.was_crawl_dissemination.stacks_collections_path + collection_id
-          contentMetadata = druid_obj.datastreams['contentMetadata']
           path_working_directory = Settings.was_crawl_dissemination.path_working_directory
+          contentMetadata = druid_obj.datastreams['contentMetadata']
+          warc_file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(contentMetadata.content)
 
-          path_indexer_service = Dor::WASCrawl::PathIndexerService.new(druid, collection_path, path_working_directory, contentMetadata.content)
+          path_indexer_service = Dor::WASCrawl::PathIndexerService.new(druid, collection_path, path_working_directory, warc_file_list)
           path_indexer_service.merge
           path_indexer_service.sort
           path_indexer_service.publish
