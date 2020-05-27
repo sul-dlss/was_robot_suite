@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dor::WASCrawl::PathIndexerService do
+RSpec.describe Dor::WASCrawl::PathIndexerService do
   before(:all) do
     @stacks_path = Pathname(File.dirname(__FILE__)).join('fixtures/stacks')
     @path_files = Pathname(File.dirname(__FILE__)).join('fixtures/path_files')
@@ -8,15 +8,16 @@ describe Dor::WASCrawl::PathIndexerService do
     @collection_path = '/wasCrawlDissemination/collections/test_collection'
   end
 
-  describe '.merge' do
+  describe '#merge' do
     before(:all) do
       @druid = 'druid:dd111dd1111'
       @content_metadata_xml_location = 'spec/was_crawl_dissemination/fixtures/metadata/'
     end
+    let(:content_metadata) { File.open(@content_metadata_xml_location + 'contentMetadata_4files.xml').read }
+    let(:warc_file_list) { Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(content_metadata) }
 
-    it 'should merge results from contentMetadata to the main path index' do
-      content_metadata = File.open(@content_metadata_xml_location + 'contentMetadata_4files.xml').read
-      path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, content_metadata)
+    it 'merges results from contentMetadata to the main path index' do
+      path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, warc_file_list)
       path_index_service.instance_variable_set(:@main_path_index_file, "#{@stacks_path}/data/indices/path/path-index.txt")
 
       path_index_service.merge
@@ -33,11 +34,11 @@ describe Dor::WASCrawl::PathIndexerService do
     end
   end
 
-  describe '.sort' do
-    it 'should sort and remove duplicate frm the merged path index' do
+  describe '#sort' do
+    it 'sorts and remove duplicate frm the merged path index' do
       FileUtils.cp("#{@path_files}/merged_path_index.txt", "#{@path_working_directory}/merged_path_index.txt")
 
-      path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, '')
+      path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, [])
       path_index_service.sort
 
       expected_duplicate_path_index = "#{@path_files}/duplicate_path_index.txt"
@@ -58,11 +59,11 @@ describe Dor::WASCrawl::PathIndexerService do
     end
   end
 
-  describe '.publish' do
-    it 'should copy the new path index to the main path index location' do
+  describe '#publish' do
+    it 'copies the new path index to the main path index location' do
       FileUtils.cp("#{@path_files}/path_index.txt", "#{@path_working_directory}/path_index.txt")
 
-      path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, '')
+      path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, [])
       path_index_service.instance_variable_set(:@main_path_index_file, "#{@stacks_path}/data/indices/path/test_path-index.txt")
 
       path_index_service.publish

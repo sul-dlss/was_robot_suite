@@ -1,8 +1,8 @@
 module Dor
   module WASCrawl
     class CDXGeneratorService
-      def initialize(collection_path, druid_id, contentMetadata)
-        @contentMetadata = contentMetadata
+      def initialize(collection_path, druid_id, warc_file_list)
+        @warc_file_list = warc_file_list
         @druid_id = druid_id
         @collection_path = collection_path
         @cdx_indexer_script_file_name = Settings.was_crawl_dissemination.cdx_indexer_script
@@ -12,11 +12,10 @@ module Dor
       end
 
       def generate_cdx_for_crawl
-        warc_file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(@contentMetadata)
         cdx_druid_dir = "#{@cdx_working_directory}/#{@druid_id}"
         FileUtils.makedirs cdx_druid_dir unless File.exist?(cdx_druid_dir)
         druid_base_directory = DruidTools::AccessDruid.new(@druid_id, @collection_path).path
-        warc_file_list.each do |warc_file_name|
+        @warc_file_list.each do |warc_file_name|
           cdx_file_name  = get_cdx_file_name(warc_file_name)
           cdx_file_path  = "#{cdx_druid_dir}/#{cdx_file_name}"
           warc_file_path = "#{druid_base_directory}/#{warc_file_name}"

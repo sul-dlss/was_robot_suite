@@ -3,7 +3,7 @@ RSpec.configure do |c|
   c.filter_run_excluding :openwayback_prerequisite
 end
 
-describe Dor::WASCrawl::CDXGeneratorService do
+RSpec.describe Dor::WASCrawl::CDXGeneratorService do
   before(:all) do
     @stacks_path = Pathname(File.dirname(__FILE__)).join('fixtures/stacks')
     @workspace   = Pathname(File.dirname(__FILE__)).join('fixtures/workspace')
@@ -11,7 +11,7 @@ describe Dor::WASCrawl::CDXGeneratorService do
     @crawl_id      = 'test_crawl'
   end
 
-  context '.generate_cdx_for_crawl' do
+  describe '#generate_cdx_for_crawl' do
     before(:all) do
       @druid_id_1 = 'dd111dd1111'
       @druid_id_2 = 'dd111dd1111'
@@ -20,64 +20,71 @@ describe Dor::WASCrawl::CDXGeneratorService do
       @collection_path = "#{@stacks_path}/data/collections/test_collection"
     end
 
-    it 'should generate cdx file for each warc or arc file in contentMetadata', :openwayback_prerequisite do
-      contentMetadata = File.open(@content_metadata_xml_location + 'contentMetadata_3files.xml').read
-      cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_1, contentMetadata)
+    let(:warc_file_list) { Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(contentMetadata) }
 
-      cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
-      cdx_generator.generate_cdx_for_crawl
+    context "when contentMetadata has arcs or warcs" do
+      let(:contentMetadata) { File.open(@content_metadata_xml_location + 'contentMetadata_3files.xml').read }
 
-      cdx_file_path_1 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_1}/WARC-Test.cdx"
-      cdx_file_path_2 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_1}/ARC-Test.cdx"
+      it 'generates cdx files for each warc or arc file in contentMetadata', :openwayback_prerequisite do
+        cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_1, warc_file_list)
 
-      expect(File.exist?(cdx_file_path_1)).to eq(true)
-      expect(File.exist?(cdx_file_path_2)).to eq(true)
+        cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
+        cdx_generator.generate_cdx_for_crawl
 
-      actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path_1))
-      expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/WARC-Test.cdx'))
-      expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
+        cdx_file_path_1 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_1}/WARC-Test.cdx"
+        cdx_file_path_2 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_1}/ARC-Test.cdx"
 
-      actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path_2))
-      expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/ARC-Test.cdx'))
-      expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
+        expect(File.exist?(cdx_file_path_1)).to eq(true)
+        expect(File.exist?(cdx_file_path_2)).to eq(true)
+
+        actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path_1))
+        expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/WARC-Test.cdx'))
+        expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
+
+        actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path_2))
+        expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/ARC-Test.cdx'))
+        expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
+      end
+
+      it 'generates cdx files for each warc or arc file in contentMetadata even if there are some file already created', :openwayback_prerequisite do
+        # Make sure the test case is correctly setup
+        cdx_file_path_1 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/WARC-Test.cdx"
+        expect(File.exist?(cdx_file_path_1)).to eq(true)
+
+        cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_2, warc_file_list)
+
+        cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
+        cdx_generator.generate_cdx_for_crawl
+
+        cdx_file_path_1 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/WARC-Test.cdx"
+        cdx_file_path_2 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/ARC-Test.cdx"
+
+        expect(File.exist?(cdx_file_path_1)).to eq(true)
+        expect(File.exist?(cdx_file_path_2)).to eq(true)
+
+        actual_cdx_MD5   = Digest::MD5.hexdigest(File.read(cdx_file_path_1))
+        expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/WARC-Test.cdx'))
+        expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
+
+        actual_cdx_MD5   = Digest::MD5.hexdigest(File.read(cdx_file_path_2))
+        expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/ARC-Test.cdx'))
+        expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
+      end
     end
 
-    it 'should generate cdx file for each warc or arc file in contentMetadata even if there are some file already created', :openwayback_prerequisite do
-      # Make sure the test case is correctly setup
-      cdx_file_path_1 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/WARC-Test.cdx"
-      expect(File.exist?(cdx_file_path_1)).to eq(true)
+    context "when contentMetadata has no arcs or warcs" do
+      let(:contentMetadata) { File.open(@content_metadata_xml_location + 'contentMetadata_0file.xml').read }
 
-      contentMetadata = File.open(@content_metadata_xml_location + 'contentMetadata_3files.xml').read
-      cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_2, contentMetadata)
+      it 'should do nothing for the contentMetadata without any arcs or warcs', :openwayback_prerequisite do
+        cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_3, warc_file_list)
+        cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
+        cdx_generator.generate_cdx_for_crawl
 
-      cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
-      cdx_generator.generate_cdx_for_crawl
+        cdx_dir = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_3}/"
 
-      cdx_file_path_1 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/WARC-Test.cdx"
-      cdx_file_path_2 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/ARC-Test.cdx"
-
-      expect(File.exist?(cdx_file_path_1)).to eq(true)
-      expect(File.exist?(cdx_file_path_2)).to eq(true)
-
-      actual_cdx_MD5   = Digest::MD5.hexdigest(File.read(cdx_file_path_1))
-      expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/WARC-Test.cdx'))
-      expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
-
-      actual_cdx_MD5   = Digest::MD5.hexdigest(File.read(cdx_file_path_2))
-      expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/ARC-Test.cdx'))
-      expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
-    end
-
-    it 'should do nothing for the contentMetadata without any arcs or warcs', :openwayback_prerequisite do
-      contentMetadata = File.open(@content_metadata_xml_location + 'contentMetadata_0file.xml').read
-      cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_3, contentMetadata)
-      cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
-      cdx_generator.generate_cdx_for_crawl
-
-      cdx_dir = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_3}/"
-
-      expect(File.exist?(cdx_dir)).to eq(true)
-      expect(Dir.glob('#{cdx_dir}{*,.*}').empty?).to eq(true)
+        expect(File.exist?(cdx_dir)).to eq(true)
+        expect(Dir.glob('#{cdx_dir}{*,.*}').empty?).to eq(true)
+      end
     end
 
     after(:all) do
@@ -87,9 +94,9 @@ describe Dor::WASCrawl::CDXGeneratorService do
     end
   end
 
-  context '.generate_cdx_for_one_warc' do
+  describe '#generate_cdx_for_one_warc' do
     before(:all) do
-      @cdx_generator = Dor::WASCrawl::CDXGeneratorService.new('', '', '')
+      @cdx_generator = Dor::WASCrawl::CDXGeneratorService.new('', '', [])
     end
 
     it 'should generate CDX file for the input warc file', :openwayback_prerequisite do
@@ -124,7 +131,7 @@ describe Dor::WASCrawl::CDXGeneratorService do
 
   context '.get_cdx_file_name' do
     before(:all) do
-      @cdx_generator = Dor::WASCrawl::CDXGeneratorService.new('', '', '')
+      @cdx_generator = Dor::WASCrawl::CDXGeneratorService.new('', '', [])
     end
 
     it 'should return the cdx file for .warc.gz' do
@@ -169,7 +176,7 @@ describe Dor::WASCrawl::CDXGeneratorService do
 
   context '.prepare_cdx_generation_cmd_string' do
     before(:all) do
-      @cdx_generator = Dor::WASCrawl::CDXGeneratorService.new('', '', '')
+      @cdx_generator = Dor::WASCrawl::CDXGeneratorService.new('', '', [])
     end
 
     it 'should returns the command string as expected' do
