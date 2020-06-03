@@ -3,7 +3,7 @@ module Robots
     module WasCrawlDissemination
       class CdxGenerator < Was::Robots::Base
         def initialize
-          super('dor', 'wasCrawlDisseminationWF', 'cdx-generator')
+          super('wasCrawlDisseminationWF', 'cdx-generator')
         end
 
         # `perform` is the main entry point for the robot. This is where

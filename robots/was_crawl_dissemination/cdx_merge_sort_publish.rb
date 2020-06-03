@@ -5,7 +5,7 @@ module Robots
     module WasCrawlDissemination
       class CdxMergeSortPublish < Was::Robots::Base
         def initialize
-          super('dor', 'wasCrawlDisseminationWF', 'cdx-merge-sort-publish')
+          super('wasCrawlDisseminationWF', 'cdx-merge-sort-publish')
         end
 
         # `perform` is the main entry point for the robot. This is where

@@ -3,7 +3,7 @@ module Robots
     module WasCrawlDissemination
       class PathIndexer < Was::Robots::Base
         def initialize
-          super('dor', 'wasCrawlDisseminationWF', 'path-indexer')
+          super('wasCrawlDisseminationWF', 'path-indexer')
         end
 
         # `perform` is the main entry point for the robot. This is where
