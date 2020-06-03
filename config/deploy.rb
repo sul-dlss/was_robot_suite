@@ -40,7 +40,7 @@ namespace :deploy do
   desc 'Download WAS Metadata Extractor for was-crawl-preassembly'
   task :download_metadata_extractor_tar do
     on roles(:app), in: :sequence, wait: 10 do
-      execute :curl, '-s https://jenkinsqa.stanford.edu/artifacts/WASMetadataExtractor-0.0.2-SNAPSHOT-jar-with-dependencies.jar', "> #{fetch(:deploy_to)}/shared/jar/WASMetadataExtractor.jar"
+      execute :curl, '-s https://jenkinsqa.stanford.edu/artifacts/WASMetadataExtractor-0.0.3-SNAPSHOT-jar-with-dependencies.jar', "> #{fetch(:deploy_to)}/shared/jar/WASMetadataExtractor.jar"
     end
   end
 
