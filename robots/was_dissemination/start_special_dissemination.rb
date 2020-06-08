@@ -11,16 +11,13 @@ module Robots
         #
         # @param [String] druid -- the Druid identifier for the object to process
         def perform(druid)
-          druid_obj = Dor.find(druid)
-          return unless druid_obj.identityMetadata.objectType == ['item'] && !druid_obj.contentMetadata.nil?
+          obj = Dor::Services::Client.object(druid).find
+          return LyberCore::Robot::ReturnState.new(status: :skipped, note: 'Not an item/DRO, nothing to do') unless obj.dro?
 
-          object_client = Dor::Services::Client.object(druid)
-          current_version = object_client.version.current
-
-          if druid_obj.contentMetadata.contentType == ['webarchive-seed']
-            workflow_service.create_workflow_by_name(druid, 'wasSeedDisseminationWF', version: current_version)
-          elsif druid_obj.contentMetadata.contentType == ['file']
-            workflow_service.create_workflow_by_name(druid, 'wasCrawlDisseminationWF', version: current_version)
+          if obj.type == Cocina::Models::Vocab.webarchive_seed
+            workflow_service.create_workflow_by_name(druid, 'wasSeedDisseminationWF', version: obj.version)
+          elsif obj.type == Cocina::Models::Vocab.object
+            workflow_service.create_workflow_by_name(druid, 'wasCrawlDisseminationWF', version: obj.version)
           end
         end
       end

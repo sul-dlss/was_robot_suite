@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
-  let(:druid_obj) { instance_double(Dor::Item, contentMetadata: contentMetadata) }
-  let(:contentMetadata) { Dor::ContentMetadataDS }
   let(:druid) { 'druid:ab123cd4567' }
   subject(:robot) { described_class.new }
 
@@ -15,19 +13,16 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
 
   describe '.perform' do
     subject(:perform) { robot.perform(druid) }
-    let(:version_client) { instance_double(Dor::Services::Client::ObjectVersion, current: '1') }
-    let(:object_client) { instance_double(Dor::Services::Client::Object, version: version_client) }
+    let(:object_client) { instance_double(Dor::Services::Client::Object, find: item) }
     let(:workflow_service) { instance_double(Dor::Workflow::Client, create_workflow_by_name: true) }
 
     before do
-      allow(Dor).to receive(:find).and_return(druid_obj)
       allow(Dor::Services::Client).to receive(:object).with(druid).and_return(object_client)
       allow(WorkflowClientFactory).to receive(:build).and_return(workflow_service)
-      allow(druid_obj).to receive_message_chain('identityMetadata.objectType').and_return([object_type])
     end
 
     context 'when the type is collection' do
-      let(:object_type) { 'collection' }
+      let(:item) { instance_double(Cocina::Models::Collection, dro?: false) }
 
       it 'does nothing for collection object' do
         perform
@@ -36,14 +31,10 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
     end
 
     context 'when the object type is item' do
-      let(:object_type) { 'item' }
+      let(:item) { instance_double(Cocina::Models::DRO, version: '1', dro?: true, type: type) }
 
-      before do
-        allow(contentMetadata).to receive(:contentType).and_return([content_type])
-      end
-
-      context 'when the contentType is webarchive-seed' do
-        let(:content_type) { 'webarchive-seed' }
+      context 'when the type is webarchive-seed' do
+        let(:type) { Cocina::Models::Vocab.webarchive_seed }
 
         it 'initializes wasSeedDisseminationWF for the webarchive-seed item' do
           perform
@@ -51,8 +42,8 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
         end
       end
 
-      context 'when the contentType is file (crawl item)' do
-        let(:content_type) { 'file' }
+      context 'when the type is object (crawl item)' do
+        let(:type) { Cocina::Models::Vocab.object }
 
         it 'initializes wasCrawlDisseminationWF for the crawl item' do
           perform
