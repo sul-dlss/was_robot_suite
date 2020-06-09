@@ -390,7 +390,6 @@ DEPENDENCIES
   equivalent-xml
   faraday (~> 0.15.0)
   honeybadger
-  iso-639 (~> 0.2.8)
   lockfile
   lyber-core (~> 6.0)
   mini_exiftool
