@@ -60,6 +60,8 @@ GEM
       capistrano
       resque-pool
     capistrano-shared_configs (0.2.2)
+    capistrano-yarn (2.0.2)
+      capistrano (~> 3.0)
     chronic (0.10.2)
     cocina-models (0.33.0)
       activesupport
@@ -238,7 +240,6 @@ GEM
     parallel (1.19.2)
     parser (2.7.1.4)
       ast (~> 2.4.1)
-    phantomjs (2.1.1.0)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -381,6 +382,7 @@ DEPENDENCIES
   awesome_print
   capistrano-bundler
   capistrano-resque-pool
+  capistrano-yarn
   config (~> 2.0)
   dlss-capistrano
   dor-services (~> 9.0)
@@ -394,7 +396,6 @@ DEPENDENCIES
   lyber-core (~> 6.0)
   mini_exiftool
   mini_magick
-  phantomjs
   pry
   pry-byebug
   rake

@@ -1,13 +1,8 @@
 require 'spec_helper'
 require 'was_seed_preassembly/thumbnail_generator_service'
 
-describe Dor::WASSeed::ThumbnailGeneratorService do
-  # VCR.configure do |config|
-  #   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'
-  #   config.hook_into :webmock # or :fakeweb
-  # end
-
-  before :all do
+RSpec.describe Dor::WASSeed::ThumbnailGeneratorService do
+  before do
     Settings.was_seed.wayback_uri = 'https//swap.stanford.edu'
   end
 
@@ -21,17 +16,9 @@ describe Dor::WASSeed::ThumbnailGeneratorService do
     end
 
     it 'generates jp2 from jpeg thumbnail and pushes to druid_tree content directory', :image_prerequisite do
-      allow(Dor::WASSeed::ThumbnailGeneratorService).to receive(:capture).and_return('')
+      allow(Dor::WASSeed::ThumbnailGeneratorService).to receive(:capture)
       Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(@druid_id, @workspace, @uri)
       expect(File.exist?('spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2')).to be true
-      expect(File.exist?('tmp/ab123cd4567.jpeg')).to be false
-    end
-
-    it 'raises an error if there is an error in the capture method' do
-      allow(Dor::WASSeed::ThumbnailGeneratorService).to receive(:capture).and_return('#FAIL#')
-      exp_msg = "Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n #FAIL#"
-      expect { Dor::WASSeed::ThumbnailGeneratorService.capture_thumbnail(@druid_id, @workspace, @uri) }.to raise_error.with_message(exp_msg)
-      expect(File.exist?('spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2')).to be false
       expect(File.exist?('tmp/ab123cd4567.jpeg')).to be false
     end
 

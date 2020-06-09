@@ -1,7 +1,4 @@
-require 'nokogiri'
-require 'phantomjs'
-require 'assembly-image'
-require 'mini_magick'
+require 'open3'
 
 module Dor
   module WASSeed
@@ -13,33 +10,23 @@ module Dor
         thumbnail_file = "#{DruidTools::Druid.new(druid, workspace).content_dir}/thumbnail.jp2"
         wayback_uri    = "#{Settings.was_seed.wayback_uri}/#{DATE_TO_TRIGGER_EARLIEST_CAPTURE_DATE}/#{uri}"
         temporary_file = "tmp/#{druid[6, 14]}"
-        result = ''
+        jpeg_file = "#{temporary_file}.jpeg"
         begin
-          result = capture(wayback_uri, temporary_file)
+          capture(wayback_uri, jpeg_file)
         rescue => e
-          File.delete(temporary_file + '.jpeg') if File.exist?(temporary_file + '.jpeg')
+          File.delete(jpeg_file) if File.exist?(jpeg_file)
           raise "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{e.message}"
         end
 
-        if result.starts_with?('#FAIL#')
-          File.delete(temporary_file + '.jpeg') if File.exist?(temporary_file + '.jpeg')
-          fail "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{result}"
-        else
-          resize_temporary_image(temporary_file + '.jpeg')
-          Assembly::Image.new(temporary_file + '.jpeg').create_jp2(output: temporary_file + '.jp2')
-          FileUtils.rm temporary_file + '.jpeg'
-          FileUtils.mv temporary_file + '.jp2', thumbnail_file
-        end
+        resize_temporary_image(jpeg_file)
+        Assembly::Image.new(jpeg_file).create_jp2(output: temporary_file + '.jp2')
+        FileUtils.rm jpeg_file
+        FileUtils.mv temporary_file + '.jp2', thumbnail_file
       end
 
       def self.capture(wayback_uri, temporary_file)
-        result = ''
-        begin
-          result = Phantomjs.run('scripts/rasterize.js', wayback_uri, temporary_file + '.jpeg')
-        rescue StandardError => e
-          result += "\nException in generating thumbnail. #{e.message}\n#{e.backtrace.inspect}"
-        end
-        result
+        _stdout_str, stderr_str, _status = Open3.capture3("node scripts/screenshot.js #{wayback_uri} #{temporary_file} #{Settings.chrome_path}")
+        raise stderr_str unless File.exist?(temporary_file)
       end
 
       def self.resize_temporary_image(temporary_image)

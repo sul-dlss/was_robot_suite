@@ -9,7 +9,6 @@ gem 'faraday', '~> 0.15.0'
 gem 'lyber-core', '~> 6.0'
 
 gem 'lockfile'       # file locks needed for mutual exclusion during rollup and index addition processes
-gem 'phantomjs'      # was-seed-preassembly thumbnail creation
 gem 'mini_exiftool'  # was-seed-preassembly thumbnail creation
 gem 'mini_magick'    # was-seed-preassembly thumbnail creation
 gem 'assembly-image' # was-seed-preassembly thumbnail creation
@@ -35,5 +34,6 @@ end
 group :deployment do
   gem 'capistrano-bundler'
   gem 'capistrano-resque-pool'
+  gem 'capistrano-yarn'
   gem 'dlss-capistrano'
 end
