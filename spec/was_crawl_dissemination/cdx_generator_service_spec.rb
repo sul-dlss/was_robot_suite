@@ -20,7 +20,7 @@ RSpec.describe Dor::WASCrawl::CDXGeneratorService do
       @collection_path = "#{@stacks_path}/data/collections/test_collection"
     end
 
-    let(:warc_file_list) { Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(contentMetadata) }
+    let(:warc_file_list) { Dor::WASCrawl::Dissemination::Utilities.warc_file_list(contentMetadata) }
 
     context "when contentMetadata has arcs or warcs" do
       let(:contentMetadata) { File.open(@content_metadata_xml_location + 'contentMetadata_3files.xml').read }

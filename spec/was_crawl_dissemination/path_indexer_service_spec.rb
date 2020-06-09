@@ -11,12 +11,10 @@ RSpec.describe Dor::WASCrawl::PathIndexerService do
   describe '#merge' do
     before(:all) do
       @druid = 'druid:dd111dd1111'
-      @content_metadata_xml_location = 'spec/was_crawl_dissemination/fixtures/metadata/'
     end
-    let(:content_metadata) { File.open(@content_metadata_xml_location + 'contentMetadata_4files.xml').read }
-    let(:warc_file_list) { Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(content_metadata) }
+    let(:warc_file_list) { ["WARC-Test.warc.gz", "ARC-Test.arc.gz"] }
 
-    it 'merges results from contentMetadata to the main path index' do
+    it 'merges results from warc_file_list to the main path index' do
       path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, warc_file_list)
       path_index_service.instance_variable_set(:@main_path_index_file, "#{@stacks_path}/data/indices/path/path-index.txt")
 

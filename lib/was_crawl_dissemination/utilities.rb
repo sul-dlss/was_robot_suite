@@ -8,10 +8,18 @@ module Dor
           end
         end
 
-        def self.get_warc_file_list_from_content_metadata(contentMetadata)
-          contentMetadata_xml = Nokogiri::XML(contentMetadata)
-          warc_file_list = contentMetadata_xml.xpath("//contentMetadata/resource/file[(@dataType='WARC' or @dataType='ARC') and @shelve='yes']/@id")
-          warc_file_list
+        # @param [Cocina::Models::DRO] cocina_model
+        # @return [Array<String>] a list of filenames that are ARCs or WARCs
+        def self.warc_file_list(cocina_model)
+          cocina_model.structural.contains.flat_map do |file_set|
+            file_set.structural.contains.select do |file|
+              filename = file.filename.downcase
+              file.administrative.shelve &&
+                (filename.ends_with?('.arc.gz') ||
+                filename.ends_with?('.warc.gz') ||
+                filename.ends_with?('.warc'))
+            end.map(&:filename)
+          end
         end
 
         def self.get_collection_id(druid_obj)

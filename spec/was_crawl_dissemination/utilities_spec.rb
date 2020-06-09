@@ -11,30 +11,99 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
     end
   end
 
-  context '.prepare_new_file_list' do
-    let(:content_metadata_xml_location) { 'spec/was_crawl_dissemination/fixtures/metadata/' }
+  context '.warc_file_list' do
+    let(:fs_structural) { instance_double(Cocina::Models::FileSetStructural, contains: files) }
+    let(:fileset) { instance_double(Cocina::Models::FileSet, structural: fs_structural) }
 
-    it 'should return a list for the extrcted arc and warc files' do
-      contentMetadata = File.open(content_metadata_xml_location + 'contentMetadata_4files.xml').read
+    let(:cocina_model) { instance_double(Cocina::Models::DRO, structural: structural) }
+    let(:file_list) { Dor::WASCrawl::Dissemination::Utilities.warc_file_list(cocina_model) }
 
-      file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(contentMetadata)
-      expect(file_list.length).to eq(2)
+    context 'with 4 files' do
+      let(:structural) do
+        Cocina::Models::DROStructural.new(contains: [
+                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
+                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
+                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
+                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
+                                          ])
+      end
+      let(:file1) do
+        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+                                 label: '', filename: 'WARC-Test.warc.gz', version: 1,
+                                 administrative: { shelve: true })
+      end
+      let(:file2) do
+        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+                                 label: '', filename: 'ARC-Test.arc.gz', version: 1,
+                                 administrative: { shelve: true })
+      end
+      let(:file3) do
+        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+                                 label: '', filename: 'test.txt', version: 1,
+                                 administrative: { shelve: false })
+      end
+      let(:file4) do
+        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+                                 label: '', filename: 'ARC-Test2.arc.gz', version: 1,
+                                 administrative: { shelve: false })
+      end
+
+      it 'returns a list for the extrcted arc and warc files' do
+        expect(file_list.length).to eq(2)
+      end
     end
 
-    it 'should return an empty list for the contentMetadata with no arcs or warcs inside' do
-      contentMetadata = File.open(content_metadata_xml_location + 'contentMetadata_0file.xml').read
+    context 'for the contentMetadata with no arcs or warcs inside' do
+      let(:structural) do
+        Cocina::Models::DROStructural.new(contains: [
+                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } }
+                                          ])
+      end
 
-      file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(contentMetadata)
-      expect(file_list).not_to be_nil
-      expect(file_list.length).to eq(0)
+      let(:file1) do
+        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+                                 label: '', filename: 'test.txt', version: 1,
+                                 administrative: { shelve: false })
+      end
+
+      it 'returns an empty list' do
+        expect(file_list).to eq []
+      end
     end
 
-    it 'should return an empty list for the contentMetadata with dark archive shelve=no' do
-      contentMetadata = File.open(content_metadata_xml_location + 'contentMetadata_dark.xml').read
+    context 'when the contentMetadata has dark archive shelve=no' do
+      let(:structural) do
+        Cocina::Models::DROStructural.new(contains: [
+                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
+                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
+                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
+                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
+                                          ])
+      end
+      let(:file1) do
+        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+                                 label: '', filename: 'WARC-Test.warc.gz', version: 1,
+                                 administrative: { shelve: false })
+      end
+      let(:file2) do
+        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+                                 label: '', filename: 'ARC-Test.arc.gz', version: 1,
+                                 administrative: { shelve: false })
+      end
+      let(:file3) do
+        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+                                 label: '', filename: 'test.txt', version: 1,
+                                 administrative: { shelve: false })
+      end
+      let(:file4) do
+        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+                                 label: '', filename: 'ARC-Test2.arc.gz', version: 1,
+                                 administrative: { shelve: false })
+      end
 
-      file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(contentMetadata)
-      expect(file_list).not_to be_nil
-      expect(file_list.length).to eq(0)
+      it 'returns an empty list' do
+        expect(file_list).to eq []
+      end
     end
   end
 

@@ -11,13 +11,11 @@ module Robots
         #
         # @param [String] druid -- the Druid identifier for the object to process
         def perform(druid)
-          druid_obj = Dor.find(druid)
           cocina_object = Dor::Services::Client.object(druid).find
 
           collection_id = Dor::WASCrawl::Dissemination::Utilities.get_collection_id(cocina_object)
           collection_path = Settings.was_crawl_dissemination.stacks_collections_path + collection_id
-          contentMetadata = druid_obj.datastreams['contentMetadata']
-          warc_file_list = Dor::WASCrawl::Dissemination::Utilities.get_warc_file_list_from_content_metadata(contentMetadata.content)
+          warc_file_list = Dor::WASCrawl::Dissemination::Utilities.warc_file_list(cocina_object)
 
           cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(collection_path, druid, warc_file_list)
           cdx_generator.generate_cdx_for_crawl
