@@ -6,13 +6,6 @@ ssl:
   key_file: ~
   key_pass: ~
 
-suri:
-  mint_ids: true
-  id_namespace: 'druid'
-  url: ~
-  user: ~
-  pass: ~
-
 solr:
   url: ~
 

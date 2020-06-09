@@ -64,14 +64,6 @@ Dor::Config.configure do
     key_pass Settings.ssl.key_pass
   end
 
-  suri do
-    mint_ids Settings.suri.mint_ids
-    id_namespace Settings.suri.id_namespace
-    url Settings.suri.url
-    user Settings.suri.user
-    pass Settings.suri.pass
-  end
-
   solr.url Settings.solr.url
 end
 
