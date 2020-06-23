@@ -41,6 +41,7 @@ was_seed:
 
 thumbnail_generator_service_uri: ''  # for was-seed-dissemination
 
+chrome_path: /usr/bin/google-chrome
 workflow:
   url: https://example.com/workflow/
   logfile: 'log/workflow_service.log'

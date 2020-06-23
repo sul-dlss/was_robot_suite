@@ -6,3 +6,4 @@ doc/
 config/environments/test.rb
 config/environments/dev.rb
 spec/was_seed_preassembly/fixtures/workspace
+node_modules/
