@@ -12,7 +12,7 @@ async function run() {
         const page = await browser.newPage();
         await page.setViewport({ width: 1200, height: 800 });
         await page.goto(process.argv[2]);
-        await page.screenshot({ path: process.argv[3], fullPage: true, format: 'jpeg' });
+        await page.screenshot({ path: process.argv[3], format: 'jpeg' });
     } catch (err) {
         console.error(err.message)
     } finally {
