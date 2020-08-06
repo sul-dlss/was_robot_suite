@@ -24,8 +24,8 @@
                  <internetMediaType>text/html</internetMediaType>
                  <digitalOrigin>born digital</digitalOrigin>
              </physicalDescription>
-             <location displayLabel="Archived site">
-                 <url>https://swap.stanford.edu/*/<xsl:value-of select="uri"/></url>
+             <location>
+                 <url displayLabel="Archived website">https://swap.stanford.edu/*/<xsl:value-of select="uri"/></url>
              </location>
              <recordInfo>
                  <languageOfCataloging>
