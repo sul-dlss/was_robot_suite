@@ -25,7 +25,7 @@ The WAS robots depend on some java projects:
 - [openwayback](https://github.com/sul-dlss/openwayback)
   - to index WARC materials for the Stanford Web Archiving Portal, used by cdx-generator step in wasCrawlDisseminationWF
 
-These java projects use [jenkinsqa](https://jenkinsqa.stanford.edu/) to create deployment artifacts, which are then deployed with capistrano via `config/deploy.rb` (see lines 40-54).
+These java projects use [sul-ci-prod](https://sul-ci-prod.stanford.edu/) to create deployment artifacts, which are then deployed with capistrano via `config/deploy.rb` (see lines 40-54).
 
 The deployed `was_robot_suite` houses these java artifacts in the `jar` directory.
 
