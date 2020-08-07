@@ -31,7 +31,7 @@ RSpec.describe Dor::WASSeed::DescMetadataGenerator do
         # fixed in v2.2.0, but dor-services pinned to 1.5.3
         expect(smods_rec._location.url.text).to match %r{^https://swap.stanford.edu/*/}
         expect(smods_rec._location.url.text).to end_with seed_uri
-        expect(smods_rec._location.displayLabel).to eq ['Archived site']
+        expect(smods_rec._location.url.displayLabel).to eq ['Archived website']
       end
       context 'constant values' do
         it '<typeOfResource> of text' do
