@@ -37,8 +37,8 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
         let(:type) { Cocina::Models::Vocab.webarchive_seed }
 
         it 'initializes wasSeedDisseminationWF for the webarchive-seed item' do
-          perform
-          expect(workflow_service).to have_received(:create_workflow_by_name).with(druid, 'wasSeedDisseminationWF', version: '1')
+          expect(perform.status).to eq 'skipped'
+          expect(workflow_service).not_to have_received(:create_workflow_by_name)
         end
       end
 
