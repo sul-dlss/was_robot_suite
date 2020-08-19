@@ -65,12 +65,6 @@ It consists of 4 robots:
 * `content-metadata-generator`: generates contentMetadata.xml for the thumbnail by processing the contentMetadata.XSLT template against the available thumbnail.jp2.
 * `end-was-seed-preassembly`: initiates the accessionWF (of common-accessioning) and opens/closes version for the old object.
 
-## wasSeedDissemination
-
-This workflow provides the connection between the SDR and the actual web archiving components.  It consists of 1 robot:
-
-* `update-thumbnail-generator`: sends the information about the seed object URI and DRUID to `was-thumbnail-service`.
-
 ## wasDissemination
 
 Worfklow to route web archiving objects to the wasSeedDisseminationWF or wasCrawlDisseminationWF based on content type.  Note that the wasDisseminationWF itself is fired off by the accessionWF by using the custom <dissemination><workflow> tag in the APO. For example, if the APO has the following, it'll fire off wasDisseminationWF:
