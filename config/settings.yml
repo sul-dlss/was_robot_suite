@@ -39,8 +39,6 @@ was_seed:
   staging_path: '/was_unaccessioned_data/seed/'
   wayback_uri: 'https://swap.stanford.edu'
 
-thumbnail_generator_service_uri: ''  # for was-seed-dissemination
-
 chrome_path: /usr/bin/google-chrome
 workflow:
   url: https://example.com/workflow/

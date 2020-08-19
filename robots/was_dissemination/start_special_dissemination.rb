@@ -14,11 +14,10 @@ module Robots
           obj = Dor::Services::Client.object(druid).find
           return LyberCore::Robot::ReturnState.new(status: :skipped, note: 'Not an item/DRO, nothing to do') unless obj.dro?
 
-          if obj.type == Cocina::Models::Vocab.webarchive_seed
-            workflow_service.create_workflow_by_name(druid, 'wasSeedDisseminationWF', version: obj.version)
-          elsif obj.type == Cocina::Models::Vocab.object
-            workflow_service.create_workflow_by_name(druid, 'wasCrawlDisseminationWF', version: obj.version)
-          end
+          # Theres nothing to do if this is a seed file
+          return LyberCore::Robot::ReturnState.new(status: :skipped, note: "Nothing to do for #{obj.type}") unless obj.type == Cocina::Models::Vocab.object
+
+          workflow_service.create_workflow_by_name(druid, 'wasCrawlDisseminationWF', version: obj.version)
         end
       end
     end
