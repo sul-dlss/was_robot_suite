@@ -63,4 +63,4 @@ set :honeybadger_env, fetch(:stage)
 
 # update shared_configs before restarting app
 before 'deploy:publishing', 'shared_configs:update'
-after 'deploy:publishing', 'resque:pool:full_restart'
+after 'deploy:publishing', 'resque:pool:hot_swap'
