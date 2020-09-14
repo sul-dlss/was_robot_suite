@@ -9,7 +9,7 @@ RSpec.describe Dor::WASCrawl::Utilities do
   end
 
   context 'when the object belongs to a collection' do
-    let(:structural) { instance_double(Cocina::Models::DROStructural, isMemberOf: collection_druid) }
+    let(:structural) { instance_double(Cocina::Models::DROStructural, isMemberOf: [collection_druid]) }
 
     it 'fetches a collection id' do
       expect(described_class.get_collection_id(cocina_model)).to eq 'cc333dd4444'
@@ -17,7 +17,7 @@ RSpec.describe Dor::WASCrawl::Utilities do
   end
 
   context 'when the object does not belong to a collection' do
-    let(:structural) { instance_double(Cocina::Models::DROStructural, isMemberOf: nil) }
+    let(:structural) { instance_double(Cocina::Models::DROStructural, isMemberOf: []) }
 
     it 'raises an error' do
       expect { described_class.get_collection_id(cocina_model) }.to raise_error(RuntimeError, /aa111bb2222 doesn't belong to a collection/)
