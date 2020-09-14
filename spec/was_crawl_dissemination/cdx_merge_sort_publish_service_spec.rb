@@ -79,43 +79,43 @@ describe Dor::WASCrawl::CDXMergeSortPublishService do
     before(:all) do
       # needs to be @ so after(:all) can access it
       @cdx_backup_dir = "#{@stacks_path}/data/indices/cdx_backup"
+      @druid = 'ii111ii1111'
     end
-    let(:druid) { 'ii111ii1111' }
     it 'moves cdx files to cdx backup directory (from  source_dir)' do
       FileUtils.cp_r("#{cdx_file_path}/ii/.", "#{@cdx_working_dir}")
-      mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid, @cdx_working_dir, @cdx_backup_dir)
+      mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(@druid, @cdx_working_dir, @cdx_backup_dir)
 
       expect(File.exist?(mergeSortPublishService.instance_variable_get(:@source_cdx_dir))).to eq true
-      expect(File.exist?("#{@cdx_working_dir}/#{druid}_merged_index.cdx")).to eq true
-      expect(File.exist?("#{@cdx_working_dir}/#{druid}_sorted_duplicate_index.cdx")).to eq true
-      expect(File.exist?("#{@cdx_backup_dir}/#{druid}")).to eq false
-      expect(File.exist?("#{@cdx_backup_dir}/#{druid}/file1.cdx")).to eq false
-      expect(File.exist?("#{@cdx_backup_dir}/#{druid}/file2.cdx")).to eq false
+      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_merged_index.cdx")).to eq true
+      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_sorted_duplicate_index.cdx")).to eq true
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}")).to eq false
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file1.cdx")).to eq false
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file2.cdx")).to eq false
 
       mergeSortPublishService.clean
       expect(File.exist?(mergeSortPublishService.instance_variable_get(:@source_cdx_dir))).to eq false
-      expect(File.exist?("#{@cdx_working_dir}/#{druid}_merged_index.cdx")).to eq false
-      expect(File.exist?("#{@cdx_working_dir}/#{druid}_sorted_duplicate_index.cdx")).to eq false
-      expect(File.exist?("#{@cdx_backup_dir}/#{druid}")).to eq true
-      expect(File.exist?("#{@cdx_backup_dir}/#{druid}/file1.cdx")).to eq true
-      expect(File.exist?("#{@cdx_backup_dir}/#{druid}/file2.cdx")).to eq true
+      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_merged_index.cdx")).to eq false
+      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_sorted_duplicate_index.cdx")).to eq false
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}")).to eq true
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file1.cdx")).to eq true
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file2.cdx")).to eq true
       # merged_index.cdx and sorted_duplicate_index.cdx are not kept
-      expect(File.exist?("#{@cdx_backup_dir}/#{druid}_merged_index.cdx")).to eq false
-      expect(File.exist?("#{@cdx_backup_dir}/#{druid}_sorted_duplicate_index.cdx")).to eq false
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}_merged_index.cdx")).to eq false
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}_sorted_duplicate_index.cdx")).to eq false
     end
 
-    it 'moves cdx files to cdx backup directory when the druid directory already exists' do
+    it 'moves cdx files to cdx backup directory when the @druid directory already exists' do
       FileUtils.cp_r("#{cdx_file_path}/ii/.", "#{@cdx_backup_dir}")
 
-      mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(druid, @cdx_working_dir, @cdx_backup_dir)
-      expect(File.exist?("#{@cdx_backup_dir}/#{druid}")).to eq true
+      mergeSortPublishService = Dor::WASCrawl::CDXMergeSortPublishService.new(@druid, @cdx_working_dir, @cdx_backup_dir)
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}")).to eq true
 
       # it's okay if it complains about the files;  we are specifically concerned about the directory
-      expect { mergeSortPublishService.clean }.not_to raise_error(StandardError, "File exists - #{@cdx_backup_dir}/#{druid}")
+      expect { mergeSortPublishService.clean }.not_to raise_error(StandardError, "File exists - #{@cdx_backup_dir}/#{@druid}")
     end
 
     after(:all) do
-      FileUtils.rm_rf("#{@cdx_backup_dir}/.")
+      FileUtils.rm_rf(Dir.glob("#{@cdx_backup_dir}/#{@druid}*"))
     end
   end
 end

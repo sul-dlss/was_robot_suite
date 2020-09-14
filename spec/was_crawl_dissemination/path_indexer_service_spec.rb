@@ -9,13 +9,11 @@ RSpec.describe Dor::WASCrawl::PathIndexerService do
   end
 
   describe '#merge' do
-    before(:all) do
-      @druid = 'druid:dd111dd1111'
-    end
+    let(:druid) { 'druid:dd111dd1111' }
     let(:warc_file_list) { ["WARC-Test.warc.gz", "ARC-Test.arc.gz"] }
 
     it 'merges results from warc_file_list to the main path index' do
-      path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, warc_file_list)
+      path_index_service = Dor::WASCrawl::PathIndexerService.new(druid, @collection_path, @path_working_directory, warc_file_list)
       path_index_service.instance_variable_set(:@main_path_index_file, "#{@stacks_path}/data/indices/path/path-index.txt")
 
       path_index_service.merge
@@ -25,10 +23,6 @@ RSpec.describe Dor::WASCrawl::PathIndexerService do
       expect(File.exist?(actual_merged_file_path)).to eq(true)
 
       expect(File.read(actual_merged_file_path)).to eq(File.read(expected_merged_file_path))
-    end
-
-    after(:all) do
-      FileUtils.rm_rf("#{@path_working_directory}/.")
     end
   end
 
@@ -50,10 +44,6 @@ RSpec.describe Dor::WASCrawl::PathIndexerService do
 
       expect(File.exist?(actual_path_index)).to eq(true)
       expect(File.read(actual_path_index)).to eq(File.read(expected_path_index))
-    end
-
-    after(:all) do
-      FileUtils.rm_rf("#{@path_working_directory}/.")
     end
   end
 
