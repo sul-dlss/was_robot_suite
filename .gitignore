@@ -7,3 +7,4 @@ config/environments/test.rb
 config/environments/dev.rb
 spec/was_seed_preassembly/fixtures/workspace
 node_modules/
+spec/was_crawl_dissemination/fixtures/stacks/data/indices/path_working/*
