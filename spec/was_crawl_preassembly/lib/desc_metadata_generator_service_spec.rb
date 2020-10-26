@@ -32,9 +32,8 @@ describe Dor::WASCrawl::DescMetadataGenerator do
   end
 
   def generate_object(druid_id)
-    metadata_generator_service = Dor::WASCrawl::DescMetadataGenerator.new(@collection_id,
-                                                                          @staging_path.to_s, druid_id)
-    metadata_generator_service
+    Dor::WASCrawl::DescMetadataGenerator.new(@collection_id,
+                                             @staging_path.to_s, druid_id)
   end
 
   def generate_data_items

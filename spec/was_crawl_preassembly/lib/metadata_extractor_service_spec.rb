@@ -23,7 +23,7 @@ describe Dor::WASCrawl::MetadataExtractor do
       druid_id = 'druid:ab123ab1234'
       metadata_extractor_service = Dor::WASCrawl::MetadataExtractor.new(@collection_id, @crawl_id, @staging_path.to_s, druid_id)
       metadata_extractor_service.prepare_parameters
-      expect(metadata_extractor_service.instance_variable_get(:@input_directory)).to eq @staging_path.to_s + '/ab/123/ab/1234/ab123ab1234/content'
+      expect(metadata_extractor_service.instance_variable_get(:@input_directory)).to eq "#{@staging_path}/ab/123/ab/1234/ab123ab1234/content"
       expect(metadata_extractor_service.instance_variable_get(:@xml_output_location)).to eq 'tmp/druid:ab123ab1234.xml'
     end
 

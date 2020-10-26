@@ -3,9 +3,7 @@ require 'nokogiri'
 module Dor
   module WASCrawl
     class MetadataGenerator
-      attr_accessor  :collection_id
-      attr_accessor  :staging_path
-      attr_accessor  :druid_id
+      attr_accessor :collection_id, :staging_path, :druid_id
 
       def initialize(collection_id, staging_path, druid_id)
         @collection_id = collection_id
@@ -27,16 +25,15 @@ module Dor
         druid_pathname = Pathname(DruidTools::Druid.new(@druid_id, @staging_path.to_s).path).to_s
         raise "Directory for #{@druid_id} doesn't exist in workspace #{@staging_path}" unless File.exist?(druid_pathname)
 
-        metadata_pathname = druid_pathname + '/metadata/'
+        metadata_pathname = "#{druid_pathname}/metadata/"
         Dir.mkdir(metadata_pathname) unless File.exist?(metadata_pathname)
-        f = File.open(metadata_pathname + metadata_file_name + '.xml', 'w');
+        f = File.open("#{metadata_pathname}#{metadata_file_name}.xml", 'w');
         f.write(metadata_content);
         f.close
       end
 
       def read_template(metadata_name)
-        metadata_xslt_template = File.read(Pathname(File.dirname(__FILE__)).join("../../template/wasCrawlPreassembly/#{metadata_name}.xslt"))
-        metadata_xslt_template
+        File.read(Pathname(File.dirname(__FILE__)).join("../../template/wasCrawlPreassembly/#{metadata_name}.xslt"))
       end
 
       def transform_xml_using_xslt(metadata_xml_input, metadata_xslt_template)

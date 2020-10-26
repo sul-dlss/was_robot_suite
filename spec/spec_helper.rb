@@ -6,7 +6,7 @@ SimpleCov.start
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 
-require File.expand_path(File.dirname(__FILE__) + '/../config/boot')
+require File.expand_path("#{File.dirname(__FILE__)}/../config/boot")
 
 require 'rspec'
 require 'awesome_print'
