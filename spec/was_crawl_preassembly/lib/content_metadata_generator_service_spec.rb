@@ -68,10 +68,12 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
 
     context 'when the access is dark' do
       let(:xml) do
-        '<rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access> ' +
-          '<access type= "read">  <machine>   <none/>  </machine> </access> <use> ' +
-          '<human type= "useAndReproduction"/> <human type= "creativeCommons"/> ' +
-          '<machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>'
+        <<~EOF
+          <rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access>
+            <access type= "read">  <machine>   <none/>  </machine> </access> <use>
+            <human type= "useAndReproduction"/> <human type= "creativeCommons"/>
+            <machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>
+        EOF
       end
 
       it 'returns dark for read/none access' do
@@ -81,10 +83,12 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
 
     context 'when the access is world' do
       let(:xml) do
-        '<rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access> ' +
-          '<access type= "read">  <machine>   <world/>  </machine> </access> <use> ' +
-          '<human type= "useAndReproduction"/> <human type= "creativeCommons"/> ' +
-          '<machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>'
+        <<~EOF
+          <rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access>
+            <access type= "read">  <machine>   <world/>  </machine> </access> <use>
+            <human type= "useAndReproduction"/> <human type= "creativeCommons"/>
+            <machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>
+        EOF
       end
 
       it 'returns public for read/world access' do
@@ -94,9 +98,8 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
   end
 
   def generate_object(druid_id)
-    metadata_generator_service = Dor::WASCrawl::ContentMetadataGenerator.new(@collection_id,
-                                                                             @staging_path.to_s, druid_id)
-    metadata_generator_service
+    Dor::WASCrawl::ContentMetadataGenerator.new(@collection_id,
+                                                @staging_path.to_s, druid_id)
   end
 
   def generate_data_items

@@ -3,8 +3,7 @@ require 'nokogiri'
 module Dor
   module WASSeed
     class MetadataGenerator
-      attr_accessor :workspace
-      attr_accessor :druid_id
+      attr_accessor :workspace, :druid_id
 
       def initialize(workspace, druid_id, _extracted_location = 'tmp/')
         @workspace = workspace
@@ -29,8 +28,7 @@ module Dor
       end
 
       def read_template(metadata_name)
-        metadata_xslt_template = File.read(Pathname(File.dirname(__FILE__)).join("../../template/wasSeedPreassembly/#{metadata_name}.xslt"))
-        metadata_xslt_template
+        File.read(Pathname(File.dirname(__FILE__)).join("../../template/wasSeedPreassembly/#{metadata_name}.xslt"))
       end
 
       def transform_xml_using_xslt(metadata_xml_input_object, metadata_xslt_template)

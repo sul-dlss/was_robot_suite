@@ -1,6 +1,6 @@
 require 'lockfile'
 
-require File.dirname(__FILE__) + '../../../config/boot' # for Dor::Config settings
+require "#{File.dirname(__FILE__)}../../../config/boot" # for Dor::Config settings
 
 # Location of the CDX index files
 INDEX_DIR = Pathname.new(File.dirname(Settings.was_crawl_dissemination.main_cdx_file)).freeze

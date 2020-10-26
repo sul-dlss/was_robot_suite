@@ -19,9 +19,9 @@ module Dor
         end
 
         resize_temporary_image(jpeg_file)
-        Assembly::Image.new(jpeg_file).create_jp2(output: temporary_file + '.jp2')
+        Assembly::Image.new(jpeg_file).create_jp2(output: "#{temporary_file}.jp2")
         FileUtils.rm jpeg_file
-        FileUtils.mv temporary_file + '.jp2', thumbnail_file
+        FileUtils.mv "#{temporary_file}.jp2", thumbnail_file
       end
 
       def self.capture(wayback_uri, temporary_file)

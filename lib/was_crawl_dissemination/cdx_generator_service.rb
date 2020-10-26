@@ -33,7 +33,7 @@ module Dor
         elsif cdx_file_name.end_with? '.warc'
           cdx_file_name = cdx_file_name[0...-5]
         end
-        cdx_file_name + '.cdx'
+        "#{cdx_file_name}.cdx"
       end
 
       def generate_cdx_for_one_warc(warc_file_path, cdx_file_path)
@@ -45,8 +45,7 @@ module Dor
         raise 'invalid warc file name' if warc_file_path.nil? || warc_file_path.length < 1
         raise 'invalid cdx file name'  if cdx_file_path.nil?  || cdx_file_path.length < 1
 
-        cmd_string = "#{@cdx_indexer_script_file_name} #{warc_file_path} #{cdx_file_path} 2>> #{@cdx_indexer_log_file}"
-        cmd_string
+        "#{@cdx_indexer_script_file_name} #{warc_file_path} #{cdx_file_path} 2>> #{@cdx_indexer_log_file}"
       end
     end
   end

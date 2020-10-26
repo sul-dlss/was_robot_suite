@@ -23,7 +23,7 @@ RSpec.describe Dor::WASCrawl::CDXGeneratorService do
     let(:warc_file_list) { Dor::WASCrawl::Dissemination::Utilities.warc_file_list(contentMetadata) }
 
     context "when contentMetadata has arcs or warcs" do
-      let(:contentMetadata) { File.open(@content_metadata_xml_location + 'contentMetadata_3files.xml').read }
+      let(:contentMetadata) { File.open("#{@content_metadata_xml_location}contentMetadata_3files.xml").read }
 
       it 'generates cdx files for each warc or arc file in contentMetadata', :openwayback_prerequisite do
         cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_1, warc_file_list)
@@ -73,7 +73,7 @@ RSpec.describe Dor::WASCrawl::CDXGeneratorService do
     end
 
     context "when contentMetadata has no arcs or warcs" do
-      let(:contentMetadata) { File.open(@content_metadata_xml_location + 'contentMetadata_0file.xml').read }
+      let(:contentMetadata) { File.open("#{@content_metadata_xml_location}contentMetadata_0file.xml").read }
 
       it 'should do nothing for the contentMetadata without any arcs or warcs', :openwayback_prerequisite do
         cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_3, warc_file_list)
