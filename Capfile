@@ -23,9 +23,9 @@ require 'capistrano/yarn'
 # require 'capistrano/rails/migrations'
 
 require 'dlss/capistrano'
+require 'dlss/capistrano/resque_pool'
 require 'whenever/capistrano'
 require 'capistrano/honeybadger'
-require 'capistrano-resque-pool'
 
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
