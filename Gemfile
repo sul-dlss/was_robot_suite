@@ -33,7 +33,6 @@ end
 
 group :deployment do
   gem 'capistrano-bundler'
-  gem 'capistrano-resque-pool'
   gem 'capistrano-yarn'
   gem 'dlss-capistrano'
 end
