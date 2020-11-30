@@ -271,7 +271,7 @@ GEM
     redis (4.2.5)
     redis-namespace (1.8.0)
       redis (>= 3.0.4)
-    regexp_parser (1.8.2)
+    regexp_parser (2.0.0)
     resque (2.0.0)
       mono_logger (~> 1.0)
       multi_json (~> 1.0)
@@ -303,7 +303,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.0)
-    rubocop (1.4.0)
+    rubocop (1.4.2)
       parallel (~> 1.10)
       parser (>= 2.7.1.5)
       rainbow (>= 2.2.2, < 4.0)
@@ -312,7 +312,7 @@ GEM
       rubocop-ast (>= 1.1.1)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 2.0)
-    rubocop-ast (1.1.1)
+    rubocop-ast (1.2.0)
       parser (>= 2.7.1.5)
     ruby-enum (0.8.0)
       i18n
@@ -344,7 +344,7 @@ GEM
       nokogiri
       stomp
       xml-simple
-    sshkit (1.21.0)
+    sshkit (1.21.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
     stanford-mods (2.6.2)
@@ -369,7 +369,7 @@ GEM
     whenever (1.0.0)
       chronic (>= 0.6.3)
     xml-simple (1.1.5)
-    zeitwerk (2.4.1)
+    zeitwerk (2.4.2)
 
 PLATFORMS
   ruby
