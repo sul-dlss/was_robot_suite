@@ -2,7 +2,7 @@ set :application, 'was_robot_suite'
 set :repo_url, 'https://github.com/sul-dlss/was_robot_suite.git'
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }
 
-# Default branch is :master
+# Default branch is :main
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
