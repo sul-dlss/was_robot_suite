@@ -34,5 +34,5 @@ end
 group :deployment do
   gem 'capistrano-bundler'
   gem 'capistrano-yarn'
-  gem 'dlss-capistrano'
+  gem 'dlss-capistrano', '~> 3.11'
 end
