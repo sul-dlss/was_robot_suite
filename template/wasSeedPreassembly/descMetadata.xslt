@@ -29,7 +29,7 @@
              </location>
              <recordInfo>
                  <languageOfCataloging>
-                     <languageTerm authority="iso639-2b" type="code">eng</languageTerm>
+                     <languageTerm type="code" authority="iso639-2b" authorityURI="http://id.loc.gov/vocabulary/iso639-2" valueURI="http://id.loc.gov/vocabulary/iso639-2/eng">eng</languageTerm>
                  </languageOfCataloging>
                  <recordContentSource authority="marcorg">CSt</recordContentSource>
                  <recordOrigin>Transformed from record for <xsl:value-of select="uri"/> used in the web archiving service and which is part of the collection (record ID <xsl:value-of select="collection_id"/>).</recordOrigin>
