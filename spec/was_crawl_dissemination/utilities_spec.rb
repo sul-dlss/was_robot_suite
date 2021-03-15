@@ -21,10 +21,10 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
     context 'with 4 files' do
       let(:structural) do
         Cocina::Models::DROStructural.new(contains: [
-                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
-                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
-                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
-                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
+                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
+                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
+                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
+                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
                                           ])
       end
       let(:file1) do
@@ -56,7 +56,7 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
     context 'for the contentMetadata with no arcs or warcs inside' do
       let(:structural) do
         Cocina::Models::DROStructural.new(contains: [
-                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } }
+                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } }
                                           ])
       end
 
@@ -74,10 +74,10 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
     context 'when the contentMetadata has dark archive shelve=no' do
       let(:structural) do
         Cocina::Models::DROStructural.new(contains: [
-                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
-                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
-                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
-                                            { type: Cocina::Models::Vocab.fileset, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
+                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
+                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
+                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
+                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
                                           ])
       end
       let(:file1) do
