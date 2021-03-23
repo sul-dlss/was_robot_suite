@@ -12,6 +12,7 @@
          <mods xmlns:xlink="http://www.w3.org/1999/xlink"
                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                 xmlns="http://www.loc.gov/mods/v3"
+                version="3.5"
                 xsi:schemaLocation="http://www.loc.gov/mods/v3 http://www.loc.gov/standards/mods/v3/mods-3-5.xsd">
              <typeOfResource>text</typeOfResource>
              <genre authority="local">archived website</genre>
