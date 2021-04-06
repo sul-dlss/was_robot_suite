@@ -28,9 +28,6 @@ describe Dor::WASCrawl::DescMetadataGenerator do
     end
   end
 
-  context Dor::WASCrawl::DescMetadataGenerator, 'generate_xml_doc' do
-  end
-
   def generate_object(druid_id)
     Dor::WASCrawl::DescMetadataGenerator.new(@collection_id,
                                              @staging_path.to_s, druid_id)
