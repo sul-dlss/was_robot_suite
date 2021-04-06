@@ -108,7 +108,8 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
   end
 
   context '.get_collection_id' do
-    let(:druid_obj) { double(Dor::Item) }
+    let(:druid_obj) { double(Cocina::Models::DRO) }
+
     it 'delegates to Dor::WASCrawl::Utilities' do
       expect(Dor::WASCrawl::Utilities).to receive(:get_collection_id).with(druid_obj).and_return('abc')
       expect(described_class.get_collection_id(druid_obj)).to eq 'abc'
