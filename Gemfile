@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 gem 'config', '~> 2.0'
 gem 'druid-tools'
-gem 'dor-services-client', '~> 6.0'
+gem 'dor-services-client', '~> 7.0'
 gem 'dor-workflow-client', '~> 3.22'
 gem 'faraday', '~> 0.15.0'
 gem 'lyber-core', '~> 6.0'
