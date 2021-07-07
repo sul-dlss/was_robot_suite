@@ -43,7 +43,7 @@ GEM
     capistrano-yarn (2.0.2)
       capistrano (~> 3.0)
     chronic (0.10.2)
-    cocina-models (0.61.0)
+    cocina-models (0.61.1)
       activesupport
       dry-struct (~> 1.0)
       dry-types (~> 1.1)
@@ -199,7 +199,7 @@ GEM
     rack-protection (2.1.0)
       rack
     rainbow (3.0.0)
-    rake (13.0.3)
+    rake (13.0.4)
     redis (4.3.1)
     redis-namespace (1.8.1)
       redis (>= 3.0.4)
@@ -232,7 +232,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.2)
-    rubocop (1.18.2)
+    rubocop (1.18.3)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
