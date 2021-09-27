@@ -167,10 +167,10 @@ GEM
       net-ssh (>= 2.6.5, < 7.0.0)
     net-ssh (6.1.0)
     netrc (0.11.0)
-    nokogiri (1.12.4)
+    nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
-    nokogiri (1.12.4-x86_64-linux)
+    nokogiri (1.12.5-x86_64-linux)
       racc (~> 1.4)
     nokogiri-happymapper (0.8.1)
       nokogiri (~> 1.5)
@@ -181,7 +181,7 @@ GEM
     openapi3_parser (0.9.0)
       commonmarker (~> 0.17)
       psych (~> 3.1)
-    openapi_parser (0.14.1)
+    openapi_parser (0.15.0)
     parallel (1.21.0)
     parser (3.0.2.0)
       ast (~> 2.4.1)
@@ -309,4 +309,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   2.2.15
+   2.2.27
