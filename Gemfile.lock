@@ -1,18 +1,17 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (6.1.4.4)
+    activesupport (7.0.0)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 1.6, < 2)
       minitest (>= 5.1)
       tzinfo (~> 2.0)
-      zeitwerk (~> 2.3)
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     assembly-image (1.7.7)
       assembly-objectfile (>= 1.6.4)
       mini_exiftool (>= 1.6, < 3)
-    assembly-objectfile (1.10.3)
+    assembly-objectfile (1.11.0)
       activesupport (>= 5.2.0)
       deprecation
       dry-struct (~> 1.0)
@@ -60,7 +59,7 @@ GEM
     deep_merge (1.2.1)
     deprecation (1.1.0)
       activesupport
-    diff-lcs (1.4.4)
+    diff-lcs (1.5.0)
     dlss-capistrano (3.11.1)
       capistrano (~> 3.0)
       capistrano-bundle_audit (>= 0.3.0)
@@ -69,7 +68,7 @@ GEM
     docile (1.4.0)
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
-    dor-services-client (7.4.0)
+    dor-services-client (7.5.0)
       activesupport (>= 4.2, < 8)
       cocina-models (~> 0.62.0)
       deprecation
@@ -120,8 +119,8 @@ GEM
       dry-core (~> 0.5, >= 0.5)
       dry-initializer (~> 3.0)
       dry-schema (~> 1.8, >= 1.8.0)
-    edtf (3.0.6)
-      activesupport (>= 3.0, < 7.0)
+    edtf (3.0.7)
+      activesupport (>= 3.0, < 8.0)
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
     faraday (0.15.4)
@@ -170,12 +169,12 @@ GEM
       activesupport (>= 3.2.18)
       i18n
       nokogiri
-    openapi3_parser (0.9.0)
+    openapi3_parser (0.9.1)
       commonmarker (~> 0.17)
       psych (~> 3.1)
     openapi_parser (0.15.0)
     parallel (1.21.0)
-    parser (3.0.3.2)
+    parser (3.1.0.0)
       ast (~> 2.4.1)
     pry (0.14.1)
       coderay (~> 1.1)
@@ -222,16 +221,16 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.3)
-    rubocop (1.23.0)
+    rubocop (1.24.1)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml
-      rubocop-ast (>= 1.12.0, < 2.0)
+      rubocop-ast (>= 1.15.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.15.0)
+    rubocop-ast (1.15.1)
       parser (>= 3.0.1.1)
     ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
@@ -252,7 +251,7 @@ GEM
     stanford-mods (2.6.3)
       activesupport
       mods (~> 2.2)
-    thor (1.1.0)
+    thor (1.2.1)
     tilt (2.0.10)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -264,7 +263,7 @@ GEM
       rack (>= 1.0.0)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    zeitwerk (2.5.1)
+    zeitwerk (2.5.3)
 
 PLATFORMS
   ruby
