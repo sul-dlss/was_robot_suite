@@ -12,7 +12,6 @@ gem 'lockfile'       # file locks needed for mutual exclusion during rollup and 
 gem 'mini_exiftool'  # was-seed-preassembly thumbnail creation
 gem 'mini_magick'    # was-seed-preassembly thumbnail creation
 gem 'assembly-image' # was-seed-preassembly thumbnail creation
-gem 'rest-client'    # was-seed-dissemination to call was-thumbnail-service
 gem 'pry'            # for bin/console
 gem 'slop'           # for bin/run_robot
 gem 'honeybadger'
