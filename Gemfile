@@ -32,6 +32,6 @@ end
 
 group :deployment do
   gem 'capistrano-bundler'
-  gem 'capistrano-yarn'
+  gem 'capistrano-yarn' # for generating was-seed-preassembly thumbnail with chrome (PR #242)
   gem 'dlss-capistrano', '~> 3.11'
 end
