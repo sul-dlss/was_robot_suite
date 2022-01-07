@@ -279,7 +279,7 @@ DEPENDENCIES
   resque-pool
   rspec
   rubocop
-  simplecov (~> 0.17.1)
+  simplecov
   slop
   stanford-mods (~> 2.6)
   whenever
