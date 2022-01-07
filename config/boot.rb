@@ -50,7 +50,7 @@ require 'lyber_core'
 
 # Load any library files and all the robots
 # TODO: Maybe move auto-require to just run_robot and spec_helper?
-Dir["#{ROBOT_ROOT}/lib/*/*.rb"].sort.each { |f| require f }
+Dir["#{ROBOT_ROOT}/lib/*/*.rb"].each { |f| require f }
 require 'robots'
 
 REDIS_URL ||= Settings.redis.url # rubocop:disable Lint/OrAssignmentToConstant

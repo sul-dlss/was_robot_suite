@@ -1,9 +1,14 @@
 version: 2.1
 
+parameters:
+  ruby-version:
+    type: string
+    default: "3.0.3"
+
 jobs:
   build:
     docker:
-      - image: circleci/ruby:2.7.1
+      - image: 'cimg/ruby:<< pipeline.parameters.ruby-version >>'
         environment:
           CC_TEST_REPORTER_ID: 83c16289b10e9312a748431ec6adbb1c24767afbf317bb05691f2f54acc13cf1
           RAILS_ENV: test
