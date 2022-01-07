@@ -1,6 +1,6 @@
 # Ensure subsequent requires search the correct local paths
-$LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift File.expand_path(File.join(File.dirname(__FILE__), '..', 'robots'))
+$LOAD_PATH.unshift File.expand_path(File.join(__dir__, '..', 'lib'))
+$LOAD_PATH.unshift File.expand_path(File.join(__dir__, '..', 'robots'))
 
 require 'rubygems'
 require 'bundler/setup'
@@ -10,10 +10,11 @@ require 'workflow_client_factory'
 
 # Load the environment file based on Environment.  Default to development
 environment = ENV['ROBOT_ENVIRONMENT'] ||= 'development'
-ROBOT_ROOT = File.expand_path("#{File.dirname(__FILE__)}/..")
+ROBOT_ROOT = File.expand_path(File.join(__dir__, '..'))
 ROBOT_LOG = Logger.new(File.join(ROBOT_ROOT, "log/#{environment}.log"))
 ROBOT_LOG.level = Logger::SEV_LABEL.index(ENV['ROBOT_LOG_LEVEL']) || Logger::INFO
 
+# config gem, without Rails, requires we load the config ourselves
 require 'config'
 Config.setup do |config|
   # Name of the constant exposing loaded settings
