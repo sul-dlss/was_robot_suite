@@ -10,7 +10,11 @@ describe Dor::WASCrawl::DescMetadataGenerator do
     generate_data_items
   end
 
-  context Dor::WASCrawl::DescMetadataGenerator, 'generate_metadata_output' do
+  context described_class, 'generate_metadata_output' do
+    after do
+      File.delete "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/descMetadata.xml"
+    end
+
     it 'should generate technicalMetadata with valid input' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
@@ -21,10 +25,6 @@ describe Dor::WASCrawl::DescMetadataGenerator do
       metadata_generator_service.generate_metadata_output
       actual_desc_metadata = File.read "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/descMetadata.xml"
       expect(actual_desc_metadata).to eq @expected_desc_metadata
-    end
-
-    after(:each) do
-      File.delete "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/descMetadata.xml"
     end
   end
 

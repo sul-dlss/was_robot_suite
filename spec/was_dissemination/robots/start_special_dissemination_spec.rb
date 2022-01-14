@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
-  let(:druid) { 'druid:ab123cd4567' }
   subject(:robot) { described_class.new }
+
+  let(:druid) { 'druid:ab123cd4567' }
 
   describe '.initialize' do
     it 'initalizes the robot with valid parameters' do
@@ -13,6 +14,7 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
 
   describe '.perform' do
     subject(:perform) { robot.perform(druid) }
+
     let(:object_client) { instance_double(Dor::Services::Client::Object, find: item) }
     let(:workflow_service) { instance_double(Dor::Workflow::Client, create_workflow_by_name: true) }
 

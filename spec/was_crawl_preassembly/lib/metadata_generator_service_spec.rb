@@ -10,7 +10,7 @@ describe Dor::WASCrawl::MetadataGenerator do
     generate_data_items
   end
 
-  context '#read_metadata_xml_input_file' do
+  describe '#read_metadata_xml_input_file' do
     it 'should read the file successfully if druid id is passed' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
@@ -38,7 +38,7 @@ describe Dor::WASCrawl::MetadataGenerator do
     end
   end
 
-  context '#write_file_to_druid_metadata_folder' do
+  describe '#write_file_to_druid_metadata_folder' do
     it "should raise an error if the druid directory tree doesn't exist in the workspace" do
       druid_id = 'druid:xx111xx1111'
       metadata_generator_service = generate_object(druid_id)
@@ -59,8 +59,8 @@ describe Dor::WASCrawl::MetadataGenerator do
 
       metadata_generator_service.write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)
 
-      expect(File.exist?(expected_metadata_directory)).to be_truthy
-      expect(File.exist?(expected_output_file)).to be_truthy
+      expect(File).to exist(expected_metadata_directory)
+      expect(File).to exist(expected_output_file)
 
       expect(File.read(expected_output_file)).to eq metadata_content
       File.delete(expected_output_file)
@@ -77,13 +77,13 @@ describe Dor::WASCrawl::MetadataGenerator do
 
       metadata_generator_service.write_file_to_druid_metadata_folder(metadata_file_name, metadata_content)
 
-      expect(File.exist?(expected_output_file)).to be_truthy
+      expect(File).to exist(expected_output_file)
       expect(File.read(expected_output_file)).to eq metadata_content
       File.delete(expected_output_file)
     end
   end
 
-  context '#read_template' do
+  describe '#read_template' do
     it 'should read the contentMetadata template successfully' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
@@ -117,7 +117,7 @@ describe Dor::WASCrawl::MetadataGenerator do
     end
   end
 
-  context '#transform_xml_using_xslt' do
+  describe '#transform_xml_using_xslt' do
     it 'should transform the xml using xslt with valid inputs' do
       druid_id = 'druid:xx'
       metadata_generator_service = generate_object(druid_id)
@@ -150,7 +150,7 @@ describe Dor::WASCrawl::MetadataGenerator do
     end
   end
 
-  context '#do_post_transform' do
+  describe '#do_post_transform' do
     it 'should return the string with no modification' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)

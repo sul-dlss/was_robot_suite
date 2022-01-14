@@ -34,11 +34,11 @@ module Dor
         width = image.width
         height = image.height
 
-        if width > height
-          resize_dimension = ' 400x '
-        else
-          resize_dimension = ' x400 '
-        end
+        resize_dimension = if width > height
+                             ' 400x '
+                           else
+                             ' x400 '
+                           end
         image.resize resize_dimension
         image.write(temporary_image)
       end

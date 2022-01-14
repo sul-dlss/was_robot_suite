@@ -2,21 +2,22 @@ require 'spec_helper'
 require 'was_crawl_dissemination/utilities'
 
 RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
-  context '.run_sys_cmd' do
+  describe '.run_sys_cmd' do
     it 'should return nothing with succesful command' do
-      Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd('ls', '')
+      described_class.run_sys_cmd('ls', '')
     end
+
     it 'should raise an error with wrong command' do
-      expect { Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd('lss', '') }.to raise_error StandardError
+      expect { described_class.run_sys_cmd('lss', '') }.to raise_error StandardError
     end
   end
 
-  context '.warc_file_list' do
+  describe '.warc_file_list' do
     let(:fs_structural) { instance_double(Cocina::Models::FileSetStructural, contains: files) }
     let(:fileset) { instance_double(Cocina::Models::FileSet, structural: fs_structural) }
 
     let(:cocina_model) { instance_double(Cocina::Models::DRO, structural: structural) }
-    let(:file_list) { Dor::WASCrawl::Dissemination::Utilities.warc_file_list(cocina_model) }
+    let(:file_list) { described_class.warc_file_list(cocina_model) }
 
     context 'with 4 files' do
       let(:structural) do
@@ -107,7 +108,7 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
     end
   end
 
-  context '.get_collection_id' do
+  describe '.get_collection_id' do
     let(:druid_obj) { double(Cocina::Models::DRO) }
 
     it 'delegates to Dor::WASCrawl::Utilities' do

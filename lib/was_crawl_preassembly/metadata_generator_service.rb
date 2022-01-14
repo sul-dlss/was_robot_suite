@@ -14,9 +14,7 @@ module Dor
 
       def read_metadata_xml_input_file
         metadata_xml_input = Nokogiri::XML(File.read("#{@extracted_metadata_xml_location}/#{@druid_id}.xml"))
-        unless metadata_xml_input.errors.empty?
-          raise "#{@extracted_metadata_xml_location}/#{@druid_id}.xml is not a valid xml file.\nNokogiri errors: #{metadata_xml_input.errors}"
-        end
+        raise "#{@extracted_metadata_xml_location}/#{@druid_id}.xml is not a valid xml file.\nNokogiri errors: #{metadata_xml_input.errors}" unless metadata_xml_input.errors.empty?
 
         metadata_xml_input.to_s
       end
@@ -27,8 +25,8 @@ module Dor
 
         metadata_pathname = "#{druid_pathname}/metadata/"
         Dir.mkdir(metadata_pathname) unless File.exist?(metadata_pathname)
-        f = File.open("#{metadata_pathname}#{metadata_file_name}.xml", 'w');
-        f.write(metadata_content);
+        f = File.open("#{metadata_pathname}#{metadata_file_name}.xml", 'w')
+        f.write(metadata_content)
         f.close
       end
 

@@ -9,7 +9,12 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
     generate_data_items
   end
 
-  context Dor::WASCrawl::ContentMetadataGenerator, 'generate_metadata_output' do
+  context described_class, 'generate_metadata_output' do
+    after do
+      expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/contentMetadata.xml"
+      File.delete(expected_output_file)
+    end
+
     it 'should generate contentMetadata.xml with valid druid and input' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
@@ -21,14 +26,9 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
       actual_content_metadata = File.read(expected_output_file)
       expect(actual_content_metadata).to eq @expected_content_metadata
     end
-
-    after(:each) do
-      expected_output_file = "#{@staging_path}/gh/123/gh/1234/gh123gh1234/metadata/contentMetadata.xml"
-      File.delete(expected_output_file)
-    end
   end
 
-  context Dor::WASCrawl::ContentMetadataGenerator, 'do_post_transform' do
+  context described_class, 'do_post_transform' do
     it 'should add the id to the root node' do
       druid_id = 'druid:gh123gh1234'
       metadata_generator_service = generate_object(druid_id)
@@ -49,7 +49,7 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
     end
   end
 
-  context Dor::WASCrawl::ContentMetadataGenerator, 'template_suffix' do
+  context described_class, 'template_suffix' do
     let(:metadata_generator_service) { generate_object(druid_id) }
     let(:druid_id) { 'druid:gh123gh1234' }
     let(:apo_pid) { 'druid:dz123fg1234' }

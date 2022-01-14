@@ -20,9 +20,7 @@ module Dor
       def do_post_transform(metadata_content)
         # include druid_id in the xml before saving
         metadata_content_xml = Nokogiri::XML(metadata_content)
-        unless metadata_content_xml.errors.empty?
-          raise "The input string is not a valid xml file.\nNokogiri errors: #{metadata_content_xml.errors}\n#{metadata_content_xml}"
-        end
+        raise "The input string is not a valid xml file.\nNokogiri errors: #{metadata_content_xml.errors}\n#{metadata_content_xml}" unless metadata_content_xml.errors.empty?
 
         metadata_content_xml.root.set_attribute('id', @druid_id)
         resources = metadata_content_xml.root.xpath('resource')

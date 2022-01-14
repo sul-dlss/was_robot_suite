@@ -22,11 +22,17 @@ RSpec.describe Dor::WASCrawl::CDXGeneratorService do
 
     let(:warc_file_list) { Dor::WASCrawl::Dissemination::Utilities.warc_file_list(contentMetadata) }
 
+    after(:all) do
+      FileUtils.rm_rf("#{@stacks_path}/data/indices/cdx_working/#{@druid_id_1}/")
+      FileUtils.rm_rf("#{@stacks_path}/data/indices/cdx_working/#{@druid_id_3}/")
+      FileUtils.rm_rf("#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/ARC-Test.cdx")
+    end
+
     context "when contentMetadata has arcs or warcs" do
       let(:contentMetadata) { File.read("#{@content_metadata_xml_location}contentMetadata_3files.xml") }
 
       it 'generates cdx files for each warc or arc file in contentMetadata', :openwayback_prerequisite do
-        cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_1, warc_file_list)
+        cdx_generator = described_class.new(@collection_path, @druid_id_1, warc_file_list)
 
         cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
         cdx_generator.generate_cdx_for_crawl
@@ -51,7 +57,7 @@ RSpec.describe Dor::WASCrawl::CDXGeneratorService do
         cdx_file_path_1 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/WARC-Test.cdx"
         expect(File.exist?(cdx_file_path_1)).to eq(true)
 
-        cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_2, warc_file_list)
+        cdx_generator = described_class.new(@collection_path, @druid_id_2, warc_file_list)
 
         cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
         cdx_generator.generate_cdx_for_crawl
@@ -76,27 +82,26 @@ RSpec.describe Dor::WASCrawl::CDXGeneratorService do
       let(:contentMetadata) { File.read("#{@content_metadata_xml_location}contentMetadata_0file.xml") }
 
       it 'should do nothing for the contentMetadata without any arcs or warcs', :openwayback_prerequisite do
-        cdx_generator = Dor::WASCrawl::CDXGeneratorService.new(@collection_path, @druid_id_3, warc_file_list)
+        cdx_generator = described_class.new(@collection_path, @druid_id_3, warc_file_list)
         cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
         cdx_generator.generate_cdx_for_crawl
 
         cdx_dir = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_3}/"
 
         expect(File.exist?(cdx_dir)).to eq(true)
-        expect(Dir.glob('#{cdx_dir}{*,.*}').empty?).to eq(true)
+        expect(Dir.glob("#{cdx_dir}{*,.*}").empty?).to eq(true)
       end
-    end
-
-    after(:all) do
-      FileUtils.rm_rf("#{@stacks_path}/data/indices/cdx_working/#{@druid_id_1}/")
-      FileUtils.rm_rf("#{@stacks_path}/data/indices/cdx_working/#{@druid_id_3}/")
-      FileUtils.rm_rf("#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/ARC-Test.cdx")
     end
   end
 
   describe '#generate_cdx_for_one_warc' do
     before(:all) do
-      @cdx_generator = Dor::WASCrawl::CDXGeneratorService.new('', '', [])
+      @cdx_generator = described_class.new('', '', [])
+    end
+
+    after(:all) do
+      FileUtils.rm 'tmp/WARC-Test.cdx'
+      FileUtils.rm 'tmp/ARC-Test.cdx'
     end
 
     it 'should generate CDX file for the input warc file', :openwayback_prerequisite do
@@ -122,16 +127,11 @@ RSpec.describe Dor::WASCrawl::CDXGeneratorService do
       expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/ARC-Test.cdx'))
       expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
     end
-
-    after(:all) do
-      FileUtils.rm 'tmp/WARC-Test.cdx'
-      FileUtils.rm 'tmp/ARC-Test.cdx'
-    end
   end
 
-  context '.get_cdx_file_name' do
+  describe '.get_cdx_file_name' do
     before(:all) do
-      @cdx_generator = Dor::WASCrawl::CDXGeneratorService.new('', '', [])
+      @cdx_generator = described_class.new('', '', [])
     end
 
     it 'should return the cdx file for .warc.gz' do
@@ -174,9 +174,9 @@ RSpec.describe Dor::WASCrawl::CDXGeneratorService do
     end
   end
 
-  context '.prepare_cdx_generation_cmd_string' do
+  describe '.prepare_cdx_generation_cmd_string' do
     before(:all) do
-      @cdx_generator = Dor::WASCrawl::CDXGeneratorService.new('', '', [])
+      @cdx_generator = described_class.new('', '', [])
     end
 
     it 'should returns the command string as expected' do

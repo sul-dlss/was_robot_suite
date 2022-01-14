@@ -25,9 +25,7 @@ module Dor
 
       def get_cdx_file_name(warc_file_name)
         cdx_file_name = File.basename(warc_file_name)
-        if cdx_file_name.end_with? 'gz'
-          cdx_file_name = cdx_file_name[0...-3]
-        end
+        cdx_file_name = cdx_file_name[0...-3] if cdx_file_name.end_with? 'gz'
         if cdx_file_name.end_with? '.arc'
           cdx_file_name = cdx_file_name[0...-4]
         elsif cdx_file_name.end_with? '.warc'
@@ -42,8 +40,8 @@ module Dor
       end
 
       def prepare_cdx_generation_cmd_string(warc_file_path, cdx_file_path)
-        raise 'invalid warc file name' if warc_file_path.nil? || warc_file_path.length < 1
-        raise 'invalid cdx file name'  if cdx_file_path.nil?  || cdx_file_path.length < 1
+        raise 'invalid warc file name' if warc_file_path.nil? || warc_file_path.empty?
+        raise 'invalid cdx file name'  if cdx_file_path.nil?  || cdx_file_path.empty?
 
         "#{@cdx_indexer_script_file_name} #{warc_file_path} #{cdx_file_path} 2>> #{@cdx_indexer_log_file}"
       end

@@ -24,7 +24,7 @@ module Dor
           working_path_index_file.write(record)
         end
 
-        working_path_index_file.close()
+        working_path_index_file.close
       end
 
       def sort
