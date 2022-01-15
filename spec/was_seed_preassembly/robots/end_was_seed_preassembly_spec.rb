@@ -2,12 +2,12 @@ require 'spec_helper'
 
 RSpec.describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
   describe 'perform' do
+    subject(:perform) { instance.perform(druid) }
+
     let(:druid) { 'druid:ab123cd4567' }
     let(:instance) { described_class.new }
     let(:accession_object) { instance_double(Dor::Services::Client::Accession, start: true) }
     let(:object_client) { instance_double(Dor::Services::Client::Object, accession: accession_object) }
-
-    subject(:perform) { instance.perform(druid) }
 
     before do
       allow(Dor::Services::Client).to receive(:object).and_return(object_client)

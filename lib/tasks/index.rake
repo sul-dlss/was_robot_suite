@@ -72,7 +72,8 @@ namespace :cdx do
         end
       end
 
-      def rollup(n) # n is the log level from which to rollup
+      # n is the log level from which to rollup
+      def rollup(n)
         src = INDEX_DIR.join("level#{n}.cdx")
         dst = INDEX_DIR.join("level#{n + 1}.cdx")
 

@@ -13,7 +13,7 @@ RSpec.describe Dor::WASCrawl::PathIndexerService do
     let(:warc_file_list) { ["WARC-Test.warc.gz", "ARC-Test.arc.gz"] }
 
     it 'merges results from warc_file_list to the main path index' do
-      path_index_service = Dor::WASCrawl::PathIndexerService.new(druid, @collection_path, @path_working_directory, warc_file_list)
+      path_index_service = described_class.new(druid, @collection_path, @path_working_directory, warc_file_list)
       path_index_service.instance_variable_set(:@main_path_index_file, "#{@stacks_path}/data/indices/path/path-index.txt")
 
       path_index_service.merge
@@ -30,7 +30,7 @@ RSpec.describe Dor::WASCrawl::PathIndexerService do
     it 'sorts and remove duplicate frm the merged path index' do
       FileUtils.cp("#{@path_files}/merged_path_index.txt", "#{@path_working_directory}/merged_path_index.txt")
 
-      path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, [])
+      path_index_service = described_class.new(@druid, @collection_path, @path_working_directory, [])
       path_index_service.sort
 
       expected_duplicate_path_index = "#{@path_files}/duplicate_path_index.txt"
@@ -48,20 +48,20 @@ RSpec.describe Dor::WASCrawl::PathIndexerService do
   end
 
   describe '#publish' do
+    after(:all) do
+      FileUtils.rm("#{@stacks_path}/data/indices/path/test_path-index.txt")
+    end
+
     it 'copies the new path index to the main path index location' do
       FileUtils.cp("#{@path_files}/path_index.txt", "#{@path_working_directory}/path_index.txt")
 
-      path_index_service = Dor::WASCrawl::PathIndexerService.new(@druid, @collection_path, @path_working_directory, [])
+      path_index_service = described_class.new(@druid, @collection_path, @path_working_directory, [])
       path_index_service.instance_variable_set(:@main_path_index_file, "#{@stacks_path}/data/indices/path/test_path-index.txt")
 
       path_index_service.publish
 
       actual_path_index = "#{@stacks_path}/data/indices/path/test_path-index.txt"
       expect(File.exist?(actual_path_index)).to eq(true)
-    end
-
-    after(:all) do
-      FileUtils.rm("#{@stacks_path}/data/indices/path/test_path-index.txt")
     end
   end
 

@@ -28,6 +28,7 @@ RSpec.describe Dor::WASSeed::ContentMetadataGenerator do
       XML
     end
     let(:stub_exif) { double(MiniExiftool, MIMEType: 'image/jp2', imagewidth: 1000, imageheight: 1215) }
+
     before do
       path = "#{workspace}/gh/123/gh/1234/gh123gh1234/content"
       FileUtils.mkdir_p(path)
@@ -107,6 +108,7 @@ RSpec.describe Dor::WASSeed::ContentMetadataGenerator do
  </resource>
 </contentMetadata>'
     end
+
     it 'transforms the xml to content metadata data format using XSLT' do
       xslt_template = File.read(Pathname(File.dirname(__FILE__)).join('../../../template/wasSeedPreassembly/contentMetadata.xslt'))
       actual_content_metadata = cm_generator_instance.transform_xml_using_xslt @expected_full_xml_element, xslt_template

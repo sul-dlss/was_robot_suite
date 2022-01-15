@@ -1,3 +1,4 @@
+require 'English'
 require 'pathname'
 require 'druid-tools'
 
@@ -33,7 +34,7 @@ module Dor
       end
 
       def call_java_library(java_cmd)
-        raise "Error in executing the WASMetadataExtractor.jar\n#{$?}" unless system(java_cmd)
+        raise "Error in executing the WASMetadataExtractor.jar\n#{$CHILD_STATUS}" unless system(java_cmd)
       end
     end
   end

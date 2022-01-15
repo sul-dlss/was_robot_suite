@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
   describe '.initialize' do
     it 'initializes the robot with valid parameters' do
-      robot = Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly.new
+      robot = described_class.new
       expect(robot.instance_variable_get(:@workflow_name)).to eq('wasCrawlPreassemblyWF')
       expect(robot.instance_variable_get(:@process)).to eq('end-was-crawl-preassembly')
     end
@@ -23,7 +23,7 @@ describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
 
     it 'starts the accessionWF on default lane' do
       allow(workflow_client).to receive(:create_workflow_by_name)
-      robot = Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly.new
+      robot = described_class.new
       robot.perform(druid)
       expect(workflow_client).to have_received(:create_workflow_by_name)
         .with(druid, workflow_name, lane_id: 'default', version: '1')
@@ -32,7 +32,7 @@ describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
     it 'starts the accessionWF on a non-default lane' do
       Settings.was_crawl.dedicated_lane = 'NotDefault'
       allow(workflow_client).to receive(:create_workflow_by_name)
-      robot = Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly.new
+      robot = described_class.new
       robot.perform(druid)
       expect(workflow_client).to have_received(:create_workflow_by_name)
         .with(druid, workflow_name, lane_id: 'NotDefault', version: '1')

@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Robots::DorRepo::WasCrawlPreassembly::BuildWasCrawlDruidTree do
   describe '.initialize' do
     it 'initializes the robot with valid parameters' do
-      robot = Robots::DorRepo::WasCrawlPreassembly::BuildWasCrawlDruidTree.new
+      robot = described_class.new
       expect(robot.instance_variable_get(:@workflow_name)).to eq('wasCrawlPreassemblyWF')
       expect(robot.instance_variable_get(:@process)).to eq('build-was-crawl-druid-tree')
     end
@@ -37,7 +37,7 @@ describe Robots::DorRepo::WasCrawlPreassembly::BuildWasCrawlDruidTree do
     end
 
     it 'copies the files to staging' do
-      robot = Robots::DorRepo::WasCrawlPreassembly::BuildWasCrawlDruidTree.new
+      robot = described_class.new
       robot.perform(druid)
       expect(File.exist?(crawl_path)).to be false
       expect(File.exist?("#{staging_path}/ab/123/cd/4567/ab123cd4567/content/WARC-Test.warc.gz")).to be true

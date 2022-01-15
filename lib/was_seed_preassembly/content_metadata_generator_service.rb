@@ -8,7 +8,7 @@ module Dor
       CONTENT_METADATA = 'contentMetadata'.freeze
 
       def generate_metadata_output
-        xml_input = generate_xml_doc(create_thumbnail_xml_element "#{DruidTools::Druid.new(@druid_id, workspace).content_dir}/thumbnail.jp2")
+        xml_input = generate_xml_doc(create_thumbnail_xml_element("#{DruidTools::Druid.new(@druid_id, workspace).content_dir}/thumbnail.jp2"))
         metadata_content = transform_xml_using_xslt(xml_input, read_template(CONTENT_METADATA))
         metadata_content = do_post_transform(metadata_content)
         write_file_to_druid_metadata_folder(CONTENT_METADATA, metadata_content)
@@ -28,7 +28,7 @@ module Dor
         exif = MiniExiftool.new thumbnail_file
         if exif.MIMEType.nil? || exif.MIMEType != 'image/jp2'
           LyberCore::Log.warn "ThumbnailGenerator - #{thumbnail_file} is not a valid JP2 image"
-          fail "#{thumbnail_file} is not a valid image"
+          raise "#{thumbnail_file} is not a valid image"
         end
 
         begin

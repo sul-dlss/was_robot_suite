@@ -3,9 +3,7 @@ module Dor
     module Dissemination
       class Utilities
         def self.run_sys_cmd(cmd_string, error_message)
-          unless system(cmd_string)
-            fail "Error in #{error_message} with command: #{cmd_string}\n" + $CHILD_STATUS.to_s
-          end
+          raise "Error in #{error_message} with command: #{cmd_string}\n" + $CHILD_STATUS.to_s unless system(cmd_string)
         end
 
         # @param [Cocina::Models::DRO] cocina_model
