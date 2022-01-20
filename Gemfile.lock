@@ -42,7 +42,7 @@ GEM
     capistrano-yarn (2.0.2)
       capistrano (~> 3.0)
     chronic (0.10.2)
-    cocina-models (0.62.1)
+    cocina-models (0.63.1)
       activesupport
       dry-struct (~> 1.0)
       dry-types (~> 1.1)
@@ -66,9 +66,9 @@ GEM
       capistrano-one_time_key
       capistrano-shared_configs
     docile (1.4.0)
-    dor-services-client (7.5.0)
+    dor-services-client (7.7.1)
       activesupport (>= 4.2, < 8)
-      cocina-models (~> 0.62.0)
+      cocina-models (~> 0.63.1)
       deprecation
       faraday (>= 0.15, < 2)
       zeitwerk (~> 2.1)
@@ -90,7 +90,7 @@ GEM
     dry-core (0.7.1)
       concurrent-ruby (~> 1.0)
     dry-inflector (0.2.1)
-    dry-initializer (3.1.0)
+    dry-initializer (3.1.1)
     dry-logic (1.2.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 0.5, >= 0.5)
@@ -146,7 +146,7 @@ GEM
     faraday-retry (1.0.3)
     faraday_middleware (1.2.0)
       faraday (~> 1.0)
-    honeybadger (4.9.0)
+    honeybadger (4.10.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -229,9 +229,9 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.3)
-    rubocop (1.24.1)
+    rubocop (1.25.0)
       parallel (~> 1.10)
-      parser (>= 3.0.0.0)
+      parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml
