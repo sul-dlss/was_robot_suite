@@ -4,9 +4,6 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 <xsl:template match="/crawlObject">
 
 <contentMetadata type="file" >
-     <xsl:attribute name="stacks">
-        <xsl:value-of select="concat('/web-archiving-stacks/data/collections/',collectionId)"/>
-     </xsl:attribute>
      
     <xsl:for-each select="files/file[type='WARC']">
 		<resource type="file" >
@@ -43,7 +40,7 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 			</file>
 		</resource>
     </xsl:for-each>
-	
+
 
 </contentMetadata>
 
