@@ -153,11 +153,6 @@ RSpec/MessageSpies:
 RSpec/MultipleExpectations:
   Max: 14
 
-# Offense count: 10
-# Configuration parameters: AllowSubject.
-RSpec/MultipleMemoizedHelpers:
-  Max: 10
-
 # Offense count: 1
 # Configuration parameters: IgnoreSharedExamples.
 RSpec/NamedSubject:
