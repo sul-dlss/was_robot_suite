@@ -29,6 +29,9 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
 Style/ExponentialNotation:
   Enabled: true
 

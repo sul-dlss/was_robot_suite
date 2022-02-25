@@ -59,7 +59,8 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
 
     let(:apo_client) { instance_double(Dor::Services::Client::Object, find: cocina_apo) }
     let(:cocina_apo) { instance_double(Cocina::Models::AdminPolicy, administrative: apo_administrative) }
-    let(:apo_administrative) { instance_double(Cocina::Models::AdminPolicyAdministrative, defaultObjectRights: xml) }
+    let(:apo_administrative) { instance_double(Cocina::Models::AdminPolicyAdministrative, defaultAccess: default_access) }
+    let(:default_access) { instance_double(Cocina::Models::AdminPolicyDefaultAccess, access: access) }
 
     before do
       allow(Dor::Services::Client).to receive(:object).with(druid_id).and_return(object_client)
@@ -67,14 +68,7 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
     end
 
     context 'when the access is dark' do
-      let(:xml) do
-        <<~EOF
-          <rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access>
-            <access type= "read">  <machine>   <none/>  </machine> </access> <use>
-            <human type= "useAndReproduction"/> <human type= "creativeCommons"/>
-            <machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>
-        EOF
-      end
+      let(:access) { 'dark' }
 
       it 'returns dark for read/none access' do
         expect(metadata_generator_service.template_suffix).to eq('dark')
@@ -82,14 +76,7 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
     end
 
     context 'when the access is world' do
-      let(:xml) do
-        <<~EOF
-          <rightsMetadata> <access type= "discover">  <machine>   <world/>  </machine> </access>
-            <access type= "read">  <machine>   <world/>  </machine> </access> <use>
-            <human type= "useAndReproduction"/> <human type= "creativeCommons"/>
-            <machine type= "creativeCommons"/> </use> <copyright>  <human/> </copyright></rightsMetadata>
-        EOF
-      end
+      let(:access) { 'world' }
 
       it 'returns public for read/world access' do
         expect(metadata_generator_service.template_suffix).to eq('public')

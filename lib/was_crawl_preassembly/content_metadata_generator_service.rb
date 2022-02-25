@@ -34,9 +34,9 @@ module Dor
       def template_suffix
         dro = Dor::Services::Client.object(@druid_id).find
         apo = Dor::Services::Client.object(dro.administrative.hasAdminPolicy).find
-        default_rights_xml = apo.administrative.defaultObjectRights
-        # If the read access is anything other than world, it's dark.
-        Nokogiri::XML(default_rights_xml).xpath('//access[@type="read"]/machine/world').first.nil? ? 'dark' : 'public'
+        access = apo.administrative&.defaultAccess&.access
+        # If the access is anything other than world, it's dark.
+        access == 'world' ? 'public' : 'dark'
       end
     end
   end
