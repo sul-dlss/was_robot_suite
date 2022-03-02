@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 gem 'config', '~> 2.0'
 gem 'druid-tools'
-gem 'dor-services-client', '~> 7.0'
-gem 'dor-workflow-client', '~> 3.22'
+gem 'dor-services-client', '~> 8.0'
+gem 'dor-workflow-client', '~> 4.0'
 gem 'lyber-core', '~> 6.0'
 gem 'stanford-mods', '~> 2.6'
 
