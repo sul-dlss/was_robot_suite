@@ -34,9 +34,9 @@ module Dor
       def template_suffix
         dro = Dor::Services::Client.object(@druid_id).find
         apo = Dor::Services::Client.object(dro.administrative.hasAdminPolicy).find
-        access = apo.administrative&.defaultAccess&.access
-        # If the access is anything other than world, it's dark.
-        access == 'world' ? 'public' : 'dark'
+        view = apo.administrative&.accessTemplate&.view
+        # If the view access is anything other than world, it's dark.
+        view == 'world' ? 'public' : 'dark'
       end
     end
   end

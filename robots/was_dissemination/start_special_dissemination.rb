@@ -15,7 +15,7 @@ module Robots
           return LyberCore::Robot::ReturnState.new(status: :skipped, note: 'Not an item/DRO, nothing to do') unless obj.dro?
 
           # Theres nothing to do if this is a seed file
-          return LyberCore::Robot::ReturnState.new(status: :skipped, note: "Nothing to do for #{obj.type}") unless obj.type == Cocina::Models::Vocab.object
+          return LyberCore::Robot::ReturnState.new(status: :skipped, note: "Nothing to do for #{obj.type}") unless obj.type == Cocina::Models::ObjectType.object
 
           workflow_service.create_workflow_by_name(druid, 'wasCrawlDisseminationWF', version: obj.version)
         end

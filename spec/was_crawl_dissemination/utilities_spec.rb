@@ -22,29 +22,29 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
     context 'with 4 files' do
       let(:structural) do
         Cocina::Models::DROStructural.new(contains: [
-                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
-                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
-                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
-                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
                                           ])
       end
       let(:file1) do
-        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
                                  label: '', filename: 'WARC-Test.warc.gz', version: 1,
                                  administrative: { shelve: true })
       end
       let(:file2) do
-        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
                                  label: '', filename: 'ARC-Test.arc.gz', version: 1,
                                  administrative: { shelve: true })
       end
       let(:file3) do
-        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
                                  label: '', filename: 'test.txt', version: 1,
                                  administrative: { shelve: false })
       end
       let(:file4) do
-        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
                                  label: '', filename: 'ARC-Test2.arc.gz', version: 1,
                                  administrative: { shelve: false })
       end
@@ -57,12 +57,12 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
     context 'for the contentMetadata with no arcs or warcs inside' do
       let(:structural) do
         Cocina::Models::DROStructural.new(contains: [
-                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } }
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } }
                                           ])
       end
 
       let(:file1) do
-        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
                                  label: '', filename: 'test.txt', version: 1,
                                  administrative: { shelve: false })
       end
@@ -75,29 +75,29 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
     context 'when the contentMetadata has dark archive shelve=no' do
       let(:structural) do
         Cocina::Models::DROStructural.new(contains: [
-                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
-                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
-                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
-                                            { type: Cocina::Models::Vocab::Resources.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
                                           ])
       end
       let(:file1) do
-        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
                                  label: '', filename: 'WARC-Test.warc.gz', version: 1,
                                  administrative: { shelve: false })
       end
       let(:file2) do
-        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
                                  label: '', filename: 'ARC-Test.arc.gz', version: 1,
                                  administrative: { shelve: false })
       end
       let(:file3) do
-        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
                                  label: '', filename: 'test.txt', version: 1,
                                  administrative: { shelve: false })
       end
       let(:file4) do
-        Cocina::Models::File.new(type: Cocina::Models::Vocab.file, externalIdentifier: '',
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
                                  label: '', filename: 'ARC-Test2.arc.gz', version: 1,
                                  administrative: { shelve: false })
       end

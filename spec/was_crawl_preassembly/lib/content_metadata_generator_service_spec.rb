@@ -59,26 +59,26 @@ RSpec.describe Dor::WASCrawl::ContentMetadataGenerator do
 
     let(:apo_client) { instance_double(Dor::Services::Client::Object, find: cocina_apo) }
     let(:cocina_apo) { instance_double(Cocina::Models::AdminPolicy, administrative: apo_administrative) }
-    let(:apo_administrative) { instance_double(Cocina::Models::AdminPolicyAdministrative, defaultAccess: default_access) }
-    let(:default_access) { instance_double(Cocina::Models::AdminPolicyDefaultAccess, access: access) }
+    let(:apo_administrative) { instance_double(Cocina::Models::AdminPolicyAdministrative, accessTemplate: access_template) }
+    let(:access_template) { instance_double(Cocina::Models::AdminPolicyAccessTemplate, view: view) }
 
     before do
       allow(Dor::Services::Client).to receive(:object).with(druid_id).and_return(object_client)
       allow(Dor::Services::Client).to receive(:object).with(apo_pid).and_return(apo_client)
     end
 
-    context 'when the access is dark' do
-      let(:access) { 'dark' }
+    context 'when the view access is dark' do
+      let(:view) { 'dark' }
 
       it 'returns dark for read/none access' do
         expect(metadata_generator_service.template_suffix).to eq('dark')
       end
     end
 
-    context 'when the access is world' do
-      let(:access) { 'world' }
+    context 'when the view access is world' do
+      let(:view) { 'world' }
 
-      it 'returns public for read/world access' do
+      it 'returns public for read/world view access' do
         expect(metadata_generator_service.template_suffix).to eq('public')
       end
     end
