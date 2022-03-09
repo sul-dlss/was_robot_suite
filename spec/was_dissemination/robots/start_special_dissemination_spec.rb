@@ -36,7 +36,7 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
       let(:item) { instance_double(Cocina::Models::DRO, version: '1', dro?: true, type: type) }
 
       context 'when the type is webarchive-seed' do
-        let(:type) { Cocina::Models::Vocab.webarchive_seed }
+        let(:type) { Cocina::Models::ObjectType.webarchive_seed }
 
         it 'initializes wasSeedDisseminationWF for the webarchive-seed item' do
           expect(perform.status).to eq 'skipped'
@@ -45,7 +45,7 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
       end
 
       context 'when the type is object (crawl item)' do
-        let(:type) { Cocina::Models::Vocab.object }
+        let(:type) { Cocina::Models::ObjectType.object }
 
         it 'initializes wasCrawlDisseminationWF for the crawl item' do
           perform
