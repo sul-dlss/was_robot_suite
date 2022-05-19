@@ -33,8 +33,10 @@ set :linked_dirs, %w(log config/environments config/certs config/settings jar tm
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-set :stages, %w(dev stage prod)
-set :default_stage, 'dev'
+set :deploy_environment, 'production'
+set :whenever_environment, fetch(:deploy_environment)
+set :default_env, { robot_environment: fetch(:deploy_environment) }
+set :bundle_without, %w{deployment development test}.join(' ')
 
 namespace :deploy do
   desc 'Download WAS Metadata Extractor for was-crawl-preassembly'
