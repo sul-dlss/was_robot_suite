@@ -31,6 +31,7 @@ end
 
 group :deployment do
   gem 'capistrano-bundler'
+  gem 'capistrano-rvm', require: false
   gem 'capistrano-yarn' # for generating was-seed-preassembly thumbnail with chrome (PR #242)
   gem 'dlss-capistrano', require: false
 end

@@ -39,6 +39,9 @@ GEM
       capistrano (~> 3.1)
     capistrano-one_time_key (0.1.0)
       capistrano (~> 3.0)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     capistrano-shared_configs (0.2.2)
     capistrano-yarn (2.0.2)
       capistrano (~> 3.0)
@@ -268,6 +271,7 @@ DEPENDENCIES
   assembly-image
   awesome_print
   capistrano-bundler
+  capistrano-rvm
   capistrano-yarn
   config (~> 2.0)
   dlss-capistrano
@@ -294,4 +298,4 @@ DEPENDENCIES
   whenever
 
 BUNDLED WITH
-   2.3.9
+   2.3.14
