@@ -39,13 +39,6 @@ set :default_env, { robot_environment: fetch(:deploy_environment) }
 set :bundle_without, %w{deployment development test}.join(' ')
 
 namespace :deploy do
-  desc 'Download WAS Metadata Extractor for was-crawl-preassembly'
-  task :download_metadata_extractor_tar do
-    on roles(:app), in: :sequence, wait: 10 do
-      execute :curl, '-s https://sul-ci-prod.stanford.edu/artifacts/WASMetadataExtractor-0.0.3-SNAPSHOT-jar-with-dependencies.jar', "> #{fetch(:deploy_to)}/shared/jar/WASMetadataExtractor.jar"
-    end
-  end
-
   desc 'Download/unpack OpenWayback tar file to work with was-crawl-diss indexer script.'
   task :download_openwayback_tar do
     on roles(:app), in: :sequence, wait: 10 do
@@ -56,7 +49,6 @@ namespace :deploy do
   end
 
   # Download and extract JARs before restarting
-  after :publishing, :download_metadata_extractor_tar
   after :publishing, :download_openwayback_tar
 end
 

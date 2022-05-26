@@ -10,31 +10,47 @@ module Dor
         @crawl_id      = crawl_id
         @staging_path  = staging_path
         @druid_id      = druid_id
-        @java_log_file = 'log/jar_WASMetadataExtractor.log'
-        @extracted_metadata_xml_path = 'tmp'
-        @java_heap_size = Settings.was_crawl.java_heap_size
       end
 
-      def run_metadata_extractor_jar
+      def run
+        # This previously used WASMetadataExtractor.
+        # However, it has now been simplified to create the necessary XML without it.
         prepare_parameters
-        java_cmd = build_cmd_string
-        call_java_library(java_cmd)
+        File.write(@xml_output_location, build_xml)
       end
 
       def prepare_parameters
         @input_directory = "#{Pathname(DruidTools::Druid.new(@druid_id, @staging_path.to_s).path)}/content"
         raise "#{@input_directory} doesn't exist" unless File.exist?(@input_directory)
 
-        @jar_path = Settings.was_crawl.metadata_extractor_jar
-        @xml_output_location = "#{@extracted_metadata_xml_path}/#{@druid_id}.xml"
+        @xml_output_location = "tmp/#{@druid_id}.xml"
       end
 
-      def build_cmd_string
-        "java #{@java_heap_size} -jar #{@jar_path} -f XML -d #{@input_directory} -o #{@xml_output_location} -c config/extractor.yml --collectionId #{@collection_id} --crawlId #{@crawl_id} 2>> #{@java_log_file}"
+      def build_xml
+        builder = Nokogiri::XML::Builder.new do |xml|
+          xml.crawlObject do
+            xml.crawlId @crawl_id
+            xml.collectionId @collection_id
+            xml.files do
+              build_files(xml)
+            end
+          end
+        end
+        builder.to_xml
       end
 
-      def call_java_library(java_cmd)
-        raise "Error in executing the WASMetadataExtractor.jar\n#{$CHILD_STATUS}" unless system(java_cmd)
+      def build_files(xml)
+        Dir.glob("*.warc.gz", base: @input_directory).each do |filename|
+          filepath = "#{@input_directory}/#{filename}"
+          xml.file do
+            xml.name filename
+            xml.type "WARC"
+            xml.size File.size(filepath)
+            xml.mimeType 'application/warc'
+            xml.checksumMD5 Digest::MD5.file(filepath).hexdigest
+            xml.checksumSHA1 Digest::SHA1.file(filepath).hexdigest
+          end
+        end
       end
     end
   end

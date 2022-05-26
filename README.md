@@ -20,8 +20,6 @@ to start all robots defined in `config/environments/robots_ENV.yml`.
 
 The WAS robots depend on some java projects:
 
-- [WasMetadataExtractor](https://github.com/sul-dlss/WASMetadataExtractor)
-  - to extract metadata from web archiving ARC and WARC files, used by wasCrawlPreassemblyWF.
 - [openwayback](https://github.com/sul-dlss/openwayback)
   - to index WARC materials for the Stanford Web Archiving Portal, used by cdx-generator step in wasCrawlDisseminationWF
 
