@@ -38,10 +38,6 @@ See consul pages in Web Archival portal, esp Web Archiving Development Documenta
 Preassembly workflow for web archiving crawl objects (that include (W)ARCs files) to extract and create metadata stream.  It consists of 6 robots:
 
 * `build-was-crawl-druid-tree`: this robot reads the crawl object content (ARCs or WARCs and logs) from directory defined by crawl object label, then it builds druid tree, and copy the content to the druid tree content directory.
-* `metadata_extractor`: this robot extracts the metadata from the (W)ARCs files using java jar file. The output is an xml includes metadata for the (W)ARCs and general information about the other files.
-* `content_metadata_generator`: this robot generates content metadata based on the xml created from `metadata_extractor` and `contentMetadata.xslt` template.
-* `desc_metadata_generator`: this robot generates desc metadata based on the xml created from `metadata_extractor` and `descMetadata.xslt` template.
-* `technical_metadata_generator`: this robot generates technical metadata based on the xml created from `metadata_extractor` and `techicalMetadata.xslt` template.
 * `end_was_crawl_preassembly`: initiates the accessionWF (of common-accessioning).
 
 ## wasCrawlDissemination
