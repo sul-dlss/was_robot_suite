@@ -1,5 +1,5 @@
 module Dor
-  module WASCrawl
+  module WasCrawl
     module Dissemination
       class Utilities
         def self.run_sys_cmd(cmd_string, error_message)
@@ -21,7 +21,7 @@ module Dor
         end
 
         def self.get_collection_id(druid_obj)
-          Dor::WASCrawl::Utilities.get_collection_id(druid_obj)
+          Dor::WasCrawl::Utilities.get_collection_id(druid_obj)
         end
       end
     end

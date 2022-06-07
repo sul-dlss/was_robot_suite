@@ -296,6 +296,7 @@ DEPENDENCIES
   slop
   stanford-mods (~> 2.6)
   whenever
+  zeitwerk (~> 2.1)
 
 BUNDLED WITH
    2.3.14

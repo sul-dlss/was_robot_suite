@@ -1,5 +1,5 @@
-module Was
-  module Robots
+module Robots
+  module DorRepo
     class Base
       include LyberCore::Robot
 

@@ -1,7 +1,6 @@
 require 'spec_helper'
-require 'was_seed_preassembly/thumbnail_generator_service'
 
-RSpec.describe Dor::WASSeed::ThumbnailGeneratorService do
+RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
   before do
     Settings.was_seed.wayback_uri = 'https//swap.stanford.edu'
   end

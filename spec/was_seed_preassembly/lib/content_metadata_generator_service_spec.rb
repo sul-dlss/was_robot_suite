@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Dor::WASSeed::ContentMetadataGenerator do
+RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
   before(:all) do
     @staging_path = Pathname(File.dirname(__FILE__)).join('../fixtures/')
     @expected_thumbnal_xml_element = '<image><md5>cecab42610cefd7f8ba80c8505a0f95f</md5><sha1>c78e5e8e8ca02c6fffa9169b0e9e4df908675fdc</sha1><size>228709</size><width>1000</width><height>1215</height></image>'
@@ -117,10 +117,10 @@ RSpec.describe Dor::WASSeed::ContentMetadataGenerator do
   end
 
   def cm_generator_instance
-    Dor::WASSeed::ContentMetadataGenerator.new('', '')
+    Dor::WasSeed::ContentMetadataGenerator.new('', '')
   end
 
   def cm_generator_instance_with_druid(druid = 'druid:aa111aa1111')
-    Dor::WASSeed::ContentMetadataGenerator.new('', druid)
+    Dor::WasSeed::ContentMetadataGenerator.new('', druid)
   end
 end

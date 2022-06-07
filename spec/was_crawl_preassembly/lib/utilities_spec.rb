@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Dor::WASCrawl::Utilities do
+RSpec.describe Dor::WasCrawl::Utilities do
   let(:druid) { 'druid:aa111bb2222' }
   let(:collection_druid) { 'druid:cc333dd4444' }
 

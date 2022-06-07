@@ -1,6 +1,6 @@
 module Dor
-  module WASCrawl
-    class CDXGeneratorService
+  module WasCrawl
+    class CdxGeneratorService
       def initialize(collection_path, druid_id, warc_file_list)
         @warc_file_list = warc_file_list
         @druid_id = druid_id
@@ -36,7 +36,7 @@ module Dor
 
       def generate_cdx_for_one_warc(warc_file_path, cdx_file_path)
         cmd_string = prepare_cdx_generation_cmd_string(warc_file_path, cdx_file_path)
-        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(cmd_string, 'extracting CDX')
+        Dor::WasCrawl::Dissemination::Utilities.run_sys_cmd(cmd_string, 'extracting CDX')
       end
 
       def prepare_cdx_generation_cmd_string(warc_file_path, cdx_file_path)

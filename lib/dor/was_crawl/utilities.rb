@@ -1,5 +1,5 @@
 module Dor
-  module WASCrawl
+  module WasCrawl
     class Utilities
       # @param [Cocina::Models::DRO] cocina_model
       def self.get_collection_id(cocina_model)

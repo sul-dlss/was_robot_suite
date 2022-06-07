@@ -1,14 +1,14 @@
 module Robots
   module DorRepo
     module WasSeedPreassembly
-      class DescMetadataGenerator < Was::Robots::Base
+      class DescMetadataGenerator < Base
         def initialize
           super('wasSeedPreassemblyWF', 'desc-metadata-generator')
         end
 
         def perform(druid)
           LyberCore::Log.info "Creating DescMetadataGenerator with parameters #{druid}"
-          metadata_generator_service = Dor::WASSeed::DescMetadataGenerator.new(workspace_path,
+          metadata_generator_service = Dor::WasSeed::DescMetadataGenerator.new(workspace_path,
                                                                                druid,
                                                                                seed_uri(druid),
                                                                                collection_id(druid))

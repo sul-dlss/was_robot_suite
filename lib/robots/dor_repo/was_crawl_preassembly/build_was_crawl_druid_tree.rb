@@ -3,7 +3,7 @@ require 'find'
 module Robots
   module DorRepo
     module WasCrawlPreassembly
-      class BuildWasCrawlDruidTree < Was::Robots::Base
+      class BuildWasCrawlDruidTree < Base
         def initialize
           super('wasCrawlPreassemblyWF', 'build-was-crawl-druid-tree')
         end
@@ -11,7 +11,7 @@ module Robots
         def perform(druid)
           cocina_model = Dor::Services::Client.object(druid).find
 
-          crawl_id = Dor::WASCrawl::Utilities.get_crawl_id(cocina_model)
+          crawl_id = Dor::WasCrawl::Utilities.get_crawl_id(cocina_model)
           crawl_directory = File.join(Settings.was_crawl.source_path, crawl_id)
           staging_path = Settings.was_crawl.staging_path
 

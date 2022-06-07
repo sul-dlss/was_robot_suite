@@ -1,7 +1,7 @@
 require 'nokogiri'
 
 module Dor
-  module WASSeed
+  module WasSeed
     class MetadataGenerator
       attr_accessor :workspace, :druid_id
 
@@ -26,7 +26,7 @@ module Dor
       end
 
       def read_template(metadata_name)
-        File.read(Pathname(File.dirname(__FILE__)).join("../../template/wasSeedPreassembly/#{metadata_name}.xslt"))
+        File.read(Pathname(File.dirname(__FILE__)).join("../../../template/wasSeedPreassembly/#{metadata_name}.xslt"))
       end
 
       def transform_xml_using_xslt(metadata_xml_input_object, metadata_xslt_template)

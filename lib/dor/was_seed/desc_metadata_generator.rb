@@ -1,7 +1,5 @@
-require 'was_seed_preassembly/metadata_generator_service'
-
 module Dor
-  module WASSeed
+  module WasSeed
     class DescMetadataGenerator < MetadataGenerator
       attr_reader :desc_metadata_name, :seed_uri, :collection_id
 

@@ -1,9 +1,8 @@
-require 'was_seed_preassembly/metadata_generator_service'
 require 'digest/md5'
 require 'digest/sha1'
 
 module Dor
-  module WASSeed
+  module WasSeed
     class ContentMetadataGenerator < MetadataGenerator
       CONTENT_METADATA = 'contentMetadata'.freeze
 

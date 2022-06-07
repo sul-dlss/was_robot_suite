@@ -1,5 +1,5 @@
 module Dor
-  module WASCrawl
+  module WasCrawl
     class PathIndexerService
       def initialize(druid_id, collection_path, path_working_directory, warc_file_list)
         @druid_id = druid_id
@@ -30,11 +30,11 @@ module Dor
       def sort
         # sort
         sort_cmd_string = "LC_ALL=C sort #{@working_merged_path_index} > #{@working_sorted_duplicate_path_index}"
-        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(sort_cmd_string, 'sorting path index file')
+        Dor::WasCrawl::Dissemination::Utilities.run_sys_cmd(sort_cmd_string, 'sorting path index file')
 
         # uniq
         uniq_cmd_string = "uniq #{@working_sorted_duplicate_path_index} > #{@working_sorted_path_index}"
-        Dor::WASCrawl::Dissemination::Utilities.run_sys_cmd(uniq_cmd_string, 'removing duplicates from path index file')
+        Dor::WasCrawl::Dissemination::Utilities.run_sys_cmd(uniq_cmd_string, 'removing duplicates from path index file')
       end
 
       def publish

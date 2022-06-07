@@ -1,7 +1,7 @@
 module Robots
   module DorRepo
     module WasSeedPreassembly
-      class EndWasSeedPreassembly < Was::Robots::Base
+      class EndWasSeedPreassembly < Base
         def initialize
           super('wasSeedPreassemblyWF', 'end-was-seed-preassembly')
         end
