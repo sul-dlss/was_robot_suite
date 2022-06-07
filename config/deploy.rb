@@ -57,3 +57,18 @@ set :honeybadger_env, fetch(:stage)
 
 # update shared_configs before restarting app
 before 'deploy:publishing', 'shared_configs:update'
+
+# Install python dependencies
+before 'deploy:updated', 'pip:install'
+before 'deploy:reverted', 'pip:install'
+
+namespace :pip do
+  desc 'Install python dependencies via pip'
+  task :install do
+    on roles(:app) do
+      within release_path do
+        execute(*%w[pip install -r requirements.txt])
+      end
+    end
+  end
+end
