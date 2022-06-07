@@ -38,13 +38,6 @@ Config.load_and_set_settings(
   Config.setting_files(File.expand_path(__dir__), environment)
 )
 
-# Override Solrizer's logger before it gets a chance to load and pollute STDERR.
-begin
-  require 'solrizer'
-  Solrizer.logger = ROBOT_LOG
-rescue LoadError, NameError, NoMethodError
-end
-
 # Load core robot services
 require 'lyber_core'
 
