@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Dor::WASCrawl::CDXMergeSortPublishService do
+describe Dor::WasCrawl::CdxMergeSortPublishService do
   let(:cdx_file_path) { Pathname(File.dirname(__FILE__)).join('fixtures/cdx_files') }
 
   before(:all) do

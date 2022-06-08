@@ -1,7 +1,6 @@
 require 'spec_helper'
-require 'was_seed_preassembly/desc_metadata_generator_service'
 
-RSpec.describe Dor::WASSeed::DescMetadataGenerator do
+RSpec.describe Dor::WasSeed::DescMetadataGenerator do
   let(:fixtures) { 'spec/was_seed_preassembly/fixtures/' }
 
   describe '.generate_metadata_output xsl transform' do

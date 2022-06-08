@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe Dor::WASCrawl::PathIndexerService do
+RSpec.describe Dor::WasCrawl::PathIndexerService do
   before(:all) do
     @stacks_path = Pathname(File.dirname(__FILE__)).join('fixtures/stacks')
     @path_files = Pathname(File.dirname(__FILE__)).join('fixtures/path_files')

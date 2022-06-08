@@ -10,12 +10,12 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::ThumbnailGenerator do
 
     before do
       allow(Dor::Services::Client).to receive(:object).with(druid).and_return(object_client)
-      allow(Dor::WASSeed::ThumbnailGeneratorService).to receive(:capture_thumbnail)
+      allow(Dor::WasSeed::ThumbnailGeneratorService).to receive(:capture_thumbnail)
     end
 
     it 'invokes thumbnail generator service' do
       instance.perform(druid)
-      expect(Dor::WASSeed::ThumbnailGeneratorService).to have_received(:capture_thumbnail).with(druid, '/dor/workspace/', url)
+      expect(Dor::WasSeed::ThumbnailGeneratorService).to have_received(:capture_thumbnail).with(druid, '/dor/workspace/', url)
     end
   end
 end

@@ -18,6 +18,7 @@ gem 'rake'
 gem 'resque'
 gem 'resque-pool'
 gem 'whenever'
+gem 'zeitwerk', '~> 2.1'
 
 group :development, :test do
   gem 'rspec'

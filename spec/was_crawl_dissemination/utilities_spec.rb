@@ -1,7 +1,6 @@
 require 'spec_helper'
-require 'was_crawl_dissemination/utilities'
 
-RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
+RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
   describe '.run_sys_cmd' do
     it 'should return nothing with succesful command' do
       described_class.run_sys_cmd('ls', '')
@@ -111,8 +110,8 @@ RSpec.describe Dor::WASCrawl::Dissemination::Utilities do
   describe '.get_collection_id' do
     let(:druid_obj) { double(Cocina::Models::DRO) }
 
-    it 'delegates to Dor::WASCrawl::Utilities' do
-      expect(Dor::WASCrawl::Utilities).to receive(:get_collection_id).with(druid_obj).and_return('abc')
+    it 'delegates to Dor::WasCrawl::Utilities' do
+      expect(Dor::WasCrawl::Utilities).to receive(:get_collection_id).with(druid_obj).and_return('abc')
       expect(described_class.get_collection_id(druid_obj)).to eq 'abc'
     end
   end

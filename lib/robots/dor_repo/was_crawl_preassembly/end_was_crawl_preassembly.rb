@@ -1,7 +1,7 @@
 module Robots
   module DorRepo
     module WasCrawlPreassembly
-      class EndWasCrawlPreassembly < Was::Robots::Base
+      class EndWasCrawlPreassembly < Base
         def initialize
           super('wasCrawlPreassemblyWF', 'end-was-crawl-preassembly')
         end

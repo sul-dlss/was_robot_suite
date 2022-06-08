@@ -1,7 +1,7 @@
 module Robots
   module DorRepo
     module WasDissemination
-      class StartSpecialDissemination < Was::Robots::Base
+      class StartSpecialDissemination < Base
         def initialize
           super('wasDisseminationWF', 'start-special-dissemination')
         end

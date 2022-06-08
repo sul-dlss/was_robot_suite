@@ -1,7 +1,7 @@
 require 'open3'
 
 module Dor
-  module WASSeed
+  module WasSeed
     class ThumbnailGeneratorService
       # because this date is earlier than any of the archived dates of the content,
       # this tells openwayback to provide the earliest capture date.
