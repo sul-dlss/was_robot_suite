@@ -110,7 +110,7 @@ RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
     end
 
     it 'transforms the xml to content metadata data format using XSLT' do
-      xslt_template = File.read(Pathname(File.dirname(__FILE__)).join('../../../template/wasSeedPreassembly/contentMetadata.xslt'))
+      xslt_template = File.read(Pathname(File.dirname(__FILE__)).join('../../../../template/wasSeedPreassembly/contentMetadata.xslt'))
       actual_content_metadata = cm_generator_instance.transform_xml_using_xslt @expected_full_xml_element, xslt_template
       expect(actual_content_metadata).to be_equivalent_to content_metadata_full
     end
