@@ -145,7 +145,7 @@ RSpec/VerifiedDoubles:
     - 'spec/lib/dor/was_crawl/dissemination/utilities_spec.rb'
     - 'spec/lib/dor/was_seed/content_metadata_generator_service_spec.rb'
 
-# Offense count: 22
+# Offense count: 24
 # Configuration parameters: AllowedConstants.
 Style/Documentation:
   Enabled: false
