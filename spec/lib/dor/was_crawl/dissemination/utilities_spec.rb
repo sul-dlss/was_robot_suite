@@ -2,11 +2,11 @@ require 'spec_helper'
 
 RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
   describe '.run_sys_cmd' do
-    it 'should return nothing with succesful command' do
+    it 'returns nothing with succesful command' do
       described_class.run_sys_cmd('ls', '')
     end
 
-    it 'should raise an error with wrong command' do
+    it 'raises an error with wrong command' do
       expect { described_class.run_sys_cmd('lss', '') }.to raise_error StandardError
     end
   end

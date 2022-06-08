@@ -81,7 +81,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
     context "when contentMetadata has no arcs or warcs" do
       let(:contentMetadata) { File.read("#{@content_metadata_xml_location}contentMetadata_0file.xml") }
 
-      it 'should do nothing for the contentMetadata without any arcs or warcs', :openwayback_prerequisite do
+      it 'does nothing for the contentMetadata without any arcs or warcs', :openwayback_prerequisite do
         cdx_generator = described_class.new(@collection_path, @druid_id_3, warc_file_list)
         cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
         cdx_generator.generate_cdx_for_crawl
@@ -104,7 +104,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       FileUtils.rm 'tmp/ARC-Test.cdx'
     end
 
-    it 'should generate CDX file for the input warc file', :openwayback_prerequisite do
+    it 'generates CDX file for the input warc file', :openwayback_prerequisite do
       cdx_file_path = 'tmp/WARC-Test.cdx'
       warc_file_path = "#{@workspace}/aa111aa1111/WARC-Test.warc.gz"
       @cdx_generator.generate_cdx_for_one_warc(warc_file_path, cdx_file_path)
@@ -116,7 +116,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
     end
 
-    it 'should generate CDX file for the input arc file', :openwayback_prerequisite do
+    it 'generates CDX file for the input arc file', :openwayback_prerequisite do
       cdx_file_path = 'tmp/ARC-Test.cdx'
       warc_file_path = "#{@workspace}/cc111cc1111/ARC-Test.arc.gz"
       @cdx_generator.generate_cdx_for_one_warc(warc_file_path, cdx_file_path)
@@ -134,37 +134,37 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       @cdx_generator = described_class.new('', '', [])
     end
 
-    it 'should return the cdx file for .warc.gz' do
+    it 'returns the cdx file for .warc.gz' do
       warc_file_name = 'file.warc.gz'
       cdx_file_name = @cdx_generator.get_cdx_file_name(warc_file_name)
       expect(cdx_file_name).to eq('file.cdx')
     end
 
-    it 'should return the cdx file for .arc.gz' do
+    it 'returns the cdx file for .arc.gz' do
       warc_file_name = 'file.arc.gz'
       cdx_file_name = @cdx_generator.get_cdx_file_name(warc_file_name)
       expect(cdx_file_name).to eq('file.cdx')
     end
 
-    it 'should return the cdx file for .warc' do
+    it 'returns the cdx file for .warc' do
       warc_file_name = 'file.warc'
       cdx_file_name = @cdx_generator.get_cdx_file_name(warc_file_name)
       expect(cdx_file_name).to eq('file.cdx')
     end
 
-    it 'should return the cdx file for .arc' do
+    it 'returns the cdx file for .arc' do
       warc_file_name = 'file.arc'
       cdx_file_name = @cdx_generator.get_cdx_file_name(warc_file_name)
       expect(cdx_file_name).to eq('file.cdx')
     end
 
-    it 'should return the cdx file for irregular file extension' do
+    it 'returns the cdx file for irregular file extension' do
       warc_file_name = 'file.txt'
       cdx_file_name = @cdx_generator.get_cdx_file_name(warc_file_name)
       expect(cdx_file_name).to eq('file.txt.cdx')
     end
 
-    it 'should return the cdx file without the directory path' do
+    it 'returns the cdx file without the directory path' do
       expect(@cdx_generator.get_cdx_file_name('tmp/file.txt')).to eq('file.txt.cdx')
       expect(@cdx_generator.get_cdx_file_name('./file.txt')).to eq('file.txt.cdx')
       expect(@cdx_generator.get_cdx_file_name('../file.txt')).to eq('file.txt.cdx')
@@ -179,7 +179,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       @cdx_generator = described_class.new('', '', [])
     end
 
-    it 'should returns the command string as expected' do
+    it 'returns the command string as expected' do
       warc_file_name = 'file.warc'
       cdx_file_name  = 'file.cdx'
       @cdx_generator.instance_variable_set(:@cdx_working_directory, 'working_directory/')
@@ -187,7 +187,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       expect(cmd_string).to eq('jar/openwayback/bin/cdx-indexer file.warc file.cdx 2>> log/cdx_indexer.log')
     end
 
-    it 'should raise an error with nil or missing file names' do
+    it 'raises an error with nil or missing file names' do
       warc_file_name = nil
       cdx_file_name = 'file.cdx'
 
@@ -199,7 +199,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
   end
 
   context Dor::WasCrawl::Dissemination::Utilities, '.run_sys_cmd', :openwayback_prerequisite do
-    it 'should generate CDX file in the right location with valid WARC file' do
+    it 'generates CDX file in the right location with valid WARC file' do
       warc_file_name = "#{@workspace}/aa111aa1111/WARC-Test.warc.gz"
       cdx_file_name = 'tmp/WARC-Test.cdx'
       cmd_string = "jar/openwayback/bin/cdx-indexer  #{warc_file_name} #{cdx_file_name} 2>> log/cdx_indexer.log"
@@ -212,7 +212,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       expect(actual_cdx_MD5).to eq(expected_cdx_MD5)
     end
 
-    it 'should raise an error with invalid input file' do
+    it 'raises an error with invalid input file' do
       warc_file_name = '{@workspace}/bb111bbb1111/WARC-Test.txt'
       cdx_file_name = 'tmp/WARC-Test.cdx'
       cmd_string = "jar/openwayback/bin/cdx-indexer  #{warc_file_name} #{cdx_file_name} 2>> log/cdx_indexer.log"

@@ -46,25 +46,25 @@ RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
   end
 
   describe '.generate_xml_doc' do
-    it 'should return a complete xml element for valid druid and an image xml element' do
+    it 'returns a complete xml element for valid druid and an image xml element' do
       actual_xml_element = cm_generator_instance_with_druid.generate_xml_doc @expected_thumbnal_xml_element
       expect(actual_xml_element.to_xml).to eq(@expected_full_xml_element.to_xml)
       # expect(actual_xml_element).to be_equivalent_to(@expected_full_xml_element)
     end
 
-    it 'should return a basic xml element for a valid druid and empty xml element' do
+    it 'returns a basic xml element for a valid druid and empty xml element' do
       actual_xml_element =  cm_generator_instance_with_druid.generate_xml_doc ''
       expect(actual_xml_element.to_xml).to eq(@expected_empty_xml_element.to_xml)
     end
 
-    it 'should return a basic xml element for a valid druid and empty xml element' do
+    it 'returns a basic xml element for a valid druid and empty xml element' do
       actual_xml_element =  cm_generator_instance_with_druid.generate_xml_doc
       expect(actual_xml_element.to_xml).to eq(@expected_empty_xml_element.to_xml)
     end
   end
 
   describe '.create_thumbnail_xml_element' do
-    it 'should return valid xml element for a regular image', :image_prerequisite do
+    it 'returns valid xml element for a regular image', :image_prerequisite do
       thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail.jp2"
       actual_xml_element = cm_generator_instance.create_thumbnail_xml_element thumbnail_file_location
       expect(actual_xml_element).to eq(@expected_thumbnal_xml_element)
@@ -73,24 +73,24 @@ RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
       # expect(actual_xml_object).to be_equivalent_to(expected_xml_objet)
     end
 
-    it 'should return empty string for non-existing images' do
+    it 'returns empty string for non-existing images' do
       thumbnail_file_location = "#{@staging_path}/thumbnail_files/nonthing.jpeg"
       actual_xml_element = cm_generator_instance.create_thumbnail_xml_element thumbnail_file_location
       expect(actual_xml_element).to eq('')
     end
 
-    it 'should return empty string for null location string' do
+    it 'returns empty string for null location string' do
       actual_xml_element = cm_generator_instance.create_thumbnail_xml_element nil
       expect(actual_xml_element).to eq('')
     end
 
-    it 'should raise an excetion for reading an empty image' do
+    it 'raises an excetion for reading an empty image' do
       # TODO: ? This test case should be fixed with adding an empty image
       thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail_empty.jpeg"
       expect { create_thumbnail_xml_element thumbnail_file_location }.to raise_error StandardError
     end
 
-    it 'should raise an error for reading an invalid image' do
+    it 'raises an error for reading an invalid image' do
       thumbnail_file_location = "#{@staging_path}/thumbnail_files/thumbnail_text.jpeg"
       expect { create_thumbnail_xml_element thumbnail_file_location }.to raise_error StandardError
     end
