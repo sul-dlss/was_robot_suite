@@ -33,6 +33,10 @@ was_crawl_dissemination:
   stacks_collections_path: "/web-archiving-stacks/data/collections/"
   sort_env_vars: "TMPDIR=/web-archiving-stacks/data/tmp/ LC_ALL=C"
 
+cdxj_indexer:
+  working_directory: /web-archiving-stacks/data/indexes/cdxj_working
+
+
 was_seed:
   workspace_path: '/dor/workspace/'  #the root for the storage for DRUID tree that will be the input to AssemblyWF
   staging_path: '/was_unaccessioned_data/seed/'
