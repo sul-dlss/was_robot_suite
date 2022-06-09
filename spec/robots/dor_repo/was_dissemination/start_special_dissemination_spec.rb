@@ -45,7 +45,7 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
       end
 
       context 'when the type is object (crawl item)' do
-        let(:type) { Cocina::Models::ObjectType.object }
+        let(:type) { Cocina::Models::ObjectType.webarchive_binary }
 
         it 'initializes wasCrawlDisseminationWF for the crawl item' do
           perform
