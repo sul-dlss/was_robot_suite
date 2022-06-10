@@ -1,2 +1,3 @@
 cdxj_indexer:
   working_directory: tmp
+  main_cdxj_file: tmp/cdxj/level0.cdxj
