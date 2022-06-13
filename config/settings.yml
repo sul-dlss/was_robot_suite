@@ -34,6 +34,7 @@ was_crawl_dissemination:
   sort_env_vars: "TMPDIR=/web-archiving-stacks/data/tmp/ LC_ALL=C"
 
 cdxj_indexer:
+  bin: /opt/app/was/.local/bin/cdxj-indexer
   working_directory: /web-archiving-stacks/data/indexes/cdxj_working
   backup_directory: /web-archiving-stacks/data/indexes/cdxj_backup
   main_cdxj_file: /web-archiving-stacks/data/indexes/cdxj/level0.cdxj
