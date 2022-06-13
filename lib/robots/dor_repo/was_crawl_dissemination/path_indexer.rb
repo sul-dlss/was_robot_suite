@@ -22,6 +22,8 @@ module Robots
           path_indexer_service.merge
           path_indexer_service.sort
           path_indexer_service.publish
+          # copy needed only while pywb is run in parallel with openwayback
+          path_indexer_service.copy
           path_indexer_service.clean
         end
       end
