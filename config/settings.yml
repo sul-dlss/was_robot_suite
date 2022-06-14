@@ -28,6 +28,11 @@ was_crawl_dissemination:
 
   path_working_directory: "/web-archiving-stacks/data/indices/path_working/"
   main_path_index_file: "/web-archiving-stacks/data/indices/path/path-index.txt"
+  # when in production with pywb, new settings for path:
+  # path_working_directory: "/web-archiving-stacks/data/indexes/path_working/" 
+  # main_path_index_file: "/web-archiving-stacks/data/indexes/path/path-index.txt"
+  # Needed only while pywb is run in parallel with openwayback:
+  pywb_main_path_index_file: "/web-archiving-stacks/data/indexes/path/path-index.txt"
 
   cdx_indexer_script: "jar/openwayback/bin/cdx-indexer"
   stacks_collections_path: "/web-archiving-stacks/data/collections/"

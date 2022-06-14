@@ -7,6 +7,7 @@ module Dor
         @collection_path = collection_path
 
         @main_path_index_file = Settings.was_crawl_dissemination.main_path_index_file
+        @pywb_main_path_index_file = Settings.was_crawl_dissemination.pywb_main_path_index_file
 
         @working_merged_path_index = "#{path_working_directory}/merged_path_index.txt"
         @working_sorted_duplicate_path_index = "#{path_working_directory}/duplicate_path_index.txt"
@@ -39,6 +40,11 @@ module Dor
 
       def publish
         FileUtils.mv(@working_sorted_path_index, @main_path_index_file)
+      end
+
+      # Needed only while pywb is run in parallel with openwayback
+      def copy
+        FileUtils.cp(@main_path_index_file, @pywb_main_path_index_file)
       end
 
       def clean

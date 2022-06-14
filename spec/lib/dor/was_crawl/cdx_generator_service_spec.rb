@@ -40,8 +40,8 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
         cdx_file_path_1 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_1}/WARC-Test.cdx"
         cdx_file_path_2 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_1}/ARC-Test.cdx"
 
-        expect(File.exist?(cdx_file_path_1)).to eq(true)
-        expect(File.exist?(cdx_file_path_2)).to eq(true)
+        expect(File.exist?(cdx_file_path_1)).to be(true)
+        expect(File.exist?(cdx_file_path_2)).to be(true)
 
         actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path_1))
         expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/WARC-Test.cdx'))
@@ -55,7 +55,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       it 'generates cdx files for each warc or arc file in contentMetadata even if there are some file already created', :openwayback_prerequisite do
         # Make sure the test case is correctly setup
         cdx_file_path_1 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/WARC-Test.cdx"
-        expect(File.exist?(cdx_file_path_1)).to eq(true)
+        expect(File.exist?(cdx_file_path_1)).to be(true)
 
         cdx_generator = described_class.new(@collection_path, @druid_id_2, warc_file_list)
 
@@ -65,8 +65,8 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
         cdx_file_path_1 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/WARC-Test.cdx"
         cdx_file_path_2 = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_2}/ARC-Test.cdx"
 
-        expect(File.exist?(cdx_file_path_1)).to eq(true)
-        expect(File.exist?(cdx_file_path_2)).to eq(true)
+        expect(File.exist?(cdx_file_path_1)).to be(true)
+        expect(File.exist?(cdx_file_path_2)).to be(true)
 
         actual_cdx_MD5   = Digest::MD5.hexdigest(File.read(cdx_file_path_1))
         expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/WARC-Test.cdx'))
@@ -88,8 +88,8 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
 
         cdx_dir = "#{@stacks_path}/data/indices/cdx_working/#{@druid_id_3}/"
 
-        expect(File.exist?(cdx_dir)).to eq(true)
-        expect(Dir.glob("#{cdx_dir}{*,.*}").empty?).to eq(true)
+        expect(File.exist?(cdx_dir)).to be(true)
+        expect(Dir.glob("#{cdx_dir}{*,.*}").empty?).to be(true)
       end
     end
   end
@@ -109,7 +109,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       warc_file_path = "#{@workspace}/aa111aa1111/WARC-Test.warc.gz"
       @cdx_generator.generate_cdx_for_one_warc(warc_file_path, cdx_file_path)
 
-      expect(File.exist?(cdx_file_path)).to eq(true)
+      expect(File.exist?(cdx_file_path)).to be(true)
 
       actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path))
       expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/WARC-Test.cdx'))
@@ -121,7 +121,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       warc_file_path = "#{@workspace}/cc111cc1111/ARC-Test.arc.gz"
       @cdx_generator.generate_cdx_for_one_warc(warc_file_path, cdx_file_path)
 
-      expect(File.exist?(cdx_file_path)).to eq(true)
+      expect(File.exist?(cdx_file_path)).to be(true)
 
       actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_path))
       expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/ARC-Test.cdx'))
@@ -205,7 +205,7 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       cmd_string = "jar/openwayback/bin/cdx-indexer  #{warc_file_name} #{cdx_file_name} 2>> log/cdx_indexer.log"
       Dor::WasCrawl::Dissemination::Utilities.run_sys_cmd(cmd_string, 'extracting CDX')
 
-      expect(File.exist?(cdx_file_name)).to eq(true)
+      expect(File.exist?(cdx_file_name)).to be(true)
 
       actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(cdx_file_name))
       expected_cdx_MD5 = Digest::MD5.hexdigest(File.read('spec/fixtures/cdx_files/WARC-Test.cdx'))
