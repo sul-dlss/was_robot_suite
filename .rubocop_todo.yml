@@ -194,4 +194,4 @@ Style/TernaryParentheses:
 # Configuration parameters: AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, AllowedPatterns, IgnoredPatterns.
 # URISchemes: http, https
 Layout/LineLength:
-  Max: 209
+  Max: 225 
