@@ -6,7 +6,7 @@ Bundler.require(:default)
 environment = ENV['ROBOT_ENVIRONMENT'] ||= 'development'
 ROBOT_ROOT = File.expand_path(File.join(__dir__, '..'))
 ROBOT_LOG = Logger.new(File.join(ROBOT_ROOT, "log/#{environment}.log"))
-ROBOT_LOG.level = Logger::SEV_LABEL.index(ENV['ROBOT_LOG_LEVEL']) || Logger::INFO
+ROBOT_LOG.level = Logger::SEV_LABEL.index(ENV.fetch('ROBOT_LOG_LEVEL', nil)) || Logger::INFO
 
 loader = Zeitwerk::Loader.new
 loader.push_dir(File.absolute_path("#{__FILE__}/../../lib"))
@@ -47,4 +47,4 @@ Was.connect_dor_services_app
 
 # Load Resque configuration and controller
 require 'resque'
-Resque.redis = (defined? REDIS_URL) ? REDIS_URL : "localhost:6379/resque:#{ENV['ROBOT_ENVIRONMENT']}"
+Resque.redis = (defined? REDIS_URL) ? REDIS_URL : "localhost:6379/resque:#{ENV.fetch('ROBOT_ENVIRONMENT', nil)}"

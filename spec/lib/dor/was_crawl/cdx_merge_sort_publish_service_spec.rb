@@ -22,7 +22,7 @@ describe Dor::WasCrawl::CdxMergeSortPublishService do
 
       expected_merged_file_path = "#{cdx_file_path}/#{druid}_merged_index.cdx"
       actual_merged_file_path = "#{@cdx_working_dir}/#{druid}_merged_index.cdx"
-      expect(File.exist?(actual_merged_file_path)).to eq true
+      expect(File.exist?(actual_merged_file_path)).to be true
 
       actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(actual_merged_file_path))
       expected_cdx_MD5 = Digest::MD5.hexdigest(File.read(expected_merged_file_path))
@@ -45,7 +45,7 @@ describe Dor::WasCrawl::CdxMergeSortPublishService do
 
       expected_sorted = "#{cdx_file_path}/#{druid}_sorted_index.cdx"
       actual_sorted = "#{@cdx_working_dir}/#{druid}_sorted_index.cdx"
-      expect(File.exist?(actual_sorted)).to eq true
+      expect(File.exist?(actual_sorted)).to be true
       actual_cdx_MD5 = Digest::MD5.hexdigest(File.read(actual_sorted))
       expected_cdx_MD5 = Digest::MD5.hexdigest(File.read(expected_sorted))
       expect(actual_cdx_MD5).to eq expected_cdx_MD5
@@ -68,12 +68,12 @@ describe Dor::WasCrawl::CdxMergeSortPublishService do
 
       mergeSortPublishService = described_class.new(druid, @cdx_working_dir, '')
       mergeSortPublishService.instance_variable_set(:@main_cdx_file, @main_cdx_file)
-      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@working_sorted_cdx))).to eq true
-      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@main_cdx_file))).to eq false
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@working_sorted_cdx))).to be true
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@main_cdx_file))).to be false
 
       mergeSortPublishService.publish
-      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@working_sorted_cdx))).to eq false
-      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@main_cdx_file))).to eq true
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@working_sorted_cdx))).to be false
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@main_cdx_file))).to be true
     end
   end
 
@@ -92,30 +92,30 @@ describe Dor::WasCrawl::CdxMergeSortPublishService do
       FileUtils.cp_r("#{cdx_file_path}/ii/.", @cdx_working_dir)
       mergeSortPublishService = described_class.new(@druid, @cdx_working_dir, @cdx_backup_dir)
 
-      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@source_cdx_dir))).to eq true
-      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_merged_index.cdx")).to eq true
-      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_sorted_duplicate_index.cdx")).to eq true
-      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}")).to eq false
-      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file1.cdx")).to eq false
-      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file2.cdx")).to eq false
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@source_cdx_dir))).to be true
+      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_merged_index.cdx")).to be true
+      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_sorted_duplicate_index.cdx")).to be true
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}")).to be false
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file1.cdx")).to be false
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file2.cdx")).to be false
 
       mergeSortPublishService.clean
-      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@source_cdx_dir))).to eq false
-      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_merged_index.cdx")).to eq false
-      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_sorted_duplicate_index.cdx")).to eq false
-      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}")).to eq true
-      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file1.cdx")).to eq true
-      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file2.cdx")).to eq true
+      expect(File.exist?(mergeSortPublishService.instance_variable_get(:@source_cdx_dir))).to be false
+      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_merged_index.cdx")).to be false
+      expect(File.exist?("#{@cdx_working_dir}/#{@druid}_sorted_duplicate_index.cdx")).to be false
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}")).to be true
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file1.cdx")).to be true
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}/file2.cdx")).to be true
       # merged_index.cdx and sorted_duplicate_index.cdx are not kept
-      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}_merged_index.cdx")).to eq false
-      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}_sorted_duplicate_index.cdx")).to eq false
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}_merged_index.cdx")).to be false
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}_sorted_duplicate_index.cdx")).to be false
     end
 
     it 'moves cdx files to cdx backup directory when the @druid directory already exists' do
       FileUtils.cp_r("#{cdx_file_path}/ii/.", @cdx_backup_dir)
 
       mergeSortPublishService = described_class.new(@druid, @cdx_working_dir, @cdx_backup_dir)
-      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}")).to eq true
+      expect(File.exist?("#{@cdx_backup_dir}/#{@druid}")).to be true
 
       # it's okay if it complains about the files;  we are specifically concerned about the directory
       expect { mergeSortPublishService.clean }.not_to raise_error(StandardError, "File exists - #{@cdx_backup_dir}/#{@druid}")

@@ -20,7 +20,7 @@ RSpec.describe Dor::WasCrawl::PathIndexerService do
 
       expected_merged_file_path = "#{@path_files}/merged_path_index.txt"
       actual_merged_file_path = "#{@path_working_directory}/merged_path_index.txt"
-      expect(File.exist?(actual_merged_file_path)).to eq(true)
+      expect(File.exist?(actual_merged_file_path)).to be(true)
 
       expect(File.read(actual_merged_file_path)).to eq(File.read(expected_merged_file_path))
     end
@@ -36,13 +36,13 @@ RSpec.describe Dor::WasCrawl::PathIndexerService do
       expected_duplicate_path_index = "#{@path_files}/duplicate_path_index.txt"
       actual_duplicate_path_index = "#{@path_working_directory}/duplicate_path_index.txt"
 
-      expect(File.exist?(actual_duplicate_path_index)).to eq(true)
+      expect(File.exist?(actual_duplicate_path_index)).to be(true)
       expect(File.read(actual_duplicate_path_index)).to eq(File.read(expected_duplicate_path_index))
 
       expected_path_index = "#{@path_files}/path_index.txt"
       actual_path_index = "#{@path_working_directory}/path_index.txt"
 
-      expect(File.exist?(actual_path_index)).to eq(true)
+      expect(File.exist?(actual_path_index)).to be(true)
       expect(File.read(actual_path_index)).to eq(File.read(expected_path_index))
     end
   end
@@ -61,7 +61,7 @@ RSpec.describe Dor::WasCrawl::PathIndexerService do
       path_index_service.publish
 
       actual_path_index = "#{@stacks_path}/data/indices/path/test_path-index.txt"
-      expect(File.exist?(actual_path_index)).to eq(true)
+      expect(File.exist?(actual_path_index)).to be(true)
     end
   end
 
@@ -81,7 +81,7 @@ RSpec.describe Dor::WasCrawl::PathIndexerService do
       path_index_service.copy
 
       pywb_path_index_file = "#{@stacks_path}/data/indexes/path/test_path-index.txt"
-      expect(File.exist?(pywb_path_index_file)).to eq(true)
+      expect(File.exist?(pywb_path_index_file)).to be(true)
     end
   end
 
