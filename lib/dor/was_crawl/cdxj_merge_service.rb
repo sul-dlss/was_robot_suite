@@ -76,7 +76,8 @@ module Dor
       end
 
       def sort_env_vars
-        # See http://iipc.github.io/warc-specifications/specifications/cdx-format/openwayback-cdxj/#sorting-file--index
+        # Ensure that the index is sorted by byte values
+        # See https://specs.webrecorder.net/cdxj/0.1.0/#sorting
         "LC_ALL=C"
       end
     end
