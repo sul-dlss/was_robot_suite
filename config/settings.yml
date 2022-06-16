@@ -47,7 +47,7 @@ cdxj_indexer:
 was_seed:
   workspace_path: '/dor/workspace/'  #the root for the storage for DRUID tree that will be the input to AssemblyWF
   staging_path: '/was_unaccessioned_data/seed/'
-  wayback_uri: 'https://swap.stanford.edu'
+  wayback_uri: 'https://was-pywb-stage.stanford.edu/was'
 
 chrome_path: /usr/bin/google-chrome
 workflow:
