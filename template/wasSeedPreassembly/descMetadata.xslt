@@ -26,7 +26,7 @@
                  <digitalOrigin>born digital</digitalOrigin>
              </physicalDescription>
              <location>
-                 <url displayLabel="Archived website">https://swap.stanford.edu/*/<xsl:value-of select="uri"/></url>
+                 <url displayLabel="Archived website"><%= Settings.was_seed.wayback_uri %>/*/<xsl:value-of select="uri"/></url>
              </location>
              <recordInfo>
                  <languageOfCataloging>
