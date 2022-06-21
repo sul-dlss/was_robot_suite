@@ -24,7 +24,7 @@ RSpec.describe Robots::DorRepo::WasCrawlDissemination::CdxjGenerator do
     it 'runs the cdxj-indexer' do
       perform
       expect(Dor::WasCrawl::Dissemination::Utilities).to have_received(:run_sys_cmd)
-        .with('/opt/app/was/.local/bin/cdxj-indexer /web-archiving-stacks/data/collections/xx123xx1234/dd/116/zh/0343/foo/number1.warc --output tmp/druid:dd116zh0343/number1.cdxj --sort --post-append 2>> log/cdx_indexer.log',
+        .with('/opt/app/was/.local/bin/cdxj-indexer /web-archiving-stacks/data/collections/xx123xx1234/dd/116/zh/0343/foo/number1.warc --output tmp/druid:dd116zh0343/number1.cdxj --post-append 2>> log/cdx_indexer.log',
               "extracting CDXJ")
     end
   end

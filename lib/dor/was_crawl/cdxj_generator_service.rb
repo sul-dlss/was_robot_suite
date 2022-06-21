@@ -31,7 +31,7 @@ module Dor
       def generate_cdx_for_one_warc(warc_file_name)
         cdx_file_path  = cdx_file_name(warc_file_name)
         warc_file_path = "#{druid_base_directory}/#{warc_file_name}"
-        cmd_string = "#{Settings.cdxj_indexer.bin} #{warc_file_path} --output #{cdx_file_path} --sort --post-append 2>> log/cdx_indexer.log"
+        cmd_string = "#{Settings.cdxj_indexer.bin} #{warc_file_path} --output #{cdx_file_path} --post-append 2>> log/cdx_indexer.log"
         Dor::WasCrawl::Dissemination::Utilities.run_sys_cmd(cmd_string, 'extracting CDXJ')
       end
     end
