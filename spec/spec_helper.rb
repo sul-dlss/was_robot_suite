@@ -2,7 +2,12 @@
 ENV['ROBOT_ENVIRONMENT'] = 'test'
 
 require 'simplecov'
-SimpleCov.start
+SimpleCov.start :rails do
+  add_filter '/bin/'
+  add_filter '/config/'
+  add_filter '/spec/'
+  add_filter '/vendor/'
+end
 
 require File.expand_path("#{__dir__}/../config/boot")
 require 'rspec'

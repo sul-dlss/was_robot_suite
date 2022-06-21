@@ -27,7 +27,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
       expect(File.exist?('tmp/ab123cd4567.jpeg')).to be false
     end
 
-    it 'raises an error if there capture method raise an exception' do
+    it 'raises an error if the capture method raises an exception' do
       allow(described_class).to receive(:capture).and_raise('Error')
       exp_msg = "Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n Error"
       expect { described_class.capture_thumbnail(@druid_id, @workspace, @uri) }.to raise_error.with_message(exp_msg)
