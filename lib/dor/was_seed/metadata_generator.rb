@@ -26,7 +26,9 @@ module Dor
       end
 
       def read_template(metadata_name)
-        File.read(Pathname(File.dirname(__FILE__)).join("../../../template/wasSeedPreassembly/#{metadata_name}.xslt"))
+        ERB.new(
+          File.read(Pathname(File.dirname(__FILE__)).join("../../../template/wasSeedPreassembly/#{metadata_name}.xslt"))
+        ).result
       end
 
       def transform_xml_using_xslt(metadata_xml_input_object, metadata_xslt_template)
