@@ -11,7 +11,10 @@ async function run() {
     try {
         const page = await browser.newPage();
         await page.setViewport({ width: 1200, height: 800 });
-        await page.goto(process.argv[2]);
+        await page.goto(process.argv[2], {
+          timeout: 30000, 
+          waitUntil: 'networkidle0'
+        });
         await page.screenshot({ path: process.argv[3], format: 'jpeg' });
     } catch (err) {
         console.error(err.message)
