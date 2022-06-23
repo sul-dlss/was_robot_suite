@@ -4,12 +4,12 @@ module Dor
   module WasCrawl
     # Extracts WARC files from a WACZ and delete
     class WarcExtractorService
-      def self.extract(collection_path, wacz_filename)
-        new(collection_path, wacz_filename).extract
+      def self.extract(base_path, wacz_filename)
+        new(base_path, wacz_filename).extract
       end
 
-      def initialize(collection_path, wacz_filename)
-        @collection_path = collection_path
+      def initialize(base_path, wacz_filename)
+        @base_path = base_path
         @wacz_filename = wacz_filename
       end
 
@@ -18,7 +18,7 @@ module Dor
           wacz_file.glob('archive/*.warc.gz').each do |warc_entry|
             filename = warc_entry.name.delete_prefix('archive/')
             # Prefixing with WACZ filename to make unique.
-            warc_entry.extract(File.join(collection_path, "#{wacz_basename}-#{filename}"))
+            warc_entry.extract(File.join(base_path, "#{wacz_basename}-#{filename}"))
           end
         end
         File.delete(wacz_filepath)
@@ -26,10 +26,10 @@ module Dor
 
       private
 
-      attr_reader :collection_path, :wacz_filename
+      attr_reader :base_path, :wacz_filename
 
       def wacz_filepath
-        File.join(collection_path, wacz_filename)
+        File.join(base_path, wacz_filename)
       end
 
       def wacz_basename

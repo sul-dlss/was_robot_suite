@@ -23,7 +23,7 @@ RSpec.describe Robots::DorRepo::WasCrawlDissemination::WarcExtractor do
 
     it 'calls the warc extractor' do
       perform
-      expect(Dor::WasCrawl::WarcExtractorService).to have_received(:extract).with('/web-archiving-stacks/data/collections/xx123xx1234', 'foo/number1.wacz')
+      expect(Dor::WasCrawl::WarcExtractorService).to have_received(:extract).with('/web-archiving-stacks/data/collections/xx123xx1234/dd/116/zh/0343', 'foo/number1.wacz')
     end
   end
 end
