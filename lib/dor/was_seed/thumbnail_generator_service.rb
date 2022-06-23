@@ -1,4 +1,5 @@
 require 'open3'
+require 'net/http'
 
 module Dor
   module WasSeed
@@ -12,6 +13,7 @@ module Dor
         temporary_file = "tmp/#{druid[6, 14]}"
         jpeg_file = "#{temporary_file}.jpeg"
         begin
+          indexed?(uri)
           capture(wayback_uri, jpeg_file)
         rescue => e
           File.delete(jpeg_file) if File.exist?(jpeg_file)
@@ -41,6 +43,18 @@ module Dor
                            end
         image.resize resize_dimension
         image.write(temporary_image)
+      end
+
+      # Queries the configured CDXJ API for the provided URI
+      #
+      # param uri [String] the uri to verify if it exists in the index
+      # raises [StandardError] if the uri is not found in the cdxj index
+      def self.indexed?(uri)
+        cdx_index_url = "#{Settings.cdxj_indexer.url}#{uri}"
+        response = Net::HTTP.get_response(URI(cdx_index_url))
+        return unless response.body.nil?
+
+        raise StandardError, "#{uri} not found in cdxj index."
       end
     end
   end

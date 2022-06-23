@@ -44,6 +44,7 @@ cdxj_indexer:
   working_directory: /web-archiving-stacks/data/indexes/cdxj_working
   backup_directory: /web-archiving-stacks/data/indexes/cdxj_backup
   main_cdxj_file: /web-archiving-stacks/data/indexes/cdxj/level0.cdxj
+  url: ~
 
 was_seed:
   workspace_path: '/dor/workspace/'  #the root for the storage for DRUID tree that will be the input to AssemblyWF

@@ -76,4 +76,29 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
       expect(FileUtils.compare_file(temporary_image, 'spec/was_seed_preassembly/fixtures/thumbnail_files/thum_extra_height.jpeg')).to be_truthy
     end
   end
+
+  describe '.indexed?' do
+    let(:uri) { 'http://www.slac.stanford.edu' }
+
+    context 'when the uri is found in the cdxj index' do
+      let(:response_body) { { body: 'some content' } }
+      let(:response) { Net::HTTPSuccess.new(1.0, '200', 'OK') }
+
+      it 'returns nil when the uri is found in the index' do
+        allow(Net::HTTP).to receive(:get_response).and_return(response)
+        allow(response).to receive(:body).and_return(response_body)
+        expect(described_class.indexed?(uri)).to be_nil
+      end
+    end
+
+    context 'when the uri is not found in the cdxj index' do
+      let(:response) { Net::HTTPSuccess.new(1.0, '200', 'OK') }
+
+      it 'returns nil when the uri is found in the index' do
+        allow(Net::HTTP).to receive(:get_response).and_return(response)
+        allow(response).to receive(:body).and_return(nil)
+        expect { described_class.indexed?(uri) }.to raise_error.with_message("#{uri} not found in cdxj index.")
+      end
+    end
+  end
 end
