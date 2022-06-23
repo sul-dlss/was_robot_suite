@@ -17,6 +17,7 @@ gem 'honeybadger'
 gem 'rake'
 gem 'resque'
 gem 'resque-pool'
+gem 'rubyzip'        # warc_extractor_service
 gem 'whenever'
 gem 'zeitwerk', '~> 2.1'
 

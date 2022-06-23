@@ -9,13 +9,20 @@ module Dor
         # @param [Cocina::Models::DRO] cocina_model
         # @return [Array<String>] a list of filenames that are ARCs or WARCs
         def self.warc_file_list(cocina_model)
+          file_list(cocina_model, ['.arc.gz', '.warc.gz', '.warc'])
+        end
+
+        # @param [Cocina::Models::DRO] cocina_model
+        # @return [Array<String>] a list of filenames that are WACZs
+        def self.wacz_file_list(cocina_model)
+          file_list(cocina_model, ['.wacz'])
+        end
+
+        def self.file_list(cocina_model, file_extensions)
           cocina_model.structural.contains.flat_map do |file_set|
             file_set.structural.contains.select do |file|
               filename = file.filename.downcase
-              file.administrative.shelve &&
-                (filename.ends_with?('.arc.gz') ||
-                filename.ends_with?('.warc.gz') ||
-                filename.ends_with?('.warc'))
+              file.administrative.shelve && file_extensions.any? { |file_extension| filename.ends_with?(file_extension) }
             end.map(&:filename)
           end
         end
