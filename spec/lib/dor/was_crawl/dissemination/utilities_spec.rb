@@ -11,20 +11,20 @@ RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
     end
   end
 
-  describe '.warc_file_list' do
+  describe '.warc_file_list and .wacz_file_list' do
     let(:fs_structural) { instance_double(Cocina::Models::FileSetStructural, contains: files) }
     let(:fileset) { instance_double(Cocina::Models::FileSet, structural: fs_structural) }
 
     let(:cocina_model) { instance_double(Cocina::Models::DRO, structural: structural) }
-    let(:file_list) { described_class.warc_file_list(cocina_model) }
 
-    context 'with 4 files' do
+    context 'with 5 files' do
       let(:structural) do
         Cocina::Models::DROStructural.new(contains: [
                                             { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
                                             { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
                                             { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } },
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file5] } }
                                           ])
       end
       let(:file1) do
@@ -47,13 +47,22 @@ RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
                                  label: '', filename: 'ARC-Test2.arc.gz', version: 1,
                                  administrative: { shelve: false })
       end
+      let(:file5) do
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
+                                 label: '', filename: 'WACZ-Test.wacz', version: 1,
+                                 administrative: { shelve: true })
+      end
 
-      it 'returns a list for the extrcted arc and warc files' do
-        expect(file_list.length).to eq(2)
+      it 'returns a list for the extracted arc and warc files' do
+        expect(described_class.warc_file_list(cocina_model)).to eq ["WARC-Test.warc.gz", "ARC-Test.arc.gz"]
+      end
+
+      it 'returns a list for the extracted wacz files' do
+        expect(described_class.wacz_file_list(cocina_model)).to eq ['WACZ-Test.wacz']
       end
     end
 
-    context 'for the contentMetadata with no arcs or warcs inside' do
+    context 'for the contentMetadata with no waczs or arcs or warcs inside' do
       let(:structural) do
         Cocina::Models::DROStructural.new(contains: [
                                             { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } }
@@ -66,8 +75,12 @@ RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
                                  administrative: { shelve: false })
       end
 
-      it 'returns an empty list' do
-        expect(file_list).to eq []
+      it 'returns an empty list for arc and warc files' do
+        expect(described_class.warc_file_list(cocina_model)).to eq []
+      end
+
+      it 'returns an empty list for waczs' do
+        expect(described_class.wacz_file_list(cocina_model)).to eq []
       end
     end
 
@@ -77,7 +90,8 @@ RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
                                             { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
                                             { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
                                             { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } }
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } },
+                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file5] } }
                                           ])
       end
       let(:file1) do
@@ -100,9 +114,18 @@ RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
                                  label: '', filename: 'ARC-Test2.arc.gz', version: 1,
                                  administrative: { shelve: false })
       end
+      let(:file5) do
+        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
+                                 label: '', filename: 'WACZ-Test.wacz', version: 1,
+                                 administrative: { shelve: false })
+      end
 
-      it 'returns an empty list' do
-        expect(file_list).to eq []
+      it 'returns an empty list for arc and warc files' do
+        expect(described_class.warc_file_list(cocina_model)).to eq []
+      end
+
+      it 'returns an empty list for wacz files' do
+        expect(described_class.wacz_file_list(cocina_model)).to eq []
       end
     end
   end
