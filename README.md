@@ -29,7 +29,11 @@ The deployed `was_robot_suite` houses these java artifacts in the `jar` director
 
 Various other dependencies, including `cdxj-indexer` which is installed by puppet via `pip3`, can be found in `config/settings.yml` and [shared_configs](https://github.com/sul-dlss/shared_configs) (was-robotsxxx branches)
 
-# Documentation
+## Prerequisites
+
+See below.
+
+# Workflows
 
 See consul pages in Web Archival portal, esp Web Archiving Development Documentation
 
@@ -47,8 +51,8 @@ Dissemination workflow for web archiving crawl objects.  It is kicked off by the
 * `cdx-generator`: performs the basic indexing for the WARC/ARC files and generates CDX files (Web Archiving index files used by WayBack Machine). Generates 1 CDX file for each WARC file; the generated CDX files will be copied to `/web-archiving-stacks/`. This workflow step will be removed when we are no longer using openwayback.
 * `cdx-merge-sort-publish`: performs two main tasks:  1) Merge the individual cdx files that are generated in the previous step with the main index file 2) Sort the new generated index file. It puts the sorted mainf index file at `/web-archiving-stacks/data/indexes/cdx/level0.cdx`. Will be removed when we are no longer using openwayback.
 * `path-indexer`: Creates an inverted index for each WARC file and its physical location in the desk for the WayBack machine and pywb.
-* `cdxj-generator`: performs the basic indexing for the WARC/ARC files and generates CDXJ files (web archiving index files used by pywb). Generates 1 CDXJ file for each WARC file; the generated CDXJ files will be copied to `/web-archiving-stacks`. 
-* `cdxj-merge`: performs two main tasks:  1) Merges the individual CDXJ files that are generated in the previous step with the main index file (`/web-archiving-stacks/data/indexes/cdx/level0.cdxj`) 2) Sorts the new generated index file. 
+* `cdxj-generator`: performs the basic indexing for the WARC/ARC files and generates CDXJ files (web archiving index files used by pywb). Generates 1 CDXJ file for each WARC file; the generated CDXJ files will be copied to `/web-archiving-stacks`.
+* `cdxj-merge`: performs two main tasks:  1) Merges the individual CDXJ files that are generated in the previous step with the main index file (`/web-archiving-stacks/data/indexes/cdx/level0.cdxj`) 2) Sorts the new generated index file.
 
 ## wasSeedPreassembly
 
@@ -75,4 +79,41 @@ It consists of 1 robot:
 * `start_special_dissemination`: sends objects with content type `webarchive-binary` to wasCrawlDisseminationWF.
 
 ## Index rollup
-There is a scheduled task to roll up the `level0.cdx` and `level0.cdxj` files into `level1` each night, plus additional rollups to `level2` and `level3`, monthly and yearly respectively. 
+There is a scheduled task to roll up the `level0.cdx` and `level0.cdxj` files into `level1` each night, plus additional rollups to `level2` and `level3`, monthly and yearly respectively.
+
+
+# Prerequisites
+
+## For thumbnail image creation
+
+1. Kakadu Proprietary Software Binaries - for JP2 generation
+2. libvips
+3. Exiftool
+
+### Kakadu
+
+Download and install demonstration binaries from Kakadu:
+http://kakadusoftware.com/downloads/
+
+NOTE: If you have upgrade to El Capitan on OS X, you will need to donwload and re-install the latest version of Kakadu, due to changes made with SIP.  These changes moved the old executable binaries to an inaccessible location.
+
+### Libvips
+
+#### Mac
+
+```bash
+brew install libvips
+```
+
+### Exiftool
+
+#### RHEL
+Download latest version from: http://www.sno.phy.queensu.ca/~phil/exiftool
+
+```bash
+tar -xf Image-ExifTool-#.##.tar.gz
+cd Image-ExifTool-#.##
+perl Makefile.PL
+make test
+sudo make install
+```
