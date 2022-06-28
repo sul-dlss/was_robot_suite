@@ -10,7 +10,7 @@ gem 'stanford-mods', '~> 2.6'
 gem 'lockfile'       # file locks needed for mutual exclusion during rollup and index addition processes
 gem 'mini_exiftool'  # was-seed-preassembly thumbnail creation
 gem 'mini_magick'    # was-seed-preassembly thumbnail creation
-gem 'assembly-image' # was-seed-preassembly thumbnail creation
+gem 'assembly-image', '~> 1.0' # was-seed-preassembly thumbnail creation
 gem 'pry'            # for bin/console
 gem 'slop'           # for bin/run_robot
 gem 'honeybadger'
