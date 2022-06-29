@@ -16,7 +16,6 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
       @druid_id_1 = 'dd111dd1111'
       @druid_id_2 = 'dd111dd1111'
       @druid_id_3 = 'ee111ee1111'
-      @content_metadata_xml_location = Pathname(File.dirname(__FILE__)).join('fixtures/metadata')
       @collection_path = "#{@stacks_path}/data/collections/test_collection"
     end
 
@@ -29,8 +28,6 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
     end
 
     context "when contentMetadata has arcs or warcs" do
-      let(:contentMetadata) { File.read("#{@content_metadata_xml_location}contentMetadata_3files.xml") }
-
       it 'generates cdx files for each warc or arc file in contentMetadata', :openwayback_prerequisite do
         cdx_generator = described_class.new(@collection_path, @druid_id_1, warc_file_list)
 
@@ -79,8 +76,6 @@ RSpec.describe Dor::WasCrawl::CdxGeneratorService do
     end
 
     context "when contentMetadata has no arcs or warcs" do
-      let(:contentMetadata) { File.read("#{@content_metadata_xml_location}contentMetadata_0file.xml") }
-
       it 'does nothing for the contentMetadata without any arcs or warcs', :openwayback_prerequisite do
         cdx_generator = described_class.new(@collection_path, @druid_id_3, warc_file_list)
         cdx_generator.instance_variable_set(:@cdx_working_directory, "#{@stacks_path}/data/indices/cdx_working")
