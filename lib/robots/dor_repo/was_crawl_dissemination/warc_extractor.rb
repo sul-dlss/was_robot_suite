@@ -12,14 +12,9 @@ module Robots
         #
         # @param [String] druid -- the Druid identifier for the object to process
         def perform(druid)
-          cocina_object = Dor::Services::Client.object(druid).find
+          Dor::WasCrawl::Dissemination::Utilities.wacz_file_location_info(druid) => {item_path:, file_list:}
 
-          collection_id = Dor::WasCrawl::Dissemination::Utilities.get_collection_id(cocina_object)
-          collection_path = Settings.was_crawl_dissemination.stacks_collections_path + collection_id
-          base_path = DruidTools::AccessDruid.new(druid, collection_path).path
-          wacz_file_list = Dor::WasCrawl::Dissemination::Utilities.wacz_file_list(cocina_object)
-
-          wacz_file_list.each { |filename| Dor::WasCrawl::WarcExtractorService.extract(base_path, filename) }
+          file_list.each { |filename| Dor::WasCrawl::WarcExtractorService.extract(item_path, filename) }
         end
       end
     end

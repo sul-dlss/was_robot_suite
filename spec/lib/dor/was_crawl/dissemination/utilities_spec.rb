@@ -11,121 +11,40 @@ RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
     end
   end
 
-  describe '.warc_file_list and .wacz_file_list' do
-    let(:fs_structural) { instance_double(Cocina::Models::FileSetStructural, contains: files) }
-    let(:fileset) { instance_double(Cocina::Models::FileSet, structural: fs_structural) }
+  describe 'file location info' do
+    let(:druid) { 'druid:dd111dd1111' }
+    let(:collection_druid) { 'druid:cc333dd4444' }
+    let(:collections_path) { 'spec/lib/dor/was_crawl/fixtures/stacks/data/collections' }
 
-    let(:cocina_model) { instance_double(Cocina::Models::DRO, structural: structural) }
+    let(:object_client) do
+      instance_double(Dor::Services::Client::Object, find: object)
+    end
+    let(:object) { build(:dro, id: druid, collection_ids: [collection_druid]) }
 
-    context 'with 5 files' do
-      let(:structural) do
-        Cocina::Models::DROStructural.new(contains: [
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } },
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file5] } }
-                                          ])
-      end
-      let(:file1) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'WARC-Test.warc.gz', version: 1,
-                                 administrative: { shelve: true })
-      end
-      let(:file2) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'ARC-Test.arc.gz', version: 1,
-                                 administrative: { shelve: true })
-      end
-      let(:file3) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'test.txt', version: 1,
-                                 administrative: { shelve: false })
-      end
-      let(:file4) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'ARC-Test2.arc.gz', version: 1,
-                                 administrative: { shelve: false })
-      end
-      let(:file5) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'WACZ-Test.wacz', version: 1,
-                                 administrative: { shelve: true })
-      end
+    before do
+      allow(Dor::Services::Client).to receive(:object).and_return(object_client)
+      allow(Settings.was_crawl_dissemination).to receive(:stacks_collections_path).and_return(collections_path)
+    end
 
-      it 'returns a list for the extracted arc and warc files' do
-        expect(described_class.warc_file_list(cocina_model)).to eq ["WARC-Test.warc.gz", "ARC-Test.arc.gz"]
-      end
-
-      it 'returns a list for the extracted wacz files' do
-        expect(described_class.wacz_file_list(cocina_model)).to eq ['WACZ-Test.wacz']
+    describe '.warc_file_location_info' do
+      it 'returns file info' do
+        expect(described_class.warc_file_location_info(druid)).to eq({
+                                                                       collection_id: "cc333dd4444",
+                                                                       collection_path: "#{collections_path}/cc333dd4444",
+                                                                       item_path: "#{collections_path}/cc333dd4444/dd/111/dd/1111",
+                                                                       file_list: ["WARC-Test.warc.gz"]
+                                                                     })
       end
     end
 
-    context 'for the contentMetadata with no waczs or arcs or warcs inside' do
-      let(:structural) do
-        Cocina::Models::DROStructural.new(contains: [
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } }
-                                          ])
-      end
-
-      let(:file1) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'test.txt', version: 1,
-                                 administrative: { shelve: false })
-      end
-
-      it 'returns an empty list for arc and warc files' do
-        expect(described_class.warc_file_list(cocina_model)).to eq []
-      end
-
-      it 'returns an empty list for waczs' do
-        expect(described_class.wacz_file_list(cocina_model)).to eq []
-      end
-    end
-
-    context 'when the contentMetadata has dark archive shelve=no' do
-      let(:structural) do
-        Cocina::Models::DROStructural.new(contains: [
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file1] } },
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file2] } },
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file3] } },
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file4] } },
-                                            { type: Cocina::Models::FileSetType.file, externalIdentifier: '', label: '', version: 1, structural: { contains: [file5] } }
-                                          ])
-      end
-      let(:file1) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'WARC-Test.warc.gz', version: 1,
-                                 administrative: { shelve: false })
-      end
-      let(:file2) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'ARC-Test.arc.gz', version: 1,
-                                 administrative: { shelve: false })
-      end
-      let(:file3) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'test.txt', version: 1,
-                                 administrative: { shelve: false })
-      end
-      let(:file4) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'ARC-Test2.arc.gz', version: 1,
-                                 administrative: { shelve: false })
-      end
-      let(:file5) do
-        Cocina::Models::File.new(type: Cocina::Models::ObjectType.file, externalIdentifier: '',
-                                 label: '', filename: 'WACZ-Test.wacz', version: 1,
-                                 administrative: { shelve: false })
-      end
-
-      it 'returns an empty list for arc and warc files' do
-        expect(described_class.warc_file_list(cocina_model)).to eq []
-      end
-
-      it 'returns an empty list for wacz files' do
-        expect(described_class.wacz_file_list(cocina_model)).to eq []
+    describe '.wacz_file_location_info' do
+      it 'returns file info' do
+        expect(described_class.wacz_file_location_info(druid)).to eq({
+                                                                       collection_id: "cc333dd4444",
+                                                                       collection_path: "#{collections_path}/cc333dd4444",
+                                                                       item_path: "#{collections_path}/cc333dd4444/dd/111/dd/1111",
+                                                                       file_list: ["WACZ-Test.wacz"]
+                                                                     })
       end
     end
   end
