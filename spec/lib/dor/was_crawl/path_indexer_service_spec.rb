@@ -69,6 +69,7 @@ RSpec.describe Dor::WasCrawl::PathIndexerService do
   describe '#copy' do
     after(:all) do
       FileUtils.rm("#{@stacks_path}/data/indexes/path/test_path-index.txt")
+      FileUtils.rm("#{@stacks_path}/data/indices/path/test_path-index.txt")
     end
 
     it 'copies the openwayback path index to the pywb location' do
