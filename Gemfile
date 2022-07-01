@@ -1,34 +1,34 @@
 source 'https://rubygems.org'
 
-gem 'config', '~> 2.0'
+gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 uses vips
 gem 'druid-tools'
 gem 'dor-services-client', '~> 12.0'
 gem 'dor-workflow-client', '~> 4.0'
 gem 'lyber-core', '~> 6.0'
 gem 'stanford-mods', '~> 2.6'
 
+gem 'config', '~> 2.0'
+gem 'honeybadger'
 gem 'lockfile'       # file locks needed for mutual exclusion during rollup and index addition processes
 gem 'mini_exiftool'  # was-seed-preassembly thumbnail creation
 gem 'mini_magick'    # was-seed-preassembly thumbnail creation
-gem 'assembly-image', '~> 1.0' # was-seed-preassembly thumbnail creation
 gem 'pry'            # for bin/console
-gem 'slop'           # for bin/run_robot
-gem 'honeybadger'
 gem 'rake'
 gem 'resque'
 gem 'resque-pool'
 gem 'rubyzip'        # warc_extractor_service
-gem 'whenever'
+gem 'slop'           # for bin/run_robot
+gem 'whenever'       # for cron jobs
 gem 'zeitwerk', '~> 2.1'
 
 group :development, :test do
-  gem 'rspec'
-  gem 'equivalent-xml'
   gem 'awesome_print'
+  gem 'equivalent-xml'
+  gem 'pry-byebug'
+  gem 'rspec'
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'simplecov'
-  gem 'pry-byebug'
 end
 
 group :deployment do

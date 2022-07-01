@@ -20,7 +20,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
       FileUtils.rm 'tmp/ab123cd4567.jp2', force: true
     end
 
-    it 'generates jp2 from jpeg thumbnail and pushes to druid_tree content directory', :image_prerequisite do
+    it 'generates jp2 from jpeg thumbnail and pushes to druid_tree content directory' do
       allow(described_class).to receive(:screenshot).and_call_original
       described_class.capture_thumbnail(@druid_id, @workspace, @uri)
       expect(File.exist?('spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2')).to be true
