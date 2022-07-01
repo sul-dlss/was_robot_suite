@@ -16,8 +16,8 @@ RSpec.describe Robots::DorRepo::WasCrawlDissemination::CdxjMerge do
     let(:working_file2) { "#{working_dir}/index2.cdxj" }
 
     before do
-      FileUtils.makedirs index_dir unless File.exist?(index_dir)
-      FileUtils.makedirs working_dir unless File.exist?(working_dir)
+      FileUtils.mkdir_p index_dir
+      FileUtils.mkdir_p working_dir
 
       File.write(main_file, "AG\nBG\nCG")
       File.write(working_file1, "AA\nBH\nCI")

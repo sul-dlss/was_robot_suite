@@ -7,7 +7,7 @@ module Dor
       end
 
       def generate(warc_file_list)
-        FileUtils.makedirs druid_dir unless File.exist?(druid_dir)
+        FileUtils.mkdir_p druid_dir
         warc_file_list.each do |warc_file_name|
           generate_cdx_for_one_warc(warc_file_name)
         end

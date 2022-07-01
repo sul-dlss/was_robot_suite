@@ -16,7 +16,7 @@ module Dor
           indexed?(uri)
           capture(wayback_uri, jpeg_file)
         rescue => e
-          File.delete(jpeg_file) if File.exist?(jpeg_file)
+          FileUtils.rm_rf(jpeg_file)
           raise "Thumbnail for druid #{druid} and #{uri} can't be generated.\n #{e.message}"
         end
 

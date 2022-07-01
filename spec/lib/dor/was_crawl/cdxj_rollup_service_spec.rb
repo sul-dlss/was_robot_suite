@@ -12,7 +12,7 @@ RSpec.describe Dor::WasCrawl::CdxjRollupService do
     let(:level) { 0 }
 
     before do
-      FileUtils.makedirs index_dir unless File.exist?(index_dir)
+      FileUtils.mkdir_p index_dir
       File.write(main_file, "AG\nBG\nCG")
       File.write(main_file1, "AA\nBG\nBH\nCI")
     end
