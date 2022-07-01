@@ -72,7 +72,7 @@ module Dor
 
       def clean
         FileUtils.mv(source_dir, backup_directory, force: true)
-        FileUtils.rm(working_merged_index) if File.exist?(working_merged_index)
+        FileUtils.rm_rf(working_merged_index)
       end
 
       def sort_env_vars

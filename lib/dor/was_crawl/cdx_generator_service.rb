@@ -13,7 +13,7 @@ module Dor
 
       def generate_cdx_for_crawl
         cdx_druid_dir = "#{@cdx_working_directory}/#{@druid_id}"
-        FileUtils.makedirs cdx_druid_dir unless File.exist?(cdx_druid_dir)
+        FileUtils.mkdir_p cdx_druid_dir
         druid_base_directory = DruidTools::AccessDruid.new(@druid_id, @collection_path).path
         @warc_file_list.each do |warc_file_name|
           cdx_file_name  = get_cdx_file_name(warc_file_name)

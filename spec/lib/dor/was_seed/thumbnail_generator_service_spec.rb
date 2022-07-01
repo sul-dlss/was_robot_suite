@@ -15,7 +15,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
     end
 
     after do
-      FileUtils.rm_rf 'spec/was_seed_preassembly/fixtures/workspace/ab' if File.exist?('spec/was_seed_preassembly/fixtures/workspace/ab')
+      FileUtils.rm_rf 'spec/was_seed_preassembly/fixtures/workspace/ab'
       FileUtils.rm 'tmp/ab123cd4567.jpeg', force: true
       FileUtils.rm 'tmp/ab123cd4567.jp2', force: true
     end
