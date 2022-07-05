@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 set :application, 'was_robot_suite'
 set :repo_url, 'https://github.com/sul-dlss/was_robot_suite.git'
 set :whenever_identifier, -> { "#{fetch(:application)}_#{fetch(:stage)}" }

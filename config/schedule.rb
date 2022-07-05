@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 set :output, 'log/cdx_index_rollup.log'
 set :environment_variable, 'ROBOT_ENVIRONMENT'
 
