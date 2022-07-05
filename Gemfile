@@ -19,6 +19,7 @@ gem 'rake'
 gem 'resque'
 gem 'resque-pool'
 gem 'rubyzip'        # warc_extractor_service
+gem 'ruby-vips'      # image processing for thumbnail creation
 gem 'slop'           # for bin/run_robot
 gem 'whenever'       # for cron jobs
 gem 'zeitwerk', '~> 2.1'

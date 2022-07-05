@@ -305,6 +305,7 @@ DEPENDENCIES
   rspec
   rubocop
   rubocop-rspec
+  ruby-vips
   rubyzip
   simplecov
   slop

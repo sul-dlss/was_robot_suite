@@ -31,6 +31,7 @@ module Dor
         raise stderr_str unless File.exist?(screenshot_jpeg)
       end
 
+      # resizes the passed jpeg image to a 400 px max and replaces the original file with the resized image
       def self.resize_jpeg(jpeg_file)
         image = MiniMagick::Image.open(jpeg_file)
         width = image.width
