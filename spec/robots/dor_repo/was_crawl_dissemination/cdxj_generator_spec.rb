@@ -7,6 +7,10 @@ RSpec.describe Robots::DorRepo::WasCrawlDissemination::CdxjGenerator do
     subject(:perform) { robot.perform(druid) }
 
     let(:druid) { 'druid:dd116zh0343' }
+    let(:sys_cmd) do
+      '/opt/app/was/.local/bin/cdxj-indexer /web-archiving-stacks/data/collections/xx123xx1234/dd/116/zh/0343/number1.warc ' \
+        '--output tmp/druid:dd116zh0343/number1.cdxj --dir-root /web-archiving-stacks/data/collections/ --post-append 2>> log/cdx_indexer.log'
+    end
 
     before do
       allow(Dor::WasCrawl::Dissemination::Utilities).to receive(:run_sys_cmd)
@@ -18,8 +22,7 @@ RSpec.describe Robots::DorRepo::WasCrawlDissemination::CdxjGenerator do
     it 'runs the cdxj-indexer' do
       perform
       expect(Dor::WasCrawl::Dissemination::Utilities).to have_received(:run_sys_cmd)
-        .with('/opt/app/was/.local/bin/cdxj-indexer /web-archiving-stacks/data/collections/xx123xx1234/dd/116/zh/0343/number1.warc --output tmp/druid:dd116zh0343/number1.cdxj --post-append 2>> log/cdx_indexer.log',
-              "extracting CDXJ")
+        .with(sys_cmd, "extracting CDXJ")
     end
   end
 end
