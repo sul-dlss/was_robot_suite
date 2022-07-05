@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Robots::DorRepo::WasCrawlDissemination::CdxjMerge do
   subject(:robot) { described_class.new }
 

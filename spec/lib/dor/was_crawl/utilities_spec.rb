@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe Dor::WasCrawl::Utilities do
   let(:druid) { 'druid:aa111bb2222' }
