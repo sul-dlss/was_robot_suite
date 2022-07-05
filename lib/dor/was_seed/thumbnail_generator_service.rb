@@ -8,12 +8,12 @@ module Dor
     class ThumbnailGeneratorService
       # because this date is earlier than any of the archived dates of the content,
       # this tells openwayback to provide the earliest capture date.
-      DATE_TO_TRIGGER_EARLIEST_CAPTURE_DATE = '19900101120000'
+      DATE_TO_TRIGGER_EARLIEST_CAPTURE = '19900101120000'
       def self.capture_thumbnail(druid, workspace, seed_uri)
         screenshot_jpeg = "tmp/#{druid.delete_prefix('druid:')}.jpeg"
         begin
           indexed?(seed_uri)
-          wayback_uri = "#{Settings.was_seed.wayback_uri}/#{DATE_TO_TRIGGER_EARLIEST_CAPTURE_DATE}/#{seed_uri}"
+          wayback_uri = "#{Settings.was_seed.wayback_uri}/#{DATE_TO_TRIGGER_EARLIEST_CAPTURE}/#{seed_uri}"
           screenshot(wayback_uri, screenshot_jpeg)
           resize_jpeg(screenshot_jpeg)
           thumbnail_file = "#{DruidTools::Druid.new(druid, workspace).content_dir}/thumbnail.jp2"
