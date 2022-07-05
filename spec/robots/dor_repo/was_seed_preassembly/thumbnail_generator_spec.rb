@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe Robots::DorRepo::WasSeedPreassembly::ThumbnailGenerator do
   describe 'perform' do

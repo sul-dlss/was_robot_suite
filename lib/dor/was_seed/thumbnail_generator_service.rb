@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'open3'
 require 'net/http'
 
@@ -6,7 +8,7 @@ module Dor
     class ThumbnailGeneratorService
       # because this date is earlier than any of the archived dates of the content,
       # this tells openwayback to provide the earliest capture date.
-      DATE_TO_TRIGGER_EARLIEST_CAPTURE_DATE = '19900101120000'.freeze
+      DATE_TO_TRIGGER_EARLIEST_CAPTURE_DATE = '19900101120000'
       def self.capture_thumbnail(druid, workspace, seed_uri)
         screenshot_jpeg = "tmp/#{druid.delete_prefix('druid:')}.jpeg"
         begin

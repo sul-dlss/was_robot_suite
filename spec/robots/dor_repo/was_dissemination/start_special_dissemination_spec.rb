@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
   subject(:robot) { described_class.new }

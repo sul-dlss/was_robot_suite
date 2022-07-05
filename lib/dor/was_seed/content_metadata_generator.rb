@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 require 'digest/md5'
 require 'digest/sha1'
 
 module Dor
   module WasSeed
     class ContentMetadataGenerator < MetadataGenerator
-      CONTENT_METADATA = 'contentMetadata'.freeze
+      CONTENT_METADATA = 'contentMetadata'
 
       def generate_metadata_output
         xml_input = generate_xml_doc(create_thumbnail_xml_element("#{DruidTools::Druid.new(@druid_id, workspace).content_dir}/thumbnail.jp2"))

@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Dor::WasCrawl::CdxMergeSortPublishService do
   let(:cdx_file_path) { Pathname(File.dirname(__FILE__)).join('fixtures/cdx_files') }

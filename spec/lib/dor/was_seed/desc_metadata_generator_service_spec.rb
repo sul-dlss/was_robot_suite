@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe Dor::WasSeed::DescMetadataGenerator do
   let(:fixtures) { 'spec/was_seed_preassembly/fixtures/' }

@@ -15,7 +15,7 @@ Style/StringLiterals:
   Enabled: false
 
 Style/FrozenStringLiteralComment:
-  Enabled: false
+  Enabled: true
 
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
@@ -29,8 +29,20 @@ Lint/RaiseException:
 Lint/StructNewOverride:
   Enabled: true
 
+Metrics/MethodLength:
+  Max: 15
+
+RSpec/ExampleLength:
+  Max: 20
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
+
+RSpec/NestedGroups:
+  Max: 4
 
 Style/ExponentialNotation:
   Enabled: true

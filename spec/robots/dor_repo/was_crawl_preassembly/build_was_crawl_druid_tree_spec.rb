@@ -1,4 +1,4 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
 describe Robots::DorRepo::WasCrawlPreassembly::BuildWasCrawlDruidTree do
   describe '.initialize' do

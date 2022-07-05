@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
 RSpec.describe Dor::WasCrawl::CdxjRollupService do
   describe '#rollup' do
     subject(:rollup_service) { described_class.new(level, index_dir) }
