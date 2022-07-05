@@ -47,7 +47,7 @@ GEM
     capistrano-yarn (2.0.2)
       capistrano (~> 3.0)
     chronic (0.10.2)
-    cocina-models (0.82.0)
+    cocina-models (0.83.0)
       activesupport
       deprecation
       dry-struct (~> 1.0)
@@ -78,9 +78,9 @@ GEM
       capistrano-one_time_key
       capistrano-shared_configs
     docile (1.4.0)
-    dor-services-client (12.4.0)
+    dor-services-client (12.6.0)
       activesupport (>= 4.2, < 8)
-      cocina-models (~> 0.82.0)
+      cocina-models (~> 0.83.0)
       deprecation
       faraday (~> 2.0)
       faraday-retry
@@ -157,7 +157,7 @@ GEM
     mini_exiftool (2.10.2)
     mini_magick (4.11.0)
     mini_portile2 (2.8.0)
-    minitest (5.16.1)
+    minitest (5.16.2)
     mods (2.4.1)
       edtf
       iso-639
@@ -314,4 +314,4 @@ DEPENDENCIES
   zeitwerk (~> 2.1)
 
 BUNDLED WITH
-   2.3.16
+   2.3.17
