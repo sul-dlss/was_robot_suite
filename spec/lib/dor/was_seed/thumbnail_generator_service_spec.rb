@@ -3,60 +3,67 @@
 require 'vips'
 
 RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
-  before do
-    Settings.was_seed.wayback_uri = 'https//swap.stanford.edu'
-  end
-
   describe '.capture_thumbnail' do
+    let(:druid) { 'druid:ab123cd4567' }
+    let(:workspace) { 'spec/was_seed_preassembly/fixtures/workspace/' }
+    let(:uri) { 'http://www.slac.stanford.edu' }
+    let(:screenshot_jpeg_file) { 'tmp/ab123cd4567.jpeg' }
+    let(:thumbnail_jp2_file) { 'spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2' }
+
     before do
-      @druid_id = 'druid:ab123cd4567'
-      @workspace = 'spec/was_seed_preassembly/fixtures/workspace/'
-      @uri = 'http://www.slac.stanford.edu'
-      FileUtils.rm 'tmp/ab123cd4567.jp2', force: true
-      FileUtils.cp 'spec/was_seed_preassembly/fixtures/thumbnail_files/ab123cd4567.jpeg', 'tmp/ab123cd4567.jpeg'
+      FileUtils.rm thumbnail_jp2_file, force: true
+      # the following fakes the result of calling .screenshot by putting a file where a result is expected
+      FileUtils.cp 'spec/was_seed_preassembly/fixtures/thumbnail_files/ab123cd4567.jpeg', screenshot_jpeg_file
     end
 
     after do
+      FileUtils.rm thumbnail_jp2_file, force: true
       FileUtils.rm_rf 'spec/was_seed_preassembly/fixtures/workspace/ab'
-      FileUtils.rm 'tmp/ab123cd4567.jpeg', force: true
-      FileUtils.rm 'tmp/ab123cd4567.jp2', force: true
+      FileUtils.rm screenshot_jpeg_file, force: true
     end
 
-    it 'generates jp2 from jpeg thumbnail and pushes to druid_tree content directory' do
-      allow(described_class).to receive(:screenshot).and_call_original
-      described_class.capture_thumbnail(@druid_id, @workspace, @uri)
-      expect(File.exist?('spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2')).to be true
-      expect(File.exist?('tmp/ab123cd4567.jpeg')).to be false
+    it 'generates max 400 px jp2 from jpeg screenshot and pushes to druid_tree content directory', js: true do
+      allow(described_class).to receive(:screenshot) # NOTE: this does NOT execute screenshot, the FileUtils.cp in before mocks this
+      described_class.capture_thumbnail(druid, workspace, uri)
+      expect(File.exist?(screenshot_jpeg_file)).to be false # screenshot jpeg is removed - it's produced on the way to the jp2
+      expect(File.exist?(thumbnail_jp2_file)).to be true
+      # what follows is a poor attempt to indicate this is a true thumbnail for the given image.
+      # MiniExiftool is used because getting a version of libvips that reads jp2 loaded on circleci ubuntu was too hard.
+      thumbnail_image = MiniExiftool.new(thumbnail_jp2_file)
+      expect(thumbnail_image.imagewidth).to eq 400
+      expect(thumbnail_image.imageheight).to eq 400
     end
 
     it 'raises an error if the screenshot method raises an exception' do
       allow(described_class).to receive(:screenshot).and_raise('Foo')
       exp_msg = "Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n Foo"
-      expect { described_class.capture_thumbnail(@druid_id, @workspace, @uri) }.to raise_error.with_message(exp_msg)
-      expect(File.exist?('spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2')).to be false
-      expect(File.exist?('tmp/ab123cd4567.jpeg')).to be false
+      expect { described_class.capture_thumbnail(druid, workspace, uri) }.to raise_error.with_message(exp_msg)
+      expect(File.exist?(thumbnail_jp2_file)).to be false
+      expect(File.exist?(screenshot_jpeg_file)).to be false
     end
   end
 
   describe '.screenshot' do
-    before do
-      FileUtils.rm 'tmp/test_capture.jpeg', force: true
-    end
-
-    after do
-      FileUtils.rm 'tmp/test_capture.jpeg', force: true
-    end
-
-    it 'captures jpeg image for the first capture of url', :image_prerequisite do
-      # FIXME: We have NO TEST EXECUTING FOR THIS METHOD!
-      pending 'fails from lack of VCR cassette and maybe also jquery error'
-      VCR.use_cassette('slac_capture') do
-        wayback_uri = 'https://swap.stanford.edu/20110202032021/http://www.slac.stanford.edu'
-        temporary_file = 'tmp/test_capture'
-        result = described_class.screenshot(wayback_uri, temporary_file)
-        expect(result).to eq('')
-      end
-    end
+    skip('to test .screenshot method we need to execute puppeteer in a headless browser')
+    # let(:wayback_uri) { "https://swap.stanford.edu/#{Dor::WasSeed::ThumbnailGeneratorService::DATE_TO_TRIGGER_EARLIEST_CAPTURE}/http://www.slac.stanford.edu" }
+    # let(:screenshot_jpeg_file) { 'tmp/test_capture.jpeg' }
+    #
+    # before do
+    #   FileUtils.rm screenshot_jpeg_file, force: true
+    #   FileUtils.cp 'spec/was_seed_preassembly/fixtures/thumbnail_files/ab123cd4567.jpeg', screenshot_jpeg_file
+    # end
+    #
+    # after do
+    #   FileUtils.rm screenshot_jpeg_file, force: true
+    # end
+    #
+    # it 'captures jpeg image for the first capture of url' do
+    #   allow(described_class).to receive(:screenshot)
+    #   described_class.screenshot(wayback_uri, screenshot_jpeg_file)
+    #   screenshot_image = Vips::Image.new_from_file(screenshot_jpeg_file, access: :sequential) # :sequential is faster to load than random (default), but less good for processing
+    #   expect(screenshot_image.width).to eq 1000
+    #   expect(screenshot_image.height).to eq 1000
+    # end
   end
 
   describe '.resize_jpeg' do
@@ -71,14 +78,18 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
       FileUtils.cp(original_file, generated_thumb_file)
       described_class.resize_jpeg(generated_thumb_file)
 
-      original_image = Vips::Image.new_from_file(original_file)
-      expected_thumb_image = Vips::Image.new_from_file('spec/was_seed_preassembly/fixtures/thumbnail_files/thum_extra_width.jpeg')
-      generated_thumb_image = Vips::Image.new_from_file(generated_thumb_file)
+      # access: :sequential is faster to load than random (default), but less good for processing
+      original_image = Vips::Image.new_from_file(original_file, access: :sequential)
+      expected_thumb_image = Vips::Image.new_from_file('spec/was_seed_preassembly/fixtures/thumbnail_files/thum_extra_width.jpeg', access: :sequential)
+      generated_thumb_image = Vips::Image.new_from_file(generated_thumb_file, access: :sequential)
+      # what follows is a poor attempt to indicate this is a true thumbnail for the given image.
       expect(generated_thumb_image.width).to be < original_image.width
       expect(generated_thumb_image.height).to be < original_image.height
       expect(generated_thumb_image.width).to eq 400
-      expect(generated_thumb_image.height).to be < 400
-      # this comparison of the image content itself courtesy of Tony Calavano
+      expect(generated_thumb_image.height).to eq 348
+      expect(generated_thumb_image.width).to eq expected_thumb_image.width
+      expect(generated_thumb_image.height).to eq expected_thumb_image.height
+      # this comparison of the image content itself (by the pixel) courtesy of Tony Calavano
       expect((expected_thumb_image == generated_thumb_image).min).to be < 255.0
     end
 
@@ -88,14 +99,18 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
       FileUtils.cp(original_file, generated_thumb_file)
       described_class.resize_jpeg(generated_thumb_file)
 
-      original_image = Vips::Image.new_from_file(original_file)
-      expected_thumb_image = Vips::Image.new_from_file('spec/was_seed_preassembly/fixtures/thumbnail_files/thum_extra_height.jpeg')
-      generated_thumb_image = Vips::Image.new_from_file(generated_thumb_file)
+      # access: :sequential is faster to load than random (default), but less good for processing
+      original_image = Vips::Image.new_from_file(original_file, access: :sequential)
+      expected_thumb_image = Vips::Image.new_from_file('spec/was_seed_preassembly/fixtures/thumbnail_files/thum_extra_height.jpeg', access: :sequential)
+      generated_thumb_image = Vips::Image.new_from_file(generated_thumb_file, access: :sequential)
+      # what follows is a poor attempt to indicate this is a true thumbnail for the given image.
       expect(generated_thumb_image.width).to be < original_image.width
       expect(generated_thumb_image.height).to be < original_image.height
-      expect(generated_thumb_image.width).to be < 400
+      expect(generated_thumb_image.width).to eq 227
       expect(generated_thumb_image.height).to eq 400
-      # this comparison of the image content itself courtesy of Tony Calavano
+      expect(generated_thumb_image.width).to eq expected_thumb_image.width
+      expect(generated_thumb_image.height).to eq expected_thumb_image.height
+      # this comparison of the image content itself (by the pixel) courtesy of Tony Calavano
       expect((expected_thumb_image == generated_thumb_image).min).to be < 255.0
     end
   end
