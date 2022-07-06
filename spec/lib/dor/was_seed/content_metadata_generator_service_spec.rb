@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
-  let(:staging_path) { Pathname(File.dirname(__FILE__)).join('../fixtures/') }
   let(:expected_thumbnail_xml_element) { '<image><md5>cecab42610cefd7f8ba80c8505a0f95f</md5><sha1>c78e5e8e8ca02c6fffa9169b0e9e4df908675fdc</sha1><size>228709</size><width>1000</width><height>1215</height></image>' }
   let(:expected_full_xml_element) { Nokogiri::XML("<item><druid>druid:aa111aa1111</druid>#{expected_thumbnail_xml_element}</item>") }
   let(:cm_generator_instance_with_druid) { described_class.new('', 'druid:aa111aa1111') }
@@ -63,17 +62,16 @@ RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
   end
 
   describe '#create_thumbnail_xml_element' do
-    it 'returns valid xml element for a regular image', :image_prerequisite do
-      thumbnail_file_location = "#{staging_path}/thumbnail_files/thumbnail.jp2"
-      actual_xml_element = cm_generator_instance.create_thumbnail_xml_element thumbnail_file_location
-      expect(actual_xml_element).to eq(expected_thumbnail_xml_element)
-      # expected_xml_objet = Nokogiri::XML(expected_thumbnail_xml_element)
-      # actual_xml_object  = Nokogiri::XML(actual_xml_element)
-      # expect(actual_xml_object).to be_equivalent_to(expected_xml_objet)
+    let(:fixture_path) { 'spec/was_seed_preassembly/fixtures' }
+
+    it 'returns valid xml element for a thumbnail image' do
+      thumbnail_file_location = "#{fixture_path}/thumbnail_files/thumbnail.jp2"
+      actual_xml_element = described_class.new('', '').send(:create_thumbnail_xml_element, thumbnail_file_location)
+      expect(actual_xml_element).to be_equivalent_to(expected_thumbnail_xml_element)
     end
 
     it 'returns empty string for non-existing images' do
-      thumbnail_file_location = "#{staging_path}/thumbnail_files/nonthing.jpeg"
+      thumbnail_file_location = "#{fixture_path}/thumbnail_files/not_there.jpeg"
       actual_xml_element = described_class.new('', '').send(:create_thumbnail_xml_element, thumbnail_file_location)
       expect(actual_xml_element).to eq('')
     end
@@ -85,12 +83,12 @@ RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
 
     it 'raises an exception for reading an empty image' do
       # TODO: ? This test case should be fixed with adding an empty image
-      thumbnail_file_location = "#{staging_path}/thumbnail_files/thumbnail_empty.jpeg"
+      thumbnail_file_location = "#{fixture_path}/thumbnail_files/thumbnail_empty.jpeg"
       expect { described_class.new.send(:create_thumbnail_xml_element, thumbnail_file_location) }.to raise_error StandardError
     end
 
     it 'raises an error for reading an invalid image' do
-      thumbnail_file_location = "#{staging_path}/thumbnail_files/thumbnail_text.jpeg"
+      thumbnail_file_location = "#{fixture_path}/thumbnail_files/thumbnail_text.jpeg"
       expect { described_class.new.send(:create_thumbnail_xml_element, thumbnail_file_location) }.to raise_error StandardError
     end
   end
