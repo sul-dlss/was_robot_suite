@@ -15,6 +15,8 @@ module Dor
         write_file_to_druid_metadata_folder(CONTENT_METADATA, metadata_content)
       end
 
+      private
+
       def generate_xml_doc(image_xml_str = '')
         xml_input = "<?xml version=\"1.0\"?><item><druid>#{@druid_id}</druid>#{image_xml_str}</item>"
         Nokogiri::XML(xml_input)
