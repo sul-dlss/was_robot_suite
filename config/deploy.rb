@@ -69,7 +69,7 @@ namespace :pip do
   task :install do
     on roles(:app) do
       within release_path do
-        execute(*%w[pip install -r requirements.txt])
+        execute(*%w[pip install --upgrade -r requirements.txt])
       end
     end
   end
