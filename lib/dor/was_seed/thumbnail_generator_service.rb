@@ -7,7 +7,7 @@ module Dor
   module WasSeed
     class ThumbnailGeneratorService
       # because this date is earlier than any of the archived dates of the content,
-      # this tells openwayback to provide the earliest capture date.
+      # this tells the wayback machine to provide the earliest capture date.
       DATE_TO_TRIGGER_EARLIEST_CAPTURE = '19900101120000'
       def self.capture_thumbnail(druid, workspace, seed_uri)
         screenshot_jpeg = "tmp/#{druid.delete_prefix('druid:')}.jpeg"

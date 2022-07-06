@@ -18,16 +18,7 @@ to start all robots defined in `config/environments/robots_ENV.yml`.
 
 ## Deployment
 
-While openwayback is still in production, the WAS robots depend on a java project:
-
-- [openwayback](https://github.com/sul-dlss/openwayback)
-  - to index WARC materials for the Stanford Web Archiving Portal, used by cdx-generator step in wasCrawlDisseminationWF
-
-These java projects use [sul-ci-prod](https://sul-ci-prod.stanford.edu/) to create deployment artifacts, which are then deployed with capistrano via `config/deploy.rb` (see lines 40-54).
-
-The deployed `was_robot_suite` houses these java artifacts in the `jar` directory.
-
-Various other dependencies, including `cdxj-indexer` which is installed by puppet via `pip3`, can be found in `config/settings.yml` and [shared_configs](https://github.com/sul-dlss/shared_configs) (was-robotsxxx branches)
+Various dependencies, including `cdxj-indexer` which is installed by puppet via `pip3`, can be found in `config/settings.yml` and [shared_configs](https://github.com/sul-dlss/shared_configs) (was-robotsxxx branches)
 
 ## Prerequisites
 
@@ -39,17 +30,15 @@ See consul pages in Web Archival portal, esp Web Archiving Development Documenta
 
 ## wasCrawlPreassembly
 
-Preassembly workflow for web archiving crawl objects (that include WARC or ARC files) to extract and create metadata.  It consists of 2 robots:
+Preassembly workflow for web archiving crawl objects (that include WARC or ARC files) to extract and create metadata.  It consists of these robots:
 
 * `build-was-crawl-druid-tree`: this robot reads the crawl object content (ARCs or WARCs and logs) from directory defined by crawl object label, builds a druid tree, and copies the content to the druid tree content directory.
 * `end_was_crawl_preassembly`: initiates the accessionWF (of common-accessioning).
 
 ## wasCrawlDissemination
 
-Dissemination workflow for web archiving crawl objects.  It is kicked off by the last step in the common-accessioning end-accession step that reads the disseminationWF that is suitable for this object type based on APO. It consists of 5 robots:
+Dissemination workflow for web archiving crawl objects.  It is kicked off by the last step in the common-accessioning end-accession step that reads the disseminationWF that is suitable for this object type based on APO. It consists of these robots:
 
-* `cdx-generator`: performs the basic indexing for the WARC/ARC files and generates CDX files (Web Archiving index files used by WayBack Machine). Generates 1 CDX file for each WARC file; the generated CDX files will be copied to `/web-archiving-stacks/`. This workflow step will be removed when we are no longer using openwayback.
-* `cdx-merge-sort-publish`: performs two main tasks:  1) Merge the individual cdx files that are generated in the previous step with the main index file 2) Sort the new generated index file. It puts the sorted mainf index file at `/web-archiving-stacks/data/indexes/cdx/level0.cdx`. Will be removed when we are no longer using openwayback.
 * `path-indexer`: Creates an inverted index for each WARC file and its physical location in the desk for the WayBack machine and pywb.
 * `cdxj-generator`: performs the basic indexing for the WARC/ARC files and generates CDXJ files (web archiving index files used by pywb). Generates 1 CDXJ file for each WARC file; the generated CDXJ files will be copied to `/web-archiving-stacks`.
 * `cdxj-merge`: performs two main tasks:  1) Merges the individual CDXJ files that are generated in the previous step with the main index file (`/web-archiving-stacks/data/indexes/cdx/level0.cdxj`) 2) Sorts the new generated index file.
@@ -79,7 +68,7 @@ It consists of 1 robot:
 * `start_special_dissemination`: sends objects with content type `webarchive-binary` to wasCrawlDisseminationWF.
 
 ## Index rollup
-There is a scheduled task to roll up the `level0.cdx` and `level0.cdxj` files into `level1` each night, plus additional rollups to `level2` and `level3`, monthly and yearly respectively.
+There is a scheduled task to roll up the `level0.cdxj` files into `level1` each night, plus additional rollups to `level2` and `level3`, monthly and yearly respectively.
 
 # Prerequisites
 

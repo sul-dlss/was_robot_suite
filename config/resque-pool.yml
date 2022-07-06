@@ -1,3 +1,3 @@
 "wasCrawlPreassemblyWF_default,wasDisseminationWF_default,wasSeedDisseminationWF_default,wasSeedPreassemblyWF_default": 5
-# Running a single worker for wasCrawlDisseminationWF_default to avoid possible conflicts when manipulating CDX indexes.
+# Running a single worker for wasCrawlDisseminationWF_default to avoid possible conflicts when manipulating CDXJ indexes.
 "wasCrawlDisseminationWF_default": 1

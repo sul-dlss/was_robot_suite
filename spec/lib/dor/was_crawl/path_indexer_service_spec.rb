@@ -65,27 +65,6 @@ RSpec.describe Dor::WasCrawl::PathIndexerService do
     end
   end
 
-  # Needed only while pywb is run in parallel with openwayback
-  describe '#copy' do
-    after(:all) do
-      FileUtils.rm("#{@stacks_path}/data/indexes/path/test_path-index.txt")
-      FileUtils.rm("#{@stacks_path}/data/indices/path/test_path-index.txt")
-    end
-
-    it 'copies the openwayback path index to the pywb location' do
-      path_index_service = described_class.new(@druid, @collection_path, @path_working_directory, [])
-      FileUtils.cp("#{@path_files}/path_index.txt", "#{@stacks_path}/data/indices/path/test_path-index.txt")
-
-      path_index_service.instance_variable_set(:@main_path_index_file, "#{@stacks_path}/data/indices/path/test_path-index.txt")
-      path_index_service.instance_variable_set(:@pywb_main_path_index_file, "#{@stacks_path}/data/indexes/path/test_path-index.txt")
-
-      path_index_service.copy
-
-      pywb_path_index_file = "#{@stacks_path}/data/indexes/path/test_path-index.txt"
-      expect(File.exist?(pywb_path_index_file)).to be(true)
-    end
-  end
-
   describe '.clean' do
     pending
   end
