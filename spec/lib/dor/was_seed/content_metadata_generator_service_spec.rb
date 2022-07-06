@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
-  let(:expected_thumbnail_xml_element) { '<image><md5>cecab42610cefd7f8ba80c8505a0f95f</md5><sha1>c78e5e8e8ca02c6fffa9169b0e9e4df908675fdc</sha1><size>228709</size><width>1000</width><height>1215</height></image>' }
-  let(:expected_full_xml_element) { Nokogiri::XML("<item><druid>druid:aa111aa1111</druid>#{expected_thumbnail_xml_element}</item>") }
-  let(:cm_generator_instance_with_druid) { described_class.new('', 'druid:aa111aa1111') }
+  let(:expected_thumbnail_xml) { '<image><md5>cecab42610cefd7f8ba80c8505a0f95f</md5><sha1>c78e5e8e8ca02c6fffa9169b0e9e4df908675fdc</sha1><size>228709</size><width>1000</width><height>1215</height></image>' }
+  let(:expected_item_xml_ng) { Nokogiri::XML("<item><druid>druid:aa111aa1111</druid>#{expected_thumbnail_xml}</item>") }
 
   describe '#generate_metadata_output' do
     let(:druid_id) { 'druid:gh123gh1234' }
@@ -33,7 +32,7 @@ RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
       allow(MiniExiftool).to receive(:new).and_return(stub_exif)
     end
 
-    it 'generates contentMetadata file for a valid druid and valid thumbnail' do
+    it 'generates contentMetadata file for a druid and valid thumbnail' do
       metadata_generator_service.generate_metadata_output
 
       expected_output_file = "#{workspace}/gh/123/gh/1234/gh123gh1234/metadata/contentMetadata.xml"
@@ -42,22 +41,23 @@ RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
     end
   end
 
-  describe '#generate_xml_doc' do
-    let(:expected_empty_xml_element) { Nokogiri::XML('<item><druid>druid:aa111aa1111</druid></item>') }
+  describe '#ng_doc' do
+    let(:described_class_instance) { described_class.new('', 'druid:aa111aa1111') }
+    let(:expected_item_empty_ng) { Nokogiri::XML('<item><druid>druid:aa111aa1111</druid></item>') }
 
-    it 'returns a complete xml element for valid druid and an image xml element' do
-      actual_xml_element = cm_generator_instance_with_druid.send(:generate_xml_doc, expected_thumbnail_xml_element)
-      expect(actual_xml_element).to be_equivalent_to(expected_full_xml_element)
+    it 'returns a complete xml element for druid and an image xml element' do
+      actual_xml_element = described_class_instance.send(:ng_doc, expected_thumbnail_xml)
+      expect(actual_xml_element).to be_equivalent_to(expected_item_xml_ng)
     end
 
-    it 'returns a basic xml element for a valid druid and empty xml element' do
-      actual_xml_element =  cm_generator_instance_with_druid.send(:generate_xml_doc, '')
-      expect(actual_xml_element).to be_equivalent_to(expected_empty_xml_element)
+    it 'returns a basic xml element for a druid and empty xml element' do
+      actual_xml_element =  described_class_instance.send(:ng_doc, '')
+      expect(actual_xml_element).to be_equivalent_to(expected_item_empty_ng)
     end
 
-    it 'returns a basic xml element for a valid druid and missing xml element' do
-      actual_xml_element =  cm_generator_instance_with_druid.send(:generate_xml_doc)
-      expect(actual_xml_element).to be_equivalent_to(expected_empty_xml_element)
+    it 'returns a basic xml element for a druid and missing/nil xml element' do
+      actual_xml_element =  described_class_instance.send(:ng_doc)
+      expect(actual_xml_element).to be_equivalent_to(expected_item_empty_ng)
     end
   end
 
@@ -67,7 +67,7 @@ RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
     it 'returns valid xml element for a thumbnail image' do
       thumbnail_file_location = "#{fixture_path}/thumbnail_files/thumbnail.jp2"
       actual_xml_element = described_class.new('', '').send(:create_thumbnail_xml_element, thumbnail_file_location)
-      expect(actual_xml_element).to be_equivalent_to(expected_thumbnail_xml_element)
+      expect(actual_xml_element).to be_equivalent_to(expected_thumbnail_xml)
     end
 
     it 'returns empty string for non-existing images' do
@@ -95,7 +95,7 @@ RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
 
   # this method is in MetadataGenerator
   describe '#transform_xml_using_xslt' do
-    let(:content_metadata_full) do
+    let(:expected_content_metadata) do
       '<contentMetadata type="webarchive-seed" id="druid:aa111aa1111">
  <resource type="image" sequence="1" id="aa111aa1111_1">
    <file preserve="no" publish="yes" shelve="yes" mimetype="image/jp2" id="thumbnail.jp2" size="228709">
@@ -109,8 +109,8 @@ RSpec.describe Dor::WasSeed::ContentMetadataGenerator do
 
     it 'transforms the xml to content metadata data format using XSLT' do
       xslt_template = File.read(Pathname(File.dirname(__FILE__)).join('../../../../template/wasSeedPreassembly/contentMetadata.xslt'))
-      actual_content_metadata = described_class.new('', '').transform_xml_using_xslt(expected_full_xml_element, xslt_template)
-      expect(actual_content_metadata).to be_equivalent_to(content_metadata_full)
+      actual_content_metadata = described_class.new('', '').transform_xml_using_xslt(expected_item_xml_ng, xslt_template)
+      expect(actual_content_metadata).to be_equivalent_to(expected_content_metadata)
     end
   end
 end

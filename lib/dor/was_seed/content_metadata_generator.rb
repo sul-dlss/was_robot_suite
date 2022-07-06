@@ -9,17 +9,17 @@ module Dor
       CONTENT_METADATA = 'contentMetadata'
 
       def generate_metadata_output
-        xml_input = generate_xml_doc(create_thumbnail_xml_element("#{DruidTools::Druid.new(@druid_id, workspace).content_dir}/thumbnail.jp2"))
-        metadata_content = transform_xml_using_xslt(xml_input, read_template(CONTENT_METADATA))
+        ng_xml_for_thumbnail = ng_doc(create_thumbnail_xml_element("#{DruidTools::Druid.new(@druid_id, workspace).content_dir}/thumbnail.jp2"))
+        metadata_content = transform_xml_using_xslt(ng_xml_for_thumbnail, read_template(CONTENT_METADATA))
         metadata_content = do_post_transform(metadata_content)
         write_file_to_druid_metadata_folder(CONTENT_METADATA, metadata_content)
       end
 
       private
 
-      def generate_xml_doc(image_xml_str = '')
-        xml_input = "<?xml version=\"1.0\"?><item><druid>#{@druid_id}</druid>#{image_xml_str}</item>"
-        Nokogiri::XML(xml_input)
+      def ng_doc(image_xml_str = '')
+        xml = "<?xml version=\"1.0\"?><item><druid>#{@druid_id}</druid>#{image_xml_str}</item>"
+        Nokogiri::XML(xml)
       end
 
       def create_thumbnail_xml_element(thumbnail_file)
