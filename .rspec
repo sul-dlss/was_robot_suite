@@ -1,3 +1,2 @@
 --color
---tag=~image_prerequisite
 --require spec_helper
