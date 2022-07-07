@@ -32,6 +32,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-rspec'
   gem 'simplecov'
+  gem 'stub_server'
 end
 
 group :deployment do

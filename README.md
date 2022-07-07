@@ -88,6 +88,8 @@ There is a scheduled task to roll up the `level0.cdx` and `level0.cdxj` files in
 1. Kakadu Proprietary Software Binaries - for JP2 generation
 2. libvips
 3. Exiftool
+4. Puppeteer
+5. Google Chrome
 
 ### Kakadu
 
@@ -115,4 +117,10 @@ cd Image-ExifTool-#.##
 perl Makefile.PL
 make test
 sudo make install
+```
+
+### Puppeteer
+
+```bash
+yarn install
 ```
