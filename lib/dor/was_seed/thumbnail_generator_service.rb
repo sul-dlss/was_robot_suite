@@ -11,18 +11,19 @@ module Dor
       DATE_TO_TRIGGER_EARLIEST_CAPTURE = '19900101120000'
       def self.capture_thumbnail(druid, workspace, seed_uri)
         screenshot_jpeg = "tmp/#{druid.delete_prefix('druid:')}.jpeg"
+        resized_jpeg = "tmp/#{druid.delete_prefix('druid:')}_thumbsize.jpeg"
         begin
           indexed?(seed_uri)
           wayback_uri = "#{Settings.was_seed.wayback_uri}/#{DATE_TO_TRIGGER_EARLIEST_CAPTURE}/#{seed_uri}"
           screenshot(wayback_uri, screenshot_jpeg)
-          resize_jpeg(screenshot_jpeg)
+          resize_jpeg(screenshot_jpeg, resized_jpeg)
           thumbnail_file = "#{DruidTools::Druid.new(druid, workspace).content_dir}/thumbnail.jp2"
-          Assembly::Image.new(screenshot_jpeg).create_jp2(output: thumbnail_file)
+          Assembly::Image.new(resized_jpeg).create_jp2(output: thumbnail_file)
         rescue => e
-          FileUtils.rm_rf(screenshot_jpeg)
           raise "Thumbnail for druid #{druid} and #{seed_uri} can't be generated.\n #{e.message}"
         ensure
-          FileUtils.rm(screenshot_jpeg, force: true)
+          FileUtils.rm_f(screenshot_jpeg)
+          FileUtils.rm_f(resized_jpeg)
         end
       end
 
@@ -31,19 +32,13 @@ module Dor
         raise stderr_str unless File.exist?(screenshot_jpeg)
       end
 
-      # resizes the passed jpeg image to a 400 px max and replaces the original file with the resized image
-      def self.resize_jpeg(jpeg_file)
-        image = MiniMagick::Image.open(jpeg_file)
-        width = image.width
-        height = image.height
+      # resizes the passed jpeg image to a 400 px max
+      def self.resize_jpeg(orig_jpeg_file, resized_jpeg_file)
+        require 'vips'
 
-        resize_dimension = if width > height
-                             ' 400x '
-                           else
-                             ' x400 '
-                           end
-        image.resize resize_dimension
-        image.write(jpeg_file)
+        image = Vips::Image.new_from_file(orig_jpeg_file)
+        thumbnail = image.resize(400.0 / [image.width, image.height].max)
+        thumbnail.jpegsave(resized_jpeg_file) # we need to save it to a different file; cleanup is handled by caller
       end
 
       # Queries the configured CDXJ API for the provided seed URI
