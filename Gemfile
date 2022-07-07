@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 uses vips
+gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 uses libvips
 gem 'druid-tools'
 gem 'dor-services-client', '~> 12.0'
 gem 'dor-workflow-client', '~> 4.0'
@@ -11,15 +11,14 @@ gem 'stanford-mods', '~> 2.6'
 
 gem 'config', '~> 2.0'
 gem 'honeybadger'
-gem 'lockfile'       # file locks needed for mutual exclusion during rollup and index addition processes
-gem 'mini_exiftool'  # was-seed-preassembly thumbnail creation
-gem 'mini_magick'    # was-seed-preassembly thumbnail creation
+gem 'lockfile'       # file locks needed for mutual exclusion during wayback index rollup and addition processes
+gem 'mini_exiftool'  # was-seed-preassembly thumbnail - used to check mimetype and to get height and width
 gem 'pry'            # for bin/console
 gem 'rake'
 gem 'resque'
 gem 'resque-pool'
 gem 'rubyzip'        # warc_extractor_service
-gem 'ruby-vips'      # image processing for thumbnail creation
+gem 'ruby-vips'      # was-seed-preassembly thumbnail creation image processing with libvips
 gem 'slop'           # for bin/run_robot
 gem 'whenever'       # for cron jobs
 gem 'zeitwerk', '~> 2.1'

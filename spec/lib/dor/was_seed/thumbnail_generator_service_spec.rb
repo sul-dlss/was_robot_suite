@@ -11,15 +11,15 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
     let(:thumbnail_jp2_file) { 'spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2' }
 
     before do
-      FileUtils.rm thumbnail_jp2_file, force: true
+      FileUtils.rm_f thumbnail_jp2_file
       # the following fakes the result of calling .screenshot by putting a file where a result is expected
       FileUtils.cp 'spec/was_seed_preassembly/fixtures/thumbnail_files/ab123cd4567.jpeg', screenshot_jpeg_file
     end
 
     after do
-      FileUtils.rm thumbnail_jp2_file, force: true
+      FileUtils.rm_f thumbnail_jp2_file
       FileUtils.rm_rf 'spec/was_seed_preassembly/fixtures/workspace/ab'
-      FileUtils.rm screenshot_jpeg_file, force: true
+      FileUtils.rm_f screenshot_jpeg_file
     end
 
     it 'generates max 400 px jp2 from jpeg screenshot and pushes to druid_tree content directory', js: true do
@@ -67,51 +67,54 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
   end
 
   describe '.resize_jpeg' do
+    let(:resized_jpeg_file) { 'tmp/resized.jpeg' }
+
     after do
-      FileUtils.rm 'tmp/thum_extra_width.jpeg', force: true
-      FileUtils.rm 'tmp/thum_extra_height.jpeg', force: true
+      FileUtils.rm_f 'tmp/resize_extra_width.jpeg'
+      FileUtils.rm_f 'tmp/resize_extra_height.jpeg'
+      FileUtils.rm_f resized_jpeg_file
     end
 
     it 'resizes the image with extra width to maximum 400 pixel width' do
       original_file = 'spec/was_seed_preassembly/fixtures/thumbnail_files/image_extra_width.jpeg'
-      generated_thumb_file = 'tmp/thum_extra_width.jpeg'
-      FileUtils.cp(original_file, generated_thumb_file)
-      described_class.resize_jpeg(generated_thumb_file)
+      original_file_copy = 'tmp/resize_extra_width.jpeg'
+      FileUtils.cp(original_file, original_file_copy)
+      described_class.resize_jpeg(original_file_copy, resized_jpeg_file)
 
       # access: :sequential is faster to load than random (default), but less good for processing
       original_image = Vips::Image.new_from_file(original_file, access: :sequential)
       expected_thumb_image = Vips::Image.new_from_file('spec/was_seed_preassembly/fixtures/thumbnail_files/thum_extra_width.jpeg', access: :sequential)
-      generated_thumb_image = Vips::Image.new_from_file(generated_thumb_file, access: :sequential)
+      generated_thumb_jpeg = Vips::Image.new_from_file(resized_jpeg_file, access: :sequential)
       # what follows is a poor attempt to indicate this is a true thumbnail for the given image.
-      expect(generated_thumb_image.width).to be < original_image.width
-      expect(generated_thumb_image.height).to be < original_image.height
-      expect(generated_thumb_image.width).to eq 400
-      expect(generated_thumb_image.height).to eq 348
-      expect(generated_thumb_image.width).to eq expected_thumb_image.width
-      expect(generated_thumb_image.height).to eq expected_thumb_image.height
+      expect(generated_thumb_jpeg.width).to be < original_image.width
+      expect(generated_thumb_jpeg.height).to be < original_image.height
+      expect(generated_thumb_jpeg.width).to eq 400
+      expect(generated_thumb_jpeg.height).to eq 348
+      expect(generated_thumb_jpeg.width).to eq expected_thumb_image.width
+      expect(generated_thumb_jpeg.height).to eq expected_thumb_image.height
       # this comparison of the image content itself (by the pixel) courtesy of Tony Calavano
-      expect((expected_thumb_image == generated_thumb_image).min).to be < 255.0
+      expect((expected_thumb_image == generated_thumb_jpeg).min).to be < 255.0
     end
 
     it 'resizes the image with extra height to maximum 400 pixel height' do
       original_file = 'spec/was_seed_preassembly/fixtures/thumbnail_files/image_extra_height.jpeg'
-      generated_thumb_file = 'tmp/thum_extra_height.jpeg'
-      FileUtils.cp(original_file, generated_thumb_file)
-      described_class.resize_jpeg(generated_thumb_file)
+      original_file_copy = 'tmp/resize_extra_height.jpeg'
+      FileUtils.cp(original_file, original_file_copy)
+      described_class.resize_jpeg(original_file_copy, resized_jpeg_file)
 
       # access: :sequential is faster to load than random (default), but less good for processing
       original_image = Vips::Image.new_from_file(original_file, access: :sequential)
       expected_thumb_image = Vips::Image.new_from_file('spec/was_seed_preassembly/fixtures/thumbnail_files/thum_extra_height.jpeg', access: :sequential)
-      generated_thumb_image = Vips::Image.new_from_file(generated_thumb_file, access: :sequential)
+      generated_thumb_jpeg = Vips::Image.new_from_file(resized_jpeg_file, access: :sequential)
       # what follows is a poor attempt to indicate this is a true thumbnail for the given image.
-      expect(generated_thumb_image.width).to be < original_image.width
-      expect(generated_thumb_image.height).to be < original_image.height
-      expect(generated_thumb_image.width).to eq 227
-      expect(generated_thumb_image.height).to eq 400
-      expect(generated_thumb_image.width).to eq expected_thumb_image.width
-      expect(generated_thumb_image.height).to eq expected_thumb_image.height
+      expect(generated_thumb_jpeg.width).to be < original_image.width
+      expect(generated_thumb_jpeg.height).to be < original_image.height
+      expect(generated_thumb_jpeg.width).to eq 227
+      expect(generated_thumb_jpeg.height).to eq 400
+      expect(generated_thumb_jpeg.width).to eq expected_thumb_image.width
+      expect(generated_thumb_jpeg.height).to eq expected_thumb_image.height
       # this comparison of the image content itself (by the pixel) courtesy of Tony Calavano
-      expect((expected_thumb_image == generated_thumb_image).min).to be < 255.0
+      expect((expected_thumb_image == generated_thumb_jpeg).min).to be < 255.0
     end
   end
 
