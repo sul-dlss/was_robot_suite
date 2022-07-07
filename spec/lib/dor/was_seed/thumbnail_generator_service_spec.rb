@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'vips'
+require 'stub_server'
 
 RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
   describe '.capture_thumbnail' do
@@ -44,26 +45,28 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
   end
 
   describe '.screenshot' do
-    skip('to test .screenshot method we need to execute puppeteer in a headless browser')
-    # let(:wayback_uri) { "https://swap.stanford.edu/#{Dor::WasSeed::ThumbnailGeneratorService::DATE_TO_TRIGGER_EARLIEST_CAPTURE}/http://www.slac.stanford.edu" }
-    # let(:screenshot_jpeg_file) { 'tmp/test_capture.jpeg' }
-    #
-    # before do
-    #   FileUtils.rm screenshot_jpeg_file, force: true
-    #   FileUtils.cp 'spec/was_seed_preassembly/fixtures/thumbnail_files/ab123cd4567.jpeg', screenshot_jpeg_file
-    # end
-    #
-    # after do
-    #   FileUtils.rm screenshot_jpeg_file, force: true
-    # end
-    #
-    # it 'captures jpeg image for the first capture of url' do
-    #   allow(described_class).to receive(:screenshot)
-    #   described_class.screenshot(wayback_uri, screenshot_jpeg_file)
-    #   screenshot_image = Vips::Image.new_from_file(screenshot_jpeg_file, access: :sequential) # :sequential is faster to load than random (default), but less good for processing
-    #   expect(screenshot_image.width).to eq 1000
-    #   expect(screenshot_image.height).to eq 1000
-    # end
+    let(:wayback_uri) { "http://localhost:#{port}/#{Dor::WasSeed::ThumbnailGeneratorService::DATE_TO_TRIGGER_EARLIEST_CAPTURE}/http://www.slac.stanford.edu" }
+    let(:port) { 9123 }
+    let(:replies) { { "/#{Dor::WasSeed::ThumbnailGeneratorService::DATE_TO_TRIGGER_EARLIEST_CAPTURE}/http://www.slac.stanford.edu" => [200, {}, ["<html><body>Hello World</body></html>"]] } }
+    let(:screenshot_jpeg_file) { 'tmp/test_capture.jpeg' }
+
+    before do
+      allow(Settings).to receive(:chrome_path).and_return('/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome') if /darwin/.match(RUBY_PLATFORM)
+    end
+
+    after do
+      FileUtils.rm screenshot_jpeg_file, force: true
+    end
+
+    it 'captures jpeg image for the first capture of url' do
+      StubServer.open(port, replies) do |server|
+        server.wait # ~ 0.1s
+        described_class.screenshot(wayback_uri, screenshot_jpeg_file)
+      end
+      screenshot_image = Vips::Image.new_from_file(screenshot_jpeg_file)
+      expect(screenshot_image.width).to eq 1200
+      expect(screenshot_image.height).to eq 800
+    end
   end
 
   describe '.resize_jpeg' do
