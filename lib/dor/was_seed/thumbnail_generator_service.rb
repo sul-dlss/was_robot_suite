@@ -48,7 +48,7 @@ module Dor
       def self.indexed?(seed_uri)
         cdx_index_url = "#{Settings.cdxj_indexer.url}#{seed_uri}"
         response = Net::HTTP.get_response(URI(cdx_index_url))
-        return unless response.body.nil?
+        return unless response.body.blank? # body is empty string when it's missing.
 
         raise StandardError, "#{seed_uri} not found in cdxj index."
       end

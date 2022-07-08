@@ -10,11 +10,14 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
     let(:uri) { 'http://www.slac.stanford.edu' }
     let(:screenshot_jpeg_file) { 'tmp/ab123cd4567.jpeg' }
     let(:thumbnail_jp2_file) { 'spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2' }
+    let(:cdxj_indexer_response) { Net::HTTPSuccess.new(1.0, '200', 'OK') }
 
     before do
       FileUtils.rm_f thumbnail_jp2_file
       # the following fakes the result of calling .screenshot by putting a file where a result is expected
       FileUtils.cp 'spec/was_seed_preassembly/fixtures/thumbnail_files/ab123cd4567.jpeg', screenshot_jpeg_file
+      allow(Net::HTTP).to receive(:get_response).and_return(cdxj_indexer_response)
+      allow(cdxj_indexer_response).to receive(:body).and_return('not empty signifying I am in the index')
     end
 
     after do
