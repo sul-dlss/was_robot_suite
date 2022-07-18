@@ -1,6 +1,3 @@
-fedora:
-  url: ~
-
 ssl:
   cert_file: ~
   key_file: ~
