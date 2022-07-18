@@ -39,7 +39,7 @@ Preassembly workflow for web archiving crawl objects (that include WARC or ARC f
 
 Dissemination workflow for web archiving crawl objects.  It is kicked off by the last step in the common-accessioning end-accession step that reads the disseminationWF that is suitable for this object type based on APO. It consists of these robots:
 
-* `path-indexer`: Creates an inverted index for each WARC file and its physical location in the desk for the WayBack machine and pywb.
+* `warc-extractor`: extracts WARC files from WACZ files
 * `cdxj-generator`: performs the basic indexing for the WARC/ARC files and generates CDXJ files (web archiving index files used by pywb). Generates 1 CDXJ file for each WARC file; the generated CDXJ files will be copied to `/web-archiving-stacks`.
 * `cdxj-merge`: performs two main tasks:  1) Merges the individual CDXJ files that are generated in the previous step with the main index file (`/web-archiving-stacks/data/indexes/cdx/level0.cdxj`) 2) Sorts the new generated index file.
 
