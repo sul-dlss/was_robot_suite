@@ -40,20 +40,6 @@ set :whenever_environment, fetch(:deploy_environment)
 set :default_env, { robot_environment: fetch(:deploy_environment) }
 set :bundle_without, %w{deployment development test}.join(' ')
 
-namespace :deploy do
-  desc 'Download/unpack OpenWayback tar file to work with was-crawl-diss indexer script.'
-  task :download_openwayback_tar do
-    on roles(:app), in: :sequence, wait: 10 do
-      execute :curl, '-s https://sul-ci-prod.stanford.edu/artifacts/dist/target/openwayback.tar.gz', "> #{fetch(:deploy_to)}/shared/jar/openwayback.tar.gz"
-      execute :tar, "-xvf #{fetch(:deploy_to)}/shared/jar/openwayback.tar.gz", "-C #{fetch(:deploy_to)}/shared/jar/"
-      execute :rm, "#{fetch(:deploy_to)}/shared/jar/openwayback/*.war"
-    end
-  end
-
-  # Download and extract JARs before restarting
-  after :publishing, :download_openwayback_tar
-end
-
 # honeybadger_env otherwise defaults to rails_env
 set :honeybadger_env, fetch(:stage)
 

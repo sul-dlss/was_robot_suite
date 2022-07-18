@@ -1,6 +1,3 @@
-fedora:
-  url: ~
-
 ssl:
   cert_file: ~
   key_file: ~
@@ -16,28 +13,11 @@ dor_services:
 was_crawl:
   source_path: '/was_unaccessioned_data/jobs/' # the root for the storage for the input directory
   staging_path: '/dor/workspace/'  # the root for the storage for DRUID tree that will be the input to AssemblyWF
-  extracted_metadata_xml_location: 'tmp'
-  java_heap_size: '-Xmx2048m'
   dedicated_lane: 'default'
 
 was_crawl_dissemination:
-  java_heap_size: '-Xmx1024m'
-  cdx_working_directory: "/web-archiving-stacks/data/indices/cdx_working/"
-  cdx_backup_directory: "/web-archiving-stacks/data/indices/cdx_backup/"
-  main_cdx_file: "/web-archiving-stacks/data/indices/cdx/level0.cdx"
   main_cdxj_file: "/web-archiving-stacks/data/indexes/cdxj/level0.cdxj"
-
-  path_working_directory: "/web-archiving-stacks/data/indices/path_working/"
-  main_path_index_file: "/web-archiving-stacks/data/indices/path/path-index.txt"
-  # when in production with pywb, new settings for path:
-  # path_working_directory: "/web-archiving-stacks/data/indexes/path_working/" 
-  # main_path_index_file: "/web-archiving-stacks/data/indexes/path/path-index.txt"
-  # Needed only while pywb is run in parallel with openwayback:
-  pywb_main_path_index_file: "/web-archiving-stacks/data/indexes/path/path-index.txt"
-
-  cdx_indexer_script: "jar/openwayback/bin/cdx-indexer"
   stacks_collections_path: "/web-archiving-stacks/data/collections/"
-  sort_env_vars: "TMPDIR=/web-archiving-stacks/data/tmp/ LC_ALL=C"
 
 cdxj_indexer:
   bin: /opt/app/was/.local/bin/cdxj-indexer
