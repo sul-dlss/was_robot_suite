@@ -1,4 +1,5 @@
 const ejs = require('ejs');
+const path = require('path');
 const puppeteer = require('puppeteer');
 
 /*
@@ -21,6 +22,7 @@ async function run() {
   );
   const uri = process.argv[2]
   const page = await browser.newPage();
+
   try {
     await page.setViewport({ width: 1200, height: 800 });
     await page.goto(uri, {
@@ -33,6 +35,8 @@ async function run() {
     // HT: https://stackoverflow.com/a/70437748
     if (err.message.match('net::ERR_ABORTED') && uri.match(/pdf/i)) {
       try {
+        await page.addScriptTag({path: './node_modules/pdfjs-dist/build/pdf.min.js'});
+        await page.addScriptTag({path: './node_modules/pdfjs-dist/build/pdf.worker.min.js'});
         const html = await ejs.renderFile('./scripts/template.ejs', { data: { uri } });
         await page.setContent(html, {
           waitUntil: 'networkidle0',
