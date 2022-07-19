@@ -2,7 +2,8 @@
 
 source 'https://rubygems.org'
 
-gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 uses libvips
+# gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 uses libvips
+gem 'assembly-image', git: 'https://github.com/sul-dlss/assembly-image.git'
 gem 'druid-tools'
 gem 'dor-services-client', '~> 12.0'
 gem 'dor-workflow-client', '~> 4.0'
