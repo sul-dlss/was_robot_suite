@@ -95,6 +95,12 @@ NOTE: If you have upgrade to El Capitan on OS X, you will need to donwload and r
 brew install libvips
 ```
 
+#### Debian/Ubuntu Linux
+
+```shell
+sudo apt install libvips42
+```
+
 ### Exiftool
 
 #### RHEL
