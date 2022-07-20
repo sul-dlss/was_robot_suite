@@ -9,19 +9,19 @@ INDEX_DIR_CDXJ = Pathname.new(File.dirname(Settings.was_crawl_dissemination.main
 
 namespace :cdxj do
   namespace :index do
-    desc "Show all CDXJ indexes"
+    desc 'Show all CDXJ indexes'
     task :show do
       system("ls -l #{INDEX_DIR_CDXJ}/level?.cdxj")
     end
 
     namespace :admin do
       namespace :lockfile do
-        desc "Show lockfile"
+        desc 'Show lockfile'
         task :show do
           system("ls -l #{INDEX_DIR_CDXJ.join('working.lock')}")
         end
 
-        desc "Remove a stale lockfile"
+        desc 'Remove a stale lockfile'
         task :remove do
           lockfile = INDEX_DIR_CDXJ.join('working.lock')
           lockfile.delete if lockfile.exist?
@@ -30,19 +30,19 @@ namespace :cdxj do
     end
 
     namespace :rollup do
-      desc "Rollup Level0 (today) into Level1 (daily) CDX index"
+      desc 'Rollup Level0 (today) into Level1 (daily) CDX index'
       task :level1 do
         cdxj_rollup = Dor::WasCrawl::CdxjRollupService.new(0, INDEX_DIR_CDXJ)
         cdxj_rollup.rollup
       end
 
-      desc "Rollup Level1 (daily) into Level2 (monthly) CDX index"
+      desc 'Rollup Level1 (daily) into Level2 (monthly) CDX index'
       task :level2 do
         cdxj_rollup = Dor::WasCrawl::CdxjRollupService.new(1, INDEX_DIR_CDXJ)
         cdxj_rollup.rollup
       end
 
-      desc "Rollup Level2 (monthly) into Level3 (yearly) CDX index"
+      desc 'Rollup Level2 (monthly) into Level3 (yearly) CDX index'
       task :level3 do
         cdxj_rollup = Dor::WasCrawl::CdxjRollupService.new(2, INDEX_DIR_CDXJ)
         cdxj_rollup.rollup

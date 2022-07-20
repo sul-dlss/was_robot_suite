@@ -80,7 +80,7 @@ module Dor
       def sort_env_vars
         # Ensure that the index is sorted by byte values
         # See https://specs.webrecorder.net/cdxj/0.1.0/#sorting
-        "LC_ALL=C"
+        'LC_ALL=C'
       end
     end
   end

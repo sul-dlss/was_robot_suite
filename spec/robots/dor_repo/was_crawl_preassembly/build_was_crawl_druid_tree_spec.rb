@@ -28,7 +28,7 @@ describe Robots::DorRepo::WasCrawlPreassembly::BuildWasCrawlDruidTree do
       allow(Settings.was_crawl).to receive(:source_path).and_return(source_path)
 
       FileUtils.mkdir_p(crawl_path)
-      FileUtils.cp("spec/was_crawl_preassembly/fixtures/workspace/test_crawl_object/WARC-Test.warc.gz", crawl_path)
+      FileUtils.cp('spec/was_crawl_preassembly/fixtures/workspace/test_crawl_object/WARC-Test.warc.gz', crawl_path)
       FileUtils.mkdir(staging_path)
     end
 
