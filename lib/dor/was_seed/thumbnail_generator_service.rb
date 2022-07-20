@@ -14,7 +14,12 @@ module Dor
         resized_jpeg = "tmp/#{druid.delete_prefix('druid:')}_thumbsize.jpeg"
         begin
           indexed?(seed_uri)
-          wayback_uri = "#{Settings.was_seed.wayback_uri}/#{DATE_TO_TRIGGER_EARLIEST_CAPTURE}/#{seed_uri}"
+          # The `mp_` date suffix here instructs the wayback machine to either
+          # give us a frameless replay, such as for PDFs, or redirect to the
+          # framed version where necessary, like when displaying an HTML page.
+          # This allows us to screenshot both PDFs and HTML pages in a uniform
+          # way and get the desired result.
+          wayback_uri = "#{Settings.was_seed.wayback_uri}/#{DATE_TO_TRIGGER_EARLIEST_CAPTURE}mp_/#{seed_uri}"
           screenshot(wayback_uri, screenshot_jpeg)
           resize_jpeg(screenshot_jpeg, resized_jpeg)
           thumbnail_file = "#{DruidTools::Druid.new(druid, workspace).content_dir}/thumbnail.jp2"

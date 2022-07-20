@@ -48,9 +48,9 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
   end
 
   describe '.screenshot' do
-    let(:wayback_uri) { "http://localhost:#{port}/#{Dor::WasSeed::ThumbnailGeneratorService::DATE_TO_TRIGGER_EARLIEST_CAPTURE}/http://www.slac.stanford.edu" }
+    let(:wayback_uri) { "http://localhost:#{port}/#{Dor::WasSeed::ThumbnailGeneratorService::DATE_TO_TRIGGER_EARLIEST_CAPTURE}/#{original_uri}" }
     let(:port) { 9123 }
-    let(:replies) { { "/#{Dor::WasSeed::ThumbnailGeneratorService::DATE_TO_TRIGGER_EARLIEST_CAPTURE}/http://www.slac.stanford.edu" => [200, {}, ["<html><body>Hello World</body></html>"]] } }
+    let(:replies) { { "/#{Dor::WasSeed::ThumbnailGeneratorService::DATE_TO_TRIGGER_EARLIEST_CAPTURE}/#{original_uri}" => [200, {}, [capture_data]] } }
     let(:screenshot_jpeg_file) { 'tmp/test_capture.jpeg' }
 
     before do
@@ -58,17 +58,37 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
     end
 
     after do
-      FileUtils.rm screenshot_jpeg_file, force: true
+      FileUtils.rm_f screenshot_jpeg_file
     end
 
-    it 'captures jpeg image for the first capture of url' do
-      StubServer.open(port, replies) do |server|
-        server.wait # ~ 0.1s
-        described_class.screenshot(wayback_uri, screenshot_jpeg_file)
+    context 'with an HTML capture' do
+      let(:original_uri) { 'http://www.slac.stanford.edu/' }
+      let(:capture_data) { '<html><body>Hello World</body></html>' }
+
+      it 'captures jpeg image for the first capture of url' do
+        StubServer.open(port, replies) do |server|
+          server.wait # ~ 0.1s
+          described_class.screenshot(wayback_uri, screenshot_jpeg_file)
+        end
+        screenshot_image = Vips::Image.new_from_file(screenshot_jpeg_file)
+        expect(screenshot_image.width).to eq 1200
+        expect(screenshot_image.height).to eq 800
       end
-      screenshot_image = Vips::Image.new_from_file(screenshot_jpeg_file)
-      expect(screenshot_image.width).to eq 1200
-      expect(screenshot_image.height).to eq 800
+    end
+
+    context 'with a PDF capture' do
+      let(:original_uri) { 'http://www.slac.stanford.edu/document.pdf' }
+      let(:capture_data) { File.read('spec/fixtures/base.pdf') }
+
+      it 'captures jpeg image for the first capture of url' do
+        StubServer.open(port, replies) do |server|
+          server.wait # ~ 0.1s
+          described_class.screenshot(wayback_uri, screenshot_jpeg_file)
+        end
+        screenshot_image = Vips::Image.new_from_file(screenshot_jpeg_file)
+        expect(screenshot_image.width).to eq 1200
+        expect(screenshot_image.height).to eq 800
+      end
     end
   end
 
