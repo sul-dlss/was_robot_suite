@@ -32,7 +32,7 @@ RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
                                                                        collection_id: "cc333dd4444",
                                                                        collection_path: "#{collections_path}/cc333dd4444",
                                                                        item_path: "#{collections_path}/cc333dd4444/dd/111/dd/1111",
-                                                                       file_list: ["WARC-Test.warc.gz"]
+                                                                       file_list: ["ARC-Test.arc.gz", "WARC-Test.warc.gz"]
                                                                      })
       end
     end

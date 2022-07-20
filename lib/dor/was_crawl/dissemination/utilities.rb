@@ -12,7 +12,7 @@ module Dor
         # @param [String] druid
         # @return {Hash{collection_id=>String, collection_path=>String, item_path=>String, file_list=>Array<String>}}
         def self.warc_file_location_info(druid)
-          file_location_info(druid, '*.warc*')
+          file_location_info(druid, '*.{arc,warc}*')
         end
 
         # Find WACZ files on stacks
