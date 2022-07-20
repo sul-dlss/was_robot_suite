@@ -22,7 +22,7 @@ RSpec.describe Robots::DorRepo::WasCrawlDissemination::CdxjGenerator do
     it 'runs the cdxj-indexer' do
       perform
       expect(Dor::WasCrawl::Dissemination::Utilities).to have_received(:run_sys_cmd)
-        .with(sys_cmd, "extracting CDXJ")
+        .with(sys_cmd, 'extracting CDXJ')
     end
   end
 end

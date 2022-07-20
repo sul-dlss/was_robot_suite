@@ -29,10 +29,10 @@ RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
     describe '.warc_file_location_info' do
       it 'returns file info' do
         expect(described_class.warc_file_location_info(druid)).to eq({
-                                                                       collection_id: "cc333dd4444",
+                                                                       collection_id: 'cc333dd4444',
                                                                        collection_path: "#{collections_path}/cc333dd4444",
                                                                        item_path: "#{collections_path}/cc333dd4444/dd/111/dd/1111",
-                                                                       file_list: ["ARC-Test.arc.gz", "WARC-Test.warc.gz"]
+                                                                       file_list: ['ARC-Test.arc.gz', 'WARC-Test.warc.gz']
                                                                      })
       end
     end
@@ -40,10 +40,10 @@ RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
     describe '.wacz_file_location_info' do
       it 'returns file info' do
         expect(described_class.wacz_file_location_info(druid)).to eq({
-                                                                       collection_id: "cc333dd4444",
+                                                                       collection_id: 'cc333dd4444',
                                                                        collection_path: "#{collections_path}/cc333dd4444",
                                                                        item_path: "#{collections_path}/cc333dd4444/dd/111/dd/1111",
-                                                                       file_list: ["WACZ-Test.wacz"]
+                                                                       file_list: ['WACZ-Test.wacz']
                                                                      })
       end
     end

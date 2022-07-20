@@ -10,10 +10,6 @@ AllCops:
     - 'config/environments/*.rb'
     - 'vendor/**/*'
 
-# because it's silly to care
-Style/StringLiterals:
-  Enabled: false
-
 Style/FrozenStringLiteralComment:
   Enabled: true
 
@@ -206,4 +202,9 @@ Layout/LineContinuationSpacing: # new in 1.31
 Lint/ConstantOverwrittenInRescue: # new in 1.31
   Enabled: true
 Lint/NonAtomicFileOperation: # new in 1.31
+  Enabled: true
+
+RSpec/Capybara/SpecificMatcher: # new in 2.12
+  Enabled: true
+RSpec/Rails/HaveHttpStatus: # new in 2.12
   Enabled: true
