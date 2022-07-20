@@ -28,7 +28,10 @@ module Dor
       end
 
       def self.screenshot(wayback_uri, screenshot_jpeg)
-        _stdout_str, stderr_str, _status = Open3.capture3("node scripts/screenshot.js #{wayback_uri} #{screenshot_jpeg} #{Settings.chrome_path}")
+        stderr_str = nil
+        Dir.mktmpdir do |tmp_dir|
+          _stdout_str, stderr_str, _status = Open3.capture3({ 'PUPPETEER_TMP_DIR' => tmp_dir }, "node scripts/screenshot.js #{wayback_uri} #{screenshot_jpeg} #{Settings.chrome_path}")
+        end
         raise stderr_str unless File.exist?(screenshot_jpeg)
       end
 
