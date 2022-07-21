@@ -7,6 +7,11 @@ every 1.day, roles: [:rollup] do
   rake 'cdxj:index:rollup:level1'
 end
 
+every 1.week, roles: [:rollup] do
+  rake 'cdxj:index:cleanup:indexes'
+  rake 'cdxj:index:cleanup:empty_directories'
+end
+
 every 1.month, roles: [:rollup] do
   rake 'cdxj:index:rollup:level2'
 end

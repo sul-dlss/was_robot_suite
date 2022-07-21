@@ -48,5 +48,18 @@ namespace :cdxj do
         cdxj_rollup.rollup
       end
     end
+
+    namespace :cleanup do
+      desc 'Cleans cdxj backups empty directories'
+      task empty_directories: :environment do
+        # Setting mindepth to 1 prevents the command from wiping out the root dir if empty
+        `find #{Settings.cdxj_indexer.backup_directory} -mindepth 1 -not -path "*/\.*" -type d -empty -delete`
+      end
+
+      desc 'Clean cdxj backups'
+      task indexes: :environment do
+        `find #{Settings.cdxj_indexer.backup_directory} -mindepth 2 -type f -ctime +7 -delete`
+      end
+    end
   end
 end
