@@ -155,6 +155,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
         allow(Net::HTTP).to receive(:get_response).and_return(response)
         allow(response).to receive(:body).and_return(response_body)
         expect(described_class.indexed?(uri)).to be_nil
+        expect(Net::HTTP).to have_received(:get_response).with(URI('http://localhost/was/cdx?url=http%3A%2F%2Fwww.slac.stanford.edu'))
       end
     end
 
