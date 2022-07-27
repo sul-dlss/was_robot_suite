@@ -18,7 +18,17 @@ to start all robots defined in `config/environments/robots_ENV.yml`.
 
 ## Deployment
 
-Various dependencies, including `cdxj-indexer` which is installed by puppet via `pip3`, can be found in `config/settings.yml` and [shared_configs](https://github.com/sul-dlss/shared_configs) (was-robotsxxx branches)
+Various dependencies, including `cdxj-indexer` which is installed via `pip3` and `poetry`, can be found in `config/settings.yml` and [shared_configs](https://github.com/sul-dlss/shared_configs) (was-robotsxxx branches). To install `cdxj-indexer`:
+
+```shell
+$ poetry install
+```
+
+And then to run it:
+
+```shell
+$ poetry run cdxj-indexer --args --follow --here
+```
 
 ## Prerequisites
 

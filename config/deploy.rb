@@ -43,19 +43,25 @@ set :bundle_without, %w{deployment development test}.join(' ')
 # honeybadger_env otherwise defaults to rails_env
 set :honeybadger_env, fetch(:stage)
 
+# Quiet yarn down
+set :yarn_flags, '--production --silent --no-progress --non-interactive'
+
 # update shared_configs before restarting app
 before 'deploy:publishing', 'shared_configs:update'
 
 # Install python dependencies
-before 'deploy:updated', 'pip:install'
-before 'deploy:reverted', 'pip:install'
+before 'resque:pool:hot_swap', 'poetry:install'
 
-namespace :pip do
-  desc 'Install python dependencies via pip'
+namespace :poetry do
+  desc 'Install python dependencies via poetry and pip'
   task :install do
     on roles(:app) do
       within release_path do
-        execute(*%w[pip install --upgrade -r requirements.txt])
+        # Make sure python executables are on the PATH
+        with(path: '$HOME/.local/bin:$PATH') do
+          execute :pip3, :install, '-q', '--progress-bar off', '--requirement requirements.txt'
+          execute :poetry, :install, '-n', '-q', '--no-ansi'
+        end
       end
     end
   end
