@@ -20,7 +20,7 @@ was_crawl_dissemination:
   stacks_collections_path: "/web-archiving-stacks/data/collections/"
 
 cdxj_indexer:
-  bin: /opt/app/was/.local/bin/cdxj-indexer
+  bin: /opt/app/was/.local/bin/poetry run cdxj-indexer
   working_directory: /web-archiving-stacks/data/indexes/cdxj_working
   backup_directory: /web-archiving-stacks/data/indexes/cdxj_backup
   main_cdxj_file: /web-archiving-stacks/data/indexes/cdxj/level0.cdxj
