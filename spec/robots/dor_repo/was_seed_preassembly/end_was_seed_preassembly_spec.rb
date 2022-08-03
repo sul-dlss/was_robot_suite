@@ -13,7 +13,7 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
       allow(Dor::Services::Client).to receive(:object).and_return(object_client)
     end
 
-    context 'for new objects' do
+    context 'with new objects' do
       it 'starts accessioning' do
         perform
         expect(object_client.accession).to have_received(:start).with(
@@ -24,7 +24,7 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
       end
     end
 
-    context 'for objects where the start accession call fails' do
+    context 'with objects for which the start accession call fails' do
       before do
         allow(object_client).to receive(:accession).and_raise(StandardError)
       end

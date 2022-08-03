@@ -19,7 +19,7 @@ RSpec.describe Dor::WasSeed::DescMetadataGenerator do
 
     require 'stanford-mods' # comes with dor-services gem
 
-    context 'results in MODS with' do
+    describe 'results in MODS with' do
       it '<title> containing URI' do
         expect(smods_rec.title_info.title.text).to end_with seed_uri
       end
@@ -37,7 +37,7 @@ RSpec.describe Dor::WasSeed::DescMetadataGenerator do
         expect(smods_rec._location.url.displayLabel).to eq ['Archived website']
       end
 
-      context 'constant values' do
+      context 'with constant values' do
         it '<typeOfResource> of text' do
           expect(smods_rec.typeOfResource.text).to eq 'text'
         end
