@@ -6,7 +6,7 @@ source 'https://rubygems.org'
 gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 uses libvips
 gem 'druid-tools'
 gem 'dor-services-client', '~> 12.0'
-gem 'dor-workflow-client', '~> 4.0'
+gem 'dor-workflow-client', '~> 5.0'
 gem 'lyber-core', '~> 6.0'
 gem 'stanford-mods', '~> 2.6'
 
