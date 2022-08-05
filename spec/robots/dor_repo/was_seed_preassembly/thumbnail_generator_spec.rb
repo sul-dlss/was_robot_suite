@@ -56,22 +56,21 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::ThumbnailGenerator do
       end
     end
 
-    context 'when re-generating the thumbnail and title has been updated but there is no note' do
+    context 'when re-generating the thumbnail and title has been updated and there is no note' do
       let(:cocina_model) do
-        build(:dro, id: druid, label: url).new(description: {
-                                                 purl: 'https://purl.stanford.edu/bc123df4567',
-                                                 title: [
-                                                   {
-                                                     value: 'Web Archive Seed for http://abc123.edu'
-                                                   }
-                                                 ]
-                                               })
+        build(:dro, id: druid).new(description: {
+                                     purl: 'https://purl.stanford.edu/bc123df4567',
+                                     title: [
+                                       {
+                                         value: 'Web Archive Seed for http://abc123.edu'
+                                       }
+                                     ]
+                                   })
       end
 
-      it 'invokes thumbnail generator service and finds the URI in the label' do
-        instance.perform(druid)
-        expect(Dor::Services::Client).to have_received(:object).with(druid)
-        expect(Dor::WasSeed::ThumbnailGeneratorService).to have_received(:capture_thumbnail).with(druid, '/dor/workspace/', url)
+      it 'raises an error' do
+        # instance.perform(druid)
+        expect { instance.perform(druid) }.to raise_error(StandardError)
       end
     end
   end

@@ -24,10 +24,9 @@ module Robots
           # it did not make it to accessioning and reflects the initial registration value
           uri = uri_note&.value || cocina_object.description.title.first.value
           # in the case that the title field reflects changes made in accessioning, do not use it
-          return uri unless uri.start_with?('Web Archive Seed for')
+          raise StandardError, 'No thumbnail URL available in the description.note or description.title' if uri.start_with?('Web Archive Seed for')
 
-          # use label if the title and note are not usable for the URI
-          cocina_object.label
+          uri
         end
       end
     end
