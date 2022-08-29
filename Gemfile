@@ -16,6 +16,7 @@ gem 'lockfile'       # file locks needed for mutual exclusion during wayback ind
 gem 'mini_exiftool'  # was-seed-preassembly thumbnail - used to check mimetype and to get height and width
 gem 'pry'            # for bin/console
 gem 'rake'
+gem 'redis', '~> 4.0' # redis 5.x has breaking changes with resque, see https://github.com/resque/resque/issues/1821
 gem 'resque'
 gem 'resque-pool'
 gem 'rubyzip'        # warc_extractor_service
