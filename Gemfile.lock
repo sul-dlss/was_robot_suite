@@ -43,7 +43,7 @@ GEM
     capistrano-yarn (2.0.2)
       capistrano (~> 3.0)
     chronic (0.10.2)
-    cocina-models (0.84.2)
+    cocina-models (0.84.3)
       activesupport
       deprecation
       dry-struct (~> 1.0)
