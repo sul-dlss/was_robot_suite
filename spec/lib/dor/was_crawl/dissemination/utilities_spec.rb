@@ -3,7 +3,7 @@
 RSpec.describe Dor::WasCrawl::Dissemination::Utilities do
   describe '.run_sys_cmd' do
     it 'returns nothing with succesful command' do
-      described_class.run_sys_cmd('ls', '')
+      expect(described_class.run_sys_cmd('ls', '')).to be_nil
     end
 
     it 'raises an error with wrong command' do
