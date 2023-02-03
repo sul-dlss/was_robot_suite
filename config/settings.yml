@@ -41,3 +41,12 @@ workflow:
 
 redis:
   url: ~
+
+# checkin keys for honeybadger (actual keys are in shared_configs per environment as needed)
+# see https://app.honeybadger.io/projects/51141/check_ins
+honeybadger_checkins:
+  rollup_level1: null
+  rollup_level2: null
+  rollup_level3: null
+  cleanup_indexes: null
+  cleanup_empty_directories: null
