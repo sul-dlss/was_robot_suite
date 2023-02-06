@@ -8,16 +8,15 @@ module Robots
           super('wasCrawlPreassemblyWF', 'end-was-crawl-preassembly')
         end
 
-        def perform(druid)
-          object_client = Dor::Services::Client.object(druid)
+        def perform_work
           current_version = object_client.version.current
-          workflow_service.create_workflow_by_name(druid, 'accessionWF', lane_id: lane_id,
+          workflow_service.create_workflow_by_name(druid, 'accessionWF', lane_id: was_lane_id,
                                                                          version: current_version)
         end
 
         private
 
-        def lane_id
+        def was_lane_id
           Settings.was_crawl.dedicated_lane
         end
       end

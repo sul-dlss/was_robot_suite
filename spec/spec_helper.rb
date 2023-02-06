@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-# Make sure specs run with the definitions from test.rb
-ENV['ROBOT_ENVIRONMENT'] = 'test'
-
 require 'simplecov'
 SimpleCov.start :rails do
   add_filter '/bin/'
@@ -11,7 +8,9 @@ SimpleCov.start :rails do
   add_filter '/vendor/'
 end
 
+ENV['ROBOT_ENVIRONMENT'] = 'test'
 require File.expand_path("#{__dir__}/../config/boot")
+
 require 'rspec'
 require 'awesome_print'
 require 'nokogiri'
@@ -19,6 +18,7 @@ require 'equivalent-xml'
 require 'equivalent-xml/rspec_matchers'
 require 'cocina/rspec'
 require 'pry-byebug'
+include LyberCore::Rspec # rubocop:disable Style/MixinUsage
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|

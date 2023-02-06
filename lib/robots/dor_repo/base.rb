@@ -2,15 +2,9 @@
 
 module Robots
   module DorRepo
-    class Base
-      include LyberCore::Robot
-
-      def workflow_service
-        WorkflowClientFactory.build
-      end
-
-      def seed_uri(druid)
-        Dor::Services::Client.object(druid).find.label
+    class Base < LyberCore::Robot
+      def seed_uri
+        cocina_object.label
       end
 
       def workspace_path

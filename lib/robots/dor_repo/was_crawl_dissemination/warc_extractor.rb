@@ -9,11 +9,7 @@ module Robots
           super('wasCrawlDisseminationWF', 'warc-extractor')
         end
 
-        # `perform` is the main entry point for the robot. This is where
-        # all of the robot's work is done.
-        #
-        # @param [String] druid -- the Druid identifier for the object to process
-        def perform(druid)
+        def perform_work
           Dor::WasCrawl::Dissemination::Utilities.wacz_file_location_info(druid) => {item_path:, file_list:}
 
           file_list.each { |filename| Dor::WasCrawl::WarcExtractorService.extract(item_path, filename) }

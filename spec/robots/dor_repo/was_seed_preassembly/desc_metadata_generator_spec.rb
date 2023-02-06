@@ -18,8 +18,8 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::DescMetadataGenerator do
     end
 
     it 'invokes metadata generator service' do
-      instance.perform(druid)
-      expect(Dor::WasSeed::DescMetadataGenerator).to have_received(:new).with('/dor/workspace/', druid, url, collection_id)
+      test_perform(instance, druid)
+      expect(Dor::WasSeed::DescMetadataGenerator).to have_received(:new).with('/dor/workspace/', druid, url, collection_id, logger: Sidekiq::Logger)
       expect(generator_service).to have_received(:generate_metadata_output)
     end
   end
