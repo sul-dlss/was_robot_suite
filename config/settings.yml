@@ -3,21 +3,18 @@ ssl:
   key_file: ~
   key_pass: ~
 
-solr:
-  url: ~
-
 dor_services:
-  url:  'https://dor-services-test.stanford.test'
+  url: 'https://dor-services-test.stanford.test'
   token: secret-token
 
 was_crawl:
   source_path: '/was_unaccessioned_data/jobs/' # the root for the storage for the input directory
-  staging_path: '/dor/workspace/'  # the root for the storage for DRUID tree that will be the input to AssemblyWF
+  staging_path: '/dor/workspace/' # the root for the storage for DRUID tree that will be the input to AssemblyWF
   dedicated_lane: 'default'
 
 was_crawl_dissemination:
-  main_cdxj_file: "/web-archiving-stacks/data/indexes/cdxj/level0.cdxj"
-  stacks_collections_path: "/web-archiving-stacks/data/collections/"
+  main_cdxj_file: '/web-archiving-stacks/data/indexes/cdxj/level0.cdxj'
+  stacks_collections_path: '/web-archiving-stacks/data/collections/'
 
 cdxj_indexer:
   bin: /opt/app/was/.local/bin/poetry run cdxj-indexer
@@ -28,7 +25,7 @@ cdxj_indexer:
   tmpdir: /tmp
 
 was_seed:
-  workspace_path: '/dor/workspace/'  #the root for the storage for DRUID tree that will be the input to AssemblyWF
+  workspace_path: '/dor/workspace/' #the root for the storage for DRUID tree that will be the input to AssemblyWF
   staging_path: '/was_unaccessioned_data/seed/'
   wayback_uri: 'https://swap.stanford.edu'
 
