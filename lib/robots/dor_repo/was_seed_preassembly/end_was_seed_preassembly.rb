@@ -8,8 +8,7 @@ module Robots
           super('wasSeedPreassemblyWF', 'end-was-seed-preassembly')
         end
 
-        def perform(druid)
-          object_client = Dor::Services::Client.object(druid)
+        def perform_work
           object_client.accession.start(
             workflow: 'accessionWF',
             significance: 'major',

@@ -5,11 +5,12 @@ require 'nokogiri'
 module Dor
   module WasSeed
     class MetadataGenerator
-      attr_accessor :workspace, :druid_id
+      attr_accessor :workspace, :druid_id, :logger
 
-      def initialize(workspace, druid_id, _extracted_location = 'tmp/')
+      def initialize(workspace, druid_id, _extracted_location = 'tmp/', logger: nil)
         @workspace = workspace
         @druid_id = druid_id
+        @logger = logger || Logger.new($stdout)
       end
 
       def read_metadata_xml_input_file

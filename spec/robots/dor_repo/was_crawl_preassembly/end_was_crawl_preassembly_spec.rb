@@ -17,14 +17,14 @@ describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
     let(:version_client) { instance_double(Dor::Services::Client::ObjectVersion, current: '1') }
 
     before do
-      allow(WorkflowClientFactory).to receive(:build).and_return(workflow_client)
+      allow(LyberCore::WorkflowClientFactory).to receive(:build).and_return(workflow_client)
       allow(Dor::Services::Client).to receive(:object).and_return(object_client)
     end
 
     it 'starts the accessionWF on default lane' do
       allow(workflow_client).to receive(:create_workflow_by_name)
       robot = described_class.new
-      robot.perform(druid)
+      test_perform(robot, druid)
       expect(workflow_client).to have_received(:create_workflow_by_name)
         .with(druid, workflow_name, lane_id: 'default', version: '1')
     end
@@ -33,7 +33,7 @@ describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
       Settings.was_crawl.dedicated_lane = 'NotDefault'
       allow(workflow_client).to receive(:create_workflow_by_name)
       robot = described_class.new
-      robot.perform(druid)
+      test_perform(robot, druid)
       expect(workflow_client).to have_received(:create_workflow_by_name)
         .with(druid, workflow_name, lane_id: 'NotDefault', version: '1')
     end

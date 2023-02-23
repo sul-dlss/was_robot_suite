@@ -23,7 +23,7 @@ set :deploy_to, "/opt/app/was/#{fetch(:application)}"
 set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w(config/honeybadger.yml tmp/resque-pool.lock)
+set :linked_files, %w(config/honeybadger.yml)
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -50,7 +50,7 @@ set :yarn_flags, '--production --silent --no-progress --non-interactive'
 before 'deploy:publishing', 'shared_configs:update'
 
 # Install python dependencies
-before 'resque:pool:hot_swap', 'poetry:install'
+before 'deploy:publishing', 'poetry:install'
 
 namespace :poetry do
   desc 'Install python dependencies via poetry and pip'
@@ -66,3 +66,6 @@ namespace :poetry do
     end
   end
 end
+
+set :sidekiq_systemd_role, :worker
+set :sidekiq_systemd_use_hooks, true

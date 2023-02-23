@@ -8,15 +8,14 @@ module Robots
           super('wasSeedPreassemblyWF', 'thumbnail-generator')
         end
 
-        def perform(druid)
-          LyberCore::Log.info "Creating ThumbnailGenerator with parameters #{druid}"
-          Dor::WasSeed::ThumbnailGeneratorService.capture_thumbnail(druid, workspace_path, original_site_uri(druid))
+        def perform_work
+          logger.info "Creating ThumbnailGenerator with parameters #{druid}"
+          Dor::WasSeed::ThumbnailGeneratorService.capture_thumbnail(druid, workspace_path, original_site_uri)
         end
 
         private
 
-        def original_site_uri(druid)
-          cocina_object = Dor::Services::Client.object(druid).find
+        def original_site_uri
           # if the seed already made it through accessioning, there should be a descriptive note with the URI
           # this is also the field that can be updated to correct a seed URL
           uri_note = cocina_object.description.note.find { |note| note.displayLabel == 'Original site' }

@@ -25,7 +25,7 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::ThumbnailGenerator do
       end
 
       it 'invokes thumbnail generator service and finds the URI in the title' do
-        instance.perform(druid)
+        test_perform(instance, druid)
         expect(Dor::Services::Client).to have_received(:object).with(druid)
         expect(Dor::WasSeed::ThumbnailGeneratorService).to have_received(:capture_thumbnail).with(druid, '/dor/workspace/', url)
       end
@@ -50,7 +50,7 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::ThumbnailGenerator do
       end
 
       it 'invokes thumbnail generator service and finds the URI in the note' do
-        instance.perform(druid)
+        test_perform(instance, druid)
         expect(Dor::Services::Client).to have_received(:object).with(druid)
         expect(Dor::WasSeed::ThumbnailGeneratorService).to have_received(:capture_thumbnail).with(druid, '/dor/workspace/', url)
       end
@@ -69,8 +69,7 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::ThumbnailGenerator do
       end
 
       it 'raises an error' do
-        # instance.perform(druid)
-        expect { instance.perform(druid) }.to raise_error(StandardError)
+        expect { test_perform(instance, druid) }.to raise_error(StandardError)
       end
     end
   end

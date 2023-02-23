@@ -4,7 +4,7 @@ RSpec.describe Robots::DorRepo::WasCrawlDissemination::CdxjMerge do
   subject(:robot) { described_class.new }
 
   describe '.perform' do
-    subject(:perform) { robot.perform(druid) }
+    subject(:perform) { test_perform(robot, druid) }
 
     let(:druid) { 'druid:dd116zh0343' }
     let(:index_dir) { 'tmp/cdxj' }

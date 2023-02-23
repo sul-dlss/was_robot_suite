@@ -2,7 +2,7 @@
 
 RSpec.describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
   describe 'perform' do
-    subject(:perform) { instance.perform(druid) }
+    subject(:perform) { test_perform(instance, druid) }
 
     let(:druid) { 'druid:ab123cd4567' }
     let(:instance) { described_class.new }

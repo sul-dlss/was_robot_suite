@@ -8,19 +8,20 @@ module Robots
           super('wasSeedPreassemblyWF', 'desc-metadata-generator')
         end
 
-        def perform(druid)
-          LyberCore::Log.info "Creating DescMetadataGenerator with parameters #{druid}"
+        def perform_work
+          logger.info "Creating DescMetadataGenerator with parameters #{druid}"
           metadata_generator_service = Dor::WasSeed::DescMetadataGenerator.new(workspace_path,
                                                                                druid,
-                                                                               seed_uri(druid),
-                                                                               collection_id(druid))
+                                                                               seed_uri,
+                                                                               collection_id,
+                                                                               logger: logger)
           metadata_generator_service.generate_metadata_output
         end
 
         private
 
-        def collection_id(druid)
-          collections = Dor::Services::Client.object(druid).collections
+        def collection_id
+          collections = object_client.collections
           raise "Expect only one collection for #{druid} but found #{collections.size}" unless collections.size == 1
 
           collections[0].externalIdentifier

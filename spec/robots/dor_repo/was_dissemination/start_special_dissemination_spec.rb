@@ -13,14 +13,14 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
   end
 
   describe '.perform' do
-    subject(:perform) { robot.perform(druid) }
+    subject(:perform) { test_perform(robot, druid) }
 
     let(:object_client) { instance_double(Dor::Services::Client::Object, find: item) }
     let(:workflow_service) { instance_double(Dor::Workflow::Client, create_workflow_by_name: true) }
 
     before do
       allow(Dor::Services::Client).to receive(:object).with(druid).and_return(object_client)
-      allow(WorkflowClientFactory).to receive(:build).and_return(workflow_service)
+      allow(LyberCore::WorkflowClientFactory).to receive(:build).and_return(workflow_service)
     end
 
     context 'when the type is collection' do

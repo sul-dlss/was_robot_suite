@@ -24,7 +24,6 @@ require 'capistrano/yarn'
 # require 'capistrano/rails/migrations'
 
 require 'dlss/capistrano'
-require 'dlss/capistrano/resque_pool'
 require 'whenever/capistrano'
 require 'capistrano/honeybadger'
 

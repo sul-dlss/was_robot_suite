@@ -5,8 +5,8 @@ module Dor
     class DescMetadataGenerator < MetadataGenerator
       attr_reader :desc_metadata_name, :seed_uri, :collection_id
 
-      def initialize(workspace_path, druid_id, seed_uri, collection_id)
-        super(workspace_path, druid_id)
+      def initialize(workspace_path, druid_id, seed_uri, collection_id, logger: nil)
+        super(workspace_path, druid_id, logger: logger)
         @desc_metadata_name = 'descMetadata'
         @seed_uri = seed_uri
         @collection_id = collection_id

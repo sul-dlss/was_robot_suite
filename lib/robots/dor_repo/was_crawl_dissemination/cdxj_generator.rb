@@ -8,11 +8,7 @@ module Robots
           super('wasCrawlDisseminationWF', 'cdxj-generator')
         end
 
-        # `perform` is the main entry point for the robot. This is where
-        # all of the robot's work is done.
-        #
-        # @param [String] druid -- the Druid identifier for the object to process
-        def perform(druid)
+        def perform_work
           Dor::WasCrawl::Dissemination::Utilities.warc_file_location_info(druid) => {collection_path:, file_list:}
 
           cdx_generator = Dor::WasCrawl::CdxjGeneratorService.new(collection_path, druid)
