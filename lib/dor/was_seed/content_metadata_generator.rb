@@ -42,7 +42,7 @@ module Dor
           raise "Problem in reading #{thumbnail_file}. #{e.message}\n#{e.backtrace.inspect}"
         end
 
-        size = thumbnail_file_object.size()
+        size = thumbnail_file_object.size
         if size == 0
           logger.warn "ThumbnailGenerator - #{thumbnail_file} size is 0"
           return ''
