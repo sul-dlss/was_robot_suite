@@ -2,7 +2,6 @@
 
 require 'bundler'
 require 'rake'
-require 'resque/pool/tasks'
 
 # Import external rake tasks
 Dir.glob('lib/tasks/*.rake').each { |r| import r }
