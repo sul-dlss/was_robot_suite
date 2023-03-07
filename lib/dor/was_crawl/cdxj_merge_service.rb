@@ -80,7 +80,10 @@ module Dor
       def sort_env_vars
         # Ensure that the index is sorted by byte values
         # See https://specs.webrecorder.net/cdxj/0.1.0/#sorting
-        'LC_ALL=C'
+        #
+        # Also ensure that the configured temporary directory is used
+        # so that /tmp doesn't fill up
+        "LC_ALL=C TMPDIR=#{Settings.cdxj_indexer.tmpdir}"
       end
     end
   end
