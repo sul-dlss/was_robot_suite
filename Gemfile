@@ -5,7 +5,7 @@ source 'https://rubygems.org'
 # stanford dlss gems
 gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 uses libvips
 gem 'dor-services-client', '~> 12.10'
-gem 'lyber-core', '~> 7.0'
+gem 'lyber-core', '~> 7.1'
 gem 'stanford-mods', '~> 2.6'
 
 gem 'config', '~> 2.0'
@@ -16,7 +16,7 @@ gem 'pry'            # for bin/console
 gem 'rake'
 gem 'rubyzip'        # warc_extractor_service
 gem 'ruby-vips'      # was-seed-preassembly thumbnail creation image processing with libvips
-gem 'sidekiq', '~> 6.4'
+gem 'sidekiq', '~> 7.0'
 gem 'slop'           # for bin/run_robot
 gem 'whenever'       # for cron jobs
 gem 'zeitwerk', '~> 2.1'
