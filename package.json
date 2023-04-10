@@ -2,6 +2,6 @@
   "dependencies": {
     "puppeteer": "^14.4.1",
     "ejs": "^3.1.8",
-    "pdfjs-dist": "latest"
+    "pdfjs-dist": "3.4.120"
   }
 }
