@@ -10,7 +10,7 @@ module Robots
 
         def perform_work
           logger.info "Creating ContentMetadataGenerator with parameters  #{workspace_path}, #{druid}"
-          metadata_generator_service = Dor::WasSeed::ContentMetadataGenerator.new(workspace_path, druid, logger: logger)
+          metadata_generator_service = Dor::WasSeed::ContentMetadataGenerator.new(workspace_path, druid, logger:)
           metadata_generator_service.generate_metadata_output
         end
       end
