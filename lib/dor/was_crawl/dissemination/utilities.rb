@@ -29,7 +29,7 @@ module Dor
           collection_path = File.join(Settings.was_crawl_dissemination.stacks_collections_path, collection_id)
           item_path = DruidTools::AccessDruid.new(druid, collection_path).path
           filenames = Dir.glob(glob, base: item_path)
-          { collection_id: collection_id, collection_path: collection_path, item_path: item_path, file_list: filenames }
+          { collection_id:, collection_path:, item_path:, file_list: filenames }
         end
         private_class_method :file_location_info
 

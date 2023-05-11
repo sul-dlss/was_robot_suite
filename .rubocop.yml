@@ -4,7 +4,7 @@ inherit_from: .rubocop_todo.yml
 
 AllCops:
   SuggestExtensions: false
-  TargetRubyVersion: 3.0
+  TargetRubyVersion: 3.2
   Exclude:
     - 'config/deploy/*.rb'
     - 'config/environments/*.rb'

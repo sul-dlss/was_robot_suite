@@ -5,7 +5,7 @@ RSpec.describe Dor::WasCrawl::Utilities do
   let(:collection_druid) { 'druid:cc333dd4444' }
 
   let(:cocina_model) do
-    instance_double(Cocina::Models::DRO, externalIdentifier: druid, structural: structural)
+    instance_double(Cocina::Models::DRO, externalIdentifier: druid, structural:)
   end
 
   context 'when the object belongs to a collection' do

@@ -8,7 +8,7 @@ module Dor
       end
 
       def self.merge(druid_id:)
-        new(druid_id: druid_id).merge
+        new(druid_id:).merge
       end
 
       delegate :main_cdxj_file, :working_directory, :backup_directory, to: :config
@@ -46,8 +46,8 @@ module Dor
       end
 
       # synchornize writes with other processes
-      def with_lock(&block)
-        Lockfile.new(lock_filename, &block)
+      def with_lock(&)
+        Lockfile.new(lock_filename, &)
       end
 
       def lock_filename

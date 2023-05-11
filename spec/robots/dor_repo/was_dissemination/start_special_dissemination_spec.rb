@@ -33,7 +33,7 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
     end
 
     context 'when the object type is item' do
-      let(:item) { instance_double(Cocina::Models::DRO, version: '1', dro?: true, type: type) }
+      let(:item) { instance_double(Cocina::Models::DRO, version: '1', dro?: true, type:) }
 
       context 'when the type is webarchive-seed' do
         let(:type) { Cocina::Models::ObjectType.webarchive_seed }

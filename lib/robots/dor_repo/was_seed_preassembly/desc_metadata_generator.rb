@@ -14,7 +14,7 @@ module Robots
                                                                                druid,
                                                                                seed_uri,
                                                                                collection_id,
-                                                                               logger: logger)
+                                                                               logger:)
           metadata_generator_service.generate_metadata_output
         end
 
