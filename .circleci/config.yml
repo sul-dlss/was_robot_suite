@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  ruby-rails: sul-dlss/ruby-rails@3.2.0
+  ruby-rails: sul-dlss/ruby-rails@4.0.0
   browser-tools: circleci/browser-tools@1.3.0
 workflows:
   build:
@@ -8,15 +8,9 @@ workflows:
       - ruby-rails/lint:
           name: lint
           context: dlss
-          executor:
-            name: ruby-rails/ruby
-            ruby-tag: '3.2.2'
       - ruby-rails/test-gem:
           name: test
           context: dlss
-          executor:
-            name: ruby-rails/ruby
-            ruby-tag: '3.2.2'
           before-test:
             - browser-tools/install-chrome
             - run:
