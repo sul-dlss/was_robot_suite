@@ -10,8 +10,8 @@ RSpec.describe Robots::DorRepo::WasCrawlDissemination::CdxjMerge do
     let(:index_dir) { 'tmp/cdxj' }
     let(:working_dir) { "tmp/#{druid}" }
     let(:main_file) { "#{index_dir}/level0.cdxj" }
-    let(:working_file1) { "#{working_dir}/index1.cdxj" }
-    let(:working_file2) { "#{working_dir}/index2.cdxj" }
+    let(:working_file1) { "#{working_dir}/index1.cdxj" } # rubocop:disable RSpec/IndexedLet
+    let(:working_file2) { "#{working_dir}/index2.cdxj" } # rubocop:disable RSpec/IndexedLet
 
     before do
       FileUtils.mkdir_p index_dir
