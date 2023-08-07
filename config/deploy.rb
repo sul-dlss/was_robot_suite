@@ -56,11 +56,11 @@ namespace :poetry do
   desc 'Install python dependencies via poetry and pip'
   task :install do
     on roles(:app) do
-      within release_path do
+      within current_path do
         # Make sure python executables are on the PATH
         with(path: '$HOME/.local/bin:$PATH') do
-          execute :pip3, :install, '-q', '--progress-bar off', '--requirement requirements.txt'
-          execute :poetry, :install, '-n', '-q', '--no-ansi'
+          execute :pip3, :install, 'poetry'
+          execute :poetry, :install
         end
       end
     end
