@@ -59,7 +59,8 @@ namespace :poetry do
       within current_path do
         # Make sure python executables are on the PATH
         with(path: '$HOME/.local/bin:$PATH') do
-          execute :pip3, :install, 'poetry'
+          execute :pip3, :install, '--user', 'pipx'
+          execute :pipx, :install, 'poetry', '--force'
           execute :poetry, :install
         end
       end
