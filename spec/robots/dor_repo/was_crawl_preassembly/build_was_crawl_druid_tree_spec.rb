@@ -20,8 +20,7 @@ describe Robots::DorRepo::WasCrawlPreassembly::BuildWasCrawlDruidTree do
 
     before do
       allow(Dor::Services::Client).to receive(:object).and_return(object_client)
-      allow(Settings.was_crawl).to receive(:staging_path).and_return(staging_path)
-      allow(Settings.was_crawl).to receive(:source_path).and_return(source_path)
+      allow(Settings.was_crawl).to receive_messages(staging_path:, source_path:)
 
       FileUtils.mkdir_p(crawl_path)
       FileUtils.cp('spec/was_crawl_preassembly/fixtures/workspace/test_crawl_object/WARC-Test.warc.gz', crawl_path)
