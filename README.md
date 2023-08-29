@@ -129,3 +129,13 @@ sudo make install
 ```bash
 yarn install
 ```
+
+## Reset Process (For QA/Stage)
+
+### Steps
+
+1. Verify there are no jobs on the was-robots at https://robot-console-stage.stanford.edu/busy
+1. Clear collections: `rm -rf /web-archiving-stacks/data/collections/*`
+2. Clear indexes: `rm -rf /web-archiving-stacks/data/indexes/*`
+1. Clear seeds: `rm -rf /was_unaccessioned_data/seed/*`
+2. Clear jobs: `rm -rf /was_unaccessioned_data/jobs/*`
