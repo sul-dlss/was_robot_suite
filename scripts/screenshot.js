@@ -33,7 +33,7 @@ async function run() {
   } catch (err) {
     // Puppeteer cannot screenshot PDFs in headless mode by itself, so get some help from EJS and PDF.js
     // HT: https://stackoverflow.com/a/70437748
-    if (err.message.match('net::ERR_ABORTED') && uri.match(/pdf/i)) {
+    if (err.message.match('net::ERR_ABORTED')) {
       try {
         await page.addScriptTag({path: './node_modules/pdfjs-dist/build/pdf.min.js'});
         await page.addScriptTag({path: './node_modules/pdfjs-dist/build/pdf.worker.min.js'});
