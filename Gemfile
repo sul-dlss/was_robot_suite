@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 # stanford dlss gems
 gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 uses libvips
-gem 'dor-services-client', '~> 12.10'
+gem 'dor-services-client', '~> 13.0'
 gem 'lyber-core', '~> 7.1'
 gem 'stanford-mods', '~> 2.6'
 
