@@ -53,13 +53,14 @@ GEM
     capistrano-yarn (2.0.2)
       capistrano (~> 3.0)
     chronic (0.10.2)
-    cocina-models (0.91.4)
+    cocina-models (0.92.0)
       activesupport
       deprecation
       dry-struct (~> 1.0)
       dry-types (~> 1.1)
       edtf
       equivalent-xml
+      i18n
       jsonpath
       nokogiri
       openapi3_parser
@@ -85,9 +86,9 @@ GEM
       capistrano-one_time_key
       capistrano-shared_configs
     docile (1.4.0)
-    dor-services-client (13.1.1)
+    dor-services-client (13.2.0)
       activesupport (>= 4.2, < 8)
-      cocina-models (~> 0.91.0)
+      cocina-models (~> 0.92.0)
       deprecation
       faraday (~> 2.0)
       faraday-retry
@@ -211,7 +212,7 @@ GEM
     pry-byebug (3.10.1)
       byebug (~> 11.0)
       pry (>= 0.13, < 0.15)
-    racc (1.7.1)
+    racc (1.7.2)
     rack (3.0.8)
     rackup (0.2.3)
       rack (>= 3.0.0.beta1)
