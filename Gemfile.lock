@@ -17,7 +17,7 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
-    airbrussh (1.5.0)
+    airbrussh (1.5.1)
       sshkit (>= 1.6.1, != 1.7.0)
     assembly-image (2.1.2)
       activesupport (> 6.1)
@@ -145,11 +145,10 @@ GEM
       activesupport (>= 3.0, < 8.0)
     equivalent-xml (0.6.0)
       nokogiri (>= 1.4.3)
-    faraday (2.8.1)
-      base64
-      faraday-net_http (>= 2.0, < 3.1)
-      ruby2_keywords (>= 0.0.4)
-    faraday-net_http (3.0.2)
+    faraday (2.9.0)
+      faraday-net_http (>= 2.0, < 3.2)
+    faraday-net_http (3.1.0)
+      net-http
     faraday-retry (2.2.0)
       faraday (~> 2.0)
     ffi (1.16.3)
@@ -178,7 +177,7 @@ GEM
     mime-types-data (3.2023.1205)
     mini_exiftool (2.10.4)
     mini_portile2 (2.8.5)
-    minitest (5.20.0)
+    minitest (5.21.1)
     mods (2.4.1)
       edtf
       iso-639
@@ -186,8 +185,12 @@ GEM
       nom-xml (~> 1.0)
     multi_json (1.15.0)
     mutex_m (0.2.0)
+    net-http (0.4.1)
+      uri
     net-scp (4.0.0)
       net-ssh (>= 2.6.5, < 8.0.0)
+    net-sftp (4.0.0)
+      net-ssh (>= 5.0.0, < 8.0.0)
     net-ssh (7.2.1)
     nokogiri (1.16.0)
       mini_portile2 (~> 2.8.2)
@@ -202,7 +205,7 @@ GEM
     openapi_parser (1.0.0)
     optimist (3.1.0)
     parallel (1.24.0)
-    parser (3.3.0.2)
+    parser (3.3.0.3)
       ast (~> 2.4.1)
       racc
     patience_diff (1.2.0)
@@ -222,7 +225,7 @@ GEM
     rake (13.1.0)
     redis-client (0.19.1)
       connection_pool
-    regexp_parser (2.8.3)
+    regexp_parser (2.9.0)
     rexml (3.2.6)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
@@ -239,11 +242,11 @@ GEM
     rspec-support (3.12.1)
     rss (0.3.0)
       rexml
-    rubocop (1.59.0)
+    rubocop (1.60.0)
       json (~> 2.3)
       language_server-protocol (>= 3.17.0)
       parallel (~> 1.10)
-      parser (>= 3.2.2.4)
+      parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml (>= 3.2.5, < 4.0)
@@ -277,9 +280,10 @@ GEM
     simplecov-html (0.12.3)
     simplecov_json_formatter (0.1.4)
     slop (4.10.1)
-    sshkit (1.21.7)
+    sshkit (1.22.0)
       mutex_m
       net-scp (>= 1.1.2)
+      net-sftp (>= 2.1.2)
       net-ssh (>= 2.8.0)
     stanford-mods (2.6.4)
       activesupport
@@ -295,6 +299,7 @@ GEM
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    uri (0.13.0)
     webrick (1.8.1)
     whenever (1.0.0)
       chronic (>= 0.6.3)
