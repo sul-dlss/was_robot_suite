@@ -7,9 +7,9 @@ gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 
 gem 'dor-services-client', '~> 14.0'
 gem 'dor-workflow-client', '~> 7.0'
 gem 'lyber-core', '~> 7.1'
-gem 'stanford-mods', '~> 2.6'
+gem 'stanford-mods'
 
-gem 'config', '~> 2.0'
+gem 'config'
 gem 'honeybadger'
 gem 'lockfile'       # file locks needed for mutual exclusion during wayback index rollup and addition processes
 gem 'mini_exiftool'  # was-seed-preassembly thumbnail - used to check mimetype and to get height and width
