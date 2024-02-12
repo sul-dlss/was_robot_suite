@@ -174,10 +174,10 @@ GEM
     method_source (1.0.0)
     mime-types (3.5.2)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2023.1205)
+    mime-types-data (3.2024.0206)
     mini_exiftool (2.10.4)
     mini_portile2 (2.8.5)
-    minitest (5.22.0)
+    minitest (5.22.2)
     mods (3.0.4)
       edtf (~> 3.0)
       iso-639
@@ -291,7 +291,7 @@ GEM
     stub_server (0.7.0)
       rackup (~> 0.2.2)
       webrick
-    super_diff (0.10.0)
+    super_diff (0.11.0)
       attr_extras (>= 6.2.4)
       diff-lcs
       patience_diff
@@ -303,7 +303,7 @@ GEM
     webrick (1.8.1)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    zeitwerk (2.6.12)
+    zeitwerk (2.6.13)
 
 PLATFORMS
   ruby
