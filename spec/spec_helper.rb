@@ -17,7 +17,7 @@ require 'nokogiri'
 require 'equivalent-xml'
 require 'equivalent-xml/rspec_matchers'
 require 'cocina/rspec'
-require 'pry-byebug'
+require 'debug'
 include LyberCore::Rspec # rubocop:disable Style/MixinUsage
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

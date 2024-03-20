@@ -29,7 +29,7 @@ end
 group :development, :test do
   gem 'awesome_print'
   gem 'equivalent-xml'
-  gem 'pry-byebug'
+  gem 'debug'
   gem 'rspec'
   gem 'rubocop'
   gem 'rubocop-rspec'
