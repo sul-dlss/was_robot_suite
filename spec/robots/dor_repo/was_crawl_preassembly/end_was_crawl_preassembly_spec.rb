@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
+RSpec.describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
   describe '.initialize' do
     it 'initializes the robot with valid parameters' do
       robot = described_class.new
