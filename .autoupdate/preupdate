@@ -7,6 +7,9 @@
 export LANG=en_US.UTF-8
 export LC_COLLATE=C.UTF-8
 
+# Needed to successfully run `pipx`
+export PATH="$HOME/.local/bin:$PATH"
+
 pip3 install --user pipx > was_robot_suite.txt &&
   pipx install poetry --force >> was_robot_suite.txt &&
   ~/.local/bin/poetry update -n --no-ansi >> was_robot_suite.txt &&
