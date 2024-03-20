@@ -26,7 +26,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
       FileUtils.rm_f screenshot_jpeg_file
     end
 
-    it 'generates max 400 px jp2 from jpeg screenshot and pushes to druid_tree content directory', js: true do
+    it 'generates max 400 px jp2 from jpeg screenshot and pushes to druid_tree content directory', :js do
       allow(described_class).to receive(:screenshot) # NOTE: this does NOT execute screenshot, the FileUtils.cp in before mocks this
       described_class.capture_thumbnail(druid, workspace, uri)
       expect(File.exist?(screenshot_jpeg_file)).to be false # screenshot jpeg is removed - it's produced on the way to the jp2
