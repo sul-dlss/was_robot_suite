@@ -10,7 +10,6 @@ dor_services:
 was_crawl:
   source_path: '/was_unaccessioned_data/jobs/' # the root for the storage for the input directory
   staging_path: '/dor/workspace/' # the root for the storage for DRUID tree that will be the input to AssemblyWF
-  dedicated_lane: 'default'
 
 was_crawl_dissemination:
   main_cdxj_file: '/web-archiving-stacks/data/indexes/cdxj/level0.cdxj'

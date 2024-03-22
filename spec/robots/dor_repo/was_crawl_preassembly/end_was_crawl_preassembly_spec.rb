@@ -21,21 +21,12 @@ RSpec.describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
       allow(Dor::Services::Client).to receive(:object).and_return(object_client)
     end
 
-    it 'starts the accessionWF on default lane' do
+    it 'starts the accessionWF' do
       allow(workflow_client).to receive(:create_workflow_by_name)
       robot = described_class.new
       test_perform(robot, druid)
       expect(workflow_client).to have_received(:create_workflow_by_name)
-        .with(druid, workflow_name, lane_id: 'default', version: '1')
-    end
-
-    it 'starts the accessionWF on a non-default lane' do
-      Settings.was_crawl.dedicated_lane = 'NotDefault'
-      allow(workflow_client).to receive(:create_workflow_by_name)
-      robot = described_class.new
-      test_perform(robot, druid)
-      expect(workflow_client).to have_received(:create_workflow_by_name)
-        .with(druid, workflow_name, lane_id: 'NotDefault', version: '1')
+        .with(druid, workflow_name, version: '1')
     end
   end
 end
