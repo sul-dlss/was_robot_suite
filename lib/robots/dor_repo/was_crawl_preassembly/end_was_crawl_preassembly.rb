@@ -10,14 +10,7 @@ module Robots
 
         def perform_work
           current_version = object_client.version.current
-          workflow_service.create_workflow_by_name(druid, 'accessionWF', lane_id: was_lane_id,
-                                                                         version: current_version)
-        end
-
-        private
-
-        def was_lane_id
-          Settings.was_crawl.dedicated_lane
+          workflow_service.create_workflow_by_name(druid, 'accessionWF', version: current_version)
         end
       end
     end
