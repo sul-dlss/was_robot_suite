@@ -9,13 +9,12 @@ module Robots
         end
 
         def perform_work
-          logger.info "Creating DescMetadataGenerator with parameters #{druid}"
-          metadata_generator_service = Dor::WasSeed::DescMetadataGenerator.new(workspace_path,
-                                                                               druid,
-                                                                               seed_uri,
-                                                                               collection_id,
-                                                                               logger:)
-          metadata_generator_service.generate_metadata_output
+          logger.info "Creating descriptive metadata with parameters #{druid}"
+          object_client = Dor::Services::Client.object(druid)
+          cocina_model = object_client.find
+          description = Dor::WasSeed::DescriptiveBuilder.build(purl: cocina_model.description.purl, seed_uri:, collection_id:)
+          updated = cocina_model.new(description:)
+          object_client.update(params: updated)
         end
 
         private
