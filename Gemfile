@@ -7,7 +7,6 @@ gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 
 gem 'dor-services-client', '~> 14.0'
 gem 'dor-workflow-client', '~> 7.0'
 gem 'lyber-core', '~> 7.1'
-gem 'stanford-mods'
 
 gem 'config'
 gem 'honeybadger'
@@ -28,7 +27,6 @@ end
 
 group :development, :test do
   gem 'awesome_print'
-  gem 'equivalent-xml'
   gem 'debug'
   gem 'rspec'
   gem 'rubocop'

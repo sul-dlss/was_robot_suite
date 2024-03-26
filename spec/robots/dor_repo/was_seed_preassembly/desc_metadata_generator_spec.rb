@@ -6,21 +6,22 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::DescMetadataGenerator do
     let(:instance) { described_class.new }
     let(:url) { 'http://abc123.edu' }
     let(:collection_id) { 'druid:ab123' }
-    let(:model) { instance_double(Cocina::Models::DRO, label: url) }
+    let(:model) { build(:dro, label: url).new(description:) }
+
+    let(:description) do
+      Cocina::Models::Description.new(purl: 'https://purl.stanford.edu/bc234fg5678',
+                                      title: [{ value: 'https://www.nancyforlosaltos.com/' }])
+    end
     let(:collection_model) { instance_double(Cocina::Models::DRO, externalIdentifier: collection_id) }
-    let(:object_client) { instance_double(Dor::Services::Client::Object, collections: [collection_model], find: model) }
-    let(:generator_service) { instance_double(Dor::WasSeed::DescMetadataGenerator) }
+    let(:object_client) { instance_double(Dor::Services::Client::Object, collections: [collection_model], find: model, update: true) }
 
     before do
       allow(Dor::Services::Client).to receive(:object).with(druid).and_return(object_client)
-      allow(Dor::WasSeed::DescMetadataGenerator).to receive(:new).and_return(generator_service)
-      allow(generator_service).to receive(:generate_metadata_output)
     end
 
     it 'invokes metadata generator service' do
       test_perform(instance, druid)
-      expect(Dor::WasSeed::DescMetadataGenerator).to have_received(:new).with('/dor/workspace/', druid, url, collection_id, logger: Sidekiq::Logger)
-      expect(generator_service).to have_received(:generate_metadata_output)
+      expect(object_client).to have_received(:update).with(hash_including(:params))
     end
   end
 end
