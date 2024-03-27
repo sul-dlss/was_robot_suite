@@ -11,7 +11,6 @@ module Robots
         def perform_work
           object_client.accession.start(
             workflow: 'accessionWF',
-            significance: 'major',
             description: 'wasSeedPreassembly'
           )
         end

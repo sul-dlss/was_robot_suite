@@ -18,7 +18,6 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
         perform
         expect(object_client.accession).to have_received(:start).with(
           workflow: 'accessionWF',
-          significance: 'major',
           description: 'wasSeedPreassembly'
         )
       end
