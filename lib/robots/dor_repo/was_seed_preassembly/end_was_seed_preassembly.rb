@@ -9,10 +9,7 @@ module Robots
         end
 
         def perform_work
-          object_client.accession.start(
-            workflow: 'accessionWF',
-            description: 'wasSeedPreassembly'
-          )
+          object_client.version.close(description: 'wasSeedPreassembly') # Starts the accessionWF by default
         end
       end
     end
