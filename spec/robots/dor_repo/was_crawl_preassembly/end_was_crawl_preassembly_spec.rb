@@ -22,7 +22,7 @@ RSpec.describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
       allow(version_client).to receive(:close)
       robot = described_class.new
       test_perform(robot, druid)
-      expect(version_client).to have_received(:close).with(description: 'wasCrawlPreassembly')
+      expect(version_client).to have_received(:close).with(description: 'Closed by WAS crawl preassembly robot to initiate accessioning')
     end
   end
 end

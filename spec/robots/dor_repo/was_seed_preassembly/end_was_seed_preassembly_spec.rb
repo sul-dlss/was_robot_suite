@@ -17,7 +17,7 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::EndWasSeedPreassembly do
     context 'with new objects' do
       it 'starts accessioning' do
         perform
-        expect(version_client).to have_received(:close).with(description: 'wasSeedPreassembly')
+        expect(version_client).to have_received(:close).with(description: 'Closed by WAS seed preassembly robot to initiate accessioning')
       end
     end
   end
