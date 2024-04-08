@@ -11,22 +11,18 @@ RSpec.describe Robots::DorRepo::WasCrawlPreassembly::EndWasCrawlPreassembly do
 
   describe '.perform' do
     let(:druid) { 'druid:ab123cd4567' }
-    let(:workflow_client) { instance_double(Dor::Workflow::Client) }
-    let(:workflow_name) { 'accessionWF' }
     let(:object_client) { instance_double(Dor::Services::Client::Object, version: version_client) }
     let(:version_client) { instance_double(Dor::Services::Client::ObjectVersion, current: '1') }
 
     before do
-      allow(LyberCore::WorkflowClientFactory).to receive(:build).and_return(workflow_client)
       allow(Dor::Services::Client).to receive(:object).and_return(object_client)
     end
 
     it 'starts the accessionWF' do
-      allow(workflow_client).to receive(:create_workflow_by_name)
+      allow(version_client).to receive(:close)
       robot = described_class.new
       test_perform(robot, druid)
-      expect(workflow_client).to have_received(:create_workflow_by_name)
-        .with(druid, workflow_name, version: '1')
+      expect(version_client).to have_received(:close)
     end
   end
 end
