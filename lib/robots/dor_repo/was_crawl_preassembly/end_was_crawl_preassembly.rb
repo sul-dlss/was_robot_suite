@@ -9,7 +9,7 @@ module Robots
         end
 
         def perform_work
-          object_client.version.close(description: 'Closed by WAS crawl preassembly robot to initiate accessioning') # Starts the accessionWF by default
+          object_client.version.close # Starts the accessionWF by default
         end
       end
     end
