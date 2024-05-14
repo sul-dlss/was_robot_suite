@@ -62,6 +62,7 @@ module Dor
             { type: 'md5', digest: assembly_objectfile.md5 }
           ],
           presentation: { height:, width: },
+          size: assembly_objectfile.filesize,
           hasMimeType: 'image/jp2',
           access: { view: object_access.view, download: object_access.download }
         )
