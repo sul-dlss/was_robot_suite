@@ -37,6 +37,7 @@ RSpec.describe Dor::WasSeed::StructuralBuilder do
                                                   externalIdentifier: 'https://cocina.sul.stanford.edu/file/1',
                                                   label: 'thumbnail.jp2',
                                                   filename: 'thumbnail.jp2',
+                                                  size: 228_709,
                                                   version: 1,
                                                   presentation: {
                                                     height: 1215,
