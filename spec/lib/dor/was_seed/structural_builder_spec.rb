@@ -39,6 +39,8 @@ RSpec.describe Dor::WasSeed::StructuralBuilder do
                                                   filename: 'thumbnail.jp2',
                                                   size: 228_709,
                                                   version: 1,
+                                                  sdrGeneratedText: false,
+                                                  correctedForAccessibility: false,
                                                   presentation: {
                                                     height: 1215,
                                                     width: 1000
