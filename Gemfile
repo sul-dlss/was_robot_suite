@@ -30,7 +30,10 @@ group :development, :test do
   gem 'debug'
   gem 'rspec'
   gem 'rubocop'
+  gem 'rubocop-capybara'
+  gem 'rubocop-factory_bot'
   gem 'rubocop-rspec'
+  gem 'rubocop-rspec_rails'
   gem 'simplecov'
   gem 'stub_server'
 end
