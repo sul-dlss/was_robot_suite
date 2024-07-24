@@ -17,7 +17,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
       # the following fakes the result of calling .screenshot by putting a file where a result is expected
       FileUtils.cp 'spec/was_seed_preassembly/fixtures/thumbnail_files/ab123cd4567.jpeg', screenshot_jpeg_file
       allow(Net::HTTP).to receive(:get_response).and_return(cdxj_indexer_response)
-      allow(cdxj_indexer_response).to receive(:body).and_return('not empty signifying I am in the index')
+      allow(cdxj_indexer_response).to receive(:body).and_return('{"timestamp": "20240101000000"}')
     end
 
     after do
@@ -48,13 +48,14 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
   end
 
   describe '.screenshot' do
-    let(:wayback_uri) { "http://localhost:#{port}/#{Dor::WasSeed::ThumbnailGeneratorService::DATE_TO_TRIGGER_EARLIEST_CAPTURE}/#{original_uri}" }
+    let(:wayback_uri) { "http://localhost:#{port}/1234/#{original_uri}" }
     let(:port) { 9123 }
-    let(:replies) { { "/#{Dor::WasSeed::ThumbnailGeneratorService::DATE_TO_TRIGGER_EARLIEST_CAPTURE}/#{original_uri}" => [200, {}, [capture_data]] } }
+    let(:replies) { { "/1234/#{original_uri}" => [200, {}, [capture_data]] } }
     let(:screenshot_jpeg_file) { 'tmp/test_capture.jpeg' }
 
     before do
-      allow(Settings).to receive(:chrome_path).and_return('/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome') if /darwin/.match(RUBY_PLATFORM)
+      allow(Settings).to receive(:chrome_path).and_return('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome') if /darwin/.match(RUBY_PLATFORM)
+      allow(Settings.cdxj_indexer).to receive(:url).and_return("http://localhost:#{port}/was/cdx")
     end
 
     after do
@@ -144,18 +145,23 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
     end
   end
 
-  describe '.indexed?' do
+  describe '.earliest_capture' do
     let(:uri) { 'http://www.slac.stanford.edu' }
+    let(:port) { 9123 }
+
+    before do
+      allow(Settings.cdxj_indexer).to receive(:url).and_return("http://localhost:#{port}/was/cdx")
+    end
 
     context 'when the uri is found in the cdxj index' do
-      let(:response_body) { { body: 'some content' } }
+      let(:response_body) { '{"timestamp": "20240101000000"}' }
       let(:response) { Net::HTTPSuccess.new(1.0, '200', 'OK') }
 
       it 'returns nil when the uri is found in the index' do
         allow(Net::HTTP).to receive(:get_response).and_return(response)
         allow(response).to receive(:body).and_return(response_body)
-        expect(described_class.indexed?(uri)).to be_nil
-        expect(Net::HTTP).to have_received(:get_response).with(URI('http://localhost/was/cdx?url=http%3A%2F%2Fwww.slac.stanford.edu'))
+        expect(described_class.earliest_capture(uri)).to eq('20240101000000')
+        expect(Net::HTTP).to have_received(:get_response).with(URI("http://localhost:#{port}/was/cdx?url=http%3A%2F%2Fwww.slac.stanford.edu&output=json&filter=status%3A200"))
       end
     end
 
@@ -165,7 +171,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
       it 'returns nil when the uri is found in the index' do
         allow(Net::HTTP).to receive(:get_response).and_return(response)
         allow(response).to receive(:body).and_return(nil)
-        expect { described_class.indexed?(uri) }.to raise_error.with_message("#{uri} not found in cdxj index.")
+        expect { described_class.earliest_capture(uri) }.to raise_error.with_message("#{uri} not found in cdxj index.")
       end
     end
   end

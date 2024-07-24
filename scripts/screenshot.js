@@ -1,10 +1,9 @@
 const ejs = require('ejs');
-const path = require('path');
 const puppeteer = require('puppeteer');
 
 /*
 / Usage:
-/  node scripts/screenshot.js url output chrome-path
+/  node scripts/screenshot.js url output [chrome-path]
 /
 */
 async function run() {
@@ -26,9 +25,12 @@ async function run() {
   try {
     await page.setViewport({ width: 1200, height: 800 });
     await page.goto(uri, {
-      timeout: 30000,
+      timeout: 60000,
       waitUntil: 'networkidle2'
     });
+    // wait a little bit longer for the page to potentially finish rendering
+    // see: https://github.com/sul-dlss/was_robot_suite/issues/570
+    await sleep(10);
     await page.screenshot({ path: process.argv[3], format: 'jpeg' });
   } catch (err) {
     // Puppeteer cannot screenshot PDFs in headless mode by itself, so get some help from EJS and PDF.js
@@ -52,6 +54,10 @@ async function run() {
   } finally {
     await browser.close()
   }
+}
+
+function sleep(seconds) { 
+  return new Promise(r => setTimeout(r, seconds * 1000));
 }
 
 run();
