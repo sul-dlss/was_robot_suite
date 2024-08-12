@@ -41,7 +41,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
     it 'raises an error if the screenshot method raises an exception' do
       allow(described_class).to receive(:screenshot).and_raise('Foo')
       exp_msg = "Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n Foo"
-      expect { described_class.capture_thumbnail(druid, workspace, uri) }.to raise_error.with_message(exp_msg)
+      expect { described_class.capture_thumbnail(druid, workspace, uri) }.to raise_error(StandardError).with_message(exp_msg)
       expect(File.exist?(thumbnail_jp2_file)).to be false
       expect(File.exist?(screenshot_jpeg_file)).to be false
     end
@@ -171,7 +171,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
       it 'returns nil when the uri is found in the index' do
         allow(Net::HTTP).to receive(:get_response).and_return(response)
         allow(response).to receive(:body).and_return(nil)
-        expect { described_class.earliest_capture(uri) }.to raise_error.with_message("#{uri} not found in cdxj index.")
+        expect { described_class.earliest_capture(uri) }.to raise_error(StandardError).with_message("#{uri} not found in cdxj index.")
       end
     end
   end
