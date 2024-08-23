@@ -2,31 +2,38 @@
 
 RSpec.describe Dor::WasCrawl::WarcExtractorService do
   describe '#extract' do
-    before :all do
-      FileUtils.cp_r 'spec/lib/dor/was_crawl/fixtures/workspace/dd111dd1111', 'tmp/'
-    end
-
-    after :all do
-      FileUtils.rm_rf 'tmp/dd111dd1111'
-    end
-
-    context 'when the data package profile is multi-wacz-package' do
-      it 'extracts the WARC files' do
-        described_class.extract('tmp/dd111dd1111', 'manual-20240813150220-f5365fda-037.wacz')
-        expect(File.exist?('tmp/dd111dd1111/manual-20240813150220-f5365fda-037-my-organization-californiahistoricalsociety-org-manual-20240813150220-f5365fda-037-20240813150255048-0.warc.gz')).to be true
-        expect(File.exist?('tmp/dd111dd1111/manual-20240813150220-f5365fda-037-my-organization-californiahistoricalsociety-org-manual-20240813150220-f5365fda-037-20240813150259570-1.warc.gz')).to be true
-        expect(File.exist?('tmp/dd111dd1111/manual-20240813150220-f5365fda-037-my-organization-californiahistoricalsociety-org-manual-20240813150220-f5365fda-037-20240813150455271-1.warc.gz')).to be true
-        expect(File.exist?('tmp/dd111dd1111/manual-20240813150220-f5365fda-037-my-organization-californiahistoricalsociety-org-manual-20240813150220-f5365fda-037-screenshots-20240813150258623.warc.gz')).to be true
-        expect(File.exist?('tmp/dd111dd1111/manual-20240813150220-f5365fda-037-my-organization-californiahistoricalsociety-org-manual-20240813150220-f5365fda-037-text-20240813150258797.warc.gz')).to be true
-        expect(File.exist?('tmp/dd111dd1111/manual-20240813150220-f5365fda-037-20240813154245913-f5365fda-037-0.wacz')).to be false
-      end
-    end
-
     context 'when the data package profile is data-package' do
+      before do
+        FileUtils.cp_r 'spec/lib/dor/was_crawl/fixtures/workspace/dd111dd1111', 'tmp/'
+      end
+
+      after do
+        FileUtils.rm_rf 'tmp/dd111dd1111'
+      end
+
       it 'extracts the WARC files' do
         described_class.extract('tmp/dd111dd1111', 'WACZ-Test.wacz')
         expect(File.exist?('tmp/dd111dd1111/WACZ-Test-data.warc.gz')).to be true
         expect(File.exist?('tmp/dd111dd1111/WACZ-Test.wacz')).to be false
+      end
+    end
+
+    context 'when the data package profile is multi-wacz-package' do
+      before do
+        FileUtils.cp_r 'spec/lib/dor/was_crawl/fixtures/workspace/ee111ee1111', 'tmp/'
+      end
+
+      after do
+        FileUtils.rm_rf 'tmp/ee111ee1111'
+      end
+
+      it 'extracts the WARC files' do
+        described_class.extract('tmp/ee111ee1111', 'Multi-WACZ-Test.wacz')
+        expect(File.exist?('tmp/ee111ee1111/Multi-WACZ-Test-stanford-library-website-fixture-wacz-manual-20240823165704-eb63421b-c8a-20240823165728702-0.warc.gz')).to be true
+        # TODO: Filter out screenshot and text files, they will still be available in the wacz when preserved.
+        expect(File.exist?('tmp/ee111ee1111/Multi-WACZ-Test-stanford-library-website-fixture-wacz-manual-20240823165704-eb63421b-c8a-screenshots-20240823165731628.warc.gz')).to be true
+        expect(File.exist?('tmp/ee111ee1111/Multi-WACZ-Test-stanford-library-website-fixture-wacz-manual-20240823165704-eb63421b-c8a-text-20240823165731772.warc.gz')).to be true
+        expect(File.exist?('tmp/ee111ee1111/Multi-WACZ-Test.wacz')).to be false
       end
     end
   end
