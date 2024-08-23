@@ -16,9 +16,10 @@ module Dor
       end
 
       def extract
+        # TODO: Raise a HB exception if no WARCs are extracted. This would have
+        # caught this situation.
         extract_multi_wacz_package if data_package_profile == 'multi-wacz-package'
-
-        extract_data_package
+        extract_data_package(wacz_filepath) if data_package_profile == 'data-package'
       end
 
       private
@@ -47,29 +48,28 @@ module Dor
         @data_package_resources ||= wacz_data_package['resources']
       end
 
-      def extract_data_package
-        Zip::File.open(wacz_filepath) do |wacz_file|
+      def extract_data_package(filepath)
+        Zip::File.open(filepath) do |wacz_file|
           wacz_file.glob('archive/*.warc.gz').each do |warc_entry|
             filename = warc_entry.name.delete_prefix('archive/')
             # Prefixing with WACZ filename to make unique.
             warc_entry.extract(File.join(base_path, "#{wacz_basename}-#{filename}"))
           end
         end
-        File.delete(wacz_filepath)
+        File.delete(filepath)
       end
 
       def extract_multi_wacz_package
-        multi_wacz_filepath = wacz_filepath
-        Zip::File.open(multi_wacz_filepath) do |wacz_file|
+        Zip::File.open(wacz_filepath) do |wacz_file|
           data_package_resources.each do |resource|
-            wacz_file.glob(resource['path']).each do |warc_entry|
-              @wacz_filename = "#{wacz_basename}-#{Pathname.new(warc_entry.name).basename}"
-              # Prefixing with WACZ filename to make unique.
-              warc_entry.extract(File.join(base_path, wacz_filename))
+            wacz_file.glob(resource['path']).each do |wacz_entry|
+              filename = File.join(base_path, Pathname.new(wacz_entry.name).basename)
+              wacz_entry.extract(filename)
+              extract_data_package(filename)
             end
           end
         end
-        File.delete(multi_wacz_filepath)
+        File.delete(wacz_filepath)
       end
     end
   end
