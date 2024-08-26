@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "puppeteer": "^14.4.1",
-    "ejs": "^3.1.8",
-    "pdfjs-dist": "3.4.120"
+    "puppeteer": "*",
+    "ejs": "*",
+    "pdfjs-dist": "*"
   }
 }
