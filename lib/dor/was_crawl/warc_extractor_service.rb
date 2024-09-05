@@ -52,6 +52,9 @@ module Dor
         Zip::File.open(filepath) do |wacz_file|
           wacz_file.glob('archive/*.warc.gz').each do |warc_entry|
             filename = warc_entry.name.delete_prefix('archive/')
+            # Skip screenshots and text files as we do not use or preserve them.
+            next if filename.downcase.match?(/screenshot|text/)
+
             # Prefixing with WACZ filename to make unique.
             warc_entry.extract(File.join(base_path, "#{wacz_basename}-#{filename}"))
           end

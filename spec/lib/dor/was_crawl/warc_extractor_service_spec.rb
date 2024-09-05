@@ -30,9 +30,8 @@ RSpec.describe Dor::WasCrawl::WarcExtractorService do
       it 'extracts the WARC files' do
         described_class.extract('tmp/ee111ee1111', 'Multi-WACZ-Test.wacz')
         expect(File.exist?('tmp/ee111ee1111/Multi-WACZ-Test-stanford-library-website-fixture-wacz-manual-20240823165704-eb63421b-c8a-20240823165728702-0.warc.gz')).to be true
-        # TODO: Filter out screenshot and text files, they will still be available in the wacz when preserved.
-        expect(File.exist?('tmp/ee111ee1111/Multi-WACZ-Test-stanford-library-website-fixture-wacz-manual-20240823165704-eb63421b-c8a-screenshots-20240823165731628.warc.gz')).to be true
-        expect(File.exist?('tmp/ee111ee1111/Multi-WACZ-Test-stanford-library-website-fixture-wacz-manual-20240823165704-eb63421b-c8a-text-20240823165731772.warc.gz')).to be true
+        expect(File.exist?('tmp/ee111ee1111/Multi-WACZ-Test-stanford-library-website-fixture-wacz-manual-20240823165704-eb63421b-c8a-screenshots-20240823165731628.warc.gz')).to be false
+        expect(File.exist?('tmp/ee111ee1111/Multi-WACZ-Test-stanford-library-website-fixture-wacz-manual-20240823165704-eb63421b-c8a-text-20240823165731772.warc.gz')).to be false
         expect(File.exist?('tmp/ee111ee1111/Multi-WACZ-Test.wacz')).to be false
       end
     end
