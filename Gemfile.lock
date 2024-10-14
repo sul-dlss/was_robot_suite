@@ -206,7 +206,7 @@ GEM
     psych (5.1.2)
       stringio
     racc (1.8.1)
-    rack (3.1.7)
+    rack (3.1.8)
     rackup (0.2.3)
       rack (>= 3.0.0.beta1)
       webrick
@@ -295,7 +295,7 @@ GEM
     webrick (1.8.2)
     whenever (1.0.0)
       chronic (>= 0.6.3)
-    zeitwerk (2.6.18)
+    zeitwerk (2.7.0)
 
 PLATFORMS
   ruby
