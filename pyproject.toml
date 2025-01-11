@@ -5,6 +5,9 @@ description = "Web Archiving Robots"
 authors = ["Michael J. Giarlo <mjgiarlo@stanford.edu>"]
 license = "Apache 2.0"
 
+# we are just using poetry to install dependencies
+package-mode = false
+
 [tool.poetry.dependencies]
 python = "^3.8"
 cdxj-indexer = "^1.4.5"
