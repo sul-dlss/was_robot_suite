@@ -62,7 +62,7 @@ namespace :poetry do
           execute :pip3, :install, '--user', '--upgrade', 'pipx'
           execute :pipx, :install, 'poetry', '--force'
           # ensure latest poetry -- pipx install doesn't have an --upgrade flag
-          execute :pipx, :uprade, 'poetry'
+          execute :pipx, :upgrade, 'poetry'
           execute :poetry, :install
         end
       end
