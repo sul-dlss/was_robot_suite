@@ -1,7 +1,5 @@
 [![CircleCI](https://circleci.com/gh/sul-dlss/was_robot_suite.svg?style=svg)](https://circleci.com/gh/sul-dlss/was_robot_suite)
-[![Code Climate](https://codeclimate.com/github/sul-dlss/was_robot_suite/badges/gpa.svg)](https://codeclimate.com/github/sul-dlss/was_robot_suite)
-[![Test Coverage](https://codeclimate.com/github/sul-dlss/was_robot_suite/badges/coverage.svg)](https://codeclimate.com/github/sul-dlss/was_robot_suite/coverage)
-
+[![codecov](https://codecov.io/github/sul-dlss/was_robot_suite/graph/badge.svg?token=ggdJEy5gpc)](https://codecov.io/github/sul-dlss/was_robot_suite)
 [![GitHub tagged version](https://badge.fury.io/gh/sul-dlss%2Fwas_robot_suite.svg)](https://badge.fury.io/gh/sul-dlss%2Fwas_robot_suite)
 
 WAS_Robot_Suite
