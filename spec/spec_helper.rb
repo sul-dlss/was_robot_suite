@@ -6,6 +6,12 @@ SimpleCov.start :rails do
   add_filter '/config/'
   add_filter '/spec/'
   add_filter '/vendor/'
+
+  if ENV['CI']
+    require 'simplecov_json_formatter'
+
+    formatter SimpleCov::Formatter::JSONFormatter
+  end
 end
 
 ENV['ROBOT_ENVIRONMENT'] = 'test'
