@@ -8,9 +8,16 @@ RSpec.describe Robots::DorRepo::WasCrawlDissemination::CdxjGenerator do
 
     let(:druid) { 'druid:dd116zh0343' }
     let(:sys_cmd) do
-      'TMPDIR=/tmp /opt/app/was/.local/bin/poetry ' \
-        'run cdxj-indexer /web-archiving-stacks/data/collections/xx123xx1234/dd/116/zh/0343/number1.warc ' \
-        '--output tmp/druid:dd116zh0343/number1.cdxj --dir-root /web-archiving-stacks/data/collections/ --post-append 2>> log/cdx_indexer.log'
+      [
+        'TMPDIR=/tmp',
+        '/opt/app/was/.local/bin/poetry',
+        "run cdxj-indexer '/web-archiving-stacks/data/collections/xx123xx1234/dd/116/zh/0343/number1.warc'",
+        "--output 'tmp/druid:dd116zh0343/number1.cdxj'",
+        '--dir-root /web-archiving-stacks/data/collections/',
+        '--post-append',
+        '2>>',
+        'log/cdx_indexer.log'
+      ].join(' ')
     end
 
     before do

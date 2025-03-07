@@ -34,7 +34,10 @@ module Dor
         cdx_file_path  = cdx_file_name(warc_file_name)
         warc_file_path = "#{druid_base_directory}/#{warc_file_name}"
         cmd_string = "TMPDIR=#{Settings.cdxj_indexer.tmpdir} " \
-                     "#{Settings.cdxj_indexer.bin} #{warc_file_path} --output #{cdx_file_path} --dir-root #{Settings.was_crawl_dissemination.stacks_collections_path} --post-append 2>> log/cdx_indexer.log"
+                     "#{Settings.cdxj_indexer.bin} '#{warc_file_path}' " \
+                     "--output '#{cdx_file_path}' " \
+                     "--dir-root #{Settings.was_crawl_dissemination.stacks_collections_path} " \
+                     '--post-append 2>> log/cdx_indexer.log'
         Dor::WasCrawl::Dissemination::Utilities.run_sys_cmd(cmd_string, 'extracting CDXJ')
       end
     end
