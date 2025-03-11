@@ -10,7 +10,7 @@ RSpec.describe Robots::DorRepo::WasCrawlDissemination::CdxjGenerator do
     let(:sys_cmd) do
       [
         'TMPDIR=/tmp',
-        '/opt/app/was/.local/bin/poetry',
+        '/opt/app/was/.local/bin/uv',
         "run cdxj-indexer '/web-archiving-stacks/data/collections/xx123xx1234/dd/116/zh/0343/number1.warc'",
         "--output 'tmp/druid:dd116zh0343/number1.cdxj'",
         '--dir-root /web-archiving-stacks/data/collections/',
