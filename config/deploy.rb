@@ -50,20 +50,20 @@ set :yarn_flags, '--production --silent --no-progress --non-interactive'
 before 'deploy:publishing', 'shared_configs:update'
 
 # Install python dependencies
-before 'deploy:publishing', 'poetry:install'
+before 'deploy:publishing', 'pydeps:install'
 
-namespace :poetry do
-  desc 'Install python dependencies via poetry and pip'
+namespace :pydeps do
+  desc 'Install python dependencies'
   task :install do
     on roles(:app) do
       within current_path do
         # Make sure python executables are on the PATH
         with(path: '$HOME/.local/bin:$PATH') do
           execute :pip3, :install, '--user', '--upgrade', 'pipx'
-          execute :pipx, :install, 'poetry', '--force'
-          # ensure latest poetry -- pipx install doesn't have an --upgrade flag
-          execute :pipx, :upgrade, 'poetry'
-          execute :poetry, :install
+          execute :pipx, :install, 'uv', '--force'
+          # ensure latest uv -- pipx install doesn't have an --upgrade flag
+          execute :pipx, :upgrade, 'uv'
+          execute :uv, :sync
         end
       end
     end
