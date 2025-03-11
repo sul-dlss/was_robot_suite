@@ -1,0 +1,4 @@
+.rubocop_todo.yml linguist-generated=true
+Gemfile.lock linguist-generated=true
+uv.lock linguist-generated=true
+yarn.lock linguist-generated=true
