@@ -7,12 +7,11 @@
 export LANG=en_US.UTF-8
 export LC_COLLATE=C.UTF-8
 
-# Needed to successfully run `pipx`-installed executables
+# Needed for pip3 installed uv to be found
 export PATH="$HOME/.local/bin:$PATH"
 
-pip3 install --user pipx > was_robot_suite.txt &&
-  pipx install uv --force >> was_robot_suite.txt &&
-  ~/.local/bin/uv lock --upgrade -q --no-progress --color never >> was_robot_suite.txt
+pip3 install --upgrade uv > was_robot_suite.txt &&
+    uv lock --upgrade --quiet --no-progress --color never >> was_robot_suite.txt
 
 retVal=$?
 
