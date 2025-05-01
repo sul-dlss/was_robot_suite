@@ -18,8 +18,11 @@ module Dor
       def extract
         # TODO: Raise a HB exception if no WARCs are extracted. This would have
         # caught this situation.
-        extract_multi_wacz_package if data_package_profile == 'multi-wacz-package'
-        extract_data_package(wacz_filepath) if data_package_profile == 'data-package'
+        if data_package_profile == 'multi-wacz-package'
+          extract_multi_wacz_package
+        else
+          extract_data_package(wacz_filepath)
+        end
       end
 
       private
