@@ -9,7 +9,7 @@ module Robots
         end
 
         def perform_work
-          Dor::WasCrawl::Dissemination::Utilities.warc_file_location_info(druid) => {collection_path:, file_list:}
+          Dor::WasCrawl::Dissemination::Utilities.warc_file_location_info(druid) => { collection_path:, file_list: }
 
           cdx_generator = Dor::WasCrawl::CdxjGeneratorService.new(collection_path, druid)
           cdx_generator.generate(file_list)
