@@ -15,12 +15,11 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
   describe '.perform' do
     subject(:perform) { test_perform(robot, druid) }
 
-    let(:object_client) { instance_double(Dor::Services::Client::Object, find: item) }
-    let(:workflow_service) { instance_double(Dor::Workflow::Client, create_workflow_by_name: true) }
+    let(:object_client) { instance_double(Dor::Services::Client::Object, find: item, workflow: workflow_client) }
+    let(:workflow_client) { instance_double(Dor::Services::Client::ObjectWorkflow, create: true) }
 
     before do
       allow(Dor::Services::Client).to receive(:object).with(druid).and_return(object_client)
-      allow(LyberCore::WorkflowClientFactory).to receive(:build).and_return(workflow_service)
     end
 
     context 'when the type is collection' do
@@ -28,7 +27,7 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
 
       it 'does nothing for collection object' do
         perform
-        expect(workflow_service).not_to have_received(:create_workflow_by_name)
+        expect(workflow_client).not_to have_received(:create)
       end
     end
 
@@ -40,7 +39,7 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
 
         it 'initializes wasSeedDisseminationWF for the webarchive-seed item' do
           expect(perform.status).to eq 'skipped'
-          expect(workflow_service).not_to have_received(:create_workflow_by_name)
+          expect(workflow_client).not_to have_received(:create)
         end
       end
 
@@ -49,7 +48,8 @@ RSpec.describe Robots::DorRepo::WasDissemination::StartSpecialDissemination do
 
         it 'initializes wasCrawlDisseminationWF for the crawl item' do
           perform
-          expect(workflow_service).to have_received(:create_workflow_by_name).with(druid, 'wasCrawlDisseminationWF', version: '1')
+          expect(object_client).to have_received(:workflow).with('wasCrawlDisseminationWF')
+          expect(workflow_client).to have_received(:create).with(version: '1')
         end
       end
     end
