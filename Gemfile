@@ -15,7 +15,7 @@ gem 'pry'            # for bin/console
 gem 'rake'
 gem 'rubyzip'        # warc_extractor_service
 gem 'ruby-vips'      # was-seed-preassembly thumbnail creation image processing with libvips
-gem 'sidekiq', '~> 7.0'
+gem 'sidekiq', '~> 8.0'
 gem 'slop'           # for bin/run_robot
 gem 'whenever', require: false # Work around https://github.com/javan/whenever/issues/831
 gem 'zeitwerk', '~> 2.1'
