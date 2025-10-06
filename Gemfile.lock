@@ -93,7 +93,7 @@ GEM
       capistrano-shared_configs
       ed25519
     docile (1.4.1)
-    dor-services-client (15.20.0)
+    dor-services-client (15.22.0)
       activesupport (>= 7.0.0)
       cocina-models (~> 0.106.0)
       deprecation
@@ -199,7 +199,7 @@ GEM
       racc
     patience_diff (1.2.0)
       optimist (~> 3.0)
-    pp (0.6.2)
+    pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
     prism (1.5.1)
@@ -217,9 +217,10 @@ GEM
       webrick
     rainbow (3.1.1)
     rake (13.3.0)
-    rdoc (6.14.2)
+    rdoc (6.15.0)
       erb
       psych (>= 4.0.0)
+      tsort
     redis-client (0.26.1)
       connection_pool
     regexp_parser (2.11.3)
@@ -300,6 +301,7 @@ GEM
       diff-lcs
       patience_diff
     thor (1.4.0)
+    tsort (0.2.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (3.2.0)
