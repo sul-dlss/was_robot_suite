@@ -18,6 +18,22 @@ RSpec.describe Dor::WasCrawl::WarcExtractorService do
       end
     end
 
+    context 'with an absolute path' do
+      before do
+        FileUtils.cp_r 'spec/lib/dor/was_crawl/fixtures/workspace/dd111dd1111', 'tmp/'
+      end
+
+      after do
+        FileUtils.rm_rf 'tmp/dd111dd1111'
+      end
+
+      it 'extracts the WARC files' do
+        described_class.extract(File.expand_path('tmp/dd111dd1111'), 'WACZ-Test.wacz')
+        expect(File.exist?(File.expand_path('tmp/dd111dd1111/WACZ-Test-data.warc.gz'))).to be true
+        expect(File.exist?(File.expand_path('tmp/dd111dd1111/WACZ-Test.wacz'))).to be false
+      end
+    end
+
     context 'when the data package profile is multi-wacz-package' do
       before do
         FileUtils.cp_r 'spec/lib/dor/was_crawl/fixtures/workspace/ee111ee1111', 'tmp/'

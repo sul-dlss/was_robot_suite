@@ -11,7 +11,6 @@ module Robots
 
         def perform_work
           Dor::WasCrawl::Dissemination::Utilities.wacz_file_location_info(druid) => { item_path:, file_list: }
-
           file_list.each { |filename| Dor::WasCrawl::WarcExtractorService.extract(item_path, filename) }
         end
       end

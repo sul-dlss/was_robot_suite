@@ -58,8 +58,9 @@ module Dor
             # Skip screenshots and text files as we do not use or preserve them.
             next if filename.downcase.match?(/screenshot|text/)
 
-            # Prefixing with WACZ filename to make unique.
-            warc_entry.extract(File.join(base_path, "#{wacz_basename}-#{filename}"))
+            # Prefixing warc filename with parent WACZ filename to make unique.
+            dest_filename = "#{wacz_basename}-#{filename}"
+            warc_entry.extract(dest_filename, destination_directory: base_path)
           end
         end
         File.delete(filepath)
