@@ -66,13 +66,14 @@ module Dor
         File.delete(filepath)
       end
 
-      def extract_multi_wacz_package
+      def extract_multi_wacz_package # rubocop:disable Metrics/AbcSize
         Zip::File.open(wacz_filepath) do |wacz_file|
           data_package_resources.each do |resource|
             wacz_file.glob(resource['path']).each do |wacz_entry|
-              filename = File.join(base_path, Pathname.new(wacz_entry.name).basename)
-              wacz_entry.extract(filename)
-              extract_data_package(filename)
+              # extract each WACZ within the multi-wacz-package
+              dest_wacz_filename = File.join(Pathname.new(wacz_entry.name).basename)
+              wacz_entry.extract(dest_wacz_filename, destination_directory: base_path)
+              extract_data_package(File.join(base_path, dest_wacz_filename))
             end
           end
         end
