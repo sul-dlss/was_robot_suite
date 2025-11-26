@@ -58,20 +58,22 @@ module Dor
             # Skip screenshots and text files as we do not use or preserve them.
             next if filename.downcase.match?(/screenshot|text/)
 
-            # Prefixing with WACZ filename to make unique.
-            warc_entry.extract(File.join(base_path, "#{wacz_basename}-#{filename}"))
+            # Prefixing warc filename with parent WACZ filename to make unique.
+            dest_filename = "#{wacz_basename}-#{filename}"
+            warc_entry.extract(dest_filename, destination_directory: base_path)
           end
         end
         File.delete(filepath)
       end
 
-      def extract_multi_wacz_package
+      def extract_multi_wacz_package # rubocop:disable Metrics/AbcSize
         Zip::File.open(wacz_filepath) do |wacz_file|
           data_package_resources.each do |resource|
             wacz_file.glob(resource['path']).each do |wacz_entry|
-              filename = File.join(base_path, Pathname.new(wacz_entry.name).basename)
-              wacz_entry.extract(filename)
-              extract_data_package(filename)
+              # extract each WACZ within the multi-wacz-package
+              dest_wacz_filename = File.join(Pathname.new(wacz_entry.name).basename)
+              wacz_entry.extract(dest_wacz_filename, destination_directory: base_path)
+              extract_data_package(File.join(base_path, dest_wacz_filename))
             end
           end
         end
