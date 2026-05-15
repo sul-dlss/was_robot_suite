@@ -330,6 +330,7 @@ DEPENDENCIES
   awesome_print
   capistrano-bundler
   capistrano-yarn
+  cocina-models
   config
   debug
   dlss-capistrano

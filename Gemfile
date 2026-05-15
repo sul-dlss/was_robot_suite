@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 
 # stanford dlss gems
 gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 uses libvips
+gem 'cocina-models'
 gem 'dor-services-client'
 gem 'lyber-core', '~> 8.0'
 
