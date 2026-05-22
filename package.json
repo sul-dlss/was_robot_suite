@@ -3,8 +3,8 @@
     "node": ">=24"
   },
   "dependencies": {
-    "puppeteer": "*",
     "ejs": "*",
-    "pdfjs-dist": "*"
+    "pdfjs-dist": "*",
+    "puppeteer": "*"
   }
 }
