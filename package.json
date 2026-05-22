@@ -1,7 +1,4 @@
 {
-  "engines": {
-    "node": ">=24"
-  },
   "dependencies": {
     "ejs": "*",
     "pdfjs-dist": "*",
