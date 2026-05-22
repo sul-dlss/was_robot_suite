@@ -1,4 +1,7 @@
 {
+  "engines": {
+    "node": ">=24"
+  },
   "dependencies": {
     "puppeteer": "*",
     "ejs": "*",
