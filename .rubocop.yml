@@ -208,7 +208,7 @@ Lint/ConstantOverwrittenInRescue: # new in 1.31
 Lint/NonAtomicFileOperation: # new in 1.31
   Enabled: true
 
-Capybara/SpecificMatcher: # new in 2.12
+Capybara/RSpec/SpecificMatcher: # new in 2.12
   Enabled: true
 RSpecRails/HaveHttpStatus: # new in 2.12
   Enabled: true
@@ -235,7 +235,7 @@ Style/RedundantStringEscape: # new in 1.37
   Enabled: true
 RSpec/SortMetadata: # new in 2.14
   Enabled: true
-Capybara/NegationMatcher: # new in 2.14
+Capybara/Rspec/NegationMatcher: # new in 2.14
   Enabled: true
 Capybara/SpecificActions: # new in 2.14
   Enabled: true
@@ -280,7 +280,7 @@ Style/RedundantHeredocDelimiterQuotes: # new in 1.45
   Enabled: true
 Style/RedundantLineContinuation: # new in 1.49
   Enabled: true
-Capybara/MatchStyle: # new in 2.17
+Capybara/RSpec/MatchStyle: # new in 2.17
   Enabled: true
 FactoryBot/AssociationStyle: # new in 2.23
   Enabled: true
@@ -331,7 +331,7 @@ Style/YAMLFileRead: # new in 1.53
   Enabled: true
 RSpec/ReceiveMessages: # new in 2.23
   Enabled: true
-RSpecRails/NegationBeValid: # new in 2.23
+RSpecRails/RSpec/NegationBeValid: # new in 2.23
   Enabled: true
 Lint/ItWithoutArgumentsInBlock: # new in 1.59
   Enabled: true
@@ -439,7 +439,7 @@ Style/RedundantFormat: # new in 1.72
   Enabled: true
 Capybara/FindAllFirst: # new in 2.22
   Enabled: true
-Capybara/NegationMatcherAfterVisit: # new in 2.22
+Capybara/RSpec/NegationMatcherAfterVisit: # new in 2.22
   Enabled: true
 RSpec/IncludeExamples: # new in 3.6
   Enabled: true
