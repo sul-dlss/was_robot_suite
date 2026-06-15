@@ -6,7 +6,7 @@ authors = [
     {name = "Michael J. Giarlo", email = "mjgiarlo@stanford.edu"},
 ]
 license = {text = "Apache 2.0"}
-requires-python = ">=3.8, <4.0"
+requires-python = "==3.10.12" # this is what is currently installed in prod
 dependencies = [
     "cdxj-indexer >=1.4.5, <2.0.0",
 ]
