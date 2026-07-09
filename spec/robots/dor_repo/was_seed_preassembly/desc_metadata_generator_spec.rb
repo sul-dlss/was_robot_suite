@@ -6,7 +6,7 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::DescMetadataGenerator do
     let(:instance) { described_class.new }
     let(:url) { 'http://abc123.edu' }
     let(:collection_id) { 'druid:ab123' }
-    let(:model) { build(:dro, label: url).new(description:) }
+    let(:model) { build(:dro).new(description:, label: url) }
 
     let(:description) do
       Cocina::Models::Description.new(purl: 'https://purl.stanford.edu/bc234fg5678',
