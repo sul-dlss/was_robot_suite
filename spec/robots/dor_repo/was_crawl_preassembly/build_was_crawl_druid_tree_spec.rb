@@ -11,7 +11,17 @@ RSpec.describe Robots::DorRepo::WasCrawlPreassembly::BuildWasCrawlDruidTree do
 
   describe '.perform' do
     let(:druid) { 'druid:ab123cd4567' }
-    let(:cocina_model) { instance_double(Cocina::Models::DRO, label: 'AIT_123') }
+    let(:cocina_model) do
+      instance_double(
+        Cocina::Models::DRO,
+        description: instance_double(
+          Cocina::Models::Description,
+          title: [
+            instance_double(Cocina::Models::Title, value: 'AIT_123', status: nil, parallelValue: [], type: nil)
+          ]
+        )
+      )
+    end
     let(:object_client) { instance_double(Dor::Services::Client::Object, find: cocina_model) }
     let(:temp_dir) { Dir.mktmpdir }
     let(:staging_path) { "#{temp_dir}/workspace" }

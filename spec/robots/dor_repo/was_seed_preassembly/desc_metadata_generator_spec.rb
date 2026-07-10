@@ -6,11 +6,11 @@ RSpec.describe Robots::DorRepo::WasSeedPreassembly::DescMetadataGenerator do
     let(:instance) { described_class.new }
     let(:url) { 'http://abc123.edu' }
     let(:collection_id) { 'druid:ab123' }
-    let(:model) { build(:dro).new(description:, label: url) }
+    let(:model) { build(:dro).new(description:) }
 
     let(:description) do
       Cocina::Models::Description.new(purl: 'https://purl.stanford.edu/bc234fg5678',
-                                      title: [{ value: 'https://www.nancyforlosaltos.com/' }])
+                                      title: [{ value: url }])
     end
     let(:collection_model) { instance_double(Cocina::Models::DRO, externalIdentifier: collection_id) }
     let(:object_client) { instance_double(Dor::Services::Client::Object, collections: [collection_model], find: model, update: true) }

@@ -16,7 +16,7 @@ module Dor
 
       # @param [Cocina::Models::DRO] cocina_model
       def self.get_crawl_id(cocina_model)
-        cocina_model.label
+        Cocina::Models::Builders::TitleBuilder.build(cocina_model.description.title)
       end
     end
   end
