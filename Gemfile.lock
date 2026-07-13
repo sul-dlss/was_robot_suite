@@ -20,7 +20,7 @@ GEM
       securerandom (>= 0.3)
       tzinfo (~> 2.0, >= 2.0.5)
       uri (>= 0.13.1)
-    airbrussh (1.6.1)
+    airbrussh (1.6.2)
       sshkit (>= 1.6.1, != 1.7.0)
     assembly-image (2.3.0)
       activesupport (> 6.1)
@@ -90,7 +90,6 @@ GEM
       capistrano-one_time_key (>= 0.2.0)
       capistrano-shared_configs
       ed25519
-    docile (1.4.1)
     dor-services-client (15.63.0)
       activesupport (>= 7.0.0)
       cocina-models (~> 0.128.0)
@@ -158,7 +157,7 @@ GEM
       reline (>= 0.4.2)
     iso8601 (0.13.0)
     janeway-jsonpath (1.0.0)
-    json (2.20.0)
+    json (2.21.1)
     jsonschema_rs (0.47.0)
       bigdecimal (>= 3.1, < 5)
       rb_sys (~> 0.9.124)
@@ -258,7 +257,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.7)
-    rubocop (1.88.1)
+    rubocop (1.88.2)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -298,12 +297,7 @@ GEM
       logger (>= 1.7.0)
       rack (>= 3.2.0)
       redis-client (>= 0.29.0)
-    simplecov (0.22.0)
-      docile (~> 1.1)
-      simplecov-html (~> 0.11)
-      simplecov_json_formatter (~> 0.1)
-    simplecov-html (0.13.2)
-    simplecov_json_formatter (0.1.4)
+    simplecov (1.0.0)
     slop (4.10.1)
     sshkit (1.25.0)
       base64
@@ -370,4 +364,4 @@ DEPENDENCIES
   zeitwerk (~> 2.1)
 
 BUNDLED WITH
-  4.0.15
+  4.0.16
