@@ -8,6 +8,7 @@ gem 'cocina-models'
 gem 'dor-services-client'
 gem 'lyber-core'
 
+gem 'benchmark'
 gem 'config'
 gem 'honeybadger'
 gem 'lockfile'       # file locks needed for mutual exclusion during wayback index rollup and addition processes
