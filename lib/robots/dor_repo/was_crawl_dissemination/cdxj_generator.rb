@@ -8,7 +8,7 @@ module Robots
           super('wasCrawlDisseminationWF', 'cdxj-generator')
         end
 
-        def perform_work
+        def perform_work # rubocop:disable Naming/PredicateMethod
           Dor::WasCrawl::Dissemination::Utilities.warc_file_location_info(druid) => { collection_path:, file_list: }
 
           cdx_generator = Dor::WasCrawl::CdxjGeneratorService.new(collection_path, druid)

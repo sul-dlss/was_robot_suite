@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 
 # stanford dlss gems
-gem 'assembly-image', '~> 2.0' # was-seed-preassembly thumbnail creation; 2.0.0 uses libvips
+gem 'assembly-image'
 gem 'cocina-models'
 gem 'dor-services-client'
 gem 'lyber-core'
@@ -16,10 +16,10 @@ gem 'pry'            # for bin/console
 gem 'rake'
 gem 'rubyzip'        # warc_extractor_service
 gem 'ruby-vips'      # was-seed-preassembly thumbnail creation image processing with libvips
-gem 'sidekiq', '~> 8.0'
+gem 'sidekiq'
 gem 'slop'           # for bin/run_robot
 gem 'whenever', require: false # Work around https://github.com/javan/whenever/issues/831
-gem 'zeitwerk', '~> 2.1'
+gem 'zeitwerk'
 
 source 'https://gems.contribsys.com/' do
   gem 'sidekiq-pro'
