@@ -4,10 +4,10 @@ RSpec.describe Dor::WasSeed::DescriptiveBuilder do
   let(:fixtures) { 'spec/was_seed_preassembly/fixtures/' }
 
   describe '.build' do
-    subject(:result) { described_class.build(purl:, seed_uri:, collection_id:) }
+    subject(:result) { described_class.build(purl:, seed_uri:, collection_ids:) }
 
     let(:purl) { 'https://purl.stanford.edu/bc234fg5678' }
-    let(:collection_id) { 'druid:mc744qd2082' }
+    let(:collection_ids) { ['druid:mc744qd2082'] }
     let(:seed_uri) { 'http://www.frontnational.com/?post_type=works' }
 
     it 'produces descriptive metadata' do # rubocop:disable RSpec/ExampleLength
@@ -52,6 +52,17 @@ RSpec.describe Dor::WasSeed::DescriptiveBuilder do
                                purl: 'https://purl.stanford.edu/bc234fg5678'
                              }
                            ))
+    end
+
+    context 'when the seed is in more than one collection' do
+      let(:collection_ids) { ['druid:mc744qd2082', 'druid:bb111cc2222'] }
+
+      it 'lists every collection in the record origin note' do
+        expect(result.adminMetadata.note.map(&:value)).to eq [
+          'Transformed from record for http://www.frontnational.com/?post_type=works used in the web archiving service ' \
+          'and which is part of the collections (record IDs druid:mc744qd2082, druid:bb111cc2222).'
+        ]
+      end
     end
   end
 end

@@ -6,7 +6,7 @@ require 'stub_server'
 RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
   describe '.capture_thumbnail' do
     let(:druid) { 'druid:ab123cd4567' }
-    let(:workspace) { 'spec/was_seed_preassembly/fixtures/workspace/' }
+    let(:content_dir) { 'spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content' }
     let(:uri) { 'http://www.slac.stanford.edu' }
     let(:screenshot_jpeg_file) { 'tmp/ab123cd4567.jpeg' }
     let(:thumbnail_jp2_file) { 'spec/was_seed_preassembly/fixtures/workspace/ab/123/cd/4567/ab123cd4567/content/thumbnail.jp2' }
@@ -28,7 +28,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
 
     it 'generates max 400 px jp2 from jpeg screenshot and pushes to druid_tree content directory', :js do
       allow(described_class).to receive(:screenshot) # NOTE: this does NOT execute screenshot, the FileUtils.cp in before mocks this
-      described_class.capture_thumbnail(druid, workspace, uri)
+      described_class.capture_thumbnail(druid, content_dir, uri)
       expect(File.exist?(screenshot_jpeg_file)).to be false # screenshot jpeg is removed - it's produced on the way to the jp2
       expect(File.exist?(thumbnail_jp2_file)).to be true
       # what follows is a poor attempt to indicate this is a true thumbnail for the given image.
@@ -41,7 +41,7 @@ RSpec.describe Dor::WasSeed::ThumbnailGeneratorService do
     it 'raises an error if the screenshot method raises an exception' do
       allow(described_class).to receive(:screenshot).and_raise('Foo')
       exp_msg = "Thumbnail for druid druid:ab123cd4567 and http://www.slac.stanford.edu can't be generated.\n Foo"
-      expect { described_class.capture_thumbnail(druid, workspace, uri) }.to raise_error(StandardError).with_message(exp_msg)
+      expect { described_class.capture_thumbnail(druid, content_dir, uri) }.to raise_error(StandardError).with_message(exp_msg)
       expect(File.exist?(thumbnail_jp2_file)).to be false
       expect(File.exist?(screenshot_jpeg_file)).to be false
     end

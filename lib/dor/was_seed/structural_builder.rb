@@ -44,7 +44,7 @@ module Dor
       private_class_method :build_fileset
 
       def self.build_file(assembly_objectfile:, version:, object_access:)
-        filename = 'thumbnail.jp2'
+        filename = assembly_objectfile.filename
 
         exif = MiniExiftool.new assembly_objectfile.path
         width = exif.imagewidth
