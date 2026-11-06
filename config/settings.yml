@@ -24,8 +24,7 @@ cdxj_indexer:
   tmpdir: /tmp
 
 was_seed:
-  workspace_path: '/dor/workspace/' #the root for the storage for DRUID tree that will be the input to AssemblyWF
-  staging_path: '/was_unaccessioned_data/seed/'
+  staging_path: '/dor/assembly/' # where argo-b3 stages the seed's files and wasSeedPreassemblyWF builds its thumbnail, for accessionWF to move to the workspace
   wayback_uri: 'https://swap.stanford.edu'
 
 chrome_path: /usr/bin/google-chrome

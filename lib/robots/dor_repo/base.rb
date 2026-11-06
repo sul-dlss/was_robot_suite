@@ -16,11 +16,11 @@ module Robots
         uri
       end
 
-      def workspace_path
-        Settings.was_seed.workspace_path
-      end
-
       private
+
+      def skipped(note)
+        LyberCore::ReturnState.new(status: :skipped, note:)
+      end
 
       def valid_uri?(maybe_uri)
         uri = URI.parse(maybe_uri)

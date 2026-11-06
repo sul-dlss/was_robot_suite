@@ -23,8 +23,12 @@ require 'cocina/rspec'
 require 'debug'
 include LyberCore::Rspec # rubocop:disable Style/MixinUsage
 
+Dir[File.join(__dir__, 'support/**/*.rb')].each { |file| require file }
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
+  config.include CocinaHelpers
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.

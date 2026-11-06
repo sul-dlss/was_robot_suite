@@ -7,7 +7,8 @@ module Dor
   module WasSeed
     # TODO: why is this a class if it is full of class methods and has no constructor?
     class ThumbnailGeneratorService
-      def self.capture_thumbnail(druid, workspace, seed_uri)
+      # @param [String] content_dir the seed's content folder, where thumbnail.jp2 is written
+      def self.capture_thumbnail(druid, content_dir, seed_uri)
         screenshot_jpeg = "tmp/#{druid.delete_prefix('druid:')}.jpeg"
         resized_jpeg = "tmp/#{druid.delete_prefix('druid:')}_thumbsize.jpeg"
         begin
@@ -22,8 +23,8 @@ module Dor
           wayback_uri = "#{Settings.was_seed.wayback_uri}/#{capture_timestamp}mp_/#{seed_uri}"
           screenshot(wayback_uri, screenshot_jpeg)
           resize_jpeg(screenshot_jpeg, resized_jpeg)
-          thumbnail_file = "#{DruidTools::Druid.new(druid, workspace).content_dir}/thumbnail.jp2"
-          Assembly::Image.new(resized_jpeg).create_jp2(output: thumbnail_file)
+          FileUtils.mkdir_p(content_dir)
+          Assembly::Image.new(resized_jpeg).create_jp2(output: File.join(content_dir, 'thumbnail.jp2'))
         rescue => e
           raise "Thumbnail for druid #{druid} and #{seed_uri} can't be generated.\n #{e.message}"
         ensure

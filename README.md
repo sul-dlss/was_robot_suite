@@ -53,14 +53,17 @@ Dissemination workflow for web archiving crawl objects.  It is kicked off by the
 
 ## wasSeedPreassembly
 
-Preassembly workflow for web archiving seed objects.
+Preassembly workflow for web archiving seed objects. Argo-b3 starts it when a seed is accessioned without files yet, or with files staged for an update. Argo still starts it automatically.
 
-It consists of 4 robots:
+The robots work in the seed's folder in the assembly location (`Settings.was_seed.staging_path`, `/dor/assembly`), where Argo stages any files. accessionWF's `stage` step then moves that folder to the workspace.
 
-* `desc-metadata-generator`: generates the descMetadata in MODS format for the seed object.
-* `thumbnail-generator`: captures a screenshot for the first memento using puppeteer and includes it as the main image for the object. This image will be used in Argo and SearchWorks's sul-embed.  If the robot fails to generate a thumbnail, it shows as an error in Argo.
-* `content-metadata-generator`: generates contentMetadata.xml for the thumbnail by processing the contentMetadata.XSLT template against the available thumbnail.jp2.
-* `end-was-seed-preassembly`: initiates the accessionWF (of common-accessioning) and opens/closes version for the old object.
+It consists of 5 robots:
+
+* `start`: checks that the seed's version is open.
+* `desc-metadata-generator`: generates the descriptive metadata for the seed, including a record origin note that lists the seed's collections. The seed must be in at least one collection. Skips if files are staged (an update, so the description may already have been edited) or if the description has already been generated (it has an "Archived website" URL).
+* `thumbnail-generator`: captures a screenshot of the first memento using puppeteer and saves it as `thumbnail.jp2`, the main image for the object. This image is used in Argo and SearchWorks's sul-embed. Skips if a jp2 has been staged (it is the new thumbnail) or if the seed already has a published jp2. Raises if more than one jp2 has been staged, since only one can be published. If the robot fails to generate a thumbnail, it shows as an error in Argo.
+* `content-metadata-generator`: generates the structural metadata for the jp2 thumbnail. Skips if there is no jp2 but the seed already has a published jp2; otherwise raises if there is no jp2.
+* `end-was-seed-preassembly`: closes the version, which starts accessionWF (of common-accessioning).
 
 ## wasDissemination
 
@@ -135,5 +138,4 @@ yarn install
 1. Verify there are no jobs on the was-robots at https://robot-console-stage.stanford.edu/busy
 1. Clear collections: `rm -rf /web-archiving-stacks/data/collections/*`
 2. Clear indexes: `rm -rf /web-archiving-stacks/data/indexes/*`
-1. Clear seeds: `rm -rf /was_unaccessioned_data/seed/*`
 2. Clear jobs: `rm -rf /was_unaccessioned_data/jobs/*`

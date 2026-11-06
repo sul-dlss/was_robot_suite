@@ -8,8 +8,8 @@ module Dor
       #
       # @param [String] purl
       # @param [String] seed_uri
-      # @param [String] collection_id
-      def self.build(purl:, seed_uri:, collection_id:) # rubocop:disable Metrics/MethodLength
+      # @param [Array<String>] collection_ids all listed in the record origin note
+      def self.build(purl:, seed_uri:, collection_ids:) # rubocop:disable Metrics/MethodLength
         Cocina::Models::Description.new(
           title: [
             {
@@ -98,7 +98,7 @@ module Dor
             ],
             note: [
               {
-                value: "Transformed from record for #{seed_uri} used in the web archiving service and which is part of the collection (record ID #{collection_id}).",
+                value: "Transformed from record for #{seed_uri} used in the web archiving service and which is part of #{collections_phrase(collection_ids)}.",
                 type: 'record origin'
               }
             ]
@@ -106,6 +106,9 @@ module Dor
           purl:
         )
       end
+
+      def self.collections_phrase(ids) = ids.one? ? "the collection (record ID #{ids.first})" : "the collections (record IDs #{ids.join(', ')})"
+      private_class_method :collections_phrase
     end
   end
 end
