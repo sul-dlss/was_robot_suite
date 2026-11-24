@@ -6,8 +6,7 @@ source 'https://rubygems.org'
 gem 'assembly-image'
 gem 'cocina-models'
 gem 'dor-services-client'
-# TODO: Use the released lyber-core with LyberCore::Robot#close_version (sul-dlss/lyber-core#322).
-gem 'lyber-core', github: 'sul-dlss/lyber-core', branch: 'robot-close-version'
+gem 'lyber-core', '>= 9.1.1'
 
 gem 'config'
 gem 'honeybadger'
