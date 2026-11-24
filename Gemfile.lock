@@ -355,7 +355,7 @@ DEPENDENCIES
   dor-services-client
   honeybadger
   lockfile
-  lyber-core (>= 9.1.1)
+  lyber-core
   mini_exiftool
   pry
   rake

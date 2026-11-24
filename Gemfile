@@ -6,7 +6,7 @@ source 'https://rubygems.org'
 gem 'assembly-image'
 gem 'cocina-models'
 gem 'dor-services-client'
-gem 'lyber-core', '>= 9.1.1'
+gem 'lyber-core'
 
 gem 'config'
 gem 'honeybadger'
