@@ -9,7 +9,7 @@ module Robots
         end
 
         def perform_work
-          object_client.version.close # Starts the accessionWF by default
+          close_version # Starts the accessionWF by default
         end
       end
     end
